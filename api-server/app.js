@@ -14,7 +14,21 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(cors());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+// 404 에러 처리
+app.use((req, res, next) => {
+  console.error(404, req.url);
+  res.json({error: {message: "존재하지 않는 API입니다."}});
+});
+
+// 500 에러 처리
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  console.error(err.cause);
+  res.json({error: {message: "요청을 처리할 수 없습니다. 잠시 후 다시 요청해 주세요."}});
+});
 
 module.exports = app;
