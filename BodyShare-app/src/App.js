@@ -8,6 +8,9 @@ import Home from "./pages/home";
 import Analysis from "./pages/analysis";
 import Community from "./pages/community";
 import Mypage from "./pages/mypage";
+import Interest from "./pages/user/Interest";
+import InterestList from "./pages/user/InterestList";
+import UserInfo from "./pages/user/UserInfo";
 
 
 function App() {
@@ -18,7 +21,11 @@ function App() {
         <Routes>
           <Route path="/" element={<User />}>
             <Route index element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />}/>
+            <Route path="/signup" element={<SignUp />}>
+              <Route path="./interest" element={<Interest />} />
+              <Route path="./interestList" element={<InterestList />} />
+              <Route path="./userInfo" element={<UserInfo />} />
+            </Route>
           </Route>
           <Route path="/home" element={<Layout />}>
             <Route index element={<Home />} />
