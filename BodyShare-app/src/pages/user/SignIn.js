@@ -1,50 +1,74 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import loginlogo from "../../assets/Img/loginlogo.png"
 
-const Logo = styled.image`
+const Logo = styled.img`
+  display: block;
   width: 180px;
   height: 180px;
+  margin: 15px auto;
 `;
 
 const Intro = styled.div`
-
+  display: block;
+  width: 33vw;
+  text-align: center;
+  margin-bottom: 25px;
 `;
 
 const BP = styled.p`
   font-size: 25px;
+  margin: 0 auto;
 `;
 
 const SP = styled.p`
   font-size: 14px;
+  margin-top: 25px;
 `;
 
 const Inputdiv = styled.div`
-  width: 360px;
+  width: 33vw;
   height: 146.47px;
 `;
 
 const Input = styled.input`
-  width: 360px;
+  width: 33vw;
   height: 60.75px;
   border-radius: 15px;
   background-color: #FFFFFF;
-  box-shadow: 0 0 0 1px #878787;
-  opacity: 0.3;
-  color: black;
+  border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 16px;
 
 `;
 
-const Login = styled.button`
+const StyledLink = styled(Link)`
+  display: block;
+  width: 33vw;
+  color: black;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+`;
 
+const Login = styled.button`
+  background-color: #556fff;
+  width: 33vw;
+  height: 60px;
+  border-radius: 15px;
+  color: white;
+  font-size: 20px;
+  border: 1px solid rgba(135, 135, 135, 0.3);
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 const SignIn = function () {
-  const login = function(){};
+  const navigate = useNavigate();
 
   return (
     <>
-      <Logo></Logo>
+      <Logo src={loginlogo}></Logo>
 
       <Intro>
         <BP>안녕하세요.</BP>
@@ -60,10 +84,10 @@ const SignIn = function () {
       </Inputdiv>
 
       <br></br>
-      <Link to="/signup">회원 가입</Link>
+      <StyledLink to="/signup">회원 가입</StyledLink>
       <br></br>
-
-      <Login onClick={login}>로그인</Login>
+      <br></br>
+      <Login onClick={() => navigate("/home")}>로그인</Login>
 
     </>
   );
