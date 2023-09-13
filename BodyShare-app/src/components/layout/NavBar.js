@@ -13,7 +13,7 @@ import React, {useState, useEffect} from "react";
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  width: 33vw;
+  width : 390px;
   position:absolute;
   background-color: white;
   height: 60px;
@@ -42,6 +42,10 @@ const Container = styled.div`
         background-position: 0% 50%;
     }
   }
+
+  @media screen and (max-width: 390px) {
+        width: 100%;
+    }
 `
 
 const Nav1 = styled.img`
