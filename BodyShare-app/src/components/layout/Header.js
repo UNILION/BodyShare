@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import logo from "../Img/logo.png"
+import logo from "../../assets/Img/logo.png"
 
 const Container = styled.div`
     position:relative;
