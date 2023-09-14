@@ -4,7 +4,7 @@ import loginlogo from "../../assets/Img/loginlogo.png"
 
 const Container = styled.div`
   width: 390px;
-  height: 100vw;
+  height: 696px;
 `;
 
 const Logo = styled.img`
@@ -29,6 +29,7 @@ const BP = styled.p`
 const B = styled.b`
   font-weight: bold;
 `;
+
 const SP = styled.p`
   font-size: 14px;
   margin-top: 25px;
@@ -59,6 +60,7 @@ const StyledLink = styled(Link)`
   text-align: center;
   margin: 0 auto;
 `;
+
 const Logindiv = styled.div`
   width: 390px;
   height: 60px;
@@ -74,7 +76,8 @@ const Login = styled.button`
   color: white;
   font-size: 20px;
   border: 1px solid rgba(135, 135, 135, 0.3);
-  &:hover{
+  
+  &:hover {
     cursor: pointer;
   }
 `;
