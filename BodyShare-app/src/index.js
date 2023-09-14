@@ -6,13 +6,14 @@ import reportWebVitals from './reportWebVitals';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  width : 390px;
-  height: 100vh;
+  width: 390px;
+  max-height: calc(100vh-65px);
   margin: 0 auto;
+  padding-bottom: 65px;
 
   @media screen and (max-width: 390px) {
-        width: 100%;
-    }
+    width: 100%;
+  }
 `
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
