@@ -163,7 +163,7 @@ const MyPage = function () {
 
       </Info>
 
-      <Modifypf>프로필 수정하기</Modifypf>
+      <Modifypf onClick={() => navigate("/MyProfileModify")}>프로필 수정하기 </Modifypf>
       <Logout>로그아웃</Logout>
 
     </>
