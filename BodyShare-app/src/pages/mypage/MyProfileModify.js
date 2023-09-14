@@ -3,6 +3,11 @@ import styled from "styled-components";
 const All = styled.div`
   margin-left: 3px;
   margin-right: 3px;
+  margin-top: 19px;
+`
+
+const Titleul = styled.ul`
+  display: flex;
 `
 
 const Backbutton = styled.button`
@@ -13,6 +18,11 @@ const Backbutton = styled.button`
   border-radius: 20px;
   border: none;
   cursor: pointer;
+`
+
+const Title = styled.p`
+  font-size: 23px;
+  font-style: bold;
 `
 
 const Titleo = styled.p`
@@ -292,7 +302,10 @@ const MyProfileModify = function () {
   return (
     <>
       <All>
-        <Backbutton></Backbutton>
+      <Titleul>
+          <Backbutton onClick={() => navigate("/mypage")}></Backbutton>
+          <Title>나의 정보 수정</Title>
+        </Titleul>
         <Titleo>배너사진</Titleo>
         <BannerPic>변경을 하고싶은 사진을 업로드 해주세요!</BannerPic>
         <TitleT>프로필 사진</TitleT>
@@ -310,7 +323,7 @@ const MyProfileModify = function () {
         <Pwul>
           <PwTitle>비밀번호</PwTitle>
           <Pw>********</Pw>
-          <Pwbutton>변경</Pwbutton>
+          <Pwbutton onClick={() => navigate("/PasswordModify")}>변경</Pwbutton>
         </Pwul>
         <Bodyul>
           <Talltitle>키</Talltitle>
@@ -334,8 +347,7 @@ const MyProfileModify = function () {
           <Catedel>X</Catedel>
         </Cateul>
         <Catewarnig>한 개 이상의 카테고리를 선택해주세요!</Catewarnig>
-        <Modifyok>프로필 수정완료</Modifyok>
-
+        <Modifyok onClick={() => navigate("/mypage")}>프로필 수정완료</Modifyok>
       </All>
     </>
   )
