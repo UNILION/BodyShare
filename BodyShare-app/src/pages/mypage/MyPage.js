@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import bannerpic from "../../../src/assets/Img/banner.jpg"
+import bannerPic from "../../assets/Img/banner.jpg";
 
 const Banner = styled.img`
     height: 87px;
@@ -60,7 +60,7 @@ const Infodtul = styled.ul`
     font-size: 20px;
 `
 
-const Nickli= styled.li`
+const Nickli = styled.li`
     font-size: 28px;
     font-style: bold;
 `
@@ -94,14 +94,6 @@ const Catet = styled.div`
 `
 
 
-
-const Button = styled.div`
-    position: relative;
-    overflow: hidden;
-
-`
-
-
 const Logout = styled.button`
     background-color: #556FFF; 
     color: #fff; 
@@ -130,56 +122,52 @@ const Modifypf = styled.button`
     font-size: 20px;
 `;
 
+const MyPage = function () {
+  return (
+    <>
+      <Banner src={bannerPic} />
+      <Title>마이페이지</Title>
+      <Pf>
+        <Pfpic src="../../assets/Img/user.png" />
+        <Pfcomment>
+          <Pfcommentul>
+            <br />
+            <br />
+            <br />
+            <Nickli>nickname</Nickli>
+            <br />
+            <br />
+            <li>
+              <Inst>
+                <Cateo>요가</Cateo>
+                <Catet>필라테스</Catet>
+              </Inst>
+            </li>
+          </Pfcommentul>
+        </Pfcomment>
+      </Pf>
+      <Info>
+        <Infoul>
+          <li>아이디</li>
+          <li>닉네임</li>
+          <li>키</li>
+          <li>몸무게</li>
+        </Infoul>
 
+        <Infodtul>
+          <li>kimm</li>
+          <li>kimmmmm</li>
+          <li>167cm</li>
+          <li>50kg</li>
+        </Infodtul>
 
-const Mypage = function(){
-    return(
-        <>
-            <Banner src={bannerpic} />
-            <Title>마이페이지</Title>
-            <Pf>
-                <Pfpic src={bannerpic} />
-                <Pfcomment>
-                    <Pfcommentul>
-                        <br />
-                        <br />
-                        <br />
-                        <Nickli>nickname</Nickli>
-                        <br />
-                        <br />
-                        <li>
-                            <Inst>
-                                <Cateo>요가</Cateo>
-                                <Catet>필라테스</Catet>
-                            </Inst>
-                        </li>
-                    </Pfcommentul>
-                </Pfcomment>
-            </Pf>
-            <Info>
-                <Infoul>
-                    <li>아이디</li>
-                    <li>닉네임</li>
-                    <li>키</li>
-                    <li>몸무게</li>
-                </Infoul>
+      </Info>
 
-                <Infodtul>
-                    <li>kimm</li>
-                    <li>kimmmmm</li>
-                    <li>167cm</li>
-                    <li>50kg</li>
-                </Infodtul>
-            
-            </Info>
-            <Button>
-                <Modifypf>프로필 수정하기</Modifypf>
-                <Logout>로그아웃</Logout>
-            </Button>
-            
+      <Modifypf>프로필 수정하기</Modifypf>
+      <Logout>로그아웃</Logout>
 
-        </>
-    )
+    </>
+  )
 };
 
-export default Mypage;
+export default MyPage;
