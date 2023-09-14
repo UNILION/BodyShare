@@ -85,13 +85,14 @@ const IdDiv = styled.div`
 `;
 
 const Id = styled.input`
-  width: 250px;
+  width: 240px;
   height: 45px;
   color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
+  padding-left: 10px;
 `;
 
 const IdButton = styled.button`
@@ -113,13 +114,14 @@ const NicknameDiv = styled.div`
 `;
 
 const Nickname = styled.input`
-  width: 250px;
+  width: 240px;
   height: 45px;
   color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
+  padding-left: 10px;
 `;
 
 const NicknameButton = styled.button`
@@ -138,24 +140,25 @@ const NicknameButton = styled.button`
 `;
 
 const Pw = styled.input.attrs({ type: "password" })`
-  width: 321px;
+  width: 311px;
   height: 45px;
   color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
+  padding-left: 10px;
 `;
 
 const CheckPw = styled.input.attrs({ type: "password" })`
-  width: 321px;
+  width: 311px;
   height: 45px;
   color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
-
+  padding-left: 10px;
 `;
 
 const BodyDiv = styled.div`
@@ -170,13 +173,14 @@ const HeightDiv = styled.div`
 `;
 
 const Height = styled.input`
-  width: 120px;
+  width: 110px;
   height: 45px;
   color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
+  padding-left: 10px;
 `;
 
 const HeightP = styled.p`
@@ -193,13 +197,14 @@ const WeigthDiv = styled.div`
 `;
 
 const Weight = styled.input`
-  width: 120px;
+  width: 110px;
   height: 45px;
   color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
+  padding-left: 10px;
 `;
 
 const WeigthP = styled.p`

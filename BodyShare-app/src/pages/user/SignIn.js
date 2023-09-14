@@ -42,13 +42,13 @@ const Inputdiv = styled.div`
 `;
 
 const Input = styled.input`
-  width: 355px;
+  width: 340px;
   height: 60.75px;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 16px;
-
+  padding-left: 15px;
 `;
 
 const StyledLink = styled(Link)`

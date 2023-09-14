@@ -42,12 +42,12 @@ const SP = styled.p`
 `;
 
 const SearchInput = styled.div`
-    grid-row: 3;
-    width: 380px;
-    height: 45px;
-    margin: 0 auto 10px auto;
-    display: grid;
-    grid-template-columns: 24px auto;
+  grid-row: 3;
+  width: 380px;
+  height: 45px;
+  margin: 0 auto 10px auto;
+  display: grid;
+  grid-template-columns: 24px auto;
 `;
 
 const SearchDiv = styled.div`
