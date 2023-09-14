@@ -212,7 +212,6 @@ const ButtonDiv = styled.div`
   grid-row: 6;
   height: 100px;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-right: 10px
@@ -220,13 +219,13 @@ const ButtonDiv = styled.div`
 
 const PreviousButton = styled.button`
   background-color: #878787;
-  width: 321px;
-  height: 45px;
+  width: 150px;
+  height: 43.88px;
   border-radius: 15px;
   color: white;
   font-size: 13px;
   border: 1px solid rgba(135, 135, 135, 0.3);
-  margin-bottom: 10px;
+  margin-right: 15px;
 
   &:hover {
     cursor: pointer;
@@ -235,8 +234,8 @@ const PreviousButton = styled.button`
 
 const NextButton = styled.button`
   background-color: #556fff;
-  width: 321px;
-  height: 45px;
+  width: 150px;
+  height: 43.88px;
   border-radius: 15px;
   color: white;
   font-size: 13px;
