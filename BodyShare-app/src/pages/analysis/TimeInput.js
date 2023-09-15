@@ -1,5 +1,7 @@
+import React from 'react';
 import styled from "styled-components";
 import previous from "../../assets/Img/Previous.png";
+import { useNavigate } from 'react-router-dom';
 
 const TimeInputContainer = styled.div`
   display: grid;
@@ -21,7 +23,8 @@ const SportTitle = styled.div`
 
 const Line = styled.div`
   width: 360px;
-  height: 1px;
+  height: 2px;
+  margin-top: 20px;
   background-color: rgba(135, 135, 135, 0.3);
 `;
 
@@ -56,9 +59,9 @@ const SportTime = styled.div`
   grid-row: 4;
 `;
 
-const SmallBox = styled.div`
+const SmallBox = styled.input`
   float: right;
-  width: 48px;
+  width: 38px;
   height: 44px;
   background-color: rgba(85, 111, 255, 0.3);
   border-radius: 15px;
@@ -78,20 +81,32 @@ const Category = styled.p`
   float: left;
 `;
 
+const SmallLine = styled.div`
+  width: 2px;
+  height: 30px;
+  background-color: rgba(135, 135, 135, 0.3);
+  float: left;
+  margin-right: 10px;
+`;
+
 const SportName = styled.p`
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   margin-left: 10px;
 `;
 
 
 const TimeInput = function () {
+  const navigate = useNavigate();
+
   return (
     <>
       <TimeInputContainer>
-        <PreviousButton src={previous}></PreviousButton>
+        <PreviousButton src={previous} onClick={() => navigate('/analysis')}></PreviousButton>
+        
         <SportTitle>
           <Category>유산소</Category>
+          <SmallLine></SmallLine>
           <SportName>달리기</SportName>
           <Line></Line>
         </SportTitle>
