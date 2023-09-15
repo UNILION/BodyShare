@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import backButton from "../../assets/Img/back.png"
 import checkButton from "../../assets/Img/circletcheck.png"
+import { useNavigate } from "react-router-dom";
 
 const All = styled.div`
   margin-left: 3px;
@@ -150,12 +151,13 @@ const Modifyok = styled.button`
 `
 
 const PasswordModify = function () {
+  const navigate = useNavigate();
 
   return (
     <>
       <All>
         <Titleul>
-          <Backbutton></Backbutton>
+          <Backbutton onClick={() => {navigate("/mypage/modify")}}></Backbutton>
           <Title>나의 정보 수정</Title>
         </Titleul>
         <Maintitle>비밀번호 변경</Maintitle>
@@ -174,7 +176,7 @@ const PasswordModify = function () {
           <Checkokbutton></Checkokbutton>
         </Checkkul>
         <Checkpwwarn>비밀번호가 다릅니다.</Checkpwwarn>
-        <Modifyok>수정 완료</Modifyok>
+        <Modifyok onClick={() => {navigate("/mypage/modify")}}>수정 완료</Modifyok>
       </All>
     </>
   )

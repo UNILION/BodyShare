@@ -2,6 +2,7 @@ import styled from "styled-components";
 import backButton from "../../assets/Img/back.png"
 import checkButton from "../../assets/Img/circletcheck.png"
 import delButton from "../../assets/Img/xbutton.png"
+import { useNavigate } from "react-router-dom";
 
 const All = styled.div`
   margin-left: 3px;
@@ -328,12 +329,13 @@ const Modifyok = styled.button`
 `
 
 const MyProfileModify = function () {
+  const navigate = useNavigate();
 
   return (
     <>
       <All>
       <Titleul>
-          <Backbutton></Backbutton>
+          <Backbutton onClick={() => {navigate("/mypage")}}></Backbutton>
           <Title>나의 정보 수정</Title>
         </Titleul>
         <Titleo>배너사진</Titleo>
@@ -353,7 +355,7 @@ const MyProfileModify = function () {
         <Pwul>
           <PwTitle>비밀번호</PwTitle>
           <Pw>********</Pw>
-          <Pwbutton>변경</Pwbutton>
+          <Pwbutton onClick={() => {navigate("/mypage/modify/password")}}>변경</Pwbutton>
         </Pwul>
         <Bodyul>
           <Talltitle>키</Talltitle>
@@ -370,14 +372,14 @@ const MyProfileModify = function () {
         <Bodywarnig>필수로 작성해주세요!</Bodywarnig>
         <Cateckul>
           <Catetitle>나의 관심 카테고리</Catetitle>
-          <Catesearch>검색</Catesearch>
+          <Catesearch onClick={() => {navigate("/mypage/modify/interest")}}>검색</Catesearch>
         </Cateckul>
         <Cateul>
           <Cate>요가</Cate>
           <Catedel></Catedel>
         </Cateul>
         <Catewarnig>한 개 이상의 카테고리를 선택해주세요!</Catewarnig>
-        <Modifyok>프로필 수정완료</Modifyok>
+        <Modifyok onClick={() => {navigate("/mypage")}}>프로필 수정완료</Modifyok>
       </All>
     </>
   )

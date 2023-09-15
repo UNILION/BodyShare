@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import bannerPic from "../../assets/Img/banner.jpg";
 import userPic from "../../assets/Img/user.png";
+import { useNavigate } from "react-router-dom";
 
 const Banner = styled.img`
     height: 87px;
@@ -124,6 +125,8 @@ const Modifypf = styled.button`
 `;
 
 const MyPage = function () {
+  const navigate = useNavigate();
+
   return (
     <>
       <Banner src= {bannerPic} />
@@ -164,8 +167,8 @@ const MyPage = function () {
 
       </Info>
 
-      <Modifypf>프로필 수정하기 </Modifypf>
-      <Logout>로그아웃</Logout>
+      <Modifypf onClick={() => navigate("/mypage/modify")}>프로필 수정하기 </Modifypf>
+      <Logout onClick={() => navigate("/mypage/logout")}>로그아웃</Logout>
 
     </>
   )

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import logoutLogo from "../../assets/Img/logout.png"
+import { useNavigate } from "react-router-dom";
 
 const All = styled.div`
   margin-left: 3px;
@@ -89,6 +90,8 @@ const Logoutbutton = styled.button`
 `
 
 const PasswordModify = function () {
+  const navigate = useNavigate();
+
   return (
     <>
       <All>
@@ -102,8 +105,8 @@ const PasswordModify = function () {
           <Tff>준비되어 있답니다ㅜㅡㅜ</Tff>
         </Main>
         <Buttons>
-          <Backbutton>돌아가기</Backbutton>
-          <Logoutbutton>로그아웃</Logoutbutton>
+          <Backbutton onClick={() => {navigate("/mypage")}}>돌아가기</Backbutton>
+          <Logoutbutton onClick={() => {navigate("/")}}>로그아웃</Logoutbutton>
         </Buttons>
       </All>
     </>

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import search from "../../assets/Img/search.png"
 import backButton from "../../assets/Img/back.png"
 import xbutton from "../../assets/Img/xbutton.png"
+import { useNavigate } from "react-router-dom";
 
 const SelectDiv = styled.div`
   margin: 10px;
@@ -172,11 +173,13 @@ const Done = styled.button`
 
 
 const InterestModify = function () {
+  const navigate = useNavigate();
+
   return (
     <>
       <SelectDiv>
         <SportSearchContainer>
-          <PreviousButton></PreviousButton>
+          <PreviousButton onClick={() => {navigate("/mypage/modify")}}></PreviousButton>
           <SearchInput>
             <Search src={search}></Search>
             <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
@@ -239,7 +242,7 @@ const InterestModify = function () {
 
 
         <Donediv>
-          <Done>선택완료</Done>
+          <Done onClick={() => {navigate("/mypage/modify")}}>선택완료</Done>
         </Donediv>
       </SelectDiv>
 
