@@ -14,8 +14,6 @@ import UserInfo from "./pages/user/UserInfo";
 import SportSearch from "./pages/analysis/SportSearch";
 import FoodSearch from "./pages/analysis/FoodtSearch";
 import TimeInput from "./pages/analysis/TimeInput";
-import SportChart from "./pages/analysis/SportChart";
-import FoodChart from "./pages/analysis/FoodChart";
 import MyProfileModify from "./pages/mypage/MyProfileModify";
 import Logout from "./pages/mypage/Logout";
 import PasswordModify from "./pages/mypage/PasswordModify";
@@ -43,8 +41,6 @@ function App() {
             <Route path="/analysis/sports" element={<SportSearch />} />
             <Route path="/analysis/food" element={<FoodSearch />} />
             <Route path="/analysis/time" element={<TimeInput />} />
-            <Route path="/analysis/sportchart" element={<SportChart />} />
-            <Route path="/analysis/foodchart" element={<FoodChart />} />
           </Route>
           <Route path="/community" element={<Layout />}>
             <Route index element={<Community />} />
