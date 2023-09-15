@@ -95,20 +95,20 @@ const SportSearch = function() {
             <SportCategory>
                 <CategoryList>
                     <CategoryButton><CP>전체</CP></CategoryButton>
-                    <CategoryButton><CP>전체</CP></CategoryButton>
-                    <CategoryButton><CP>전체</CP></CategoryButton>
-                    <CategoryButton><CP>전체</CP></CategoryButton>
+                    <CategoryButton><CP>근력</CP></CategoryButton>
+                    <CategoryButton><CP>유산소</CP></CategoryButton>
+                    <CategoryButton><CP>기타</CP></CategoryButton>
                 </CategoryList>
             </SportCategory>
             <SportSearchResult>
                 <ResultList>
                     <ResultButton><RP>수영</RP></ResultButton>
                     <Line></Line>
-                    <ResultButton><RP>수영</RP></ResultButton>
+                    <ResultButton><RP>요가</RP></ResultButton>
                     <Line></Line>
-                    <ResultButton><RP>수영</RP></ResultButton>
+                    <ResultButton><RP>달리기</RP></ResultButton>
                     <Line></Line>
-                    <ResultButton><RP>수영</RP></ResultButton>
+                    <ResultButton><RP>골프</RP></ResultButton>
                     <Line></Line>
                 </ResultList>
             </SportSearchResult>

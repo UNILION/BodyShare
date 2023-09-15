@@ -7,7 +7,7 @@ import "../../assets/Img/buttonsearch.png";
 
 const FoodtSearchContainer = styled.div`
   display: grid;
-  grid-template-rows: auto auto auto 1fr;
+  grid-template-rows: auto auto auto auto;
   gap: 10px;
 `;
 
@@ -37,7 +37,7 @@ const Input = styled.input`
 const Search = styled.img``;
 
 const FoodSearchResult = styled.div`
-  grid-row: 4;
+  grid-row: 3;
 `;
 
 const ResultList = styled.ul`
@@ -59,6 +59,14 @@ const RP = styled.p`
 const Line = styled.div`
   width: 360px;
   border: 1px solid rgba(135, 135, 135, 0.3);
+`;
+
+const ButtonDiv = styled.div`
+  grid-row: 4;
+  text-align: right;
+  height: 150px;
+  padding-top: 100px;
+  padding-right: 15px;
 `;
 
 // 공통 버튼 css
@@ -123,33 +131,35 @@ const FoodtSearch = function () {
             </ResultButton>
             <Line></Line>
             <ResultButton>
-              <RP>김치</RP>
+              <RP>닭가슴살</RP>
             </ResultButton>
             <Line></Line>
             <ResultButton>
-              <RP>김치</RP>
+              <RP>바나나</RP>
             </ResultButton>
             <Line></Line>
             <ResultButton>
-              <RP>김치</RP>
+              <RP>계란</RP>
             </ResultButton>
             <Line></Line>
           </ResultList>
         </FoodSearchResult>
-        <StyledButton
-          width="200px"
-          height="45px"
-          color="white"
-          bc="#556FFF"
-          fs="20px"
-          br="23px"
-          border="1px solid rgba(135,135,135,0.3)"
-        >
-          <ButtonContainer>
-            <Name>Button Name</Name>
-            <Image iwidth="30px" iheight="30px" img={true} />
-          </ButtonContainer>
-        </StyledButton>
+        <ButtonDiv>
+          <StyledButton
+            width="200px"
+            height="45px"
+            color="white"
+            bc="#556FFF"
+            fs="20px"
+            br="23px"
+            border="1px solid rgba(135,135,135,0.3)"
+          >
+            <ButtonContainer>
+              <Name>선택완료</Name>
+              <Image iwidth="30px" iheight="30px" img={true} />
+            </ButtonContainer>
+          </StyledButton>
+        </ButtonDiv>
       </FoodtSearchContainer>
     </>
   );
