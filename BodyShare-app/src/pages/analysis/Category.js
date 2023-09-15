@@ -113,11 +113,11 @@ const Category = function () {
         </Tab2>
         <Tab3
           onClick={showFoodChart}
-          bg={SportChart ? "rgba(85,111,255,0.3)" : "white"}
-          under={SportChart ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
+          bg={FoodChart ? "rgba(85,111,255,0.3)" : "white"}
+          under={FoodChart ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
         >
           <Text
-            color={SportChart ? "#556FFF" : "rgba(0,0,0,0.2)"}
+            color={FoodChart ? "#556FFF" : "rgba(0,0,0,0.2)"}
           >
             식단
           </Text>
