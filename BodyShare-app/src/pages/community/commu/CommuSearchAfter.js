@@ -42,6 +42,16 @@ const Img = styled.img`
   cursor: pointer;
 `;
 
+const AddImg = styled.img`
+  display: grid;
+  align-items: end;
+  margin-left: auto;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  margin-top: 20px;
+`;
+
 const CommuSearchAfter = function () {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
@@ -102,7 +112,7 @@ const CommuSearchAfter = function () {
         nextPageText={"›"}
         onChange={handleChange}
       />
-      <Img src={Plus} onClick={() => navigate("/community/communityAdd")} />
+      <AddImg src={Plus} onClick={() => navigate("/community/communityAdd")} />
     </Container>
   );
 };
