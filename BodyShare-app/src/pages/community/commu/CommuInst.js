@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import search from "../../assets/Img/search.png"
-import backButton from "../../assets/Img/back.png"
+import search from "../../../assets/Img/search.png"
+import backButton from "../../../assets/Img/back.png"
+import { useNavigate } from "react-router-dom";
 
 const SelectDiv = styled.div`
   margin: 10px;
@@ -32,11 +33,12 @@ const SearchInput = styled.div`
 `;
 
 const Input = styled.input`
-  width: 300px;
+  width: 260px;
   height: 45px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   border-radius: 15px;
   text-align: center;
+  padding: 0 20px;
 `;
 
 const SportCategory = styled.div`
@@ -54,6 +56,11 @@ const CategoryButton = styled.button`
   border-radius: 15px;
   background-color: rgb(85, 111, 255, 0.3);
   margin-left: 9px;
+  cursor: pointer;
+
+  &:hover{
+    background-color: rgb(85, 111, 255, 0.5);
+  }
 `;
 
 const SportSearchResult = styled.div`
@@ -81,6 +88,7 @@ const ResultButton = styled.button`
     border: none;
     padding-top: 55px;
     padding-bottom: 0px;
+    cursor: pointer;
 `;
 
 const RP = styled.p`
@@ -93,12 +101,13 @@ const Line = styled.div`
 `;
 
 const InterestModify = function () {
+  const navigate = useNavigate();
 
   return (
     <>
       <SelectDiv>
         <SportSearchContainer>
-          <PreviousButton></PreviousButton>
+          <PreviousButton onClick={() => navigate("/community")} />
           <SearchInput>
             <Search src={search}></Search>
             <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
@@ -106,22 +115,22 @@ const InterestModify = function () {
           <SportCategory>
             <CategoryList>
               <CategoryButton><CP>전체</CP></CategoryButton>
-              <CategoryButton><CP>전체</CP></CategoryButton>
-              <CategoryButton><CP>전체</CP></CategoryButton>
-              <CategoryButton><CP>전체</CP></CategoryButton>
+              <CategoryButton><CP>유산소</CP></CategoryButton>
+              <CategoryButton><CP>무산소</CP></CategoryButton>
+              <CategoryButton><CP>근력</CP></CategoryButton>
             </CategoryList>
           </SportCategory>
           <SportSearchResult>
             <ResultList>
-              <ResultButton><RP>수영</RP></ResultButton>
+              <ResultButton><RP>축구</RP></ResultButton>
               <Line></Line>
               <ResultButton><RP>수영</RP></ResultButton>
               <Line></Line>
-              <ResultButton><RP>수영</RP></ResultButton>
+              <ResultButton><RP>달리기</RP></ResultButton>
               <Line></Line>
-              <ResultButton><RP>수영</RP></ResultButton>
+              <ResultButton><RP>필라테스</RP></ResultButton>
               <Line></Line>
-              <ResultButton><RP>수영</RP></ResultButton>
+              <ResultButton><RP>요가</RP></ResultButton>
               <Line></Line>
             </ResultList>
           </SportSearchResult>
