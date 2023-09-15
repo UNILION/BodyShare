@@ -186,7 +186,7 @@ const Height = styled.input`
 const HeightP = styled.p`
   font-size: 13px;
   color: #808080;
-  margin-left: 10px
+  margin-left: 10px;
 `;
 
 const WeigthDiv = styled.div`
@@ -210,7 +210,7 @@ const Weight = styled.input`
 const WeigthP = styled.p`
   font-size: 13px;
   color: #808080;
-  margin-left: 10px
+  margin-left: 10px;
 `;
 
 const ButtonDiv = styled.div`
@@ -219,7 +219,7 @@ const ButtonDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 10px
+  margin-right: 10px;
 `;
 
 const PreviousButton = styled.button`
