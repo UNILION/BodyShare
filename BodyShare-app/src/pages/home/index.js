@@ -1,8 +1,9 @@
+import Index from "./mainhome";
 
 const Home = function() {
   return (
     <>
-      <h2>Hi</h2>
+      <Index />
     </>
   );
 };
