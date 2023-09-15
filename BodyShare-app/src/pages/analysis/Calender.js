@@ -6,6 +6,7 @@ import 'react-calendar/dist/Calendar.css';
 import buttonplus from "../../assets/Img/buttonplus.png";
 import seemore from "../../assets/Img/seemore.png";
 
+
 const RecordGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -13,12 +14,6 @@ const RecordGrid = styled.div`
   justify-content: center;
   align-items: center;
   margin: 20px auto;
-`;
-
-const Calender = styled.img`
-  width: 390px;
-  height: 270px;
-  border-radius: 15px;
 `;
 
 const NoteGrid = styled.div`
@@ -72,6 +67,66 @@ const SeeMore = styled.button`
   padding: 0;
 `;
 
+const FoodSeeMore = styled.button`
+  width: 20px;
+  height: 26px;
+  border: none;
+  background-color: white;
+  cursor: pointer;
+  padding: 0;
+`;
+
+const SeeMoreDetail = styled.div`
+  width: 158px;
+  position: absolute;
+  left: 490px;
+  top: 440px;
+  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+`;
+
+const FoodSeeMoreDetail = styled.div`
+  width: 158px;
+  position: absolute;
+  left: 490px;
+  top: 500px;
+  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+`;
+const Correction = styled.button`
+  width: 158px;
+  height: 40px;
+  border-radius: 15px 15px 0px 0px;
+  border: 1px solid #B3B3B3;
+  background-color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: #556FFF;
+  }
+`;
+
+const Delete = styled.button`
+  width: 158px;
+  height: 40px;
+  border-radius: 0px 0px 15px 15px;
+  border: 1px solid #B3B3B3;
+  background-color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: red;
+  }
+`;
+
+const FoodDelete = styled.button`
+  width: 158px;
+  height: 40px;
+  border-radius: 15px;
+  border: 1px solid #B3B3B3;
+  background-color: white;
+  &:hover {
+    cursor: pointer;
+    background-color: red;
+  }
+`;
+
 const SmIng = styled.img`
   width: 20px;
   height: 26px;
@@ -121,9 +176,20 @@ const Record = function () {
   // 캘린더
   const [value, onChange] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
+  
+  const [seeMoreVisible, setSeeMoreVisible] = useState(false);
+  const [foodSeeMoreVisible, setFoodSeeMoreVisible] = useState(false);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
+  };
+
+  const toggleSeeMore = () => {
+    setSeeMoreVisible(!seeMoreVisible);
+  };
+
+  const toggleFoodSeeMore = () => { 
+    setFoodSeeMoreVisible(!foodSeeMoreVisible);
   };
 
   return (
@@ -139,16 +205,23 @@ const Record = function () {
           <SportNoteContainer>
             <SportNote>유산소 달리기</SportNote>
             <SportTime>30분</SportTime>
-            <SeeMore>
+            <SeeMore onClick={toggleSeeMore}>
               <SmIng src={seemore}></SmIng>
             </SeeMore>
+            <SeeMoreDetail isVisible={seeMoreVisible}>
+              <Correction onClick={() => navigate("/analysis/time")}>수정하기</Correction>
+              <Delete>삭제하기</Delete>
+            </SeeMoreDetail>
           </SportNoteContainer>
           <Line></Line>
           <FoodNoteContainer>
             <FoodNote>닭죽</FoodNote>
-            <SeeMore>
+            <FoodSeeMore onClick={toggleFoodSeeMore}>
               <SmIng src={seemore}></SmIng>
-            </SeeMore>
+            </FoodSeeMore>
+            <FoodSeeMoreDetail isVisible={foodSeeMoreVisible}>
+              <FoodDelete>삭제하기</FoodDelete>
+            </FoodSeeMoreDetail>
           </FoodNoteContainer>
         </NoteGrid>
         <NoteAddGrid>
@@ -171,4 +244,3 @@ const Record = function () {
 };
 
 export default Record;
-
