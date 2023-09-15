@@ -1,11 +1,12 @@
-import Record from "./Calender.js";
+import styled from "styled-components";
+import Category from "./Category";
 
-const Analysis = function() {
+const index = function () {
   return (
-    <> 
-      <Record />
+    <>
+    <Category />
     </>
   );
 };
 
-export default Analysis;
+export default index;
