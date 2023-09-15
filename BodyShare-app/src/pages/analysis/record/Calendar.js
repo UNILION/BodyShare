@@ -22,6 +22,7 @@ const CalendarDiv = styled.div`
 `;
 
 const NoteGrid = styled.div`
+  position: relative;
   background-color: white;
   border: 1px solid rgba(135, 135, 135, 0.3);
   border-radius: 15px;
@@ -83,17 +84,17 @@ const FoodSeeMore = styled.button`
 
 const SeeMoreDetail = styled.div`
   width: 158px;
-  position: absolute;
-  left: 490px;
-  top: 440px;
+  position: absolute; 
+  top: 70px;
+  left: 200px;
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
 `;
 
 const FoodSeeMoreDetail = styled.div`
   width: 158px;
-  position: absolute;
-  left: 490px;
-  top: 500px;
+  position: absolute; 
+  top: 130px;
+  left: 200px;
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
 `;
 const Correction = styled.button`
@@ -185,10 +186,12 @@ const Record = function () {
   };
 
   const toggleSeeMore = () => {
+    setFoodSeeMoreVisible(false);
     setSeeMoreVisible(!seeMoreVisible);
   };
 
   const toggleFoodSeeMore = () => { 
+    setSeeMoreVisible(false);
     setFoodSeeMoreVisible(!foodSeeMoreVisible);
   };
 
