@@ -78,21 +78,23 @@ const ChartBox = styled.div`
 `;
 
 const ChartContainer1 = styled.div`
-  width: 205px;
-  height: 240px;
+  width: 175px;
+  height: 230px;
   background-color: white;
   border-radius: 15px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   cursor: pointer;
+  margin: 0 auto;
 `;
 
 const ChartContainer2 = styled.div`
-  width: 155px;
-  height: 240px;
+  width: 175px;
+  height: 230px;
   background-color: white;
   border-radius: 15px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   cursor: pointer;
+  margin: 0 auto;
 `;
 
 const CommunityDiv = styled.div`
@@ -126,9 +128,13 @@ const PostDiv = styled.div`
   align-items: center;
 `;
 
-const CommunityRecommend = styled.div``;
+const CommunityRecommend = styled.div`
+  margin: 0 auto;
+`;
 
-const CommunityRecommend2 = styled.div``;
+const CommunityRecommend2 = styled.div`
+  margin: 0 auto;
+`;
 
 const Index = function () {
   const navigate = useNavigate();
@@ -141,24 +147,30 @@ const Index = function () {
   ];
 
   const chartOptions = {
-    title: "Calorie", 
+    title: "Calorie",
     pieHole: 0.4,
+    titleTextStyle: {
+      fontSize: 16,
+    },
   };
 
   const chartData2 = [
     ["", "운동 분"],
-    ["월", 60],
-    ["화", 45],
-    ["수", 30],
-    ["목", 75],
-    ["금", 90],
-    ["토", 120],
-    ["일", 60],
+    ["M", 60],
+    ["T", 45],
+    ["W", 30],
+    ["T", 75],
+    ["F", 90],
+    ["S", 120],
+    ["S", 60],
   ];
 
   const chartOptions2 = {
     title: "Daily Diet",
     legend: { position: "none" },
+    chart: {
+      title: "Daily Diet",
+    },
   };
 
   return (
@@ -180,8 +192,8 @@ const Index = function () {
         >
           <Chart
             chartType="Bar"
-            width="220px"
-            height="240px"
+            width="100%"
+            height="230px"
             data={chartData2}
             options={chartOptions2}
             graph_id="barchart2"
@@ -194,8 +206,8 @@ const Index = function () {
         >
           <Chart
             chartType="PieChart"
-            width="160px"
-            height="240px"
+            width="100%"
+            height="230px"
             data={chartData}
             options={chartOptions}
             graph_id="donutchart"
