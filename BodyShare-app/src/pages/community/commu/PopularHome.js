@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import "../../../assets/css/Pagination.css";
 import Card from "../../../components/commons/Card";
@@ -16,6 +17,7 @@ const Group = styled.div`
 
 const PopularHome = function () {
   const [page, setPage] = useState(1);
+  const navigate = useNavigate();
 
   const handleChange = (page) => {
     setPage(page);
@@ -26,34 +28,38 @@ const PopularHome = function () {
       <Group>
         <Card
           img={Image1}
-          title="인기 요가 커뮤니티"
-          contents="요가에 재미를 붙이셨네요 :)"
+          title="요가"
+          contents="요가에서 다양한 동작을 배워보아요"
           tagName="요가"
-          footer="96명의 회원이 가입함"
+          footer="243명의 회원이 가입함"
+          onClick={() => navigate("/community/in")} 
         />
         <Card
           img={Image2}
-          title="클라이밍 커뮤니티"
+          title="클라이밍 동아리"
           contents="클라이밍에 재미를 붙이셨네요 :)"
           tagName="클라이밍"
-          footer="196명의 회원이 가입함"
+          footer="200명의 회원이 가입함"
+          onClick={() => navigate("/community/in")} 
         />
       </Group>
 
       <Group>
         <Card
           img={Image3}
-          title="필라테스 커뮤니티"
-          contents="필라테스에 재미를 붙이셨네요 :)"
+          title="필라테스를 사랑하는 모임"
+          contents="필라테스할 사람 모두 모두 모여라"
           tagName="필라테스"
-          footer="153명의 회원이 가입함"
+          footer="194명의 회원이 가입함"
+          onClick={() => navigate("/community/in")} 
         />
         <Card
           img={Image4}
-          title="축구 커뮤니티"
-          contents="축구에 재미를 붙이셨네요 :)"
+          title="축사모"
+          contents="축구에 진심이시군요"
           tagName="축구"
-          footer="3563명의 회원이 가입함"
+          footer="132명의 회원이 가입함"
+          onClick={() => navigate("/community/in")} 
         />
       </Group>
       <Pagination
