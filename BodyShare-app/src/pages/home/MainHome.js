@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Chart } from "react-google-charts";
 import Card from "../../components/commons/Card";
 import CardImage1 from "../../assets/Img/card_image1.png";
@@ -59,40 +59,80 @@ const RecordButton = styled(Link)`
 const ButtonImg = styled.img`
   width: 34.62px;
   height: 34px;
+  cursor: pointer;
 `;
 
 const ChartBox = styled.div`
   grid-row: 2;
   width: 380px;
+  height: 261px;
   border-radius: 30px;
   background-color: #ffffff;
-  border: 1px solid #878787;
+  border: 1px solid rgba(0, 0, 0, 0.25);
   margin: 0 auto;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
   display: flex;
-
+  justify-content: center;
+  align-items: center;
 `;
 
 const ChartContainer1 = styled.div`
-  padding-right: 10px;
+  width: 180px;
+  background-color: white;
+  border-radius: 15px;
+  border: 1px solid rgba(135, 135, 135, 0.3);
+  cursor: pointer;
 `;
 
 const ChartContainer2 = styled.div`
+  width: 180px;
+  background-color: white;
+  border-radius: 15px;
+  border: 1px solid rgba(135, 135, 135, 0.3);
+  cursor: pointer;
 `;
 
 const CommunityDiv = styled.div`
   grid-row: 3;
+  width: 380px;
+  height: 305px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  margin: 10px auto 0 auto;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-template-rows: auto auto;
+`;
+
+const CommunityP = styled.p`
+  grid-row: 1;
+  text-align: left;
+  font-weight: bold;
+  font-size: 16px;
+  padding-top: 15px;
+  padding-left: 15px;
+`;
+
+const PostDiv = styled.div`
+  grid-row: 2;
   display: flex;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const CommunityRecommend = styled.div`
-  margin-bottom: 10px;
 `;
 
 const CommunityRecommend2 = styled.div`
-  margin-bottom: 10px;
 `;
 
 const Index = function () {
+  const navigate = useNavigate();
+
   const chartData = [
     ["작업", "하루 시간"],
     ["탄", 3],
@@ -138,7 +178,7 @@ const Index = function () {
       </Record>
 
       <ChartBox>
-        <ChartContainer1>
+        <ChartContainer1 onClick={()=>{navigate("/analysis")}}>
           <Chart
             chartType="Bar"
             width="175px"
@@ -148,7 +188,7 @@ const Index = function () {
             graph_id="barchart2"
           />
         </ChartContainer1>
-        <ChartContainer2>
+        <ChartContainer2 onClick={()=>{navigate("/analysis")}}>
           <Chart
             chartType="PieChart"
             width="175px"
@@ -161,24 +201,27 @@ const Index = function () {
       </ChartBox>
 
       <CommunityDiv>
-        <CommunityRecommend>
-          <Card
-            img={CardImage1}
-            title="News"
-            contents="커뮤니티에 News 및 소식"
-            tagName="요가"
-            footer="TEST"
-          />
-        </CommunityRecommend>
-        <CommunityRecommend2>
-          <Card
-            img={CardImage2}
-            title="News"
-            contents="커뮤니티에 News 및 소식"
-            tagName="요가"
-            footer="TEST"
-          />
-        </CommunityRecommend2>
+        <CommunityP>News</CommunityP>
+        <PostDiv>
+          <CommunityRecommend>
+            <Card
+              img={CardImage1}
+              title="News"
+              contents="커뮤니티에 News 및 소식"
+              tagName="요가"
+              footer="TEST"
+            />
+          </CommunityRecommend>
+          <CommunityRecommend2>
+            <Card
+              img={CardImage2}
+              title="News"
+              contents="커뮤니티에 News 및 소식"
+              tagName="요가"
+              footer="TEST"
+            />
+          </CommunityRecommend2>
+        </PostDiv>
       </CommunityDiv>
     </Container>
   );
