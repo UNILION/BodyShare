@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import search from "../../assets/Img/search.png"
 import previous from "../../assets/Img/Previous.png";
+import { Link, useNavigate } from "react-router-dom";
 
 const FoodtSearchContainer = styled.div`
   display: grid;
@@ -9,10 +10,14 @@ const FoodtSearchContainer = styled.div`
 `;
 
 const PreviousButton = styled.img`
-    grid-row: 1;
-    width: 21px;
-    height: 21px;
-    margin-top: 10px;
+  grid-row: 1;
+  width: 21px;
+  height: 21px;
+  margin-top: 10px;
+
+  &:hover {
+  cursor: pointer;
+  }
 `;
 const SearchInput = styled.div`
   grid-row: 2;
@@ -56,10 +61,12 @@ const Line = styled.div`
 
 
 const FoodtSearch = function() {
+  const navigate = useNavigate();
+
   return (
     <>
         <FoodtSearchContainer>
-            <PreviousButton src={previous}></PreviousButton>
+            <PreviousButton src={previous} onClick={() => navigate("/analysis")}></PreviousButton>
             <SearchInput>
                 <Search src={search}></Search>
                 <Input type="text" placeholder="찾으시는 음식을 검색해주세요"/>
