@@ -141,11 +141,8 @@ const Index = function () {
   ];
 
   const chartOptions = {
-    title: "Calorie",
+    title: "Calorie", 
     pieHole: 0.4,
-    titleTextStyle: {
-      fontSize: 18,
-    },
   };
 
   const chartData2 = [
@@ -160,10 +157,8 @@ const Index = function () {
   ];
 
   const chartOptions2 = {
+    title: "Daily Diet",
     legend: { position: "none" },
-    chart: {
-      title: "Daily Diet",
-    },
   };
 
   return (
@@ -211,22 +206,30 @@ const Index = function () {
       <CommunityDiv>
         <CommunityP>News</CommunityP>
         <PostDiv>
-          <CommunityRecommend>
+          <CommunityRecommend
+            onClick={() => {
+              navigate("/community");
+            }}
+          >
             <Card
               img={CardImage1}
-              title="News"
-              contents="커뮤니티에 News 및 소식"
+              title="관심사 요가 커뮤니티"
+              contents="요가에 재미를 붙이셨네요 :)"
               tagName="요가"
-              footer="TEST"
+              footer="96명의 회원이 가입함"
             />
           </CommunityRecommend>
-          <CommunityRecommend2>
+          <CommunityRecommend2
+            onClick={() => {
+              navigate("/community");
+            }}
+          >
             <Card
               img={CardImage2}
-              title="News"
-              contents="커뮤니티에 News 및 소식"
-              tagName="요가"
-              footer="TEST"
+              title="클라이밍 커뮤니티"
+              contents="클라이밍에 재미를 붙이셨네요 :)"
+              tagName="클라이밍"
+              footer="196명의 회원이 가입함"
             />
           </CommunityRecommend2>
         </PostDiv>
