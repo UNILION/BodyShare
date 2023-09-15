@@ -1,37 +1,28 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { Chart } from 'react-google-charts';
-import Card from '../../components/commons/Card';
-import Tag from '../../components/commons/Tag';
+import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { Chart } from "react-google-charts";
+import Card from "../../components/commons/Card";
+import Tag from "../../components/commons/Tag";
 
 const Container = styled.div`
   width: 390px;
   height: 844px;
   display: grid;
-  grid-template-rows: auto 1fr auto; /* 상단, 중간, 하단 */
-  grid-template-columns: 1fr; 
-  gap: 10px; 
-`;
-
-const TopSection = styled.div`
-  grid-row: 1 / 2; /* 상단 */
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+  gap: 10px;
   text-align: center;
   padding: 60px;
 `;
 
-const MiddleSection = styled.div`
-  grid-row: 2 / 3; /* 중간 */
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 좌측과 우측 */
-  gap: 15px; /* 그리드 간격 */
-  justify-content: center;
-`;
-
-const BottomSection = styled.div`
-  grid-row: 3 / 3; /* 하단  */
-  text-align: center;
-  padding: 20px;
+const ChartBox = styled.div`
+  width: 380px;
   display: flex;
+  align-items: left;
+  border-radius: 30px
+  background-color: #ffffff;
+  border: 1px solid #878787;
+  margin: 0 auto;
 `;
 
 const ChartContainer1 = styled.div`
@@ -41,7 +32,7 @@ const ChartContainer1 = styled.div`
 
 const ChartContainer2 = styled.div`
   flex: 1;
-  padding-right: 10px;
+  padding-left: 10px;
 `;
 
 const Logo = styled.img``;
@@ -49,38 +40,39 @@ const Logo = styled.img``;
 const Record = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
+  align-items: left;
+  text-align: left;
+  margin-bottom: 20px;
 `;
 
 const RecordInner1 = styled.div`
-  width: 250px;
-  height: 40px;
-  border-radius: 20px;
+  width: 355.38px;
+  display: flex;
+  align-items: left;
+  max-width: 400px;
+  border-radius: 30px;
   background-color: #ffffff;
   border: 1px solid #878787;
   opacity: 0.3;
-  display: flex;
+  margin: 0 auto;
 `;
 
 const RecordText = styled.p`
-  width: 250px;
-  height: 40px;
-  border-radius: 0px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 0;
   background-color: #ffffff;
   opacity: 0.3;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start; /* 왼쪽 정렬 */
-  font-size: 1rem;
+  font-size: 2rem;
   font-weight: bold;
-  text-align: center;
+  text-align: left;
   color: black;
+  margin: 0;
 `;
 
 const RecordButton = styled(Link)`
-  width: 40px;
-  height: 40px;
+  width: 67.13px;
+  height: 60px;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   background-color: #556fff;
@@ -90,29 +82,27 @@ const RecordButton = styled(Link)`
   text-decoration: none;
   color: white;
   cursor: pointer;
-  justify-self: flex-end; /* 오른쪽 정렬 */
+  justify-content: flex-start;
 `;
 
 const CommunityRecommend = styled.div`
-  flex: 1;
-  padding-right: 10px;
+  margin-bottom: 10px;
 `;
 
 const CommunityRecommend2 = styled.div`
-  flex: 1;
-  padding-right: 10px;
+  margin-bottom: 10px;
 `;
 
 const Index = function () {
   const chartData = [
-    ['작업', '하루 시간'],
-    ['탄수화물', 3],
-    ['단백질', 5],
-    ['지방', 2],
+    ["작업", "하루 시간"],
+    ["탄", 3],
+    ["단", 5],
+    ["지", 2],
   ];
 
   const chartOptions = {
-    title: '내 일일 활동',
+    title: "Calorie",
     pieHole: 0.4,
     titleTextStyle: {
       fontSize: 18,
@@ -120,41 +110,40 @@ const Index = function () {
   };
 
   const chartData2 = [
-    ['요일', '운동 분'],
-    ['월', 60],
-    ['화', 45],
-    ['수', 30],
-    ['목', 75],
-    ['금', 90],
-    ['토', 120],
-    ['일', 60],
+    ["", "운동 분"],
+    ["월", 60],
+    ["화", 45],
+    ["수", 30],
+    ["목", 75],
+    ["금", 90],
+    ["토", 120],
+    ["일", 60],
   ];
 
   const chartOptions2 = {
-    legend: { position: 'none' },
+    legend: { position: "none" },
     chart: {
-      title: '주간 운동 시간 비교',
+      title: "Daily Diet",
     },
   };
 
   return (
     <Container>
       <Logo></Logo>
-      <TopSection>
-        <Record>
-          <RecordInner1>
-            <RecordText>오늘의 기록 0건</RecordText>
-            <RecordButton to="/analysis">{'>'}</RecordButton>
-          </RecordInner1>
-        </Record>
-      </TopSection>
 
-      <MiddleSection>
+      <Record>
+        <RecordInner1>
+          <RecordText>오늘의 기록 0건</RecordText>
+          <RecordButton to="/analysis">{">"}</RecordButton>
+        </RecordInner1>
+      </Record>
+
+      <ChartBox>
         <ChartContainer1>
           <Chart
             chartType="Bar"
-            width="220px"
-            height="300px"
+            width="175px"
+            height="240px"
             data={chartData2}
             options={chartOptions2}
             graph_id="barchart2"
@@ -163,19 +152,20 @@ const Index = function () {
         <ChartContainer2>
           <Chart
             chartType="PieChart"
-            width="180px"
-            height="300px"
+            width="175px"
+            height="240px"
             data={chartData}
             options={chartOptions}
             graph_id="donutchart"
           />
         </ChartContainer2>
-      </MiddleSection>
-      <BottomSection>
+      </ChartBox>
+
+      <div style={{ display: "flex", gap: "10px" }}>
         <CommunityRecommend>
           <Card
-            title="커뮤니티 명"
-            contents="커뮤니티에 대한 간단한 설명"
+            title="News"
+            contents="커뮤니티에 News 및 소식"
             img="이미지 URL"
             footer={
               <Tag
@@ -199,8 +189,8 @@ const Index = function () {
         </CommunityRecommend>
         <CommunityRecommend2>
           <Card
-            title="커뮤니티 명"
-            contents="커뮤니티에 대한 간단한 설명"
+            title="News"
+            contents="커뮤니티에 News 및 소식"
             img="이미지 URL"
             footer={
               <Tag
@@ -222,7 +212,7 @@ const Index = function () {
             }
           />
         </CommunityRecommend2>
-      </BottomSection>
+      </div>
     </Container>
   );
 };
