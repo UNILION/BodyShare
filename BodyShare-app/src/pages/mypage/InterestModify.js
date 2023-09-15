@@ -3,10 +3,12 @@ import search from "../../assets/Img/search.png"
 import backButton from "../../assets/Img/back.png"
 import xbutton from "../../assets/Img/xbutton.png"
 import { useNavigate } from "react-router-dom";
+import Tag from "../../components/commons/Tag";
+import ButtonTT from "./NewVer/ButtonTT"
 
 const SelectDiv = styled.div`
   margin: 10px;
-`
+`;
 
 const SportSearchContainer = styled.div`
   display: grid;
@@ -25,6 +27,7 @@ const PreviousButton = styled.button`
   border: none;
   cursor: pointer;
 `;
+
 const SearchInput = styled.div`
   margin-left: 5px;
   grid-row: 2;
@@ -40,46 +43,32 @@ const Input = styled.input`
   text-align: center;
 `;
 
-const SportCategory = styled.div`
-  grid-row: 3;
-`;
 const Search = styled.img`
   margin-right: 5px;
 `;
 
-const CategoryButton = styled.button`
-  width: 81px;
-  height: 36px;
-  border: none;
-  border-radius: 15px;
-  background-color: rgb(85, 111, 255, 0.3);
-  margin-left: 9px;
-`;
-
 const SportSearchResult = styled.div`
-  grid-row: 4;
+  
 `;
 
 const CategoryList = styled.ul`
+  grid-template-rows: 1fr 1fr 1fr 1fr;
   list-style: none;
-  display: flex;
-`;
-const CP = styled.p`
-    font-size: 12px;
-    font-weight: bold;
-    color: #656565;
+  margin-left: 20px;
 `;
 
 const ResultList = styled.ul`
   list-style: none;
   gap: 10px;
 `;
+
 const ResultButton = styled.button`
     background-color: white;
     border: none;
     padding-top: 45px;
     padding-bottom: 0px;
 `;
+
 const RP = styled.p`
     font-size: 17px;
 `;
@@ -102,7 +91,7 @@ const SelectedDiv = styled.div`
   grid-template-columns: 1fr 1fr 1fr;
   width: 300px;
   height: 25px;
-  margin: 15px auto;
+  margin: 15px auto auto 40px;
 `;
 
 const Select = styled.div`
@@ -111,22 +100,6 @@ const Select = styled.div`
 
 `;
 
-const SelectCircle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 56px;
-  height: 23px;
-  border-radius: 23px;
-  background-color: rgba(85, 111, 255, 0.3);
-`;
-
-const SelectP = styled.p`
-  font-size: 11px;
-  font-weight: bold;
-  color: #656565;
-`;
 const DeleteButtonDiv = styled.div`
   width: 30px;
   display: flex;
@@ -143,7 +116,6 @@ const DeleteButton = styled.button`
   border: none;
   background: url(${xbutton}) no-repeat center center;
   background-size: cover;
-
   &:hover {
     cursor: pointer;
   }
@@ -157,21 +129,6 @@ const Donediv = styled.div`
   text-align: center;
 `;
 
-const Done = styled.button`
-  background-color: #556fff;
-  width: 321px;
-  height: 45px;
-  border-radius: 15px;
-  color: white;
-  font-size: 13px;
-  border: 1px solid rgba(135, 135, 135, 0.3);
-  
-  &:hover {
-    cursor: pointer;
-  }
-`
-
-
 const InterestModify = function () {
   const navigate = useNavigate();
 
@@ -184,68 +141,92 @@ const InterestModify = function () {
             <Search src={search}></Search>
             <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
           </SearchInput>
-          <SportCategory>
-            <CategoryList>
-              <CategoryButton><CP>전체</CP></CategoryButton>
-              <CategoryButton><CP>전체</CP></CategoryButton>
-              <CategoryButton><CP>전체</CP></CategoryButton>
-              <CategoryButton><CP>전체</CP></CategoryButton>
-            </CategoryList>
-          </SportCategory>
+          <CategoryList>
+            <Tag 
+              tagName="전체"
+              br="15px"
+              width="81px"
+              height="36px"
+              mr="3px"
+            />
+            <Tag 
+              tagName="유산소"
+              br="15px"
+              width="81px"
+              height="36px"
+              mr="3px"
+            />
+            <Tag 
+              tagName="웨이트"
+              br="15px"
+              width="81px"
+              height="36px"
+              mr="3px"
+            />
+            <Tag 
+              tagName="야외"
+              br="15px"
+              width="81px"
+              height="36px"
+            />
+          </CategoryList>
           <SportSearchResult>
             <ResultList>
               <ResultButton><RP>수영</RP></ResultButton>
               <CheckBox ></CheckBox>
               <Line></Line>
-              <ResultButton><RP>수영</RP></ResultButton>
+              <ResultButton><RP>러닝</RP></ResultButton>
               <CheckBox ></CheckBox>
               <Line></Line>
-              <ResultButton><RP>수영</RP></ResultButton>
+              <ResultButton><RP>등산</RP></ResultButton>
               <CheckBox ></CheckBox>
               <Line></Line>
-              <ResultButton><RP>수영</RP></ResultButton>
+              <ResultButton><RP>자전거</RP></ResultButton>
               <CheckBox ></CheckBox>
               <Line></Line>
-              <ResultButton><RP>수영</RP></ResultButton>
+              <ResultButton><RP>요가</RP></ResultButton>
               <CheckBox ></CheckBox>
               <Line></Line>
             </ResultList>
           </SportSearchResult>
         </SportSearchContainer>
-
         <SelectedDiv>
           <Select>
-            <SelectCircle>
-              <SelectP>요가</SelectP>
-            </SelectCircle>
+            <Tag 
+              tagName="요가"
+            />
             <DeleteButtonDiv>
               <DeleteButton ></DeleteButton>
             </DeleteButtonDiv>
           </Select>
           <Select>
-            <SelectCircle>
-              <SelectP>수영</SelectP>
-            </SelectCircle>
+            <Tag 
+              tagName="수영"
+            />
             <DeleteButtonDiv>
               <DeleteButton ></DeleteButton>
             </DeleteButtonDiv>
           </Select>
           <Select>
-            <SelectCircle>
-              <SelectP>달리기</SelectP>
-            </SelectCircle>
+            <Tag 
+              tagName="러닝"
+            />
             <DeleteButtonDiv>
               <DeleteButton ></DeleteButton>
             </DeleteButtonDiv>
           </Select>
         </SelectedDiv>
-
-
         <Donediv>
-          <Done onClick={() => {navigate("/mypage/modify")}}>선택완료</Done>
+          <ButtonTT
+            name="선택완료"
+            onClick={() => navigate("/mypage/modify")}
+            width="321px"
+            height="45px"
+            br="15px"
+            mr="20px"
+          />
         </Donediv>
       </SelectDiv>
-
     </>
   )
 };
