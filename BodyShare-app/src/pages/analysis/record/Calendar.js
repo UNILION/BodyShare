@@ -16,6 +16,11 @@ const RecordGrid = styled.div`
   margin: 20px auto;
 `;
 
+const CalendarDiv = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 const NoteGrid = styled.div`
   background-color: white;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -152,23 +157,18 @@ const Add = styled.div`
   padding: 10px 20px;
   border-radius: 15px;
   background-color: rgba(85, 111, 255, 0.3);
-`;
-
-const AddBt = styled.button`
-  border: none;
-  float: left;
-  text-align: left;
-  margin-right: 10px;
-
-  &:hover {
-    cursor: pointer;
-  }
+  display: flex;
 `;
 
 const BtImg = styled.img`
   width: 19px;
   border: none;
   background: none;
+  margin-right: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Record = function () {
@@ -195,9 +195,9 @@ const Record = function () {
   return (
     <>
       <RecordGrid>
-        <div>
+        <CalendarDiv>
           <Calendar onChange={handleDateChange} value={value} />
-        </div>
+        </CalendarDiv>
         <NoteGrid>
           <TitleDate>
             <P>{selectedDate ? selectedDate.toLocaleDateString() : ""}</P>
@@ -226,15 +226,11 @@ const Record = function () {
         </NoteGrid>
         <NoteAddGrid>
           <Add>
-            <AddBt onClick={() => navigate("/analysis/sports")}>
-              <BtImg src={buttonplus}></BtImg>
-            </AddBt>
+            <BtImg src={buttonplus} onClick={() => navigate("/analysis/sports")}></BtImg>
             <P>운동 기록 추가</P>
           </Add>
           <Add>
-            <AddBt onClick={() => navigate("/analysis/food")}>
-              <BtImg src={buttonplus}></BtImg>
-            </AddBt>
+            <BtImg src={buttonplus} onClick={() => navigate("/analysis/food")}></BtImg>
             <P>식단 기록 추가</P>
           </Add>
         </NoteAddGrid>
