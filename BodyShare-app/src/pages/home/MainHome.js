@@ -19,7 +19,7 @@ const ChartBox = styled.div`
   width: 380px;
   display: flex;
   align-items: left;
-  border-radius: 30px
+  border-radius: 30px;
   background-color: #ffffff;
   border: 1px solid #878787;
   margin: 0 auto;
