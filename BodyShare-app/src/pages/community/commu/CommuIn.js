@@ -2,57 +2,48 @@ import styled from "styled-components";
 import Pagination from "react-js-pagination";
 import "../../../assets/css/Pagination.css";
 import Card from "../../../components/commons/Card";
-import Image1 from "../../../assets/Img/card_image1.png";
-import Image2 from "../../../assets/Img/card_image2.png";
-import Image3 from "../../../assets/Img/card_image3.png";
-import Image4 from "../../../assets/Img/card_image4.png";
+import Image1 from "../../../assets/Img/Climing1.jpg";
+import Image2 from "../../../assets/Img/Climing2.jpg";
+import Image3 from "../../../assets/Img/Climing3.jpg";
+import Image4 from "../../../assets/Img/Climing4.jpg";
 import Image5 from "../../../assets/Img/right.png"
+import Image6 from "../../../assets/Img/red.png"
 import { useState } from "react";
-import bannerPic from "../../../assets/Img/banner.jpg"
+import bannerPic from "../../../assets/Img/card_image2.png"
 import userPic from "../../../assets/Img/user.png"
 import Tag from "../../../components/commons/Tag"
 import Button from "../../../components/commons/Button";
 
-
-const NavBox = styled.div`
-  width: 391px;
-  height: 51px;
-  border: 0px solid;
-  background-color: rgba(85, 111, 255, 0.3);
-  border-radius: 15px 15px 0px 0px;
-`;
+const BannerPic = styled.div`
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+`
 
 const Banner = styled.img`
-  width: 389px;
-  height: 100px;
-  border-radius: 15px;
+  width: 100%;
+  position: absolute;
+  top: -100px;
 `;
 
 const Pf = styled.ul`
     display: grid;
-    grid-template-columns: 163px auto;
+    grid-template-columns: 1fr 2fr;
+    width: 90%;
 `;
 
 const Pfpic = styled.img`
-  width: 163px;
-  height: 163px;
+  width: 108px;
+  height: 108px;
 `;
 
-const Pfcomment = styled.div`
-
-`;
-
-const Pfcommentul = styled.div`
-  width: 174px;
-  height: 25px;
-  list-style: none;
-  margin-left: 7px;
-`;
+const Pfcommentul = styled.div``;
 
 const CommuName = styled.li`
   margin-top: 28px;
-  font-size: 20px;
-  font-style: bold;
+  font-size: 16px;
+  font-weight: bold;
 `;
 
 const CommuInLi = styled.div`
@@ -63,35 +54,37 @@ const CommuIntro = styled.p`
   font-size: 14px;
 `;
 
-const Inst = styled.li`
-    display: flex;
-    width: 215px;
-    height: 153px;
+const Inst = styled.div`
+    margin-top: 10px;
 `;
 
 const MainBar = styled.ul`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 90%;
+  margin-top: 10px;
 `;
 
 const Info = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   border: 1px solid rgba(135, 135, 135, 0.3);
   border-radius: 15px;
-  display: flex;
   width: 206px;
   height: 48px;
   align-items: center;
 ` ;
 
-const Feed = styled.li`
-  margin-left: 40px;
+const Feed = styled.div`
   font-size: 18px;
   text-align: center;
+  font-weight: bold;
 `;
 
-const Member = styled.li`
-  margin-left: 25px;
+const Member = styled.div`
   font-size: 18px;
   text-align: center;
+  font-weight: bold;
 `;
 
 const Group = styled.div`
@@ -102,86 +95,89 @@ const Group = styled.div`
 
 const CommuHome = function () {
   const [page, setPage] = useState(1);
+  const [register, setRegister] = useState(false);
 
   const handleChange = (page) => {
     setPage(page);
   }
 
+  const registerChange = (register) => {
+    setRegister(!register);
+  }
+
   return (
     <>
-      <NavBox></NavBox>
-      <Banner src= {bannerPic} />
+      <BannerPic><Banner src= {bannerPic} /></BannerPic>
       <Pf>
         <Pfpic src= {userPic} />
-        <Pfcomment>
           <Pfcommentul>
-            <br />
-            <CommuName>헬스가 좋은 사람들</CommuName>
+            <CommuName>클라이밍이 좋은 사람들</CommuName>
             <CommuInLi>
-              <CommuIntro>저희는 그저 헬스가 좋아서 모인</CommuIntro>
-              <CommuIntro>사람들 잘 부탁드립니다.</CommuIntro>
+              <CommuIntro>저희는 그저 클라이밍이 좋아서 모인 사람들입니다.</CommuIntro>
             </CommuInLi>
-            <br />
-            <li>
               <Inst>
                 <Tag 
                   tagName="요가"
+                  mr="10px;"
                 />
                 <Tag 
                   tagName="클라이밍"
                 />
               </Inst>
-            </li>
           </Pfcommentul>
-        </Pfcomment>
       </Pf>
       <MainBar>
           <Info>
             <Feed>
-              <li>404</li>
-              <li>게시물</li>
+              <p>404</p>
+              <p>게시물</p>
             </Feed>
             <Member>
-              <li>298</li>
-              <li>회원</li>
+              <p>298</p>
+              <p>회원</p>
             </Member>
           </Info>
           <Button 
-            name="가입하기"
-            img={Image5}
+            name={register?"탈퇴하기":"가입하기"}
+            bc={register?"#FF3131":"#556FFF"}
+            img={register?Image6:Image5}
+            hoverColor={register?"#FF0000":""}
+            iwidth={register?"40px":"30px"}
+            iheight={register?"40px":"30px"}
+            imt={register?"5px":"0"}
+            width="130px"
+            fs="15px"
+            ml="10px"
+            onClick={() => registerChange(register)}
           />
         </MainBar>
-      <Group>
+        <Group>
         <Card
           img={Image1}
-          title="요가 커뮤니티"
-          contents="요가에 재미를 붙이셨네요 :)"
-          tagName="요가"
-          footer="96명의 회원이 가입함"
+          title="클라이밍 좋아하는 모임"
+          contents="클라이밍 좋아하는 사람들 모두 모두 모여라"
+          footer="2023년 9월 16일"
         />
         <Card
           img={Image2}
-          title="클라이밍 커뮤니티"
-          contents="클라이밍에 재미를 붙이셨네요 :)"
-          tagName="클라이밍"
-          footer="196명의 회원이 가입함"
+          title="대전 클라이밍"
+          contents="대전에서 클라이밍 하실 분?"
+          footer="2023년 9월 15일"
         />
       </Group>
 
       <Group>
         <Card
           img={Image3}
-          title="필라테스 커뮤니티"
-          contents="필라테스에 재미를 붙이셨네요 :)"
-          tagName="필라테스"
-          footer="153명의 회원이 가입함"
+          title="수도권 클라이밍 모임"
+          contents="수도권 사람들만 오세요:)"
+          footer="2023년 9월 15일"
         />
         <Card
           img={Image4}
-          title="축구 커뮤니티"
-          contents="축구에 재미를 붙이셨네요 :)"
-          tagName="축구"
-          footer="3563명의 회원이 가입함"
+          title="클라이밍 초보들만"
+          contents="클라이밍에 재미를 붙이셨네요 :)"
+          footer="2023년 9월 14일" 
         />
       </Group>
       <Pagination
