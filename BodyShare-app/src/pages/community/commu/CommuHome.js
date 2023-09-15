@@ -99,7 +99,7 @@ const CommuHome = function () {
       </Tab>
       {Interest ? <InterestHome /> : null}
       {Popular ? <PopularHome /> : null}
-        <Img src={Plus} />
+        <Img src={Plus} onClick={() => navigate("/community/communityAdd")} />
     </Container>
   );
 };
