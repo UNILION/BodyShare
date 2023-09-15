@@ -8,6 +8,7 @@ import Home from "./pages/home";
 import Analysis from "./pages/analysis";
 import Community from "./pages/community";
 import CommuSearch from "./pages/community/commu/CommuSearch";
+import CommuSearchAfter from "./pages/community/commu/CommuSearchAfter";
 import CommuIn from "./pages/community/commu/CommuIn";
 import CommuAdd from "./pages/community/commu/CommuAdd";
 import CommuCategory from "./pages/community/commu/CommuCategory";
@@ -50,8 +51,9 @@ function App() {
           </Route>
           <Route path="/community" element={<Layout />}>
             <Route index element={<Community />} />
-            <Route path="/community/search" element={<CommuSearch />} />
             <Route path="/community/commuIn" element={<CommuIn />} />
+            <Route path="/community/search" element={<CommuSearch />} />
+            <Route path="/community/search/after" element={<CommuSearchAfter />} />
             <Route path="/community/communityAdd" element={<CommuAdd />} />
             <Route path="/community/category" element={<CommuCategory />} />
             <Route path="/community/feedAdd" element={<CommuFeedAdd />} />
