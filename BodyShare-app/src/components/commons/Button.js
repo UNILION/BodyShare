@@ -12,6 +12,7 @@ const StyledButton = styled.button`
   margin-right: ${(props) => (props.mr ? props.mr : "0px")};
   margin-bottom: ${(props) => (props.mb ? props.mb : "0px")};
   margin-left: ${(props) => (props.ml ? props.ml : "0px")};
+  display: ${(props) => (props.display ? props.display : "")};
   cursor: pointer;
 
   &:hover {
