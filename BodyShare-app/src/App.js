@@ -7,6 +7,11 @@ import Layout from "./components/layout";
 import Home from "./pages/home";
 import Analysis from "./pages/analysis";
 import Community from "./pages/community";
+import CommuInst from "./pages/community/commu/CommuInst";
+import CommuIn from "./pages/community/commu/CommuIn";
+import CommuAdd from "./pages/community/commu/CommuAdd";
+import CommuFeedAdd from "./pages/community/commu/CommuFeedAdd";
+import CommuFeed from "./pages/community/commu/CommuFeed";
 import Mypage from "./pages/mypage";
 import Interest from "./pages/user/Interest";
 import InterestList from "./pages/user/InterestList";
@@ -44,6 +49,11 @@ function App() {
           </Route>
           <Route path="/community" element={<Layout />}>
             <Route index element={<Community />} />
+            <Route path="/community/search" element={<CommuInst />} />
+            <Route path="/community/commuIn" element={<CommuIn />} />
+            <Route path="/community/communityAdd" element={<CommuAdd />} />
+            <Route path="/community/feedAdd" element={<CommuFeedAdd />} />
+            <Route path="/community/feed" element={<CommuFeed />} />
           </Route>
           <Route path="/mypage" element={<Layout />}>
             <Route index element={<Mypage />} />
