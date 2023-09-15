@@ -152,7 +152,7 @@ const CommuFeedAdd = function () {
         mb="10px"
         width="150px"
         display="block"
-        onClick={() => navigate("/community")}
+        onClick={() => navigate("/community/commuIn")}
       />
     </Container>
   );
