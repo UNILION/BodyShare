@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Chart } from 'react-google-charts';
-import foodchart1 from '../../../assets/Img/foodchart1.png'
-import foodchart2 from '../../../assets/Img/foodchart2.png'
 
 const SliderContainer = styled.div`
   display: grid;
@@ -18,16 +16,6 @@ const Slide = styled.div`
   place-items: center;
   transition: transform 0.3s ease;
   grid-column: span 1; 
-`;
-const VerticalChart = styled.img`
-  width: 360px;
-  height: 476px;
-  background-color: black;
-`;
-const HorizontalChart = styled.img`
-  width: 360px;
-  height: 476px;
-  background-color: red;
 `;
 
 const Slider = styled.div`
@@ -54,14 +42,7 @@ const Button = styled.button`
 `;
 
 // 차트 스타일
-const HorizontalChartWrapper = styled.div`
-  width: 360px;
-  height: 476px;
-  background-color: red;
-`;
-
 const ChartBox = styled.div`
-  grid-row: 2;
   width: 350px;
   height: 476px;
   border-radius: 30px;
@@ -70,19 +51,31 @@ const ChartBox = styled.div`
   margin: 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+`;
+
+const ChartContainer1 = styled.div`
+  width: 350px;
+  height: 476px;
+  background-color: white;
+  border-radius: 15px;
+  border: 1px solid rgba(135, 135, 135, 0.3);
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const ChartContainer1 = styled.div`
-  width: 180px;
+const ChartContainer2 = styled.div`
+  width: 350px;
+  height: 476px;
   background-color: white;
   border-radius: 15px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
-
 
 const FoodChart = function() {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -96,14 +89,14 @@ const FoodChart = function() {
   };
 
   // 차트
-  const chartData = [
+  const chartData1 = [
     ["작업", "하루 시간"],
     ["탄", 3],
     ["단", 5],
     ["지", 2]
   ];
 
-  const chartOptions = {
+  const chartOptions1 = {
     title: "Calorie",
     pieHole: 0.4,
     titleTextStyle: {
@@ -111,29 +104,53 @@ const FoodChart = function() {
     }
   };
 
+  const chartData2 = [
+    ['요일', '칼로리'],
+    ['월',  1000],
+    ['화',  1170],
+    ['수',  660],
+    ['목',  1030],
+    ['금',  1030],
+    ['토',  1030],
+    ['일',  1030]
+  ];
+
+  const chartOptions2 = {
+    title: '요일별 칼로리 섭취량',
+    curveType: 'function'
+  };
+
   return (
     <>
       <SliderContainer>
         <Slider slideIndex={slideIndex}>
         <Slide>
-            <HorizontalChartWrapper>
-              <ChartBox>
-                <ChartContainer1>
-                    <Chart
-                      chartType="PieChart"
-                      width="350px"
-                      height="476px"
-                      data={chartData}
-                      options={chartOptions}
-                      graph_id="donutchart"
-                    />
-                  </ChartContainer1>
-              </ChartBox>
-            </HorizontalChartWrapper>
+          <ChartBox>
+            <ChartContainer1>
+                <Chart
+                  chartType="PieChart"
+                  width="350px"
+                  height="476px"
+                  data={chartData1}
+                  options={chartOptions1}
+                  graph_id="donutchart"
+                />
+              </ChartContainer1>
+          </ChartBox>
           </Slide>
           <Slide>
-            <HorizontalChart src={foodchart2}></HorizontalChart>
-            <h1>Slide 2</h1>
+          <ChartBox>
+            <ChartContainer2>
+                <Chart
+                  chartType="ComboChart"
+                  width="340px"
+                  height="476px"
+                  data={chartData2}
+                  options={chartOptions2}
+                  graph_id="curve_chart"
+                />
+              </ChartContainer2>
+          </ChartBox>
           </Slide>
         </Slider>
       </SliderContainer>
