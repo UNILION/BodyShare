@@ -132,9 +132,13 @@ const CommuHome = function () {
                 <Tag 
                   tagName="요가"
                   mr="10px;"
+                  hoverColor="rgba(85,111,255, 0.3)"
+                  cursor="default"
                 />
                 <Tag 
                   tagName="클라이밍"
+                  hoverColor="rgba(85,111,255, 0.3)"
+                  cursor="default"
                 />
               </Inst>
           </Pfcommentul>
