@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import calender from "../../assets/Img/calender.png";
+import React, { useState } from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 import buttonplus from "../../assets/Img/buttonplus.png";
 import seemore from "../../assets/Img/seemore.png";
 
@@ -45,6 +47,7 @@ const SportNoteContainer = styled.div`
   align-items: center;
   padding: 20px;
 `;
+
 const FoodNoteContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr auto auto;
@@ -101,6 +104,10 @@ const AddBt = styled.button`
   float: left;
   text-align: left;
   margin-right: 10px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const BtImg = styled.img`
@@ -110,47 +117,58 @@ const BtImg = styled.img`
 `;
 
 const Record = function () {
+  const navigate = useNavigate();
+  // 캘린더
+  const [value, onChange] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
   return (
     <>
-    <RecordGrid>
-      <Calender src={calender} />
-      <NoteGrid>
-        <TitleDate>
-          <P>9월 7일 목</P>
-        </TitleDate>
-        <SportNoteContainer>
-          <SportNote>유산소 달리기</SportNote>
-          <SportTime>30분</SportTime>
-          <SeeMore>
-            <SmIng src={seemore}></SmIng>
-          </SeeMore>
-        </SportNoteContainer>
-        <Line></Line>
-        <FoodNoteContainer>
-          <FoodNote>닭죽</FoodNote>
-          <SeeMore>
-            <SmIng src={seemore}></SmIng>
-          </SeeMore>
-        </FoodNoteContainer>
-      </NoteGrid>
-      <NoteAddGrid>
-        <Add>
-          <AddBt>
-            <BtImg src={buttonplus}></BtImg>
-          </AddBt>
-          <P>운동 기록 추가</P>
-        </Add>
-        <Add>
-          <AddBt>
-            <BtImg src={buttonplus}></BtImg>
-          </AddBt>
-          <P>식단 기록 추가</P>
-        </Add>
-      </NoteAddGrid>
-    </RecordGrid>
+      <RecordGrid>
+        <div>
+          <Calendar onChange={handleDateChange} value={value} />
+        </div>
+        <NoteGrid>
+          <TitleDate>
+            <P>{selectedDate ? selectedDate.toLocaleDateString() : ""}</P>
+          </TitleDate>
+          <SportNoteContainer>
+            <SportNote>유산소 달리기</SportNote>
+            <SportTime>30분</SportTime>
+            <SeeMore>
+              <SmIng src={seemore}></SmIng>
+            </SeeMore>
+          </SportNoteContainer>
+          <Line></Line>
+          <FoodNoteContainer>
+            <FoodNote>닭죽</FoodNote>
+            <SeeMore>
+              <SmIng src={seemore}></SmIng>
+            </SeeMore>
+          </FoodNoteContainer>
+        </NoteGrid>
+        <NoteAddGrid>
+          <Add>
+            <AddBt onClick={() => navigate("/analysis/sports")}>
+              <BtImg src={buttonplus}></BtImg>
+            </AddBt>
+            <P>운동 기록 추가</P>
+          </Add>
+          <Add>
+            <AddBt onClick={() => navigate("/analysis/food")}>
+              <BtImg src={buttonplus}></BtImg>
+            </AddBt>
+            <P>식단 기록 추가</P>
+          </Add>
+        </NoteAddGrid>
+      </RecordGrid>
     </>
-   
   );
 };
 
 export default Record;
+
