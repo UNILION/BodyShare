@@ -78,7 +78,8 @@ const ChartBox = styled.div`
 `;
 
 const ChartContainer1 = styled.div`
-  width: 180px;
+  width: 205px;
+  height: 240px;
   background-color: white;
   border-radius: 15px;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -86,7 +87,8 @@ const ChartContainer1 = styled.div`
 `;
 
 const ChartContainer2 = styled.div`
-  width: 180px;
+  width: 155px;
+  height: 240px;
   background-color: white;
   border-radius: 15px;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -124,11 +126,9 @@ const PostDiv = styled.div`
   align-items: center;
 `;
 
-const CommunityRecommend = styled.div`
-`;
+const CommunityRecommend = styled.div``;
 
-const CommunityRecommend2 = styled.div`
-`;
+const CommunityRecommend2 = styled.div``;
 
 const Index = function () {
   const navigate = useNavigate();
@@ -137,7 +137,7 @@ const Index = function () {
     ["작업", "하루 시간"],
     ["탄", 3],
     ["단", 5],
-    ["지", 2]
+    ["지", 2],
   ];
 
   const chartOptions = {
@@ -145,7 +145,7 @@ const Index = function () {
     pieHole: 0.4,
     titleTextStyle: {
       fontSize: 18,
-    }
+    },
   };
 
   const chartData2 = [
@@ -156,14 +156,14 @@ const Index = function () {
     ["목", 75],
     ["금", 90],
     ["토", 120],
-    ["일", 60]
+    ["일", 60],
   ];
 
   const chartOptions2 = {
     legend: { position: "none" },
     chart: {
       title: "Daily Diet",
-    }
+    },
   };
 
   return (
@@ -178,20 +178,28 @@ const Index = function () {
       </Record>
 
       <ChartBox>
-        <ChartContainer1 onClick={()=>{navigate("/analysis")}}>
+        <ChartContainer1
+          onClick={() => {
+            navigate("/analysis");
+          }}
+        >
           <Chart
             chartType="Bar"
-            width="175px"
+            width="220px"
             height="240px"
             data={chartData2}
             options={chartOptions2}
             graph_id="barchart2"
           />
         </ChartContainer1>
-        <ChartContainer2 onClick={()=>{navigate("/analysis")}}>
+        <ChartContainer2
+          onClick={() => {
+            navigate("/analysis");
+          }}
+        >
           <Chart
             chartType="PieChart"
-            width="175px"
+            width="160px"
             height="240px"
             data={chartData}
             options={chartOptions}
