@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom";
+import MyPage from "./MyPage.js";
 
 const MyMain = function() {
   return (
     <>
-      <Outlet />
+      <MyPage />
     </>
   );
 };
