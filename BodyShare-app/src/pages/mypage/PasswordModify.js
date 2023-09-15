@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import backButton from "../../assets/Img/back.png"
+import checkButton from "../../assets/Img/circletcheck.png"
 
 const All = styled.div`
   margin-left: 3px;
@@ -11,10 +13,10 @@ const Titleul = styled.ul`
 `
 
 const Backbutton = styled.button`
-  margin-top: 3px;
   width: 20px;
   height: 20px;
-  background-color: #D9D9D9;
+  background-image: url(${backButton});
+  background-size: cover;
   border-radius: 20px;
   border: none;
   cursor: pointer;
@@ -37,6 +39,8 @@ const Bfpwul = styled.ul`
 `
 
 const BfpwTitle = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
@@ -46,6 +50,8 @@ const BfpwTitle = styled.div`
 `
 
 const Bfpw = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
@@ -60,6 +66,8 @@ const Atpwul = styled.ul`
 `
 
 const AtpwTitle = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
@@ -89,6 +97,8 @@ const Checkkul = styled.ul`
 `
 
 const Checktitle = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
@@ -107,6 +117,8 @@ const Checkinput = styled.input`
 `
 
 const Checkokbutton = styled.button`
+  background-image: url(${checkButton});
+  background-size: cover;
   margin-top: 7px;
   margin-left: 10px;
   width: 34px;
@@ -114,7 +126,6 @@ const Checkokbutton = styled.button`
   border-radius: 34px;
   border: none;
   cursor: pointer;
-  background-color: #556FFF;
 `
 
 const Checkpwwarn = styled.p`
@@ -139,11 +150,12 @@ const Modifyok = styled.button`
 `
 
 const PasswordModify = function () {
+
   return (
     <>
       <All>
         <Titleul>
-          <Backbutton onClick={() => navigate("/MyProfileModify")}></Backbutton>
+          <Backbutton></Backbutton>
           <Title>나의 정보 수정</Title>
         </Titleul>
         <Maintitle>비밀번호 변경</Maintitle>
@@ -153,16 +165,16 @@ const PasswordModify = function () {
         </Bfpwul>
         <Atpwul>
           <AtpwTitle>변경 비밀번호</AtpwTitle>
-          <Atpwinput></Atpwinput>
+          <Atpwinput type="password" placeholder="변경 비밀번호"></Atpwinput>
         </Atpwul>
         <Atpwwarn>조건에 충족하지 않습니다.</Atpwwarn>
         <Checkkul>
           <Checktitle>비밀번호 확인</Checktitle>
-          <Checkinput></Checkinput>
+          <Checkinput type="password" placeholder="비밀번호 확인"></Checkinput>
           <Checkokbutton></Checkokbutton>
         </Checkkul>
         <Checkpwwarn>비밀번호가 다릅니다.</Checkpwwarn>
-        <Modifyok onClick={() => navigate("/MyProfileModify")}>수정 완료</Modifyok>
+        <Modifyok>수정 완료</Modifyok>
       </All>
     </>
   )

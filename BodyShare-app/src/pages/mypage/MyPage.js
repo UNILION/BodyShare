@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import bannerPic from "../../assets/Img/banner.jpg";
+import userPic from "../../assets/Img/user.png";
 
 const Banner = styled.img`
     height: 87px;
@@ -125,10 +126,10 @@ const Modifypf = styled.button`
 const MyPage = function () {
   return (
     <>
-      <Banner src={bannerPic} />
+      <Banner src= {bannerPic} />
       <Title>마이페이지</Title>
       <Pf>
-        <Pfpic src="../../assets/Img/user.png" />
+        <Pfpic src= {userPic} />
         <Pfcomment>
           <Pfcommentul>
             <br />
@@ -163,7 +164,7 @@ const MyPage = function () {
 
       </Info>
 
-      <Modifypf onClick={() => navigate("/MyProfileModify")}>프로필 수정하기 </Modifypf>
+      <Modifypf>프로필 수정하기 </Modifypf>
       <Logout>로그아웃</Logout>
 
     </>

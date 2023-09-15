@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import backButton from "../../assets/Img/back.png"
+import checkButton from "../../assets/Img/circletcheck.png"
+import delButton from "../../assets/Img/xbutton.png"
 
 const All = styled.div`
   margin-left: 3px;
@@ -11,16 +14,17 @@ const Titleul = styled.ul`
 `
 
 const Backbutton = styled.button`
-  margin-top: 3px;
   width: 20px;
   height: 20px;
-  background-color: #D9D9D9;
+  background-image: url(${backButton});
+  background-size: cover;
   border-radius: 20px;
   border: none;
   cursor: pointer;
 `
 
 const Title = styled.p`
+  margin-left: 5px;
   font-size: 23px;
   font-style: bold;
 `
@@ -67,6 +71,8 @@ const Idul = styled.ul`
 `
 
 const IdTitle = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
@@ -90,6 +96,8 @@ const Nickul = styled.ul`
 `
 
 const NickTitle = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
@@ -108,6 +116,8 @@ const Nick = styled.p`
 `
 
 const Nickbutton = styled.button`
+  background-image: url(${checkButton});
+  background-size: cover;
   margin-top: 7px;
   margin-left: 10px;
   width: 34px;
@@ -115,7 +125,6 @@ const Nickbutton = styled.button`
   border-radius: 34px;
   border: none;
   cursor: pointer;
-  background-color: #556FFF;
 `
 
 const Nickwarnig = styled.p`
@@ -130,6 +139,8 @@ const Pwul = styled.ul`
 `
 
 const PwTitle = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
@@ -139,6 +150,8 @@ const PwTitle = styled.div`
 `
 
 const Pw = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
@@ -158,6 +171,7 @@ const Pwbutton = styled.button`
   background-color: #556FFF;
   color: #FFFFFF;
   font-size: 15px;
+  cursor: pointer;
 `
 
 const Bodyul = styled.ul`
@@ -167,6 +181,8 @@ const Bodyul = styled.ul`
 `
 
 const Talltitle = styled.div`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
@@ -176,6 +192,8 @@ const Talltitle = styled.div`
 `
 
 const Tsizebox = styled.div`
+  display: flex;
+  align-items: center;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
   width: 142px;
@@ -196,6 +214,8 @@ const Tallsize = styled.p`
 `
 
 const Weighttitle = styled.div`
+  display: flex;
+  align-items: center;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
   width: 73px;
@@ -204,6 +224,8 @@ const Weighttitle = styled.div`
 `
 
 const Wsizebox = styled.div`
+  display: flex;
+  align-items: center;
   color: #000000;
   border: 1px solid rgba(46, 44, 61, 0.3);
   width: 114px;
@@ -236,6 +258,8 @@ const Cateckul = styled.div`
 `
 
 const Catetitle = styled.p`
+  display: flex;
+  align-items: center;
   font-size: 20px;
   color: #000000;
 `
@@ -249,6 +273,7 @@ const Catesearch = styled.button`
   height: 31px;
   border: none;
   margin-left: 157px;
+  cursor: pointer;
 `
 
 const Cateul = styled.div`
@@ -256,26 +281,30 @@ const Cateul = styled.div`
   display: flex;
 `
 
-const Cate = styled.div`
+const Cate = styled.div` 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 0px solid ;
   background-color: rgba(85, 111, 255, 0.3);
   border-radius: 23px;
   width: 55px;
   height: 26px;
   font-size: 13px;
-  text-align: center;
   color: #656565;
 `
 
 const Catedel = styled.button`
+  background-image: url(${delButton});
+  background-size: cover;
   border: 0px solid ;
-  background-color: rgba(85, 111, 255, 0.3);
   border-radius: 24.85px;
   width: 24.85px;
   height: 24.85px;
   font-size: 13px;
   text-align: center;
   color: #FFFFFF;
+  cursor: pointer;
 `
 
 const Catewarnig = styled.p`
@@ -299,11 +328,12 @@ const Modifyok = styled.button`
 `
 
 const MyProfileModify = function () {
+
   return (
     <>
       <All>
       <Titleul>
-          <Backbutton onClick={() => navigate("/mypage")}></Backbutton>
+          <Backbutton></Backbutton>
           <Title>나의 정보 수정</Title>
         </Titleul>
         <Titleo>배너사진</Titleo>
@@ -323,7 +353,7 @@ const MyProfileModify = function () {
         <Pwul>
           <PwTitle>비밀번호</PwTitle>
           <Pw>********</Pw>
-          <Pwbutton onClick={() => navigate("/PasswordModify")}>변경</Pwbutton>
+          <Pwbutton>변경</Pwbutton>
         </Pwul>
         <Bodyul>
           <Talltitle>키</Talltitle>
@@ -344,10 +374,10 @@ const MyProfileModify = function () {
         </Cateckul>
         <Cateul>
           <Cate>요가</Cate>
-          <Catedel>X</Catedel>
+          <Catedel></Catedel>
         </Cateul>
         <Catewarnig>한 개 이상의 카테고리를 선택해주세요!</Catewarnig>
-        <Modifyok onClick={() => navigate("/mypage")}>프로필 수정완료</Modifyok>
+        <Modifyok>프로필 수정완료</Modifyok>
       </All>
     </>
   )

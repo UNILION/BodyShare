@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import logoutLogo from "../../assets/Img/logout.png"
 
 const All = styled.div`
   margin-left: 3px;
@@ -93,7 +94,7 @@ const PasswordModify = function () {
       <All>
         <Title>로그아웃</Title>
         <Main>
-          <Imt src="../../assets/Img/logout.png"></Imt>
+          <Imt src={logoutLogo}></Imt>
           <To>정말 로그아웃</To>
           <Tt>하시겠어요?</Tt>
           <Ttt>저희 BODY SHARE에는</Ttt>
@@ -101,8 +102,8 @@ const PasswordModify = function () {
           <Tff>준비되어 있답니다ㅜㅡㅜ</Tff>
         </Main>
         <Buttons>
-          <Backbutton >돌아가기</Backbutton>
-          <Logoutbutton >로그아웃</Logoutbutton>
+          <Backbutton>돌아가기</Backbutton>
+          <Logoutbutton>로그아웃</Logoutbutton>
         </Buttons>
       </All>
     </>
