@@ -1,18 +1,22 @@
 import styled from "styled-components";
 import logoutLogo from "../../assets/Img/logout.png"
 import { useNavigate } from "react-router-dom";
+import Button from "../../components/commons/Button"
+import Image5 from "../../assets/Img/right.png"
+import ButtonT from "./NewVer/ButtonT"
+import Image6 from "../../assets/Img/left.png"
 
 const All = styled.div`
   margin-left: 3px;
   margin-right: 3px;
   margin-top: 19px;
-`
+`;
 
 const Title = styled.p`
   margin-left: 5px;
   font-size: 23px;
   font-style: bold;
-`
+`;
 
 const Main = styled.div`
   margin-top: 20px;
@@ -20,46 +24,48 @@ const Main = styled.div`
   height: 433px;
   border: 1px solid #B3B3B3;
   border-radius: 100px;
-`
+`;
 
 const Imt = styled.img`
   margin-top: 53px;
   margin-left: 96px;
   width: 180px;
   height: 180px;
-`
+`;
 
 const To =styled.p`
   margin-top: 20px;
   text-align: center;
   font-size: 28px;
-`
+`;
 
 const Tt =styled.p`
   text-align: center;
   font-size: 28px;
-`
+`;
 
-const Ttt = styled.p`
+const Ttt = styled.div`
+  margin-left: 115px;
+  display: flex;
   text-align: center;
   font-size: 15px;
-`
+`;
 
 const Tf = styled.p`
   text-align: center;
   font-size: 15px;
-`
+`;
 
 const Tff = styled.p`
   text-align: center;
   font-size: 15px;
-`
+`;
 
 const Buttons = styled.ul`
   margin-top: 50px;
   display: flex;
-  margin-bottom: 23px;
-`
+  margin-bottom: 23px; 
+`;
 
 const Backbutton = styled.button`
   background-color: #556FFF; 
@@ -73,7 +79,7 @@ const Backbutton = styled.button`
   height: 45px;
   float: right;
   font-size: 20px;
-`
+`;
 
 const Logoutbutton = styled.button`
   background-color: rgba(85, 111, 255, 0.5); 
@@ -87,11 +93,14 @@ const Logoutbutton = styled.button`
   height: 45px;
   float: right;
   font-size: 20px;
-`
+`;
+
+const Tp = styled.p`
+  font-weight: bold;
+`;
 
 const PasswordModify = function () {
   const navigate = useNavigate();
-
   return (
     <>
       <All>
@@ -100,13 +109,22 @@ const PasswordModify = function () {
           <Imt src={logoutLogo}></Imt>
           <To>정말 로그아웃</To>
           <Tt>하시겠어요?</Tt>
-          <Ttt>저희 BODY SHARE에는</Ttt>
+          <Ttt>저희 <Tp>BODY SHARE</Tp>에는</Ttt>
           <Tf>아직 많은 재밌는 컨텐츠가</Tf>
           <Tff>준비되어 있답니다ㅜㅡㅜ</Tff>
         </Main>
         <Buttons>
-          <Backbutton onClick={() => {navigate("/mypage")}}>돌아가기</Backbutton>
-          <Logoutbutton onClick={() => {navigate("/")}}>로그아웃</Logoutbutton>
+          <ButtonT
+            name="돌아가기"
+            img={Image6}
+            onClick={() => navigate("/mypage")}
+          />
+          <Button
+            name="로그아웃"
+            img={Image5}
+            onClick={() => navigate("/")}
+            bc="rgba(85, 111, 255, 0.5)"
+          />
         </Buttons>
       </All>
     </>
