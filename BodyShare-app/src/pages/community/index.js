@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import My from"./my/My";
-import CommuHome from"./commu/CommuHome";
+import Category from "./Category";
 
 const index = function () {
   return (
     <>
-      <My />
-      <CommuHome />
+    <Category />
     </>
   );
 };
