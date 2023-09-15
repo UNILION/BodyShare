@@ -59,6 +59,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   text-align: center;
   margin: 0 auto;
+  text-decoration: underline;
 `;
 
 const Logindiv = styled.div`
