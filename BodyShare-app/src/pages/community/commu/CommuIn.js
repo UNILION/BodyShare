@@ -13,6 +13,8 @@ import bannerPic from "../../../assets/Img/card_image2.png"
 import userPic from "../../../assets/Img/user.png"
 import Tag from "../../../components/commons/Tag"
 import Button from "../../../components/commons/Button";
+import Plus from "../../../assets/Img/buttonplus.png"
+import { useNavigate } from "react-router-dom";
 
 const BannerPic = styled.div`
   width: 100%;
@@ -93,9 +95,20 @@ const Group = styled.div`
  margin-top: 10px;
 `;
 
+const Img = styled.img`
+  display: grid;
+  align-items: end;
+  margin: 20px 20px 20px auto;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+`
+
+
 const CommuHome = function () {
   const [page, setPage] = useState(1);
   const [register, setRegister] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (page) => {
     setPage(page);
@@ -189,6 +202,7 @@ const CommuHome = function () {
         nextPageText={"›"}
         onChange={handleChange}
       />
+      <Img src={Plus} onClick={() => navigate("/community/feedAdd")} />
     </>
   );
 };
