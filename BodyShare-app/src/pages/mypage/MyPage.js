@@ -2,6 +2,7 @@ import styled from "styled-components";
 import bannerPic from "../../assets/Img/banner.jpg";
 import userPic from "../../assets/Img/user.png";
 import { useNavigate } from "react-router-dom";
+import Tag from "../../components/commons/Tag"
 
 const Banner = styled.img`
     height: 87px;
@@ -17,7 +18,7 @@ const Title = styled.p`
 const Pf = styled.ul`
     display: grid;
     grid-template-columns: 163px auto;
-`
+`;
 
 const Pfpic = styled.img`
   width: 163px;
@@ -25,7 +26,7 @@ const Pfpic = styled.img`
 `;
 
 const Pfcomment = styled.div`
-
+  
 `;
 
 const Pfcommentul = styled.div`
@@ -36,64 +37,49 @@ const Pfcommentul = styled.div`
 `;
 
 const Info = styled.ul`
-    display: grid;
-    grid-template-columns: 113px auto;
-    margin-top: 26px;
-    width: 349px;
-    height: 206px;
-    border: 0px solid ;
-    background-color: rgba(85, 111, 255, 0.2);
-    border-radius: 15px;
+  margin-left: 30px;
+  display: flex;
+  margin-top: 26px;
+  width: 349px;
+  height: 206px;
+  gap: 2px;
 `;
 
 const Infoul = styled.ul`
-    margin-top: 24px;
     text-align: left;
-    margin-left: 29px;
     font-size: 20px;
     font-style: bold;
+    border: 0px solid ;
+    background-color: rgba(85, 111, 255, 0.2);
+    border-radius: 15px 0px 0px 15px;
+    width: 111px;
+    height: 206px;
     
-`
+`;
 
 const Infodtul = styled.ul`
-    margin-top: 24px;
     text-align: right;
-    margin-right: 29px;
     font-size: 20px;
-`
+    font-style: bold;
+    border: 0px solid ;
+    background-color: rgba(85, 111, 255, 0.2);
+    border-radius: 0px 15px 15px 0px;
+    width: 232px;
+    height: 206px;
+`;
 
 const Nickli = styled.li`
     font-size: 28px;
     font-style: bold;
-`
+`;
 
 const Inst = styled.li`
     display: flex;
     width: 215px;
     height: 153px;
-`
+    gap: 10px;
+`;
 
-const Cateo = styled.div`
-    border: 0px solid ;
-    background-color: rgba(85, 111, 255, 0.3);
-    border-radius: 23px;
-    width: 56px;
-    height: 23px;
-    font-size: 11px;
-    text-align: center;
-    color: #656565;
-`
-
-const Catet = styled.div`
-    border: 0px solid ;
-    background-color: rgba(85, 111, 255, 0.3);
-    border-radius: 23px;
-    width: 56px;
-    height: 23px;
-    font-size: 11px;
-    text-align: center;
-    color: #656565;
-`
 
 
 const Logout = styled.button`
@@ -143,8 +129,12 @@ const MyPage = function () {
             <br />
             <li>
               <Inst>
-                <Cateo>요가</Cateo>
-                <Catet>필라테스</Catet>
+                <Tag 
+                  tagName="요가"
+                />
+                <Tag 
+                  tagName="필라테스"
+                />
               </Inst>
             </li>
           </Pfcommentul>
