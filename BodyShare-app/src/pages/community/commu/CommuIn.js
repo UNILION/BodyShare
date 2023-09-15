@@ -170,12 +170,14 @@ const CommuHome = function () {
           title="클라이밍 좋아하는 모임"
           contents="클라이밍 좋아하는 사람들 모두 모두 모여라"
           footer="2023년 9월 16일"
+          onClick={() => navigate("/community/feed")}
         />
         <Card
           img={Image2}
           title="대전 클라이밍"
           contents="대전에서 클라이밍 하실 분?"
           footer="2023년 9월 15일"
+          onClick={() => navigate("/community/feed")}
         />
       </Group>
 
@@ -185,12 +187,14 @@ const CommuHome = function () {
           title="수도권 클라이밍 모임"
           contents="수도권 사람들만 오세요:)"
           footer="2023년 9월 15일"
+          onClick={() => navigate("/community/feed")}
         />
         <Card
           img={Image4}
           title="클라이밍 초보들만"
           contents="클라이밍에 재미를 붙이셨네요 :)"
-          footer="2023년 9월 14일" 
+          footer="2023년 9월 14일"
+          onClick={() => navigate("/community/feed")}
         />
       </Group>
       <Pagination
