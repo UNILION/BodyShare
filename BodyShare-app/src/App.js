@@ -40,8 +40,8 @@ function App() {
             <Route path="/analysis/sports" element={<SportSearch />} />
             <Route path="/analysis/food" element={<FoodSearch />} />
             <Route path="/analysis/time" element={<TimeInput />} />
-            <Route path="/analysis/time" element={<SportChart />} />
-            <Route path="/analysis/time" element={<FoodChart />} />
+            <Route path="/analysis/sportchart" element={<SportChart />} />
+            <Route path="/analysis/foodchart" element={<FoodChart />} />
           </Route>
           <Route path="/community" element={<Layout />}>
             <Route index element={<Community />} />
