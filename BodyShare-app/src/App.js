@@ -11,6 +11,11 @@ import Mypage from "./pages/mypage";
 import Interest from "./pages/user/Interest";
 import InterestList from "./pages/user/InterestList";
 import UserInfo from "./pages/user/UserInfo";
+import SportSearch from "./pages/analysis/SportSearch";
+import FoodSearch from "./pages/analysis/FoodtSearch";
+import TimeInput from "./pages/analysis/TimeInput";
+import SportChart from "./pages/analysis/SportChart";
+import FoodChart from "./pages/analysis/FoodChart";
 
 
 function App() {
@@ -32,6 +37,11 @@ function App() {
           </Route>
           <Route path="/analysis" element={<Layout />}>
             <Route index element={<Analysis />} />
+            <Route path="/analysis/sports" element={<SportSearch />} />
+            <Route path="/analysis/food" element={<FoodSearch />} />
+            <Route path="/analysis/time" element={<TimeInput />} />
+            <Route path="/analysis/time" element={<SportChart />} />
+            <Route path="/analysis/time" element={<FoodChart />} />
           </Route>
           <Route path="/community" element={<Layout />}>
             <Route index element={<Community />} />
