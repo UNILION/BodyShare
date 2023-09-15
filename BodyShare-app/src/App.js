@@ -16,7 +16,10 @@ import FoodSearch from "./pages/analysis/FoodtSearch";
 import TimeInput from "./pages/analysis/TimeInput";
 import SportChart from "./pages/analysis/SportChart";
 import FoodChart from "./pages/analysis/FoodChart";
-
+import MyProfileModify from "./pages/mypage/MyProfileModify";
+import Logout from "./pages/mypage/Logout";
+import PasswordModify from "./pages/mypage/PasswordModify";
+import InterestModify from "./pages/mypage/InterestModify";
 
 function App() {
   return (
@@ -48,6 +51,10 @@ function App() {
           </Route>
           <Route path="/mypage" element={<Layout />}>
             <Route index element={<Mypage />} />
+            <Route path="/mypage/modify" element={<MyProfileModify />} />
+            <Route path="/mypage/logout" element={<Logout />} />
+            <Route path="/mypage/modify/interest" element={<InterestModify />} />
+            <Route path="/mypage/modify/password" element={<PasswordModify />} />
           </Route>
         </Routes>
       </Router>
