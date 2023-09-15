@@ -2,72 +2,45 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Chart } from "react-google-charts";
 import Card from "../../components/commons/Card";
-import Tag from "../../components/commons/Tag";
+import CardImage1 from "../../assets/Img/card_image1.png";
+import CardImage2 from "../../assets/Img/card_image2.png";
+import CircleImg from "../../assets/Img/circletgo.png";
 
 const Container = styled.div`
   width: 390px;
-  height: 844px;
+  height: 711px;
   display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-columns: 1fr;
+  grid-template-rows: auto auto 1fr;
   gap: 10px;
   text-align: center;
-  padding: 60px;
 `;
-
-const ChartBox = styled.div`
-  width: 380px;
-  display: flex;
-  align-items: left;
-  border-radius: 30px;
-  background-color: #ffffff;
-  border: 1px solid #878787;
-  margin: 0 auto;
-`;
-
-const ChartContainer1 = styled.div`
-  flex: 1;
-  padding-right: 10px;
-`;
-
-const ChartContainer2 = styled.div`
-  flex: 1;
-  padding-left: 10px;
-`;
-
-const Logo = styled.img``;
 
 const Record = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  text-align: left;
-  margin-bottom: 20px;
+  grid-row: 1;
+  width: 370px;
+  height: 60px;
+  margin: 20px auto 15px auto;
+  border-radius: 30px;
+  border: 1px solid rgba(135, 135, 135, 0.3);
+  background-color: #ffffff;
+  text-align: center;
 `;
 
 const RecordInner1 = styled.div`
-  width: 355.38px;
   display: flex;
-  align-items: left;
-  max-width: 400px;
-  border-radius: 30px;
-  background-color: #ffffff;
-  border: 1px solid #878787;
-  opacity: 0.3;
-  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
 `;
 
 const RecordText = styled.p`
-  width: 100%;
-  padding: 10px;
-  border-radius: 0;
-  background-color: #ffffff;
-  opacity: 0.3;
-  font-size: 2rem;
+  width: 315.87px;
+  height: 31px;
+  font-size: 20px;
   font-weight: bold;
   text-align: left;
-  color: black;
-  margin: 0;
+  color: #878787;
+  padding-top: 8px;
+  padding-left: 15px;
 `;
 
 const RecordButton = styled(Link)`
@@ -76,13 +49,39 @@ const RecordButton = styled(Link)`
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   background-color: #556fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
   color: white;
   cursor: pointer;
-  justify-content: flex-start;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ButtonImg = styled.img`
+  width: 34.62px;
+  height: 34px;
+`;
+
+const ChartBox = styled.div`
+  grid-row: 2;
+  width: 380px;
+  border-radius: 30px;
+  background-color: #ffffff;
+  border: 1px solid #878787;
+  margin: 0 auto;
+  display: flex;
+
+`;
+
+const ChartContainer1 = styled.div`
+  padding-right: 10px;
+`;
+
+const ChartContainer2 = styled.div`
+`;
+
+const CommunityDiv = styled.div`
+  grid-row: 3;
+  display: flex;
 `;
 
 const CommunityRecommend = styled.div`
@@ -98,7 +97,7 @@ const Index = function () {
     ["작업", "하루 시간"],
     ["탄", 3],
     ["단", 5],
-    ["지", 2],
+    ["지", 2]
   ];
 
   const chartOptions = {
@@ -106,7 +105,7 @@ const Index = function () {
     pieHole: 0.4,
     titleTextStyle: {
       fontSize: 18,
-    },
+    }
   };
 
   const chartData2 = [
@@ -117,24 +116,24 @@ const Index = function () {
     ["목", 75],
     ["금", 90],
     ["토", 120],
-    ["일", 60],
+    ["일", 60]
   ];
 
   const chartOptions2 = {
     legend: { position: "none" },
     chart: {
       title: "Daily Diet",
-    },
+    }
   };
 
   return (
     <Container>
-      <Logo></Logo>
-
       <Record>
         <RecordInner1>
           <RecordText>오늘의 기록 0건</RecordText>
-          <RecordButton to="/analysis">{">"}</RecordButton>
+          <RecordButton to="/analysis">
+            <ButtonImg src={CircleImg}></ButtonImg>
+          </RecordButton>
         </RecordInner1>
       </Record>
 
@@ -161,58 +160,26 @@ const Index = function () {
         </ChartContainer2>
       </ChartBox>
 
-      <div style={{ display: "flex", gap: "10px" }}>
+      <CommunityDiv>
         <CommunityRecommend>
           <Card
+            img={CardImage1}
             title="News"
             contents="커뮤니티에 News 및 소식"
-            img="이미지 URL"
-            footer={
-              <Tag
-                tagName="태그명"
-                width="56px"
-                height="23px"
-                color="#656565"
-                bc="rgba(85,111,255, 0.3)"
-                fs="11px"
-                fw="bold"
-                br="23px"
-                border="none"
-                mt="0px"
-                mr="0px"
-                mb="0px"
-                ml="0px"
-                hoverColor="#A6B2F3"
-              />
-            }
+            tagName="요가"
+            footer="TEST"
           />
         </CommunityRecommend>
         <CommunityRecommend2>
           <Card
+            img={CardImage2}
             title="News"
             contents="커뮤니티에 News 및 소식"
-            img="이미지 URL"
-            footer={
-              <Tag
-                tagName="태그명"
-                width="56px"
-                height="23px"
-                color="#656565"
-                bc="rgba(85,111,255, 0.3)"
-                fs="11px"
-                fw="bold"
-                br="23px"
-                border="none"
-                mt="0px"
-                mr="0px"
-                mb="0px"
-                ml="0px"
-                hoverColor="#A6B2F3"
-              />
-            }
+            tagName="요가"
+            footer="TEST"
           />
         </CommunityRecommend2>
-      </div>
+      </CommunityDiv>
     </Container>
   );
 };
