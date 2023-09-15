@@ -3,6 +3,8 @@ import bannerPic from "../../assets/Img/banner.jpg";
 import userPic from "../../assets/Img/user.png";
 import { useNavigate } from "react-router-dom";
 import Tag from "../../components/commons/Tag"
+import Button from "../../components/commons/Button"
+import Image5 from "../../assets/Img/right.png"
 
 const Banner = styled.img`
     height: 87px;
@@ -16,8 +18,10 @@ const Title = styled.p`
 `;
 
 const Pf = styled.ul`
-    display: grid;
-    grid-template-columns: 163px auto;
+  border: 3px solid rgba(85, 111, 255, 0.2);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
 `;
 
 const Pfpic = styled.img`
@@ -30,113 +34,84 @@ const Pfcomment = styled.div`
 `;
 
 const Pfcommentul = styled.div`
-  width: 174px;
-  height: 25px;
+  display: grid;
+  grid-template-rows: 5fr 1fr;
   list-style: none;
-  margin-left: 19px;
+  place-items: center;
 `;
 
 const Info = styled.ul`
   margin-left: 30px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
   margin-top: 26px;
   width: 349px;
   height: 206px;
-  gap: 2px;
 `;
 
 const Infoul = styled.ul`
-    text-align: left;
-    font-size: 20px;
-    font-style: bold;
-    border: 0px solid ;
-    background-color: rgba(85, 111, 255, 0.2);
-    border-radius: 15px 0px 0px 15px;
-    width: 111px;
-    height: 206px;
-    
+  place-items: center;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  border: 0px solid ;
+  background-color: rgba(85, 111, 255, 0.2);
+  border-radius: 15px 0px 0px 15px;
+  width: 111px;
+  height: 206px;
 `;
 
 const Infodtul = styled.ul`
-    text-align: right;
-    font-size: 20px;
-    font-style: bold;
-    border: 0px solid ;
-    background-color: rgba(85, 111, 255, 0.2);
-    border-radius: 0px 15px 15px 0px;
-    width: 232px;
-    height: 206px;
+  place-items: center;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+  border: 0px solid ;
+  background-color: rgba(85, 111, 255, 0.2);
+  border-radius: 0px 15px 15px 0px;
+  width: 232px;
+  height: 206px;
 `;
 
 const Nickli = styled.li`
     font-size: 28px;
-    font-style: bold;
+    font-weight: bold;
 `;
 
 const Inst = styled.li`
-    display: flex;
-    width: 215px;
-    height: 153px;
-    gap: 10px;
+
 `;
 
-
-
-const Logout = styled.button`
-    background-color: #556FFF; 
-    color: #fff; 
-    padding: 10px 20px;
-    border: none;
-    border-radius: 23px;
-    cursor: pointer;
-    margin-top: 16px;
-    width: 211px;
-    height: 45px;
-    float: right;
-    font-size: 20px;
+const Buttons = styled.ul`
+  margin-top: 10px;
+  margin-left: 170px;
 `;
 
-const Modifypf = styled.button`
-    background-color: #556FFF; 
-    color: #fff; 
-    padding: 10px 20px;
-    border: none;
-    border-radius: 23px;
-    cursor: pointer;
-    margin-top: 16px;
-    width: 211px;
-    height: 45px;
-    float: right;
-    font-size: 20px;
-`;
 
 const MyPage = function () {
   const navigate = useNavigate();
-
   return (
     <>
-      <Banner src= {bannerPic} />
+      <Banner src={bannerPic} />
       <Title>마이페이지</Title>
       <Pf>
-        <Pfpic src= {userPic} />
+        <Pfpic src={userPic} />
         <Pfcomment>
           <Pfcommentul>
-            <br />
-            <br />
-            <br />
-            <Nickli>nickname</Nickli>
-            <br />
-            <br />
-            <li>
-              <Inst>
-                <Tag 
-                  tagName="요가"
-                />
-                <Tag 
-                  tagName="필라테스"
-                />
-              </Inst>
-            </li>
+            <Nickli>kimmmmm</Nickli>
+            <Inst>
+              <Tag
+                tagName="요가"
+                mr="5px"
+              />
+              <Tag
+                tagName="필라테스"
+              />
+            </Inst>
           </Pfcommentul>
         </Pfcomment>
       </Pf>
@@ -147,19 +122,26 @@ const MyPage = function () {
           <li>키</li>
           <li>몸무게</li>
         </Infoul>
-
         <Infodtul>
           <li>kimm</li>
           <li>kimmmmm</li>
           <li>167cm</li>
           <li>50kg</li>
         </Infodtul>
-
       </Info>
-
-      <Modifypf onClick={() => navigate("/mypage/modify")}>프로필 수정하기 </Modifypf>
-      <Logout onClick={() => navigate("/mypage/logout")}>로그아웃</Logout>
-
+      <Buttons>
+        <Button
+          name="프로필 수정"
+          img={Image5}
+          onClick={() => navigate("/mypage/modify")}
+          mb="5px"
+        />
+        <Button
+          name="로그아웃"
+          img={Image5}
+          onClick={() => navigate("/mypage/logout")}
+        />
+      </Buttons>
     </>
   )
 };
