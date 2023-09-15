@@ -32,7 +32,7 @@ const PopularHome = function () {
           contents="요가에서 다양한 동작을 배워보아요"
           tagName="요가"
           footer="243명의 회원이 가입함"
-          onClick={() => navigate("/community/in")} 
+          onClick={() => navigate("/community/commuIn")} 
         />
         <Card
           img={Image2}
@@ -40,7 +40,7 @@ const PopularHome = function () {
           contents="클라이밍에 재미를 붙이셨네요 :)"
           tagName="클라이밍"
           footer="200명의 회원이 가입함"
-          onClick={() => navigate("/community/in")} 
+          onClick={() => navigate("/community/commuIn")} 
         />
       </Group>
 
@@ -51,7 +51,7 @@ const PopularHome = function () {
           contents="필라테스할 사람 모두 모두 모여라"
           tagName="필라테스"
           footer="194명의 회원이 가입함"
-          onClick={() => navigate("/community/in")} 
+          onClick={() => navigate("/community/commuIn")} 
         />
         <Card
           img={Image4}
@@ -59,7 +59,7 @@ const PopularHome = function () {
           contents="축구에 진심이시군요"
           tagName="축구"
           footer="132명의 회원이 가입함"
-          onClick={() => navigate("/community/in")} 
+          onClick={() => navigate("/community/commuIn")} 
         />
       </Group>
       <Pagination
