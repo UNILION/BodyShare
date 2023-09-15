@@ -1,99 +1,189 @@
 import styled from "styled-components";
-import Button from "../../components/commons/Button";
-import Card from "../../components/commons/Card";
-import Tag from "../../components/commons/Tag";
-import Input from "../../components/commons/Input";
-import plus from "../../assets/Img/buttonplus.png"
-import banner from "../../assets/Img/banner.jpg";
+import Pagination from "react-js-pagination";
+import { useState } from "react";
+import "../../assets/css/Pagination.css";
+import user from "../../assets/Img/user.png"
 
-const Coontainer = styled.div`
+
+const Text = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
 `
 
-const Community = function () {
+const Group = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin-bottom: 30px;
+`
+
+const Img = styled.img`
+  margin-top: 20px;
+  width: 83px;
+  height: 83px;
+`
+
+const Register = styled.div`
+
+`
+
+const Title = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+`
+
+const Member = styled.div`
+  color: rgba(0,0,0,0.4);
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 10px;
+`
+
+const Writing = styled.div`
+`
+
+const Mini = styled.div`
+  font-size: 13px;
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  font-weight: bold;
+  cursor: pointer;
+
+`
+
+const MiniTitle = styled.span`
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;  /* 말줄임 적용 */
+`
+
+const MiniMember = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;  /* 말줄임 적용 */
+`
+
+const Hr = styled.hr`
+  border-color: rgba(0,0,0,0.25);
+`
+
+const My = function () {
+  const [page, setPage] = useState(1);
+
+  const handleChange = (page) => {
+    setPage(page);
+  }
+
   return (
-    <Coontainer>
-      <span>
-        <Button name="추가하기" img={plus} width="200px"></Button></span>
-      <Tag tagName="끝" />
-      <Card
-        img={banner}
-        title="9/7(목)... 🧘🏻sdfasflksajflkjslkfjalkds;fjlks;djflkdsjlflksdjf"
-        contents="요가에 재미 붙였네요 :)asddgfasfsjdlkfjlskfjl;asj;fljslk;gfjslkd;fjlsdjfl;jsdf;jasjkfsfsdfsfsfsaf sfsdfsfsfs sdfsd fsd fsdf safsdfjalksgfjlksajfl;sadj lkfsjdlkfjslkd;afj;lsdlkfjs;dflkjsdlk;f"
-        tagName="필라테스"
-        footer="20203년12월31일"
+    <>
+      <Text>내가 가입한 커뮤니티</Text>
+      <Group>
+        <Img src={user} />
+        <Register>
+          <Title>클라이밍 클럽</Title>
+          <Member>96명의 회원</Member>
+          <Writing>
+            <Mini>
+              <MiniTitle>오늘 목표 성공</MiniTitle>
+              <MiniMember>클라이밍</MiniMember>
+            </Mini>
+            <Mini>
+              <MiniTitle>오늘도 화이팅</MiniTitle>
+              <MiniMember>닉네임</MiniMember>
+            </Mini>
+            <Mini>
+              <MiniTitle>새글 제목 입니다</MiniTitle>
+              <MiniMember>입니다.</MiniMember>
+            </Mini>
+          </Writing>
+        </Register>
+      </Group>
+
+      <Hr />
+
+      <Group>
+        <Img src={user} />
+        <Register>
+          <Title>클라이밍 클럽</Title>
+          <Member>96명의 회원</Member>
+          <Writing>
+            <Mini>
+              <MiniTitle>오늘 목표 성공</MiniTitle>
+              <MiniMember>클라이밍</MiniMember>
+            </Mini>
+            <Mini>
+              <MiniTitle>오늘도 화이팅</MiniTitle>
+              <MiniMember>닉네임</MiniMember>
+            </Mini>
+            <Mini>
+              <MiniTitle>새글 제목 입니다</MiniTitle>
+              <MiniMember>입니다.</MiniMember>
+            </Mini>
+          </Writing>
+        </Register>
+      </Group>
+
+      <Hr />
+
+      <Group>
+        <Img src={user} />
+        <Register>
+          <Title>클라이밍 클럽</Title>
+          <Member>96명의 회원</Member>
+          <Writing>
+            <Mini>
+              <MiniTitle>오늘 목표 성공</MiniTitle>
+              <MiniMember>클라이밍</MiniMember>
+            </Mini>
+            <Mini>
+              <MiniTitle>오늘도 화이팅</MiniTitle>
+              <MiniMember>닉네임</MiniMember>
+            </Mini>
+            <Mini>
+              <MiniTitle>새글 제목 입니다</MiniTitle>
+              <MiniMember>입니다.</MiniMember>
+            </Mini>
+          </Writing>
+        </Register>
+      </Group>
+
+      <Hr />
+
+      <Group>
+        <Img src={user} />
+        <Register>
+          <Title>클라이밍 클럽</Title>
+          <Member>96명의 회원</Member>
+          <Writing>
+            <Mini>
+              <MiniTitle>오늘 목표 성공</MiniTitle>
+              <MiniMember>클라이밍</MiniMember>
+            </Mini>
+            <Mini>
+              <MiniTitle>오늘도 화이팅</MiniTitle>
+              <MiniMember>닉네임</MiniMember>
+            </Mini>
+            <Mini>
+              <MiniTitle>새글 제목 입니다</MiniTitle>
+              <MiniMember>입니다.</MiniMember>
+            </Mini>
+          </Writing>
+        </Register>
+      </Group>
+
+      <Pagination
+        activePage={page}
+        itemsCountPerPage={4}
+        totalItemsCount={24}
+        pageRangeDisplayed={5}
+        prevPageText={"‹"}
+        nextPageText={"›"}
+        onChange={handleChange}
       />
-      <Input placeholder="placeholder 입니다." />
-      <h2>Hi5</h2>
-      <h2>Hi4</h2>
-      <h2>Hi0</h2>
-      <h2>Hi9</h2>
-      <h2>Hi8</h2>
-      <h2>Hi7</h2>
-      <h2>Hi6</h2>
-      <h2>Hi5</h2>
-      <h2>Hi4</h2>
-      <h2>Hi3</h2>
-      <h2>Hi2</h2>
-      <h2>Hi1</h2>
-      <h2>Hi4</h2>
-      <h2>Hi3</h2>
-      <h2>Hi5</h2>
-      <h2>Hi6</h2>
-      <h2>Hi0</h2>
-      <h2>Hi9</h2>
-      <h2>Hi7</h2>
-      <h2>Hi5</h2>
-      <h2>Hi3</h2>
-      <h2>Hi1</h2>
-      <h2>Hi3</h2>
-      <h2>Hi2</h2>
-      <h2>Hi3</h2>
-      <h2>Hi2</h2>
-      <h2>Hi3</h2>
-      <h2>Hi1</h2>
-      <h2>Hi3</h2>
-      <h2>Hi2</h2>
-      <h2>Hi3</h2>
-      <h2>Hi3</h2>
-      <h2>Hi2</h2>
-      <h2>Hi3</h2>
-      <h2>Hi2</h2>
-      <h2>Hi3</h2>
-      <h2>Hi2</h2>
-      <h2>Hi3</h2>
-      <h2>Hi1</h2>
-      <h2>Hi2</h2>
-      <h2>Hi3</h2>
-      <h2>Hi4</h2>
-      <h2>Hi6</h2>
-      <h2>Hi7</h2>
-      <h2>Hi0</h2>
-      <h2>Hi9</h2>
-      <h2>Hi8</h2>
-      <h2>Hi7</h2>
-      <h2>Hi6</h2>
-      <h2>Hi5</h2>
-      <h2>Hi4</h2>
-      <h2>Hi3</h2>
-      <h2>Hi2</h2>
-      <h2>Hi1</h2>
-      <h2>Hi9</h2>
-      <h2>Hi8</h2>
-      <h2>Hi7</h2>
-      <h2>Hi6</h2>
-      <h2>Hi5</h2>
-      <h2>Hi3</h2>
-      <h2>Hi4</h2>
-      <h2>Hi2</h2>
-      <h2>Hi1</h2>
-      <h2>Hi2</h2>
-      <h2>Hi3</h2>
-      <h2>Hi4</h2>
-      <h2>Hi5</h2>
-      <h2>Hi6</h2>
-      <Button />
-    </Coontainer >
+    </>
   );
 };
 
-export default Community;
+export default My;
