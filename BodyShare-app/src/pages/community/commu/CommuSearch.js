@@ -37,6 +37,7 @@ const Input = styled.input`
 
 const Search = styled.img`
   margin: auto;
+  cursor: pointer;
 `;
 
 const CategoryList = styled.div`
@@ -70,12 +71,18 @@ const Line = styled.div`
 const CommuSearch = function () {
   const navigate = useNavigate();
 
+  const handleOnKeyDown = (e) => {
+    if (e.key === 'Enter'){
+      navigate("/community/search/after");
+    }
+  }
+
   return (
     <Container>
       <PreviousButton onClick={() => navigate("/community")} />
       <SearchInput>
-        <Search src={search} />
-        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
+        <Search src={search}  onClick={() => navigate("/community/search/after")}/>
+        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" onKeyDown={handleOnKeyDown}/>
       </SearchInput>
       <CategoryList>
         <Tag tagName="전체" width="80px" height="36px" br="13px" />
