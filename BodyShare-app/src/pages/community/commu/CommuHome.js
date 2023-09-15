@@ -4,6 +4,7 @@ import InterestHome from "./InterestHome"
 import PopularHome from "./PopularHome"
 import Search from "../../../assets/Img/buttonsearch.png"
 import Plus from "../../../assets/Img/buttonplus.png"
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -12,7 +13,6 @@ const Tab = styled.div`
   grid-template-columns: 1fr 1fr 2fr;
   width: 100%;
   margin: 20px 0 15px 0;
-  cursor: pointer;
   font-weight: bold;
 `;
 
@@ -23,6 +23,7 @@ const Tab1 = styled.div`
   border-radius: 23px 23px 0 0;
   background-color: ${(props) => props.bg};
   border-bottom: ${(props) => props.under};
+  cursor: pointer;
 `;
 
 const Tab2 = styled.div`
@@ -33,6 +34,7 @@ const Tab2 = styled.div`
   border-radius: 23px 23px 0 0;
   background-color: ${(props) => props.bg};
   border-bottom: ${(props) => props.under};
+  cursor: pointer;
 `;
 
 const Text = styled.span`
@@ -51,12 +53,14 @@ const Img = styled.img`
   margin-left: auto;
   width: 50px;
   height: 50px;
+  cursor: pointer;
 `
 
 
 const CommuHome = function () {
   const [Interest, setInterest] = useState(true);
   const [Popular, setPopular] = useState(false);
+  const navigate = useNavigate();
 
   const showInterest = async () => {
     setInterest(true);
@@ -91,7 +95,7 @@ const CommuHome = function () {
             인기 추천
           </Text>
         </Tab2>
-        <Img src={Search} />
+        <Img src={Search} onClick={() => navigate("/community/search")}/>
       </Tab>
       {Interest ? <InterestHome /> : null}
       {Popular ? <PopularHome /> : null}
