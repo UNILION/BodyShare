@@ -25,6 +25,7 @@ const Img = styled.img`
   margin-top: 20px;
   width: 83px;
   height: 83px;
+  cursor: pointer;
 `
 
 const Register = styled.div`
@@ -89,7 +90,7 @@ const My = function () {
     <>
       <Text>내가 가입한 커뮤니티</Text>
       <Group>
-        <Img src={user} />
+        <Img src={user} onClick={() => navigate("/community/commuIn")}/>
         <Register>
           <Title onClick={() => navigate("/community/commuIn")}>헬스 클럽</Title>
           <Member>96명의 회원</Member>
@@ -113,7 +114,7 @@ const My = function () {
       <Hr />
 
       <Group>
-        <Img src={user2} />
+        <Img src={user2} onClick={() => navigate("/community/commuIn")} />
         <Register>
           <Title onClick={() => navigate("/community/commuIn")}>요가</Title>
           <Member>243명의 회원</Member>
@@ -137,7 +138,7 @@ const My = function () {
       <Hr />
 
       <Group>
-        <Img src={user3} />
+        <Img src={user3} onClick={() => navigate("/community/commuIn")} />
         <Register>
           <Title onClick={() => navigate("/community/commuIn")}>클라이밍 동아리</Title>
           <Member>152명의 회원</Member>
@@ -161,7 +162,7 @@ const My = function () {
       <Hr />
 
       <Group>
-        <Img src={user4} />
+        <Img src={user4} onClick={() => navigate("/community/commuIn")} />
         <Register>
           <Title onClick={() => navigate("/community/commuIn")}>필라테스를 사랑하는 모임</Title>
           <Member>194명의 회원</Member>
