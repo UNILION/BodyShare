@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import previous from "../../assets/Img/Previous.png";
+import Button from "../../components/commons/Button";
+import plus from "../../assets/Img/buttonplus.png";
 import { useNavigate } from 'react-router-dom';
 
 const TimeInputContainer = styled.div`
@@ -124,7 +126,17 @@ const TimeInput = function () {
           <Dot>:</Dot>
           <SmallBox></SmallBox>
         </SportTime>
-      </TimeInputContainer>
+      </TimeInputContainer> 
+
+      <Button
+          name="수정하기"
+          img={plus}
+          ml="auto"
+          mb="10px"
+          width="150px"
+          display="block"
+          onClick={() => navigate("/analysis")}
+      />     
     </>
   );
 };
