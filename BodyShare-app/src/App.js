@@ -51,9 +51,11 @@ function App() {
             <Route index element={<Analysis />} />
             <Route path="/analysis/sportschart" element={<SportHome />} />
             <Route path="/analysis/foodchart" element={<FoodHome />} />
-            <Route path="/analysis/sports" element={<SportSearch />} />
-            <Route path="/analysis/food" element={<FoodSearch />} />
-            <Route path="/analysis/time" element={<TimeInput />} />
+          </Route>
+          <Route path="/analysis/add" element={<Layout />} >
+            <Route index element={<SportSearch />} />
+            <Route path="/analysis/add/food" element={<FoodSearch />} />
+            <Route path="/analysis/add/time" element={<TimeInput />} />
           </Route>
           <Route path="/community" element={<Layout />}>
             <Route index element={<Community />} />

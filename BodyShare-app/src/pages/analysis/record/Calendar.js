@@ -231,11 +231,11 @@ const Record = function () {
         </NoteGrid>
         <NoteAddGrid>
           <Add>
-            <BtImg src={buttonplus} onClick={() => navigate("/analysis/sports")}></BtImg>
+            <BtImg src={buttonplus} onClick={() => navigate("/analysis/add")}></BtImg>
             <P>운동 기록 추가</P>
           </Add>
           <Add>
-            <BtImg src={buttonplus} onClick={() => navigate("/analysis/food")}></BtImg>
+            <BtImg src={buttonplus} onClick={() => navigate("/analysis/add/food")}></BtImg>
             <P>식단 기록 추가</P>
           </Add>
         </NoteAddGrid>
