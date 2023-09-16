@@ -1,78 +1,67 @@
 import styled from "styled-components";
 import search from "../../assets/Img/search.png"
 import previous from "../../assets/Img/Previous.png";
-import { Link, useNavigate } from "react-router-dom";
+import plus from "../../assets/Img/buttonplus.png";
+import Button from "../../components/commons/Button";
+import Tag from "../../components/commons/Tag";
+import { useNavigate } from "react-router-dom";
 
-const SportSearchContainer = styled.div`
-  display: grid;
-  grid-template-rows: auto auto auto 1fr;
-  gap: 10px;
+const Container = styled.div`
+  padding: 10px 20px;
 `;
 
-const PreviousButton = styled.img`
+const PreviousButton = styled.button`
+  margin-top: 3px;
   grid-row: 1;
-  width: 21px;
-  height: 21px;
-  margin-top: 10px;
-
-  &:hover {
+  width: 20px;
+  height: 20px;
+  background-image: url(${previous});
+  background-size: cover;
+  border-radius: 20px;
+  border: none;
   cursor: pointer;
-  }
 `;
+
 const SearchInput = styled.div`
-  grid-row: 2;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin-bottom: 20px;
 `;
 
 const Input = styled.input`
-  width: 300px;
+  width: 260px;
   height: 45px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   border-radius: 15px;
   text-align: center;
+  padding: 0 20px;
 `;
 
-const SportCategory = styled.div`
-  grid-row: 3;
-`;
 const Search = styled.img`
-
+  margin: auto;
 `;
 
-const CategoryButton = styled.button`
-  width: 81px;
-  height: 36px;
-  border: none;
-  border-radius: 15px;
-  background-color: rgb(85, 111, 255, 0.3);
-  margin-left: 9px;
+const CategoryList = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
-const SportSearchResult = styled.div`
-  grid-row: 4;
+const ResultList = styled.div`
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 `;
 
-const CategoryList = styled.ul`
-  list-style: none;
-  display: flex;
-`;
-const CP = styled.p`
-    font-size: 12px;
-    font-weight: bold;
-    color: #656565;
-`;
-
-const ResultList = styled.ul`
-  list-style: none;
-  gap: 10px;
-`;
 const ResultButton = styled.button`
-    background-color: white;
-    border: none;
-    padding-top: 45px;
-    padding-bottom: 10px;
+  background-color: white;
+  border: none;
+  padding-top: 55px;
+  cursor: pointer;
 `;
+
 const RP = styled.p`
-    font-size: 17px;
+  font-size: 17px;
+  text-align: left;
+  margin-bottom: 10px;
 `;
 
 const Line = styled.div`
@@ -85,36 +74,51 @@ const SportSearch = function() {
   const navigate = useNavigate();
 
   return (
-    <>
-        <SportSearchContainer>
-            <PreviousButton src={previous} onClick={() => navigate("/analysis")}></PreviousButton>
-            <SearchInput>
-                <Search src={search}></Search>
-                <Input type="text" placeholder="찾으시는 운동을 검색해주세요"/>
-            </SearchInput>
-            <SportCategory>
-                <CategoryList>
-                    <CategoryButton><CP>전체</CP></CategoryButton>
-                    <CategoryButton><CP>근력</CP></CategoryButton>
-                    <CategoryButton><CP>유산소</CP></CategoryButton>
-                    <CategoryButton><CP>기타</CP></CategoryButton>
-                </CategoryList>
-            </SportCategory>
-            <SportSearchResult>
-                <ResultList>
-                    <ResultButton><RP>수영</RP></ResultButton>
-                    <Line></Line>
-                    <ResultButton><RP>요가</RP></ResultButton>
-                    <Line></Line>
-                    <ResultButton><RP>달리기</RP></ResultButton>
-                    <Line></Line>
-                    <ResultButton><RP>골프</RP></ResultButton>
-                    <Line></Line>
-                </ResultList>
-            </SportSearchResult>
-        </SportSearchContainer>
-      
-    </>
+    <Container>
+      <PreviousButton onClick={() => navigate("/analysis")} />
+      <SearchInput>
+        <Search src={search} />
+        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
+      </SearchInput>
+      <CategoryList>
+        <Tag tagName="전체" width="80px" height="36px" br="13px" />
+        <Tag tagName="유산소" width="80px" height="36px" br="13px" />
+        <Tag tagName="무산소" width="80px" height="36px" br="13px" />
+        <Tag tagName="근력" width="80px" height="36px" br="13px" />
+      </CategoryList>
+      <ResultList>
+        <ResultButton>
+          <RP>축구</RP>
+          <Line></Line>
+        </ResultButton>
+        <ResultButton>
+          <RP>수영</RP>
+          <Line></Line>
+        </ResultButton>
+        <ResultButton>
+          <RP>달리기</RP>
+          <Line></Line>
+        </ResultButton>
+        <ResultButton>
+          <RP>필라테스</RP>
+          <Line></Line>
+        </ResultButton>
+        <ResultButton>
+          <RP>요가</RP>
+          <Line></Line>
+        </ResultButton>
+      </ResultList>
+
+      <Button
+        name="선택하기"
+        img={plus}
+        width="200px"
+        display="block"
+        ml="auto"
+        mt="30px"
+        onClick={() => navigate("/analysis")}
+      />
+    </Container>
   );
 };
 
