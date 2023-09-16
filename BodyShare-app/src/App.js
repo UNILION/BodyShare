@@ -25,6 +25,10 @@ import MyProfileModify from "./pages/mypage/MyProfileModify";
 import Logout from "./pages/mypage/Logout";
 import PasswordModify from "./pages/mypage/PasswordModify";
 import InterestModify from "./pages/mypage/InterestModify";
+import Record from "./pages/analysis/record/Calendar";
+import SportHome from "./pages/analysis/sportchart/SportChart";
+import FoodHome from "./pages/analysis/foodchart/FoodChart";
+import LayoutAnalysis from "./pages/analysis/analysislayout";
 
 function App() {
   return (
@@ -43,8 +47,10 @@ function App() {
           <Route path="/home" element={<Layout />}>
             <Route index element={<Home />} />
           </Route>
-          <Route path="/analysis" element={<Layout />}>
+          <Route path="/analysis" element={<LayoutAnalysis />}>
             <Route index element={<Analysis />} />
+            <Route path="/analysis/sportschart" element={<SportHome />} />
+            <Route path="/analysis/foodchart" element={<FoodHome />} />
             <Route path="/analysis/sports" element={<SportSearch />} />
             <Route path="/analysis/food" element={<FoodSearch />} />
             <Route path="/analysis/time" element={<TimeInput />} />

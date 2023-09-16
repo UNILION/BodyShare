@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Record from "./record/Calendar";
-import SportHome from "./sportchart/SportChart";
-import FoodHome from "./foodchart/FoodChart";
+import Record from "../record/Calendar";
+import SportHome from "../sportchart/SportChart";
+import FoodHome from "../foodchart/FoodChart";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   margin-bottom: 30px;
@@ -64,6 +65,8 @@ const Text = styled.span`
 `;
 
 const Category = function () {
+  const navigate = useNavigate();
+
   const [Calender, setCalender] = useState(true);
   const [SportChart, setSportChart] = useState(false);
   const [FoodChart, setFoodChart] = useState(false);
@@ -72,18 +75,21 @@ const Category = function () {
     setCalender(true);
     setSportChart(false);
     setFoodChart(false);
+    navigate("/analysis")
   };
 
   const showSportChart = async () => {
     setCalender(false);
     setSportChart(true);
     setFoodChart(false);
+    navigate("/analysis/sportschart")
   };
 
   const showFoodChart = async () => {
     setCalender(false);
     setSportChart(false);
     setFoodChart(true);
+    navigate("/analysis/foodchart")
   };
 
   useEffect(() => {
@@ -123,9 +129,6 @@ const Category = function () {
           </Text>
         </Tab3>
       </Tab>
-      {Calender ? <Record /> : null}
-      {SportChart ? <SportHome /> : null}
-      {FoodChart ? <FoodHome /> : null}
     </Container>
   );
 };
