@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import backButton from "../../assets/Img/back.png"
 import checkButton from "../../assets/Img/circletcheck.png"
-import delButton from "../../assets/Img/xbutton.png"
+import xbutton from "../../assets/Img/xbutton.png"
 import { useNavigate } from "react-router-dom";
 import Tag from "../../components/commons/Tag";
 import Button from "../../components/commons/Button"
@@ -208,18 +208,14 @@ const Cateul = styled.div`
   display: flex;
 `;
 
-const Catedel = styled.button`
-  background-image: url(${delButton});
-  background-size: cover;
-  border: 0px solid ;
-  border-radius: 24.85px;
+
+const Xbutton = styled.img`
   width: 22px;
   height: 22px;
-  font-size: 13px;
-  text-align: center;
-  color: #FFFFFF;
-  cursor: pointer;
+  background-color: rgba(85, 111, 255, 0.3);
+  border-radius: 15px;
   margin-left: 3px;
+  cursor: pointer;
 `;
 
 const Catewarnig = styled.p`
@@ -301,7 +297,7 @@ const MyProfileModify = function () {
           <Tag 
             tagName="요가"
           />
-          <Catedel></Catedel>
+          <Xbutton src={xbutton} />
         </Cateul>
         <Catewarnig>한 개 이상의 카테고리를 선택해주세요!</Catewarnig>
         <Button
