@@ -82,6 +82,7 @@ const CommuFeed = function () {
           오늘 과제 너무 어려워서 여기에 투정중..
           겨우겨우 자세잡고 찍은 사진입니다 하하...
           "
+          exercise="클라이밍 30분"
           upload="2023년 9월 16일"
           onClick={() => navigate("/community/feed")}
         />
