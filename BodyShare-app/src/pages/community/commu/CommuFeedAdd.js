@@ -4,6 +4,7 @@ import Button from "../../../components/commons/Button";
 import plus from "../../../assets/Img/buttonplus.png";
 import bannerPic from "../../../assets/Img/card_image2.png";
 import { useNavigate } from "react-router-dom";
+import next from "../../../assets/Img/circletgo.png"
 
 const Container = styled.div`
   padding: 0 20px;
@@ -100,6 +101,27 @@ const FeedTitle = styled.div``;
 
 const FeedContent = styled.div``;
 
+const Target = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 0.1fr;
+  width: 100%;
+  background-color: rgba(85,111,255,0.3);
+  border-radius: 15px;
+`;
+
+const TargetTitle = styled.div`
+  line-height: 30px;
+  padding-left: 10px;
+  font-weight: bold;
+`;
+
+const Next = styled.img`
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  padding-right: 10px;
+`;
+
 const CommuFeedAdd = function () {
   const navigate = useNavigate();
   return (
@@ -143,6 +165,11 @@ const CommuFeedAdd = function () {
         (최대 60글자)"
           ></Content>
         </FeedContent>
+
+        <Target>
+          <TargetTitle>기록 불러오기</TargetTitle>
+          <Next src={next} />
+        </Target>
       </Middle>
 
       <Button
