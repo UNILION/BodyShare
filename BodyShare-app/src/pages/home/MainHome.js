@@ -73,28 +73,33 @@ const ChartBox = styled.div`
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  place-items: center;
 `;
 
 const ChartContainer1 = styled.div`
-  width: 180px;
-  height: 255px;
+  width: 185px;
+  height: 270px;
   background-color: white;
   border-radius: 30px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   cursor: pointer;
+  display: grid;
+  place-items: center;
   margin: 0 auto;
+  
 `;
 
 const ChartContainer2 = styled.div`
-  width: 180px;
-  height: 255px;
+  width: 185px;
+  height: 270px;
   background-color: white;
   border-radius: 30px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   cursor: pointer;
+  display: grid;
+  place-items: center;
   margin: 0 auto;
+  
 `;
 
 const CommunityDiv = styled.div`
@@ -191,11 +196,13 @@ const Index = function () {
         >
           <Chart
             chartType="Bar"
-            width="170px%"
-            height="250px"
+            width="170px"
+            height="240px"
             data={chartData2}
             options={chartOptions2}
             graph_id="barchart2"
+            border-radius= "30px"
+            
           />
         </ChartContainer1>
         <ChartContainer2
@@ -206,10 +213,11 @@ const Index = function () {
           <Chart
             chartType="PieChart"
             width="170px"
-            height="250px"
+            height="240px"
             data={chartData}
             options={chartOptions}
             graph_id="donutchart"
+            border-radius= "30px"
           />
         </ChartContainer2>
       </ChartBox>
