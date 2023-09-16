@@ -9,13 +9,15 @@ import Image5 from "../../assets/Img/right.png"
 import ButtonTT from "./NewVer/ButtonTT"
 
 const All = styled.div`
-  margin-left: 3px;
+  margin-left: 7px;
   margin-right: 3px;
   margin-top: 19px;
 `;
 
-const Titleul = styled.ul`
-  display: flex;
+const Titleul = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+  float: left;
 `;
 
 const Backbutton = styled.button`
@@ -72,7 +74,8 @@ const ProfilePic = styled.button`
 
 const Idul = styled.ul`
   margin-top: 7px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 60px auto;
 `;
 
 const Titlej = styled.div`
@@ -98,7 +101,8 @@ const Titlen = styled.div`
 `;
 
 const Nickul = styled.ul`
-  display: flex;
+  display: grid;
+  grid-template-columns: 60px auto auto;
   margin-top: 7px;
 `;
 
@@ -143,19 +147,22 @@ const Nickwarnig = styled.p`
 
 const Pwul = styled.ul`
   margin-top: 7px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 60px auto auto;
 `;
 
 const BodyDiv = styled.div`
   margin-top: 7px;
-  grid-row: 5;
-  display: flex;
+  margin-right: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const HeightDiv = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 60px auto 50px;
   justify-content: center;
-  align-items: center;
+  margin-right: 15px;
 `;
 
 const BInput = styled.input`
@@ -179,10 +186,10 @@ const BodyP = styled.div`
 `;
 
 const WeigthDiv = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 60px auto 50px;
   justify-content: center;
-  align-items: center;
-  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 const Bodywarnig = styled.p`
@@ -193,19 +200,21 @@ const Bodywarnig = styled.p`
 
 const Cateckul = styled.div`
   margin-top: 7px;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
 `;
 
 const Catetitle = styled.p`
-  display: flex;
   align-items: center;
   font-size: 18px;
   color: #000000;
+  margin-top: 15px;
 `;
 
 const Cateul = styled.div`
   margin-top: 3px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 65px auto;
 `;
 
 
@@ -229,10 +238,11 @@ const MyProfileModify = function () {
   return (
     <>
       <All>
-      <Titleul>
-          <Backbutton onClick={() => {navigate("/mypage")}}></Backbutton>
+        <Titleul>
+          <Backbutton onClick={() => { navigate("/mypage") }}></Backbutton>
           <Title>나의 정보 수정</Title>
         </Titleul>
+        <br />
         <Titleo>배너사진</Titleo>
         <BannerPic>
           <input type="file"
@@ -294,7 +304,7 @@ const MyProfileModify = function () {
           />
         </Cateckul>
         <Cateul>
-          <Tag 
+          <Tag
             tagName="요가"
           />
           <Xbutton src={xbutton} />
