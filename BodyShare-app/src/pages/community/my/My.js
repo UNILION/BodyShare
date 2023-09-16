@@ -128,7 +128,7 @@ const My = function () {
               <MiniMember>자세봐주는사람</MiniMember>
             </Mini>
             <Mini>
-              <MiniTitle> onClick={() => navigate("/community/feed")}차근차근 요가</MiniTitle>
+              <MiniTitle onClick={() => navigate("/community/feed")}>차근차근 요가</MiniTitle>
               <MiniMember>슬로우</MiniMember>
             </Mini>
           </Writing>
