@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Tag from "./Tag";
 
 const StyledCard = styled.div`
   width: ${(props) => (props.width ? props.width : "370px")};

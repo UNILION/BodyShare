@@ -9,7 +9,7 @@ import Analysis from "./pages/analysis";
 import Community from "./pages/community";
 import CommuSearch from "./pages/community/commu/CommuSearch";
 import CommuSearchAfter from "./pages/community/commu/CommuSearchAfter";
-import CommuIn from "./pages/community/commu/CommuIn";
+import CommuIn from "./pages/community/commu/commuIn/CommuIn";
 import CommuAdd from "./pages/community/commu/CommuAdd";
 import CommuCategory from "./pages/community/commu/CommuCategory";
 import CommuFeedAdd from "./pages/community/commu/CommuFeedAdd";
