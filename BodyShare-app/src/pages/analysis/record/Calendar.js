@@ -97,27 +97,28 @@ const FoodSeeMoreDetail = styled.div`
   left: 200px;
   display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
 `;
-const Correction = styled.button`
-  width: 158px;
-  height: 40px;
-  border-radius: 15px 15px 0px 0px;
-  border: 1px solid #B3B3B3;
-  background-color: white;
-  &:hover {
-    cursor: pointer;
-    background-color: #556FFF;
-  }
-`;
+// const Correction = styled.button`
+//   width: 158px;
+//   height: 40px;
+//   border-radius: 15px 15px 0px 0px;
+//   border: 1px solid #B3B3B3;
+//   background-color: white;
+//   &:hover {
+//     cursor: pointer;
+//     background-color: #556FFF;
+//   }
+// `;
 
 const Delete = styled.button`
   width: 158px;
   height: 40px;
-  border-radius: 0px 0px 15px 15px;
+  border-radius: 15px;
   border: 1px solid #B3B3B3;
   background-color: white;
+
   &:hover {
     cursor: pointer;
-    background-color: red;
+    background-color: #556FFF;
   }
 `;
 
@@ -129,7 +130,7 @@ const FoodDelete = styled.button`
   background-color: white;
   &:hover {
     cursor: pointer;
-    background-color: red;
+    background-color: #556FFF;
   }
 `;
 
@@ -176,12 +177,13 @@ const Record = function () {
   const navigate = useNavigate();
   // 캘린더
   const [value, onChange] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   
   const [seeMoreVisible, setSeeMoreVisible] = useState(false);
   const [foodSeeMoreVisible, setFoodSeeMoreVisible] = useState(false);
 
   const handleDateChange = (date) => {
+    onChange();
     setSelectedDate(date);
   };
 
@@ -212,7 +214,7 @@ const Record = function () {
               <SmIng src={seemore}></SmIng>
             </SeeMore>
             <SeeMoreDetail isVisible={seeMoreVisible}>
-              <Correction onClick={() => navigate("/analysis/time")}>수정하기</Correction>
+              {/* <Correction onClick={() => navigate("/analysis/time")}>수정하기</Correction> */}
               <Delete>삭제하기</Delete>
             </SeeMoreDetail>
           </SportNoteContainer>
