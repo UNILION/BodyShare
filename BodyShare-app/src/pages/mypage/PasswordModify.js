@@ -6,13 +6,15 @@ import Button from "../../components/commons/Button"
 import Image5 from "../../assets/Img/check.png"
 
 const All = styled.div`
-  margin-left: 3px;
+  margin-left: 7px;
   margin-right: 3px;
   margin-top: 19px;
 `;
 
 const Titleul = styled.ul`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
+  float: left;
 `;
 
 const Backbutton = styled.button`
@@ -60,12 +62,14 @@ const Maintitle = styled.p`
 
 const Bfpwul = styled.ul`
   margin-top: 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 95px auto;
 `;
 
 const Atpwul = styled.ul`
   margin-top: 20px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 95px auto;
 `;
 
 const Input = styled.input`
@@ -88,14 +92,15 @@ const Atpwwarn = styled.p`
 
 const Checkkul = styled.ul`
   margin-top: 5px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 95px auto auto;
 `;
 
 const Checkokbutton = styled.button`
   background-image: url(${checkButton});
   background-size: cover;
   margin-top: 7px;
-  margin-left: 10px;
+  margin-left: 3px;
   width: 34px;
   height: 34px;
   border-radius: 34px;
@@ -119,6 +124,7 @@ const PasswordModify = function () {
           <Backbutton onClick={() => {navigate("/mypage/modify")}}></Backbutton>
           <Title>나의 정보 수정</Title>
         </Titleul>
+        <br />
         <Maintitle>비밀번호 변경</Maintitle>
         <Bfpwul>
           <Titlej>기존 비밀번호</Titlej>
