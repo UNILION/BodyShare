@@ -31,7 +31,7 @@ const Title = styled.span`
   margin-top: ${(props) => (props.tmt ? props.tmt : "5px")};
   margin-right: ${(props) => (props.tmr ? props.tmr : "5px")};
   margin-bottom: ${(props) => (props.tmb ? props.tmb : "0px")};
-  margin-left: ${(props) => (props.tml ? props.tml : "5px")};
+  margin-left: ${(props) => (props.tml ? props.tml : "20px")};
   font-size: ${(props) => (props.tfs ? props.tfs : "15px")};
   font-weight: ${(props) => (props.tfw ? props.tfw : "bold")};
   color: ${(props) => (props.fcolor ? props.fcolor : "black")};
@@ -52,6 +52,18 @@ const Contents = styled.div`
   width: 330px;
   padding: 5px 20px;
   line-height: 20px;
+`
+
+const Footer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+`
+
+const Exer = styled.div`
+  color: #878787;
+  font-size: 12px;
+  text-align: start;
+  margin: 20px;
 `
 
 const Upload = styled.div`
@@ -75,7 +87,10 @@ const FeedCard = (props) => {
       <Title>{props.title}</Title>
       <Hr />
       <Contents>{props.contents}</Contents>
-      <Upload>{props.upload}</Upload>
+      <Footer>
+        <Exer>{props.exercise}</Exer>
+        <Upload>{props.upload}</Upload>
+      </Footer>
     </StyledCard>
   );
 };
