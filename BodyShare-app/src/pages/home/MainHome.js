@@ -225,7 +225,7 @@ const Index = function () {
           >
             <Card
               img={CardImage1}
-              title="관심사 요가 커뮤니티"
+              title="관심사 요가 게시물"
               contents="요가에 재미를 붙이셨네요 :)"
               tagName="요가"
               footer="96명의 회원이 가입함"
@@ -238,7 +238,7 @@ const Index = function () {
           >
             <Card
               img={CardImage2}
-              title="클라이밍 커뮤니티"
+              title="클라이밍 게시물"
               contents="클라이밍에 재미를 붙이셨네요 :)"
               tagName="클라이밍"
               footer="196명의 회원이 가입함"
