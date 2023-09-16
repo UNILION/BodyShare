@@ -45,8 +45,6 @@ const Tt =styled.p`
 `;
 
 const Ttt = styled.div`
-  margin-left: 115px;
-  display: flex;
   text-align: center;
   font-size: 15px;
 `;
@@ -63,41 +61,13 @@ const Tff = styled.p`
 
 const Buttons = styled.ul`
   margin-top: 50px;
-  display: flex;
-  margin-bottom: 23px; 
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 가로로 두 개의 열을 생성합니다. */
+  margin-bottom: 23px;
+  gap: 5px; 
 `;
 
-const Backbutton = styled.button`
-  background-color: #556FFF; 
-  color: #fff; 
-  padding: 10px 20px;
-  border: none;
-  border-radius: 23px;
-  cursor: pointer;
-  margin-top: 16px;
-  width: 211px;
-  height: 45px;
-  float: right;
-  font-size: 20px;
-`;
 
-const Logoutbutton = styled.button`
-  background-color: rgba(85, 111, 255, 0.5); 
-  color: #fff; 
-  padding: 10px 20px;
-  border: none;
-  border-radius: 23px;
-  cursor: pointer;
-  margin-top: 16px;
-  width: 211px;
-  height: 45px;
-  float: right;
-  font-size: 20px;
-`;
-
-const Tp = styled.p`
-  font-weight: bold;
-`;
 
 const PasswordModify = function () {
   const navigate = useNavigate();
@@ -109,7 +79,7 @@ const PasswordModify = function () {
           <Imt src={logoutLogo}></Imt>
           <To>정말 로그아웃</To>
           <Tt>하시겠어요?</Tt>
-          <Ttt>저희 <Tp>BODY SHARE</Tp>에는</Ttt>
+          <Ttt>저희 BODY SHARE에는</Ttt>
           <Tf>아직 많은 재밌는 컨텐츠가</Tf>
           <Tff>준비되어 있답니다ㅜㅡㅜ</Tff>
         </Main>
@@ -118,12 +88,15 @@ const PasswordModify = function () {
             name="돌아가기"
             img={Image6}
             onClick={() => navigate("/mypage")}
+            width="180px"
+            ml="10px"
           />
           <Button
             name="로그아웃"
             img={Image5}
             onClick={() => navigate("/")}
             bc="rgba(85, 111, 255, 0.5)"
+            width="180px"
           />
         </Buttons>
       </All>
