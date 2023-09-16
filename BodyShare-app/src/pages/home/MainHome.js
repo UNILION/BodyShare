@@ -6,7 +6,6 @@ import CardImage1 from "../../assets/Img/card_image1.png";
 import CardImage2 from "../../assets/Img/card_image2.png";
 import CircleImg from "../../assets/Img/circletgo.png";
 
-
 const Container = styled.div`
   width: 390px;
   height: 711px;
@@ -80,7 +79,7 @@ const ChartBox = styled.div`
 
 const ChartContainer1 = styled.div`
   width: 180px;
-  height: 275px;
+  height: 255px;
   background-color: white;
   border-radius: 30px;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -90,7 +89,7 @@ const ChartContainer1 = styled.div`
 
 const ChartContainer2 = styled.div`
   width: 180px;
-  height: 275px;
+  height: 255px;
   background-color: white;
   border-radius: 30px;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -192,8 +191,8 @@ const Index = function () {
         >
           <Chart
             chartType="Bar"
-            width="100%"
-            height="265px"
+            width="170px%"
+            height="250px"
             data={chartData2}
             options={chartOptions2}
             graph_id="barchart2"
@@ -206,8 +205,8 @@ const Index = function () {
         >
           <Chart
             chartType="PieChart"
-            width="100%"
-            height="265px"
+            width="170px"
+            height="250px"
             data={chartData}
             options={chartOptions}
             graph_id="donutchart"
