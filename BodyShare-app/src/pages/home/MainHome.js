@@ -6,6 +6,7 @@ import CardImage1 from "../../assets/Img/card_image1.png";
 import CardImage2 from "../../assets/Img/card_image2.png";
 import CircleImg from "../../assets/Img/circletgo.png";
 
+
 const Container = styled.div`
   width: 390px;
   height: 711px;
@@ -19,7 +20,7 @@ const Record = styled.div`
   grid-row: 1;
   width: 370px;
   height: 60px;
-  margin: 20px auto 15px auto;
+  margin: 10px auto 5px auto;
   border-radius: 30px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   background-color: #ffffff;
@@ -65,7 +66,7 @@ const ButtonImg = styled.img`
 const ChartBox = styled.div`
   grid-row: 2;
   width: 380px;
-  height: 261px;
+  height: 280px;
   border-radius: 30px;
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.25);
@@ -78,20 +79,20 @@ const ChartBox = styled.div`
 `;
 
 const ChartContainer1 = styled.div`
-  width: 175px;
-  height: 230px;
+  width: 180px;
+  height: 275px;
   background-color: white;
-  border-radius: 15px;
+  border-radius: 30px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   cursor: pointer;
   margin: 0 auto;
 `;
 
 const ChartContainer2 = styled.div`
-  width: 175px;
-  height: 230px;
+  width: 180px;
+  height: 275px;
   background-color: white;
-  border-radius: 15px;
+  border-radius: 30px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   cursor: pointer;
   margin: 0 auto;
@@ -166,7 +167,6 @@ const Index = function () {
   ];
 
   const chartOptions2 = {
-    title: "Daily Diet",
     legend: { position: "none" },
     chart: {
       title: "Daily Diet",
@@ -187,13 +187,13 @@ const Index = function () {
       <ChartBox>
         <ChartContainer1
           onClick={() => {
-            navigate("/analysis");
+            navigate("/analysis/sportschart");
           }}
         >
           <Chart
             chartType="Bar"
             width="100%"
-            height="230px"
+            height="265px"
             data={chartData2}
             options={chartOptions2}
             graph_id="barchart2"
@@ -201,13 +201,13 @@ const Index = function () {
         </ChartContainer1>
         <ChartContainer2
           onClick={() => {
-            navigate("/analysis");
+            navigate("/analysis/foodchart");
           }}
         >
           <Chart
             chartType="PieChart"
             width="100%"
-            height="230px"
+            height="265px"
             data={chartData}
             options={chartOptions}
             graph_id="donutchart"
