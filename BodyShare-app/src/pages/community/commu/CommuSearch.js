@@ -81,34 +81,34 @@ const CommuSearch = function () {
     <Container>
       <PreviousButton onClick={() => navigate("/community")} />
       <SearchInput>
-        <Search src={search}  onClick={() => navigate("/community/search/after")}/>
+        <Search src={search} onClick={() => navigate("/community/search/after")}/>
         <Input type="text" placeholder="찾으시는 운동을 검색해주세요" onKeyDown={handleOnKeyDown}/>
       </SearchInput>
       <CategoryList>
         <Tag tagName="전체" width="80px" height="36px" br="13px" />
-        <Tag tagName="유산소" width="80px" height="36px" br="13px" />
-        <Tag tagName="무산소" width="80px" height="36px" br="13px" />
         <Tag tagName="근력" width="80px" height="36px" br="13px" />
+        <Tag tagName="유산소" width="80px" height="36px" br="13px" />
+        <Tag tagName="기타" width="80px" height="36px" br="13px" />
       </CategoryList>
       <ResultList>
         <ResultButton>
-          <RP>축구</RP>
+          <RP onClick={() => navigate("/community/search/after")}>클라이밍</RP>
           <Line></Line>
         </ResultButton>
         <ResultButton>
-          <RP>수영</RP>
+          <RP onClick={() => navigate("/community/search/after")}>수영</RP>
           <Line></Line>
         </ResultButton>
         <ResultButton>
-          <RP>달리기</RP>
+          <RP onClick={() => navigate("/community/search/after")}>달리기</RP>
           <Line></Line>
         </ResultButton>
         <ResultButton>
-          <RP>필라테스</RP>
+          <RP onClick={() => navigate("/community/search/after")}>필라테스</RP>
           <Line></Line>
         </ResultButton>
         <ResultButton>
-          <RP>요가</RP>
+          <RP onClick={() => navigate("/community/search/after")}>요가</RP>
           <Line></Line>
         </ResultButton>
       </ResultList>
