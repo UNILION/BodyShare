@@ -81,9 +81,9 @@ const CommuSearch = function () {
       </SearchInput>
       <CategoryList>
         <Tag tagName="전체" width="80px" height="36px" br="13px" />
-        <Tag tagName="유산소" width="80px" height="36px" br="13px" />
-        <Tag tagName="무산소" width="80px" height="36px" br="13px" />
         <Tag tagName="근력" width="80px" height="36px" br="13px" />
+        <Tag tagName="유산소" width="80px" height="36px" br="13px" />
+        <Tag tagName="기타" width="80px" height="36px" br="13px" />
       </CategoryList>
       <ResultList>
         <ResultButton>
