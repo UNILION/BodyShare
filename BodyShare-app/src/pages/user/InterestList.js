@@ -171,19 +171,28 @@ const DeleteButtonDiv = styled.div`
   align-items: center;
 `;
 
-const DeleteButton = styled.button`
-  width: 19px;
-  height: 19px;
+// const DeleteButton = styled.button`
+//   width: 19px;
+//   height: 19px;
+//   background-color: rgba(85, 111, 255, 0.3);
+//   border-radius: 50%;
+//   border: none;
+//   background: url(${xbutton}) no-repeat center center;
+//   background-size: cover;
+
+//   &:hover {
+//     cursor: pointer;
+//   }
+
+// `;
+
+const Xbutton = styled.img`
+  width: 25px;
+  height: 25px;
   background-color: rgba(85, 111, 255, 0.3);
-  border-radius: 50%;
-  border: none;
-  background: url(${xbutton}) no-repeat center center;
-  background-size: cover;
-
-  &:hover {
-    cursor: pointer;
-  }
-
+  border-radius: 15px;
+  margin-left: 3px;
+  cursor: pointer;
 `;
 
 const Donediv = styled.div`
@@ -261,7 +270,7 @@ const InterestList = function() {
             <SelectP>요가</SelectP>
           </SelectCircle>
           <DeleteButtonDiv>
-            <DeleteButton ></DeleteButton>
+            <Xbutton src={xbutton}></Xbutton>
           </DeleteButtonDiv>
         </Select>
         <Select>
@@ -269,7 +278,7 @@ const InterestList = function() {
             <SelectP>수영</SelectP>
           </SelectCircle>
           <DeleteButtonDiv>
-            <DeleteButton ></DeleteButton>
+            <Xbutton src={xbutton}></Xbutton>
           </DeleteButtonDiv>
         </Select>
         <Select>
@@ -277,7 +286,7 @@ const InterestList = function() {
             <SelectP>달리기</SelectP>
           </SelectCircle>
           <DeleteButtonDiv>
-            <DeleteButton ></DeleteButton>
+            <Xbutton src={xbutton}></Xbutton>
           </DeleteButtonDiv>
         </Select>
       </SelectedDiv>
