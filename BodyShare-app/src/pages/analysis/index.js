@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Category from "./Category";
+import Record from "./record/Calendar";
 
 const index = function () {
   return (
     <>
-    <Category />
+    <Record />
     </>
   );
 };
