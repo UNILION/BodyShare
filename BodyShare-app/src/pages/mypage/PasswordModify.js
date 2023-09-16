@@ -136,10 +136,10 @@ const PasswordModify = function () {
         </Checkkul>
         <Checkpwwarn>비밀번호가 다릅니다.</Checkpwwarn>
         <Button
-          name="수정 완료"
+          name="수정완료"
           img={Image5}
           onClick={() => navigate("/mypage/modify")}
-          mt="250px"
+          mt="265px"
           ml="170px"
         />
       </All>
