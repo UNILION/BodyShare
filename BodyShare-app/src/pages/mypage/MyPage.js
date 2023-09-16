@@ -13,15 +13,18 @@ const Banner = styled.img`
 
 const Title = styled.p`
     margin-top: 8px;
+    margin-left: 5px;
     height: 45px;
     font-size: 23px;
 `;
 
 const Pf = styled.ul`
-  border: 3px solid rgba(85, 111, 255, 0.2);
+  border: 5px solid rgba(85, 111, 255, 0.2);
+  width: 360px;
   border-radius: 10px;
   display: grid;
   grid-template-columns: 1fr 3fr;
+  margin-left: 9.5px;
 `;
 
 const Pfpic = styled.img`
@@ -41,7 +44,7 @@ const Pfcommentul = styled.div`
 `;
 
 const Info = styled.ul`
-  margin-left: 30px;
+  margin-left: 20px;
   display: grid;
   grid-template-columns: 1fr 2fr;
   margin-top: 26px;
@@ -87,7 +90,7 @@ const Inst = styled.li`
 `;
 
 const Buttons = styled.ul`
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 170px;
 `;
 

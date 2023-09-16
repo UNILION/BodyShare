@@ -1,19 +1,14 @@
+import React, { useState } from 'react';
 import styled from "styled-components";
-import search from "../../assets/Img/search.png"
-import backButton from "../../assets/Img/back.png"
-import xbutton from "../../assets/Img/xbutton.png"
+import search from "../../assets/Img/search.png";
+import backButton from "../../assets/Img/back.png";
+import plus from "../../assets/Img/check.png"
+import Button from "../../components/commons/Button"
 import { useNavigate } from "react-router-dom";
 import Tag from "../../components/commons/Tag";
-import ButtonTT from "./NewVer/ButtonTT"
 
-const SelectDiv = styled.div`
-  margin: 10px;
-`;
-
-const SportSearchContainer = styled.div`
-  display: grid;
-  grid-template-rows: auto auto auto 1fr;
-  gap: 10px;
+const Container = styled.div`
+  padding: 10px 20px;
 `;
 
 const PreviousButton = styled.button`
@@ -29,208 +24,135 @@ const PreviousButton = styled.button`
 `;
 
 const SearchInput = styled.div`
-  margin-left: 5px;
-  grid-row: 2;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin-bottom: 20px;
 `;
 
 const Input = styled.input`
-  width: 300px;
+  width: 260px;
   height: 45px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   border-radius: 15px;
   text-align: center;
+  padding: 0 20px;
 `;
 
 const Search = styled.img`
-  margin-right: 5px;
+  margin: auto;
 `;
 
-const SportSearchResult = styled.div`
-  
+const CategoryList = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
-const CategoryList = styled.ul`
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  list-style: none;
-  margin-left: 20px;
-`;
-
-const ResultList = styled.ul`
-  list-style: none;
-  gap: 10px;
+const ResultList = styled.div`
+  margin-top: 20px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 `;
 
 const ResultButton = styled.button`
-    background-color: white;
-    border: none;
-    padding-top: 45px;
-    padding-bottom: 0px;
-`;
-
-const RP = styled.p`
-    font-size: 17px;
-`;
-
-const CheckBox = styled.input.attrs({ type: "checkbox" })`
-  border: 2px solid #556FFF;
-  float: right;
-  margin-top: 50px;
-  margin-right: 30px;
-`;
-
-const Line = styled.div`
-  width: 360px;
-  border: 1px solid rgba(135, 135, 135, 0.3);
-`;
-
-const SelectedDiv = styled.div`
-  grid-row: 6;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  width: 300px;
-  height: 25px;
-  margin: 15px auto auto 40px;
-`;
-
-const Select = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-
-`;
-
-const DeleteButtonDiv = styled.div`
-  width: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const DeleteButton = styled.button`
-  width: 19px;
-  height: 19px;
-  background-color: rgba(85, 111, 255, 0.3);
-  border-radius: 50%;
+  margin-top: 10px;
+  background-color: ${(props) => (props.active ? props.hoverColor : 'white')};
   border: none;
-  background: url(${xbutton}) no-repeat center center;
-  background-size: cover;
+  border-radius: 15px;
+  padding-top: 40px;
+  cursor: pointer;
+  transition: background-color 0.2s; 
+
   &:hover {
-    cursor: pointer;
+    background-color: ${(props) => (props.active ? props.hoverColor : 'white')};
   }
 `;
 
-const Donediv = styled.div`
-  grid-row: 7;
-  width: 390px;
-  height: 60px;
-  margin: 20px auto;
-  text-align: center;
+const RP = styled.p`
+  font-size: 17px;
+  text-align: left;
+  margin-bottom: 10px;
+`;
+
+const Line = styled.div`
+  width: 340px;
+  border: 1px solid rgba(135, 135, 135, 0.3);
 `;
 
 const InterestModify = function () {
   const navigate = useNavigate();
+  const [buttonStates, setButtonStates] = useState({
+    button1: false,
+    button2: false,
+    button3: false,
+    button4: false
+  });
+
+  const handleButtonClick = (buttonName) => {
+    setButtonStates((prevState) => ({
+      ...prevState,
+      [buttonName]: !prevState[buttonName],
+    }));
+  };
 
   return (
-    <>
-      <SelectDiv>
-        <SportSearchContainer>
-          <PreviousButton onClick={() => {navigate("/mypage/modify")}}></PreviousButton>
-          <SearchInput>
-            <Search src={search}></Search>
-            <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
-          </SearchInput>
-          <CategoryList>
-            <Tag 
-              tagName="전체"
-              br="15px"
-              width="81px"
-              height="36px"
-              mr="3px"
-            />
-            <Tag 
-              tagName="유산소"
-              br="15px"
-              width="81px"
-              height="36px"
-              mr="3px"
-            />
-            <Tag 
-              tagName="웨이트"
-              br="15px"
-              width="81px"
-              height="36px"
-              mr="3px"
-            />
-            <Tag 
-              tagName="야외"
-              br="15px"
-              width="81px"
-              height="36px"
-            />
-          </CategoryList>
-          <SportSearchResult>
-            <ResultList>
-              <ResultButton><RP>수영</RP></ResultButton>
-              <CheckBox ></CheckBox>
-              <Line></Line>
-              <ResultButton><RP>러닝</RP></ResultButton>
-              <CheckBox ></CheckBox>
-              <Line></Line>
-              <ResultButton><RP>등산</RP></ResultButton>
-              <CheckBox ></CheckBox>
-              <Line></Line>
-              <ResultButton><RP>자전거</RP></ResultButton>
-              <CheckBox ></CheckBox>
-              <Line></Line>
-              <ResultButton><RP>요가</RP></ResultButton>
-              <CheckBox ></CheckBox>
-              <Line></Line>
-            </ResultList>
-          </SportSearchResult>
-        </SportSearchContainer>
-        <SelectedDiv>
-          <Select>
-            <Tag 
-              tagName="요가"
-            />
-            <DeleteButtonDiv>
-              <DeleteButton ></DeleteButton>
-            </DeleteButtonDiv>
-          </Select>
-          <Select>
-            <Tag 
-              tagName="수영"
-            />
-            <DeleteButtonDiv>
-              <DeleteButton ></DeleteButton>
-            </DeleteButtonDiv>
-          </Select>
-          <Select>
-            <Tag 
-              tagName="러닝"
-            />
-            <DeleteButtonDiv>
-              <DeleteButton ></DeleteButton>
-            </DeleteButtonDiv>
-          </Select>
-        </SelectedDiv>
-        <Donediv>
-          <ButtonTT
-            name="선택완료"
-            onClick={() => navigate("/mypage/modify")}
-            width="321px"
-            height="45px"
-            br="15px"
-            mr="20px"
-          />
-        </Donediv>
-      </SelectDiv>
-    </>
-  )
+    <Container>
+      <PreviousButton onClick={() => navigate("/mypage/modify")} />
+      <SearchInput>
+        <Search src={search} />
+        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
+      </SearchInput>
+      <CategoryList>
+        <Tag tagName="전체" width="80px" height="36px" br="13px" />
+        <Tag tagName="근력" width="80px" height="36px" br="13px" />
+        <Tag tagName="유산소" width="80px" height="36px" br="13px" />
+        <Tag tagName="기타" width="80px" height="36px" br="13px" />
+      </CategoryList>
+      <ResultList>
+        <ResultButton 
+        active={buttonStates.button1} 
+        onClick={() => handleButtonClick('button1')}
+        hoverColor="rgba(85, 111, 255, 0.7)"
+        >
+          <RP>축구</RP>
+          <Line></Line>
+        </ResultButton>
+        <ResultButton
+          active={buttonStates.button2}
+          onClick={() => handleButtonClick('button2')}
+          hoverColor="rgba(85, 111, 255, 0.7)"
+        >
+          <RP>수영</RP>
+          <Line></Line>
+        </ResultButton>
+        <ResultButton
+          active={buttonStates.button3}
+          onClick={() => handleButtonClick('button3')}
+          hoverColor="rgba(85, 111, 255, 0.7)"
+        >
+          <RP>달리기</RP>
+          <Line></Line>
+        </ResultButton>
+        <ResultButton
+          active={buttonStates.button4}
+          onClick={() => handleButtonClick('button4')}
+          hoverColor="rgba(85, 111, 255, 0.7)"
+        >
+          <RP>필라테스</RP>
+          <Line></Line>
+        </ResultButton>
+      </ResultList>
+
+      <Button
+        name="선택완료"
+        img={plus}
+        width="200px"
+        display="block"
+        ml="auto"
+        mt="15px"
+        onClick={() => navigate("/mypage/modify")}
+      />
+    </Container>
+  );
 };
 
 export default InterestModify;
-
-
