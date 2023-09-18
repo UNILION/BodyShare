@@ -1,10 +1,12 @@
+import React from "react";
 import styled from "styled-components";
 import { Chart } from "react-google-charts";
 import { Link, useNavigate } from "react-router-dom";
 
 const ChartBox = styled.div`
   grid-row: 2;
-  width: 380px;
+  display: flex;
+  width: 370px;
   height: 280px;
   border-radius: 30px;
   background-color: #ffffff;
@@ -12,24 +14,11 @@ const ChartBox = styled.div`
   margin: 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  display: flex;
   place-items: center;
 `;
 
-const ChartContainer1 = styled.div`
-  width: 185px;
-  height: 270px;
-  background-color: white;
-  border-radius: 30px;
-  border: 1px solid rgba(135, 135, 135, 0.3);
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  margin: 0 auto;
-`;
-
-const ChartContainer2 = styled.div`
-  width: 185px;
+const ChartContainer = styled.div`
+  width: 180px;
   height: 270px;
   background-color: white;
   border-radius: 30px;
@@ -78,7 +67,7 @@ const Charts = function () {
 
   return (
     <ChartBox>
-      <ChartContainer1
+      <ChartContainer
         onClick={() => {
           navigate("/analysis/sportschart");
         }}
@@ -92,8 +81,8 @@ const Charts = function () {
           graph_id="barchart2"
           border-radius="30px"
         />
-      </ChartContainer1>
-      <ChartContainer2
+      </ChartContainer>
+      <ChartContainer
         onClick={() => {
           navigate("/analysis/foodchart");
         }}
@@ -107,8 +96,9 @@ const Charts = function () {
           graph_id="donutchart"
           border-radius="30px"
         />
-      </ChartContainer2>
+      </ChartContainer>
     </ChartBox>
   );
 };
+
 export default Charts;

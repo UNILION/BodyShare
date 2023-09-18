@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 const CommunityDiv = styled.div`
   grid-row: 3;
-  width: 380px;
+  width: 370px;
   height: 305px;
   border-radius: 30px;
   background-color: #ffffff;
