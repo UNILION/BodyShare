@@ -15,7 +15,6 @@ import CommuCategory from "./pages/community/commu/commuCategory/CommuCategory";
 import CommuFeedAdd from "./pages/community/commu/commuFeedAdd/CommuFeedAdd";
 import CommuFeed from "./pages/community/commu/commuFeed/CommuFeed";
 import Mypage from "./pages/mypage";
-import Interest from "./pages/user/Interest";
 import InterestList from "./pages/user/InterestList";
 import UserInfo from "./pages/user/UserInfo";
 import SportSearch from "./pages/analysis/SportSearch";
@@ -25,7 +24,6 @@ import MyProfileModify from "./pages/mypage/MyProfileModify";
 import Logout from "./pages/mypage/Logout";
 import PasswordModify from "./pages/mypage/PasswordModify";
 import InterestModify from "./pages/mypage/InterestModify";
-import Record from "./pages/analysis/record/Calendar";
 import SportHome from "./pages/analysis/sportchart/SportChart";
 import FoodHome from "./pages/analysis/foodchart/FoodChart";
 import LayoutAnalysis from "./pages/analysis/analysislayout";
@@ -38,11 +36,9 @@ function App() {
         <Routes>
           <Route path="/" element={<User />}>
             <Route index element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />}>
-              <Route index element={<Interest />} />
-              <Route path="/signup/interestList" element={<InterestList />} />
-              <Route path="/signup/userInfo" element={<UserInfo />} />
-            </Route>
+            <Route path="/signup" element={<SignUp />} /> 
+            <Route path="/signup/interestList" element={<InterestList />} />
+            <Route path="/signup/userInfo" element={<UserInfo />} />
           </Route>
           <Route path="/home" element={<Layout />}>
             <Route index element={<Home />} />
