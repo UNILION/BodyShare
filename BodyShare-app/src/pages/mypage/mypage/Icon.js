@@ -25,36 +25,31 @@ const Pfpic = styled.img`
   height: 163px;
 `;
 
-const Pfcomment = styled.div`
-  
-`;
-
 const Pfcommentul = styled.div`
   display: grid;
   grid-template-rows: 5fr 1fr;
   list-style: none;
   place-items: center;
+  margin-bottom: 25px;
 `;
 
 const Icon = function () {
   return (
     <>
-     <Pf>
+      <Pf>
         <Pfpic src={userPic} />
-        <Pfcomment>
-          <Pfcommentul>
-            <Nickli>kimmmmm</Nickli>
-            <Inst>
-              <Tag
-                tagName="요가"
-                mr="5px"
-              />
-              <Tag
-                tagName="필라테스"
-              />
-            </Inst>
-          </Pfcommentul>
-        </Pfcomment>
+        <Pfcommentul>
+          <Nickli>kimmmmm</Nickli>
+          <Inst>
+            <Tag
+              tagName="요가"
+              mr="5px"
+            />
+            <Tag
+              tagName="필라테스"
+            />
+          </Inst>
+        </Pfcommentul>
       </Pf>
     </>
   )
