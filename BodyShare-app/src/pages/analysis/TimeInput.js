@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-import previous from "../../assets/Img/Previous.png";
-import Button from "../../components/commons/Button";
-import plus from "../../assets/Img/buttonplus.png";
+import previous from "assets/Img/Previous.png";
+import Button from "components/commons/Button";
+import plus from "assets/Img/buttonplus.png";
 import { useNavigate } from 'react-router-dom';
 
 const TimeInputContainer = styled.div`
@@ -34,7 +34,6 @@ const Line = styled.div`
 const SportDate = styled.div`
   grid-row: 3;
   height: 44px;
-  /* background-color: red; */
 `;
 
 const P = styled.p`
@@ -98,7 +97,6 @@ const SportName = styled.p`
   margin-left: 10px;
 `;
 
-
 const TimeInput = function () {
   const navigate = useNavigate();
 
@@ -121,11 +119,20 @@ const TimeInput = function () {
         </SportDate>
         <SportTime>
           <P>운동한 시간</P>
-          <SmallBox></SmallBox>
+          <SmallBox
+            type="text"
+            maxLength="2"
+          />
           <Dot>:</Dot>
-          <SmallBox></SmallBox>
+          <SmallBox
+            type="text"
+            maxLength="2"
+          />
           <Dot>:</Dot>
-          <SmallBox></SmallBox>
+          <SmallBox
+            type="text"
+            maxLength="2"
+          />
         </SportTime>
       </TimeInputContainer> 
 
@@ -136,7 +143,7 @@ const TimeInput = function () {
           mb="10px"
           width="150px"
           display="block"
-          onClick={() => navigate("/analysis")}
+          onClick={() => navigate('/analysis')}
       />     
     </>
   );
