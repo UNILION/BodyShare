@@ -1,4 +1,4 @@
-import Index from "./MainHome";
+import Index from "pages/home/MainHome";
 
 const Home = function() {
   return (
