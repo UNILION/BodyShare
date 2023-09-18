@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import backButton from "../../assets/Img/back.png"
-import checkButton from "../../assets/Img/circletcheck.png"
+import backButton from "../../assets/Img/back.png";
+import checkButton from "../../assets/Img/circletcheck.png";
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/commons/Button"
-import Image5 from "../../assets/Img/check.png"
+import Button from "../../components/commons/Button";
+import Image5 from "../../assets/Img/check.png";
 
 const All = styled.div`
   margin-left: 7px;
@@ -40,18 +40,6 @@ const Titlej = styled.div`
   font-size: 13px;
   width: 95px;
   text-align: center;
-  line-height: 45px;
-`;
-
-const Titlen = styled.div`
-  width: 230px;
-  height: 45px;
-  color: #808080;
-  border-radius: 0px 15px 15px 0px;
-  background-color: #FFFFFF;
-  border: 1px solid rgba(135, 135, 135, 0.3);
-  font-size: 13px;
-  padding-left: 10px;
   line-height: 45px;
 `;
 
@@ -121,14 +109,14 @@ const PasswordModify = function () {
     <>
       <All>
         <Titleul>
-          <Backbutton onClick={() => {navigate("/mypage/modify")}}></Backbutton>
+          <Backbutton onClick={() => { navigate("/mypage/modify") }}></Backbutton>
           <Title>나의 정보 수정</Title>
         </Titleul>
         <br />
         <Maintitle>비밀번호 변경</Maintitle>
         <Bfpwul>
           <Titlej>기존 비밀번호</Titlej>
-          <Titlen>********</Titlen>
+          <Input type="password" placeholder="기존 비밀번호"></Input>
         </Bfpwul>
         <Atpwul>
           <Titlej>변경 비밀번호</Titlej>
@@ -150,7 +138,7 @@ const PasswordModify = function () {
         />
       </All>
     </>
-  )
+  );
 };
 
 export default PasswordModify;
