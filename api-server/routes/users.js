@@ -7,7 +7,7 @@ const user = require("../models/userModel");
 router.get("/:no", async (req, res, next) => {
   try{
     const no = Number(req.params.no);
-    const result = await user.findById(no);
+    const result = await user.findByNo(no);
     res.json(result);
   }catch(err){
     next(err);
