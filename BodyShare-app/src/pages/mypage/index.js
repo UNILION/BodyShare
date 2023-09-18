@@ -1,4 +1,4 @@
-import MyPage from "./MyPage.js";
+import MyPage from "pages/mypage/mypage/MyPage.js";
 
 const MyMain = function() {
   return (
