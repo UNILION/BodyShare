@@ -14,7 +14,7 @@ const Logo = styled.img`
   grid-row: 1;
   width: 180px;
   height: 180px;
-  margin: 15px auto;
+  margin: 15px auto auto auto;
 `;
 
 const SignIn = function () {
