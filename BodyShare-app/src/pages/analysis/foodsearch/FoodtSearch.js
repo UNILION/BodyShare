@@ -5,6 +5,7 @@ import previous from 'assets/Img/Previous.png';
 import "assets/Img/buttonsearch.png";
 import Button from "components/commons/Button";
 import plus from "assets/Img/buttonplus.png";
+import ResultList from "pages/analysis/foodsearch/ResultList";
 import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
@@ -42,34 +43,11 @@ const Search = styled.img`
   margin: auto;
 `;
 
-const ResultList = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-`;
-
-const ResultButton = styled.button`
-  background-color: white;
-  border: none;
-  padding-top: 55px;
-  cursor: pointer;
-`;
-
-const RP = styled.p`
-  font-size: 17px;
-  text-align: left;
-  margin-bottom: 10px;
-`;
-
-const Line = styled.div`
-  width: 360px;
-  border: 1px solid rgba(135, 135, 135, 0.3);
-`;
 
 const FoodtSearch = function () {
   const navigate = useNavigate();
 
   return (
-    <>
     <Container>
       <PreviousButton onClick={() => navigate("/analysis")} />
       <SearchInput>
@@ -77,28 +55,7 @@ const FoodtSearch = function () {
         <Input type="text" placeholder="찾으시는 음식을 검색해주세요" />
       </SearchInput>
 
-      <ResultList>
-        <ResultButton>
-          <RP>김치</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton>
-          <RP>닭가슴살</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton>
-          <RP>바나나</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton>
-          <RP>계란</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton>
-          <RP>김밥</RP>
-          <Line></Line>
-        </ResultButton>
-      </ResultList>
+      <ResultList />
 
       <Button
         name="선택하기"
@@ -110,7 +67,6 @@ const FoodtSearch = function () {
         onClick={() => navigate("/analysis")}
       />
     </Container>
-    </>
   );
 };
 
