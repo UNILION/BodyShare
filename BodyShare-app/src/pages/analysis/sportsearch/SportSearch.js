@@ -47,12 +47,6 @@ const CategoryList = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
-// const ResultList = styled.div`
-//   display: grid;
-//   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-// `;
-
-
 const SportSearch = function() {
   const navigate = useNavigate();
 
