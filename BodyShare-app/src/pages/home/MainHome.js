@@ -8,7 +8,6 @@ const Container = styled.div`
   grid-template-rows: auto auto 1fr;
   gap: 10px;
   text-align: center;
-  padding: 5px 10px;
 `;
 
 const MainHome = function () {
