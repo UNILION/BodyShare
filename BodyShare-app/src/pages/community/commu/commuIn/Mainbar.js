@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Button from "../../../../components/commons/Button"
-import Image5 from "../../../../assets/Img/right.png"
-import Image6 from "../../../../assets/Img/red.png"
+import Button from "components/commons/Button"
+import Image5 from "assets/Img/right.png"
+import Image6 from "assets/Img/red.png"
 
 const MainBar = styled.ul`
   display: grid;

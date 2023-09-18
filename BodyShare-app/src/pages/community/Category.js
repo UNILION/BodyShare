@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import My from "./my/My";
-import CommuHome from "./commu/CommuHome";
+import CommuHome from "./commu/commuHome/CommuHome";
 
 const Container = styled.div`
   margin-bottom: 30px;

@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import previous from "../../../assets/Img/Previous.png";
-import Tag from "../../../components/commons/Tag";
-import Button from "../../../components/commons/Button";
-import xbutton from "../../../assets/Img/xbutton.png";
-import plus from "../../../assets/Img/buttonplus.png";
+import previous from "assets/Img/Previous.png";
+import Tag from "components/commons/Tag";
+import Button from "components/commons/Button";
+import xbutton from "assets/Img/xbutton.png";
+import plus from "assets/Img/buttonplus.png";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`

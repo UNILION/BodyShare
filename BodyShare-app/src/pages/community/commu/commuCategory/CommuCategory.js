@@ -1,8 +1,10 @@
 import styled from "styled-components";
-import search from "../../../assets/Img/search.png";
-import backButton from "../../../assets/Img/back.png";
+import search from "assets/Img/search.png";
+import backButton from "assets/Img/back.png";
+import plus from "assets/Img/buttonplus.png"
+import Button from "components/commons/Button"
 import { useNavigate } from "react-router-dom";
-import Tag from "../../../components/commons/Tag";
+import Tag from "components/commons/Tag";
 
 const Container = styled.div`
   padding: 10px 20px;
@@ -37,7 +39,6 @@ const Input = styled.input`
 
 const Search = styled.img`
   margin: auto;
-  cursor: pointer;
 `;
 
 const CategoryList = styled.div`
@@ -71,18 +72,12 @@ const Line = styled.div`
 const CommuSearch = function () {
   const navigate = useNavigate();
 
-  const handleOnKeyDown = (e) => {
-    if (e.key === 'Enter'){
-      navigate("/community/search/after");
-    }
-  }
-
   return (
     <Container>
       <PreviousButton onClick={() => navigate("/community")} />
       <SearchInput>
-        <Search src={search} onClick={() => navigate("/community/search/after")}/>
-        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" onKeyDown={handleOnKeyDown}/>
+        <Search src={search} />
+        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
       </SearchInput>
       <CategoryList>
         <Tag tagName="전체" width="80px" height="36px" br="13px" />
@@ -92,26 +87,36 @@ const CommuSearch = function () {
       </CategoryList>
       <ResultList>
         <ResultButton>
-          <RP onClick={() => navigate("/community/search/after")}>클라이밍</RP>
+          <RP>축구</RP>
           <Line></Line>
         </ResultButton>
         <ResultButton>
-          <RP onClick={() => navigate("/community/search/after")}>수영</RP>
+          <RP>수영</RP>
           <Line></Line>
         </ResultButton>
         <ResultButton>
-          <RP onClick={() => navigate("/community/search/after")}>달리기</RP>
+          <RP>달리기</RP>
           <Line></Line>
         </ResultButton>
         <ResultButton>
-          <RP onClick={() => navigate("/community/search/after")}>필라테스</RP>
+          <RP>필라테스</RP>
           <Line></Line>
         </ResultButton>
         <ResultButton>
-          <RP onClick={() => navigate("/community/search/after")}>요가</RP>
+          <RP>요가</RP>
           <Line></Line>
         </ResultButton>
       </ResultList>
+
+      <Button
+        name="선택하기"
+        img={plus}
+        width="200px"
+        display="block"
+        ml="auto"
+        mt="30px"
+        onClick={() => navigate("/community/communityAdd")}
+      />
     </Container>
   );
 };

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import InterestHome from "./InterestHome"
-import PopularHome from "./PopularHome"
-import Search from "../../../assets/Img/buttonsearch.png"
-import Plus from "../../../assets/Img/buttonplus.png"
+import InterestHome from "pages/community/commu/commuHome/InterestHome"
+import PopularHome from "pages/community/commu/commuHome/PopularHome"
+import Search from "assets/Img/buttonsearch.png"
+import Plus from "assets/Img/buttonplus.png"
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div``;

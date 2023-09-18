@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import "../../../../assets/css/Pagination.css";
+import "assets/css/Pagination.css";
 import { useState } from "react";
-import bannerPic from "../../../../assets/Img/card_image2.png"
-import userPic from "../../../../assets/Img/user.png"
-import Plus from "../../../../assets/Img/buttonplus.png"
+import bannerPic from "assets/Img/card_image2.png"
+import userPic from "assets/Img/user.png"
+import Plus from "assets/Img/buttonplus.png"
 import { useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import Mainbar from "./Mainbar";

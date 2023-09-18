@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Tag from "../../../../components/commons/Tag";
+import Tag from "components/commons/Tag";
 
 const Pfcommentul = styled.div``;
 

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Pagination from "react-js-pagination";
-import "../../../assets/css/Pagination.css";
-import Card from "../../../components/commons/Card";
-import Image1 from "../../../assets/Img/card_image1.png";
-import Image2 from "../../../assets/Img/card_image2.png";
-import Image3 from "../../../assets/Img/card_image3.png";
-import Image4 from "../../../assets/Img/card_image4.png";
+import "assets/css/Pagination.css";
+import Card from "components/commons/Card";
+import Image1 from "assets/Img/card_image1.png";
+import Image2 from "assets/Img/card_image2.png";
+import Image3 from "assets/Img/card_image3.png";
+import Image4 from "assets/Img/card_image4.png";
 import { useState } from "react";
 
 const Group = styled.div`

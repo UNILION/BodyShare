@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import previous from "../../../assets/Img/Previous.png";
-import Button from "../../../components/commons/Button";
-import plus from "../../../assets/Img/buttonplus.png";
-import bannerPic from "../../../assets/Img/card_image2.png";
+import previous from "assets/Img/Previous.png";
+import Button from "components/commons/Button";
+import plus from "assets/Img/buttonplus.png";
+import bannerPic from "assets/Img/card_image2.png";
 import { useNavigate } from "react-router-dom";
-import next from "../../../assets/Img/circletgo.png"
+import next from "assets/Img/circletgo.png"
 
 const Container = styled.div`
   padding: 0 20px;

@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import FeedCard from "../../../components/commons/FeedCard"
-import previous from "../../../assets/Img/Previous.png";
+import FeedCard from "components/commons/FeedCard"
+import previous from "assets/Img/Previous.png";
 import { useNavigate } from "react-router-dom";
-import Image1 from "../../../assets/Img/Climing1.jpg";
-import circle from "../../../assets/Img/circletgo.png"
+import Image1 from "assets/Img/Climing1.jpg";
+import circle from "assets/Img/circletgo.png"
 
 const Container = styled.div`
   padding: 10px;
