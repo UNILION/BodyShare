@@ -1,45 +1,7 @@
 import styled from "styled-components";
+import searchIcon from "assets/Img/search.png";
+import xbutton from "assets/Img/xbutton.png";
 import { useNavigate } from "react-router-dom";
-import search from "../../assets/Img/search.png";
-import xbutton from "../../assets/Img/xbutton.png";
-
-const Container = styled.div`
-  display: grid;
-  width: 390px;
-  height: 696px;
-  grid-template-rows: auto auto auto auto auto auto 1fr;
-  gap: 10px;
-`;
-
-const Intro = styled.div`
-  grid-row: 1;
-  width: 372px;
-  height: 48px;
-  margin: 35px auto 5px auto;
-`;
-
-const BP = styled.p`
-  font-size: 20px;
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const B = styled.b`
-  font-weight: bold;
-`;
-
-const Message = styled.div`
-  grid-row: 2;
-  width: 372px;
-  height: 17px;
-  margin: 0 auto 15px auto;
-`;
-
-const SP = styled.p`
-  font-size: 14px;
-  margin: 5px auto;
-  text-align: center;
-`;
 
 const SearchInput = styled.div`
   grid-row: 3;
@@ -60,7 +22,7 @@ const SearchDiv = styled.div`
   align-items: center;
 `;
 
-const Search = styled.img`
+const SearchImg = styled.img`
   width: 24px;
   height: 24px;
 `;
@@ -171,21 +133,6 @@ const DeleteButtonDiv = styled.div`
   align-items: center;
 `;
 
-// const DeleteButton = styled.button`
-//   width: 19px;
-//   height: 19px;
-//   background-color: rgba(85, 111, 255, 0.3);
-//   border-radius: 50%;
-//   border: none;
-//   background: url(${xbutton}) no-repeat center center;
-//   background-size: cover;
-
-//   &:hover {
-//     cursor: pointer;
-//   }
-
-// `;
-
 const Xbutton = styled.img`
   width: 25px;
   height: 25px;
@@ -217,23 +164,14 @@ const Done = styled.button`
   }
 `;
 
-const InterestList = function() {
+const Search = function () {
   const navigate = useNavigate();
-
+  
   return (
-    <Container>
-      <Intro>
-        <BP>안녕하세요.</BP>
-        <BP><B>BODY SHARE</B> 입니다.</BP>
-      </Intro>
-
-      <Message>
-        <SP>회원 서비스 이용을 위해 관심사를 등록해주세요.</SP>
-      </Message>
-
+    <>
       <SearchInput>
         <SearchDiv>
-          <Search src={search}></Search>
+          <SearchImg src={searchIcon}></SearchImg>
         </SearchDiv>
         <Input type="text" placeholder="찾으시는 운동을 검색해주세요"/>
       </SearchInput>
@@ -294,9 +232,8 @@ const InterestList = function() {
       <Donediv>
         <Done onClick={() => navigate("/signup")}>선택완료</Done>
       </Donediv>
-    </Container>
+    </>
   );
-  
 };
 
-export default InterestList;
+export default Search;

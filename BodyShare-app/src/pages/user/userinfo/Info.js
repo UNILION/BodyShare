@@ -1,45 +1,6 @@
 import styled from "styled-components";
+import user from "assets/Img/user.png"
 import { useNavigate } from "react-router-dom";
-import user from "../../assets/Img/user.png"
-
-const Container = styled.div`
-  display: grid;
-  width: 390px;
-  height: 696px;
-  grid-template-rows: auto auto auto auto auto 1fr;
-  gap: 10px;
-  
-`;
-
-const Intro = styled.div`
-  grid-row: 1;
-  width: 372px;
-  height: 48px;
-  margin: 35px auto 5px auto;
-`;
-
-const BP = styled.p`
-  font-size: 20px;
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const B = styled.b`
-  font-weight: bold;
-`;
-
-const Message = styled.div`
-  grid-row: 2;
-  width: 372px;
-  height: 17px;
-  margin: 0 auto 15px auto;
-`;
-
-const SP = styled.p`
-  font-size: 14px;
-  margin: 5px auto;
-  text-align: center;
-`;
 
 const ProfileDiv = styled.div`
   grid-row: 3;
@@ -251,20 +212,11 @@ const NextButton = styled.button`
   }
 `;
 
-const UserInfo = function () {
+const Info = function () {
   const navigate = useNavigate();
 
   return (
-    <Container>
-      <Intro>
-        <BP>안녕하세요.</BP>
-        <BP><B>BODY SHARE</B> 입니다.</BP>
-      </Intro>
-
-      <Message>
-        <SP>회원 서비스 이용을 위해 본인정보를 입력해주세요.</SP>
-      </Message>
-
+    <>
       <ProfileDiv>
         <ProfileImg src={user}></ProfileImg>
         <ProfileButton>등록하기</ProfileButton>
@@ -301,8 +253,8 @@ const UserInfo = function () {
         <PreviousButton onClick={() => navigate("/signup")}>이전</PreviousButton>
         <NextButton onClick={() => navigate("/")}>회원가입</NextButton>
       </ButtonDiv>
-    </Container>
+    </>
   );
 };
 
-export default UserInfo;
+export default Info;
