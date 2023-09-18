@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import search from "../../assets/Img/search.png"
-import previous from "../../assets/Img/Previous.png";
-import plus from "../../assets/Img/buttonplus.png";
-import Button from "../../components/commons/Button";
-import Tag from "../../components/commons/Tag";
+import search from "assets/Img/search.png"
+import previous from "assets/Img/Previous.png";
+import plus from "assets/Img/buttonplus.png";
+import Button from "components/commons/Button";
+import Tag from "components/commons/Tag";
+import ResultList from "pages/analysis/sportsearch/ResultList";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -46,28 +47,10 @@ const CategoryList = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
-const ResultList = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-`;
-
-const ResultButton = styled.button`
-  background-color: white;
-  border: none;
-  padding-top: 55px;
-  cursor: pointer;
-`;
-
-const RP = styled.p`
-  font-size: 17px;
-  text-align: left;
-  margin-bottom: 10px;
-`;
-
-const Line = styled.div`
-  width: 360px;
-  border: 1px solid rgba(135, 135, 135, 0.3);
-`;
+// const ResultList = styled.div`
+//   display: grid;
+//   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+// `;
 
 
 const SportSearch = function() {
@@ -86,28 +69,8 @@ const SportSearch = function() {
         <Tag tagName="무산소" width="80px" height="36px" br="13px" />
         <Tag tagName="근력" width="80px" height="36px" br="13px" />
       </CategoryList>
-      <ResultList>
-        <ResultButton>
-          <RP>축구</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton>
-          <RP>수영</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton>
-          <RP>달리기</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton>
-          <RP>필라테스</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton>
-          <RP>요가</RP>
-          <Line></Line>
-        </ResultButton>
-      </ResultList>
+      
+      <ResultList />
 
       <Button
         name="선택하기"

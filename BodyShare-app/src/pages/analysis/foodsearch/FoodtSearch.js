@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import search from '../../assets/Img/search.png';
-import previous from '../../assets/Img/Previous.png';
-import "../../assets/Img/buttonsearch.png";
-import Button from "../../components/commons/Button";
-import plus from "../../assets/Img/buttonplus.png";
+import search from 'assets/Img/search.png';
+import previous from 'assets/Img/Previous.png';
+import "assets/Img/buttonsearch.png";
+import Button from "components/commons/Button";
+import plus from "assets/Img/buttonplus.png";
 import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
