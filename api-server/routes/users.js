@@ -45,4 +45,36 @@ router.post("/signin", async (req, res, next) => {
   }
 });
 
+// 회원 관심사 등록
+router.post("/interest", async (req, res, next) => {
+  try{
+    const id = await user.createInterest(req.body);
+    res.json({ id });
+  }catch(err){
+    next(err);
+  }
+});
+
+// 회원 관심사 수정
+router.put("/interest/:no", async (req, res, next) => {
+  try{
+    const no = Number(req.params.no);
+    const count = await user.updateInterest(no, req.body);
+    res.json({ count });
+  }catch(err){
+    next(err);
+  }
+});
+
+// 회원 관심사 조회
+router.get("/interest/:no", async (req, res, next) => {
+  try{
+    const no = Number(req.params.no);
+    const result = await user.findByNoInterest(no);
+    res.json(result);
+  }catch(err){
+    next(err);
+  }
+});
+
 module.exports = router;
