@@ -14,7 +14,6 @@ const CommunityDiv = styled.div`
   margin: 10px auto 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   display: grid;
-  grid-template-rows: auto auto;
 `;
 
 const CommunityP = styled.p`
@@ -28,11 +27,9 @@ const CommunityP = styled.p`
 
 const PostDiv = styled.div`
   grid-row: 2;
-  display: flex;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const CommunityRecommend = styled.div`
