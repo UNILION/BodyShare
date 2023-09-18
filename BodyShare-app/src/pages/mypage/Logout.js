@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import logoutLogo from "../../assets/Img/logout.png"
+import logoutLogo from "assets/Img/logout.png"
 import { useNavigate } from "react-router-dom";
-import Button from "../../components/commons/Button"
-import Image5 from "../../assets/Img/right.png"
-import ButtonT from "./NewVer/ButtonT"
-import Image6 from "../../assets/Img/left.png"
+import Button from "components/commons/Button"
+import Image5 from "assets/Img/right.png"
+import ButtonT from "pages/mypage/newverst/ButtonT"
+import Image6 from "assets/Img/left.png"
 
 const All = styled.div`
   margin-left: 3px;
@@ -19,6 +19,7 @@ const Title = styled.p`
 `;
 
 const Main = styled.div`
+  margin-left: 7px;
   margin-top: 20px;
   width: 366px;
   height: 433px;
@@ -66,8 +67,6 @@ const Buttons = styled.ul`
   margin-bottom: 23px;
   gap: 5px; 
 `;
-
-
 
 const PasswordModify = function () {
   const navigate = useNavigate();
