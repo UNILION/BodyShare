@@ -183,8 +183,16 @@ const Record = function () {
   const [foodSeeMoreVisible, setFoodSeeMoreVisible] = useState(false);
 
   const handleDateChange = (date) => {
-    onChange();
-    setSelectedDate(date);
+    // onChange();
+    // setSelectedDate(date);
+
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    if (date >= today){
+      onChange(date);
+      setSelectedDate(date);
+    }
   };
 
   const toggleSeeMore = () => {
@@ -201,7 +209,12 @@ const Record = function () {
     <>
       <RecordGrid>
         <CalendarDiv>
-          <Calendar onChange={handleDateChange} value={value} />
+          <Calendar 
+            onChange={handleDateChange} 
+            value={value}
+            // 현재 날짜를 최대로 잡음
+            maxDate={new Date()} 
+          />
         </CalendarDiv>
         <NoteGrid>
           <TitleDate>
