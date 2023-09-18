@@ -28,7 +28,6 @@ const Xbutton = styled.img`
   height: 22px;
   background-color: rgba(85, 111, 255, 0.3);
   border-radius: 15px;
-  margin-left: 3px;
   cursor: pointer;
 `;
 
@@ -44,26 +43,26 @@ const CateMod = function () {
   return (
     <>
       <Cateckul>
-          <Catetitle>나의 관심 카테고리</Catetitle>
-          <ButtonTT
-            name="검색"
-            onClick={() => navigate("/mypage/modify/interest")}
-            width="65px"
-            height="31px"
-            fs="15px"
-            mt="8px"
-            ml="175px"
-          />
-        </Cateckul>
-        <Cateul>
-          <Tag
-            tagName="요가"
-          />
-          <Xbutton src={xbutton} />
-        </Cateul>
-        <Catewarnig>한 개 이상의 카테고리를 선택해주세요!</Catewarnig>
+        <Catetitle>나의 관심 카테고리</Catetitle>
+        <ButtonTT
+          name="검색"
+          onClick={() => navigate("/mypage/modify/interest")}
+          width="65px"
+          height="31px"
+          fs="15px"
+          mt="8px"
+          ml="175px"
+        />
+      </Cateckul>
+      <Cateul>
+        <Tag
+          tagName="요가"
+        />
+        <Xbutton src={xbutton} />
+      </Cateul>
+      <Catewarnig>한 개 이상의 카테고리를 선택해주세요!</Catewarnig>
     </>
-  )
+  );
 };
 
 export default CateMod;
