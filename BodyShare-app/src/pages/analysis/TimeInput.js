@@ -17,6 +17,7 @@ const PreviousButton = styled.img`
   width: 21px;
   height: 21px;
   margin-top: 10px;
+  cursor: pointer;
 `;
 
 const SportTitle = styled.div`
