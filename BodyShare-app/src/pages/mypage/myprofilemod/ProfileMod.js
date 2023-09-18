@@ -1,8 +1,45 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import checkButton from "assets/Img/circletcheck.png"
-import ButtonTT from "pages/mypage/newverst/ButtonTT"
+import checkButton from "assets/Img/circletcheck.png";
+import ButtonTT from "pages/mypage/newverst/ButtonTT";
 
+const Titleo = styled.p`
+  margin-top: 20px;
+  font-size: 18px;
+`;
+
+const BannerPic = styled.button`
+  margin-top: 7px;
+  border: 1px solid rgba(135, 135, 135, 0.3);
+  border-radius: 15px;
+  border-style: dashed;
+  width: 372px;
+  height: 60px;
+  background-color: #FFFFFF;
+  color: #878787;
+  font-size: 13px; 
+`;
+
+const PicInput = styled.input`
+  cursor: pointer;
+`
+
+const TitleT = styled.p`
+  margin-top: 7px;
+  font-size: 18px;
+`;
+
+const ProfilePic = styled.button`
+  margin-top: 7px;
+  border: 1px solid rgba(135, 135, 135, 0.3);
+  border-style: dashed;
+  border-radius: 15px;
+  width: 372px;
+  height: 60px;
+  background-color: #FFFFFF;
+  color: #878787;
+  font-size: 13px;
+`;
 
 const Idul = styled.ul`
   margin-top: 7px;
@@ -135,44 +172,56 @@ const ProfileMod = function () {
 
   return (
     <>
+      <Titleo>배너사진</Titleo>
+      <BannerPic>
+        <PicInput type="file"
+          accept="image/gif, image/jpeg, image/png, image/jpg">
+        </PicInput>
+      </BannerPic>
+      <TitleT>프로필 사진</TitleT>
+      <ProfilePic>
+        <PicInput type="file"
+          accept="image/gif, image/jpeg, image/png, image/jpg">
+        </PicInput>
+      </ProfilePic>
       <Idul>
-          <Titlej>아이디</Titlej>
-          <Titlen>kimm</Titlen>
-        </Idul>
-        <Nickul>
-          <Nickdiv>닉네임</Nickdiv>
-          <Nickname placeholder="변경할 닉네임을 입력해주세요."></Nickname>
-          <Nickbutton></Nickbutton>
-        </Nickul>
-        <Nickwarnig>중복된 닉네임입니다.</Nickwarnig>
-        <Pwul>
-          <Titlej>비밀번호</Titlej>
-          <Titlen>********</Titlen>
-          <ButtonTT
-            name="변경"
-            onClick={() => navigate("/mypage/modify/password")}
-            width="65px"
-            height="31px"
-            fs="15px"
-            mt="8px"
-            ml="5px"
-          />
-        </Pwul>
-        <BodyDiv>
-          <HeightDiv>
-            <Titlej>키</Titlej>
-            <BInput></BInput>
-            <BodyP>cm</BodyP>
-          </HeightDiv>
-          <WeigthDiv>
-            <Titlej>몸무게</Titlej>
-            <BInput></BInput>
-            <BodyP>kg</BodyP>
-          </WeigthDiv>
-        </BodyDiv>
-        <Bodywarnig>필수로 작성해주세요!</Bodywarnig>
+        <Titlej>아이디</Titlej>
+        <Titlen>kimm</Titlen>
+      </Idul>
+      <Nickul>
+        <Nickdiv>닉네임</Nickdiv>
+        <Nickname placeholder="변경할 닉네임을 입력해주세요."></Nickname>
+        <Nickbutton></Nickbutton>
+      </Nickul>
+      <Nickwarnig>중복된 닉네임입니다.</Nickwarnig>
+      <Pwul>
+        <Titlej>비밀번호</Titlej>
+        <Titlen>********</Titlen>
+        <ButtonTT
+          name="변경"
+          onClick={() => navigate("/mypage/modify/password")}
+          width="65px"
+          height="31px"
+          fs="15px"
+          mt="8px"
+          ml="5px"
+        />
+      </Pwul>
+      <BodyDiv>
+        <HeightDiv>
+          <Titlej>키</Titlej>
+          <BInput></BInput>
+          <BodyP>cm</BodyP>
+        </HeightDiv>
+        <WeigthDiv>
+          <Titlej>몸무게</Titlej>
+          <BInput></BInput>
+          <BodyP>kg</BodyP>
+        </WeigthDiv>
+      </BodyDiv>
+      <Bodywarnig>필수로 작성해주세요!</Bodywarnig>
     </>
-  )
+  );
 };
 
 export default ProfileMod;
