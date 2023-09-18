@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import logoutLogo from "assets/Img/logout.png"
+import logoutLogo from "assets/Img/logout.png";
 import { useNavigate } from "react-router-dom";
-import Button from "components/commons/Button"
-import Image5 from "assets/Img/right.png"
-import ButtonT from "pages/mypage/newverst/ButtonT"
-import Image6 from "assets/Img/left.png"
+import Button from "components/commons/Button";
+import Image5 from "assets/Img/right.png";
+import ButtonT from "pages/mypage/newverst/ButtonT";
+import Image6 from "assets/Img/left.png";
 
 const All = styled.div`
   margin-left: 3px;
@@ -34,13 +34,13 @@ const Imt = styled.img`
   height: 180px;
 `;
 
-const To =styled.p`
+const To = styled.p`
   margin-top: 20px;
   text-align: center;
   font-size: 28px;
 `;
 
-const Tt =styled.p`
+const Tt = styled.p`
   text-align: center;
   font-size: 28px;
 `;
@@ -100,7 +100,7 @@ const PasswordModify = function () {
         </Buttons>
       </All>
     </>
-  )
+  );
 };
 
 export default PasswordModify;

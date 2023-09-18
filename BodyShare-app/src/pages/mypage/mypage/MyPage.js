@@ -45,7 +45,7 @@ const MyPage = function () {
         />
       </Buttons>
     </>
-  )
+  );
 };
 
 export default MyPage;

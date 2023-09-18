@@ -27,7 +27,7 @@ const CategoryList = styled.div`
 `;
 
 const SearchCate = function () {
-  return(
+  return (
     <>
       <SearchInput>
         <Search src={search} />
@@ -40,7 +40,7 @@ const SearchCate = function () {
         <Tag tagName="기타" width="80px" height="36px" br="13px" />
       </CategoryList>
     </>
-  )
+  );
 };
 
 export default SearchCate

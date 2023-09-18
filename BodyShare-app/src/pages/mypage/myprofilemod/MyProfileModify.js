@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import backButton from "assets/Img/back.png"
+import backButton from "assets/Img/back.png";
 import { useNavigate } from "react-router-dom";
-import Button from "components/commons/Button"
-import Image5 from "assets/Img/right.png"
-import Pic from "pages/mypage/myprofilemod/Pic"
-import ProfileMod from "pages/mypage/myprofilemod/ProfileMod"
+import Button from "components/commons/Button";
+import Image5 from "assets/Img/right.png";
+import ProfileMod from "pages/mypage/myprofilemod/ProfileMod";
 import CateMod from "pages/mypage/myprofilemod/CateMod";
 
 const All = styled.div`
@@ -45,7 +44,6 @@ const MyProfileModify = function () {
           <Title>나의 정보 수정</Title>
         </Titleul>
         <br />
-        <Pic />
         <ProfileMod />
         <CateMod />
         <Button
@@ -57,7 +55,7 @@ const MyProfileModify = function () {
         />
       </All>
     </>
-  )
+  );
 };
 
 export default MyProfileModify;

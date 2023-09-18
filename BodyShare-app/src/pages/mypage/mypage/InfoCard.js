@@ -54,7 +54,7 @@ const InfoCard = function () {
         </Infodtul>
       </Info>
     </>
-  )
+  );
 };
 
 export default InfoCard;

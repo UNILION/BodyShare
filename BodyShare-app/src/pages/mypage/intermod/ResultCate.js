@@ -4,7 +4,8 @@ import styled from "styled-components";
 const ResultList = styled.div`
   margin-top: 20px;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  margin-bottom: 70px;
 `;
 
 const ResultButton = styled.button`
@@ -33,7 +34,7 @@ const Line = styled.div`
 `;
 
 const ResultCate = function () {
-  
+
   const [buttonStates, setButtonStates] = useState({
     button1: false,
     button2: false,
@@ -48,13 +49,13 @@ const ResultCate = function () {
     }));
   };
 
-  return(
+  return (
     <>
-     <ResultList>
-        <ResultButton 
-        active={buttonStates.button1} 
-        onClick={() => handleButtonClick('button1')}
-        hoverColor="rgba(85, 111, 255, 0.7)"
+      <ResultList>
+        <ResultButton
+          active={buttonStates.button1}
+          onClick={() => handleButtonClick('button1')}
+          hoverColor="rgba(85, 111, 255, 0.7)"
         >
           <RP>축구</RP>
           <Line></Line>
