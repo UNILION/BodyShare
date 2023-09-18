@@ -116,7 +116,7 @@ const SportSearch = function() {
         display="block"
         ml="auto"
         mt="30px"
-        onClick={() => navigate("/analysis")}
+        onClick={() => navigate("/analysis/add/time")}
       />
     </Container>
   );
