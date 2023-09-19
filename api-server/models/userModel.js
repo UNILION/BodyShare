@@ -59,7 +59,7 @@ const userModel = {
   //회원 관심사 수정
   async updateInterest(no, user) {
     try {
-      const sql = `update userInterest set ? where userNo = ?`;
+      const sql = `update userInterest set ? where no = ?`;
       const [result] = await pool.query(sql, [user, no]);
       return result.affectedRows;
     } catch (err) {
