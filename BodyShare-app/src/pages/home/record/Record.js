@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import CircleImg from "assets/Img/circletgo.png";
 import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 
 const Records = styled.div`
   display: grid;
@@ -36,9 +37,27 @@ const ButtonImg = styled.img`
 `;
 
 const Record = function () {
+  const [recordCount, setRecordCount] = useState(0);
+  
+  useEffect(() => {
+    const fetchRecordCount = async () => {
+      try {
+        const todayRecordCount = 4; 
+
+        // 당일의 기록 개수 업데이트
+        setRecordCount(todayRecordCount);
+      } catch (error) {
+        console.error("기록 개수를 가져오는 중 오류 :", error);
+      }
+    };
+
+    // 함수 호출하여 당일의 기록 개수 가져오기
+    fetchRecordCount();
+  }, []);
+  
   return (
     <Records>
-      <RecordText>오늘의 기록 0건</RecordText>
+      <RecordText>{`오늘의 기록 ${recordCount}건`}</RecordText>
       <RecordButton to="/analysis">
         <ButtonImg src={CircleImg}></ButtonImg>
       </RecordButton>
@@ -46,3 +65,7 @@ const Record = function () {
   );
 };
 export default Record;
+
+
+
+
