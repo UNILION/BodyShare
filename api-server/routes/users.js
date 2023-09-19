@@ -4,7 +4,7 @@ var router = express.Router();
 const user = require("../models/userModel");
 
 // 회원 상세 조회
-router.get("/:no", async (req, res, next) => {
+router.get("/user/:no", async (req, res, next) => {
   try{
     const no = Number(req.params.no);
     const result = await user.findByNo(no);
@@ -25,7 +25,7 @@ router.post("/signup", async (req, res, next) => {
 });
 
 // 회원 정보 수정
-router.put("/:no", async (req, res, next) => {
+router.put("/useredit/:no", async (req, res, next) => {
   try{
     const no = Number(req.params.no);
     const count = await user.update(no, req.body);
@@ -46,7 +46,7 @@ router.post("/signin", async (req, res, next) => {
 });
 
 // 회원 관심사 등록
-router.post("/interest", async (req, res, next) => {
+router.post("/interestadd", async (req, res, next) => {
   try{
     const id = await user.createInterest(req.body);
     res.json({ id });
@@ -56,7 +56,7 @@ router.post("/interest", async (req, res, next) => {
 });
 
 // 회원 관심사 수정
-router.put("/interest/:no", async (req, res, next) => {
+router.put("/interestedit/:no", async (req, res, next) => {
   try{
     const no = Number(req.params.no);
     const count = await user.updateInterest(no, req.body);
@@ -99,7 +99,7 @@ router.post("/communityadd", async (req, res, next) => {
 });
 
 // 회원 가입한 커뮤니티 탈퇴(삭제)
-router.delete("/community/:no", async (req, res, next) => {
+router.delete("/communitydel/:no", async (req, res, next) => {
   try{
     const no = Number(req.params.no);
     const count = await user.deleteUsersCommu(no);
