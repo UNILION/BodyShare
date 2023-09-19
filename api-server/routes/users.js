@@ -77,4 +77,37 @@ router.get("/interest/:no", async (req, res, next) => {
   }
 });
 
+// 회원 가입한 커뮤니티 조회( 회원 no 기반의 검색 조회)
+router.get("/community/:no", async (req, res, next) => {
+  try{
+    const no = Number(req.params.no);
+    const result = await user.findByNoUsersCommu(no);
+    res.json(result);
+  }catch(err){
+    next(err);
+  }
+});
+
+// 회원 가입한 커뮤니티 등록
+router.post("/communityadd", async (req, res, next) => {
+  try{
+    const id = await user.createUsersCommu(req.body);
+    res.json({ id });
+  }catch(err){
+    next(err);
+  }
+});
+
+// 회원 가입한 커뮤니티 탈퇴(삭제)
+router.delete("/community/:no", async (req, res, next) => {
+  try{
+    const no = Number(req.params.no);
+    const count = await user.deleteUsersCommu(no);
+    res.json({ count });
+  }catch(err){
+    next(err);
+  }
+});
+
+
 module.exports = router;

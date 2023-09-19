@@ -76,7 +76,41 @@ const userModel = {
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
+  },
+
+  // 회원 가입한 커뮤니티 조회
+  async findByNoUsersCommu(no) {
+    try {
+      const sql = `select * from usersCommunity where userNo = ?`;
+      const [result] = await pool.query(sql, [no]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+
+  //회원 가입한 커뮤니티 등록
+  async createUsersCommu(user) {
+    try {
+      const sql = `insert into usersCommunity set ?`;
+      const [result] = await pool.query(sql, [user]);
+      return result.insertId;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+
+  // 회원 가입한 커뮤니티 탈퇴(삭제)
+  async deleteUsersCommu(id, conn=pool){
+    try{
+      const sql = `delete from usersCommunity where no = ?`;
+      const [ result ] = await conn.query(sql, [id]);
+      return result.affectedRows;
+    }catch(err){
+      throw new Error("DB Error", { cause: err });
+    }
   }
+
 };
 
 module.exports = userModel;
