@@ -32,6 +32,17 @@ const comuModel = {
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
+  },
+
+  // 커뮤니티 가입자 조회
+  async findByNoUsers(no) {
+    try {
+      const sql = `select * from usersCommunity where communityNo = ?`;
+      const [result] = await pool.query(sql, [no]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
   }
 };
 

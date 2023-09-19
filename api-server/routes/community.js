@@ -34,6 +34,16 @@ router.post("/commuadd", async (req, res, next) => {
   }
 });
 
+// 커뮤니티 가입자 목록 조회
+router.get("/commuusers/:no", async (req, res, next) => {
+  try{
+    const no = Number(req.params.no);
+    const list = await community.findByNoUsers(no);
+    res.json(list);
+  }catch(err){
+    next(err);
+  }
+});
 
 
 module.exports = router;
