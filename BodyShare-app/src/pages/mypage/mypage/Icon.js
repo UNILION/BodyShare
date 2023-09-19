@@ -33,13 +33,13 @@ const Pfcommentul = styled.div`
   margin-bottom: 25px;
 `;
 
-const Icon = function () {
+const Icon = function ({ id }) {
   return (
     <>
       <Pf>
         <Pfpic src={userPic} />
         <Pfcommentul>
-          <Nickli>kimmmmm</Nickli>
+          <Nickli>{id}</Nickli>
           <Inst>
             <Tag
               tagName="요가"
