@@ -8,6 +8,8 @@ import InfoCard from "pages/mypage/mypage/InfoCard";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+axios.defaults.baseURL = 'http://localhost:3000/api';
+
 const Banner = styled.img`
     height: 87px;
     width: 390px;
@@ -36,16 +38,12 @@ const MyPage = function () {
   });
 
   useEffect(() => {
-    // 사용자 정보를 가져오는 API 엔드포인트 URL을 정의합니다.
-    const apiUrl = "/api/users/user/:no"; // 유저 번호에 맞게 엔드포인트 수정
+    const apiUrl = "/users/user/:no"; // 유저 번호에 맞게 엔드포인트 수정
 
-    // axios를 사용하여 API에 GET 요청을 보냅니다.
     axios
       .get(apiUrl)
       .then((response) => {
-        // API 응답에서 사용자 정보를 추출합니다.
         const userDataFromApi = response.data; // API 응답의 구조에 따라 수정
-        // 추출한 사용자 정보를 상태에 설정합니다.
         setProfileInfo(userDataFromApi);
       })
       .catch((error) => {
