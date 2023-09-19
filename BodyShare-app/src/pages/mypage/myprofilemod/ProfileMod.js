@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import checkButton from "assets/Img/circletcheck.png";
 import ButtonTT from "pages/mypage/newverst/ButtonTT";
+import React, { useState } from "react";
 
 const Titleo = styled.p`
   margin-top: 20px;
@@ -142,6 +143,12 @@ const BInput = styled.input`
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
   padding-left: 10px;
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const BodyP = styled.div`
@@ -161,14 +168,23 @@ const WeigthDiv = styled.div`
   margin-right: 20px;
 `;
 
-const Bodywarnig = styled.p`
-  margin-top: 5px;
-  font-size: 11px;
-  color: red;
-`;
-
-const ProfileMod = function () {
+const ProfileMod = function ({ id, password, nickname, height, weight }) {
   const navigate = useNavigate();
+
+  const [heightInput, setHeightInput] = useState(height);
+  const [weightInput, setWeightInput] = useState(weight);
+
+  const handleHeightChange = (event) => {
+    // 숫자와 3자리까지만 입력되도록 정규 표현식 검사
+    const value = event.target.value.replace(/\D/g, "").slice(0, 3);
+    setHeightInput(value);
+  };
+
+  const handleWeightChange = (event) => {
+    // 숫자와 3자리까지만 입력되도록 정규 표현식 검사
+    const value = event.target.value.replace(/\D/g, "").slice(0, 3);
+    setWeightInput(value);
+  };
 
   return (
     <>
@@ -186,17 +202,17 @@ const ProfileMod = function () {
       </ProfilePic>
       <Idul>
         <Titlej>아이디</Titlej>
-        <Titlen>kimm</Titlen>
+        <Titlen>{id}</Titlen>
       </Idul>
       <Nickul>
         <Nickdiv>닉네임</Nickdiv>
-        <Nickname placeholder="변경할 닉네임을 입력해주세요."></Nickname>
+        <Nickname placeholder={nickname}></Nickname>
         <Nickbutton></Nickbutton>
       </Nickul>
       <Nickwarnig>중복된 닉네임입니다.</Nickwarnig>
       <Pwul>
         <Titlej>비밀번호</Titlej>
-        <Titlen>********</Titlen>
+        <Titlen>{password}</Titlen>
         <ButtonTT
           name="변경"
           onClick={() => navigate("/mypage/modify/password")}
@@ -210,16 +226,25 @@ const ProfileMod = function () {
       <BodyDiv>
         <HeightDiv>
           <Titlej>키</Titlej>
-          <BInput></BInput>
+          <BInput 
+            placeholder={height}
+            value={heightInput}
+            onChange={handleHeightChange} // 값이 변경될 때 실행될 함수 설정
+            type="text" // 숫자만 입력되도록 설정
+          />
           <BodyP>cm</BodyP>
         </HeightDiv>
         <WeigthDiv>
           <Titlej>몸무게</Titlej>
-          <BInput></BInput>
+          <BInput 
+            placeholder={weight}
+            value={weightInput}
+            onChange={handleWeightChange} // 값이 변경될 때 실행될 함수 설정
+            type="text" // 숫자만 입력되도록 설정
+          />
           <BodyP>kg</BodyP>
         </WeigthDiv>
       </BodyDiv>
-      <Bodywarnig>필수로 작성해주세요!</Bodywarnig>
     </>
   );
 };

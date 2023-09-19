@@ -36,7 +36,7 @@ const Infodtul = styled.ul`
   height: 206px;
 `;
 
-const InfoCard = function () {
+const InfoCard = function ({ id, nickname, height, weight }) {
   return (
     <>
       <Info>
@@ -47,10 +47,10 @@ const InfoCard = function () {
           <li>몸무게</li>
         </Infoul>
         <Infodtul>
-          <li>kimm</li>
-          <li>kimmmmm</li>
-          <li>167cm</li>
-          <li>50kg</li>
+          <li>{id}</li>
+          <li>{nickname}</li>
+          <li>{height}cm</li>
+          <li>{weight}kg</li>
         </Infodtul>
       </Info>
     </>

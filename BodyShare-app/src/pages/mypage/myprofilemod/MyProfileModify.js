@@ -5,6 +5,7 @@ import Button from "components/commons/Button";
 import Image5 from "assets/Img/right.png";
 import ProfileMod from "pages/mypage/myprofilemod/ProfileMod";
 import CateMod from "pages/mypage/myprofilemod/CateMod";
+import React, { useState } from "react";
 
 const All = styled.div`
   margin-left: 7px;
@@ -36,6 +37,15 @@ const Title = styled.p`
 
 const MyProfileModify = function () {
   const navigate = useNavigate();
+
+  const profileInfo = {
+    id: "아이디",
+    password:"********",
+    nickname: "닉네임",
+    height: "167",
+    weight: "50"
+  };
+
   return (
     <>
       <All>
@@ -44,7 +54,13 @@ const MyProfileModify = function () {
           <Title>나의 정보 수정</Title>
         </Titleul>
         <br />
-        <ProfileMod />
+        <ProfileMod 
+          id={profileInfo.id}
+          password={profileInfo.password}
+          nickname={profileInfo.nickname}
+          height={profileInfo.height}
+          weight={profileInfo.weight}
+        />
         <CateMod />
         <Button
           name="수정완료"

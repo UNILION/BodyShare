@@ -25,12 +25,27 @@ const Buttons = styled.ul`
 
 const MyPage = function () {
   const navigate = useNavigate();
+
+  const profileInfo = {
+    id: "아이디",
+    nickname: "닉네임",
+    height: "167",
+    weight: "50"
+  };
+
   return (
     <>
       <Banner src={bannerPic} />
       <Title>마이페이지</Title>
-      <Icon />
-      <InfoCard />
+      <Icon
+        id={profileInfo.id} 
+      />
+      <InfoCard 
+        id={profileInfo.id}
+        nickname={profileInfo.nickname}
+        height={profileInfo.height}
+        weight={profileInfo.weight}
+      />
       <Buttons>
         <Button
           name="프로필 수정"
