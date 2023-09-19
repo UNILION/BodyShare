@@ -5,11 +5,13 @@ const userRouter = require("./users");
 const commuRouter = require("./community");
 const sportsRouter = require("./sports");
 const foodRouter = require("./food");
+const recordRouter = require("./record");
 
 router.use("/users", userRouter);
 router.use("/community", commuRouter);
 router.use("/sports", sportsRouter);
 router.use("/food", foodRouter);
+router.use("/record", recordRouter);
 
 
 module.exports = router;
