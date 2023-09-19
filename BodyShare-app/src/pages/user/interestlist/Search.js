@@ -2,95 +2,68 @@ import styled from "styled-components";
 import searchIcon from "assets/Img/search.png";
 import xbutton from "assets/Img/xbutton.png";
 import { useNavigate } from "react-router-dom";
+import Tag from "components/commons/Tag";
+import { useState } from "react";
+
 
 const SearchInput = styled.div`
   grid-row: 3;
-  width: 380px;
-  height: 45px;
-  margin: 0 auto 10px auto;
   display: grid;
-  grid-template-columns: 24px auto;
-`;
-
-const SearchDiv = styled.div`
-  grid-column: 1;
-  width: 24px;
-  height: 45px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  grid-template-columns: 0.5fr 3fr;
+  margin-bottom: 10px;
 `;
 
 const SearchImg = styled.img`
-  width: 24px;
-  height: 24px;
+  margin: auto;
 `;
 
 const Input = styled.input`
-  grid-column: 2;
-  width: 300px;
+  width: 260px;
   height: 45px;
   border: 1px solid rgba(135, 135, 135, 0.3);
   border-radius: 15px;
   text-align: center;
-  margin-left: 10px;
+  padding: 0 20px;
 `;
 
 const SportCategory = styled.div`
   grid-row: 4;
-`;
-
-const CategoryButton = styled.button`
-  width: 81px;
-  height: 36px;
-  border: none;
-  border-radius: 15px;
-  background-color: rgb(85, 111, 255, 0.3);
-  margin-left: 9px;
-`;
-
-const CategoryList = styled.ul`
-  list-style: none;
-  display: flex;
-`;
-
-const CP = styled.p`
-    font-size: 12px;
-    font-weight: bold;
-    color: #656565;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-left: 10px;
 `;
 
 const SportSearchResult = styled.div`
   grid-row: 5;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  margin-bottom: 20px;
   justify-content: center;
-  align-items: center;
-`;
-
-const ResultList = styled.ul`
-  list-style: none;
-  gap: 10px;
 `;
 
 const ResultButton = styled.button`
-    background-color: white;
-    border: none;
-    padding-top: 20px;
-    padding-bottom: 10px;
+  width: 360px;
+  margin-top: 10px;
+  background-color: ${(props) => (props.active ? props.hoverColor : 'white')};
+  border: none;
+  border-radius: 15px;
+  padding-top: 25px;
+  cursor: pointer;
+  transition: background-color 0.2s; 
+
+  &:hover {
+    background-color: ${(props) => (props.active ? props.hoverColor : 'white')};
+  }
 `;
 
 const RP = styled.p`
-    font-size: 17px;
-`;
-
-const CheckBox = styled.input.attrs({ type: "checkbox" })`
-  border: 2px solid #556FFF;
+  font-size: 17px;
+  text-align: left;
+  margin-bottom: 10px;
 `;
 
 const Line = styled.div`
-  width: 360px;
+  width: 340px;
   border: 1px solid rgba(135, 135, 135, 0.3);
 `;
 
@@ -166,40 +139,68 @@ const Done = styled.button`
 
 const Search = function () {
   const navigate = useNavigate();
-  
+
+  const [buttonStates, setButtonStates] = useState({
+    button1: false,
+    button2: false,
+    button3: false,
+    button4: false
+  });
+
+  const handleButtonClick = (buttonName) => {
+    setButtonStates((prevState) => ({
+      ...prevState,
+      [buttonName]: !prevState[buttonName],
+    }));
+  };
+
   return (
     <>
       <SearchInput>
-        <SearchDiv>
-          <SearchImg src={searchIcon}></SearchImg>
-        </SearchDiv>
-        <Input type="text" placeholder="찾으시는 운동을 검색해주세요"/>
+        <SearchImg src={searchIcon} />
+        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
       </SearchInput>
 
       <SportCategory>
-        <CategoryList>
-          <CategoryButton><CP>전체</CP></CategoryButton>
-          <CategoryButton><CP>근력</CP></CategoryButton>
-          <CategoryButton><CP>유산소</CP></CategoryButton>
-          <CategoryButton><CP>기타</CP></CategoryButton>
-        </CategoryList>
+        <Tag tagName="전체" width="80px" height="36px" br="13px" />
+        <Tag tagName="근력" width="80px" height="36px" br="13px" />
+        <Tag tagName="유산소" width="80px" height="36px" br="13px" />
+        <Tag tagName="기타" width="80px" height="36px" br="13px" />
       </SportCategory>
 
       <SportSearchResult>
-        <ResultList>
-          <ResultButton><RP>수영</RP></ResultButton>
-          <CheckBox ></CheckBox>
+        <ResultButton
+          active={buttonStates.button1}
+          onClick={() => handleButtonClick('button1')}
+          hoverColor="rgba(85, 111, 255, 0.7)"
+        >
+          <RP>축구</RP>
           <Line></Line>
-          <ResultButton><RP>요가</RP></ResultButton>
-          <CheckBox ></CheckBox>
+        </ResultButton>
+        <ResultButton
+          active={buttonStates.button2}
+          onClick={() => handleButtonClick('button2')}
+          hoverColor="rgba(85, 111, 255, 0.7)"
+        >
+          <RP>수영</RP>
           <Line></Line>
-          <ResultButton><RP>달리기</RP></ResultButton>
-          <CheckBox ></CheckBox>
+        </ResultButton>
+        <ResultButton
+          active={buttonStates.button3}
+          onClick={() => handleButtonClick('button3')}
+          hoverColor="rgba(85, 111, 255, 0.7)"
+        >
+          <RP>달리기</RP>
           <Line></Line>
-          <ResultButton><RP>골프</RP></ResultButton>
-          <CheckBox ></CheckBox>
+        </ResultButton>
+        <ResultButton
+          active={buttonStates.button4}
+          onClick={() => handleButtonClick('button4')}
+          hoverColor="rgba(85, 111, 255, 0.7)"
+        >
+          <RP>필라테스</RP>
           <Line></Line>
-        </ResultList>
+        </ResultButton>
       </SportSearchResult>
 
       <SelectedDiv>
