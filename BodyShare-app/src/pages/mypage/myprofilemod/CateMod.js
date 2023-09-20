@@ -20,15 +20,16 @@ const Catetitle = styled.p`
 const Cateul = styled.div`
   margin-top: 3px;
   display: grid;
-  grid-template-columns: 65px auto;
+  grid-template-columns: 60px auto;
 `;
 
 const Xbutton = styled.img`
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   background-color: rgba(85, 111, 255, 0.3);
   border-radius: 15px;
   cursor: pointer;
+  margin-top: 2px;
 `;
 
 const Catewarnig = styled.p`
@@ -51,7 +52,7 @@ const CateMod = function () {
           height="31px"
           fs="15px"
           mt="8px"
-          ml="175px"
+          ml="173px"
         />
       </Cateckul>
       <Cateul>

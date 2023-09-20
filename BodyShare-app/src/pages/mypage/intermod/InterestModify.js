@@ -33,9 +33,8 @@ const InterestModify = function () {
         name="선택완료"
         img={plus}
         width="200px"
-        display="block"
-        ml="auto"
-        mt="15px"
+        mt="3px"
+        ml="157px"
         onClick={() => navigate("/mypage/modify")}
       />
     </Container>

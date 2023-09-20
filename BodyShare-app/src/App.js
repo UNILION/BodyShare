@@ -27,10 +27,11 @@ import InterestModify from "./pages/mypage/intermod/InterestModify";
 import SportHome from "./pages/analysis/sportchart/SportChart";
 import FoodHome from "./pages/analysis/foodchart/FoodChart";
 import LayoutAnalysis from "./pages/analysis/analysislayout";
+import { RecoilRoot } from 'recoil';
 
 function App() {
   return (
-    <>
+    <RecoilRoot>
       <GlobalStyle />
       <Router>
         <Routes>
@@ -72,7 +73,7 @@ function App() {
           </Route>
         </Routes>
       </Router>
-    </>
+    </RecoilRoot>
   );
 }
 

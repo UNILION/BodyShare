@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
+import xbutton from "assets/Img/xbutton.png"
+import Tag from "components/commons/Tag";
 
 const ResultList = styled.div`
   margin-top: 20px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  margin-bottom: 70px;
+  margin-bottom: 30px;
 `;
 
 const ResultButton = styled.button`
@@ -31,6 +33,33 @@ const RP = styled.p`
 const Line = styled.div`
   width: 340px;
   border: 1px solid rgba(135, 135, 135, 0.3);
+`;
+
+const Buttons = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-left: 5px;
+`
+
+const Cateul = styled.div`
+  display: grid;
+  grid-template-columns: 60px auto;
+`;
+
+const Xbutton = styled.img`
+  width: 20px;
+  height: 20px;
+  background-color: rgba(85, 111, 255, 0.3);
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 2px;
+`;
+
+const Catewarnig = styled.p`
+  margin-top: 5px;
+  font-size: 11px;
+  color: red;
+  margin-bottom: 25px;
 `;
 
 const ResultCate = function () {
@@ -85,6 +114,33 @@ const ResultCate = function () {
           <Line></Line>
         </ResultButton>
       </ResultList>
+      <Buttons>
+        {buttonStates.button1 && (
+          <Cateul>
+            <Tag tagName="축구" />
+            <Xbutton src={xbutton} />
+          </Cateul>
+        )}
+        {buttonStates.button2 && (
+          <Cateul>
+            <Tag tagName="수영" />
+            <Xbutton src={xbutton} />
+          </Cateul>
+        )}
+        {buttonStates.button3 && (
+          <Cateul>
+            <Tag tagName="달리기" />
+            <Xbutton src={xbutton} />
+          </Cateul>
+        )}
+        {buttonStates.button4 && (
+          <Cateul>
+            <Tag tagName="필라테스" />
+            <Xbutton src={xbutton} />
+          </Cateul>
+        )}
+      </Buttons>
+      <Catewarnig>한 개 이상의 카테고리를 선택해주세요!</Catewarnig>
     </>
   )
 };
