@@ -175,29 +175,42 @@ const ProfileMod = function ({ id, password, nickname, height, weight }) {
   const [weightInput, setWeightInput] = useState(weight);
 
   const handleHeightChange = (event) => {
-    // 숫자와 3자리까지만 입력되도록 정규 표현식 검사
-    const value = event.target.value.replace(/\D/g, "").slice(0, 3);
-    setHeightInput(value);
+    const value = event.target.value.replace(/[^\d.]/g, '');
+    const parts = value.split('.');
+    const integerPart = parts[0].slice(0, 3);
+    let decimalPart = '';
+    if (parts.length > 1) {
+      decimalPart = `.${parts[1].slice(0, 1)}`;
+    }
+    const formattedValue = `${integerPart}${decimalPart}`;
+    setHeightInput(formattedValue);
   };
 
   const handleWeightChange = (event) => {
-    // 숫자와 3자리까지만 입력되도록 정규 표현식 검사
-    const value = event.target.value.replace(/\D/g, "").slice(0, 3);
-    setWeightInput(value);
+    const value = event.target.value.replace(/[^\d.]/g, '');
+    const parts = value.split('.');
+    const integerPart = parts[0].slice(0, 3);
+    let decimalPart = '';
+    if (parts.length > 1) {
+      decimalPart = `.${parts[1].slice(0, 1)}`;
+    }
+    const formattedValue = `${integerPart}${decimalPart}`;
+    setWeightInput(formattedValue);
   };
+  
 
   return (
     <>
       <Titleo>배너사진</Titleo>
       <BannerPic>
         <PicInput type="file"
-          accept="image/gif, image/jpeg, image/png, image/jpg">
+          accept="image/gif, image/jpeg, image/png, image/jpg" name="bannerImg">
         </PicInput>
       </BannerPic>
       <TitleT>프로필 사진</TitleT>
       <ProfilePic>
         <PicInput type="file"
-          accept="image/gif, image/jpeg, image/png, image/jpg">
+          accept="image/gif, image/jpeg, image/png, image/jpg" name="profileImg">
         </PicInput>
       </ProfilePic>
       <Idul>
