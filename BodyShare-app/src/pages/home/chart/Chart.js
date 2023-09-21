@@ -31,39 +31,50 @@ const ChartContainer = styled.div`
 
 const Charts = function () {
   const navigate = useNavigate();
+  const [sportsChartData, setSportsChartData] = useState([]); // 스포츠 차트 데이터 상태 초기화
+  const [foodChartData, setFoodChartData] = useState([]); // 푸드 차트 데이터 상태 초기화
 
-  const chartData = [
-    ["", "운동 분"],
-    ["월", 60],
-    ["화", 45],
-    ["수", 30],
-    ["목", 75],
-    ["금", 90],
-    ["토", 120],
-    ["일", 60],
-  ];
+/*
+// 스포츠 차트 렌더링
+{sportsChartData.map((chartData, index) => (
+  <ChartContainer
+    key={index}
+    onClick={() => {
+      navigate(`/analysis/sportschart/${chartData.id}`);
+    }}
+  >
+    <Chart
+      chartType="Bar"
+      width="170px"
+      height="240px"
+      data={chartData.data}
+      options={chartData.options}
+      graph_id={`sports-chart-${chartData.id}`}
+      border-radius="30px"
+    />
+  </ChartContainer>
+))}
 
-  const chartOptions = {
-    legend: { position: "none" },
-    chart: {
-      title: "Daily Diet",
-    },
-  };
+// 푸드 차트 렌더링
+{foodChartData.map((chartData, index) => (
+  <ChartContainer
+    key={index}
+    onClick={() => {
+      navigate(`/analysis/foodchart/${chartData.id}`);
+    }}
+  >
+    <Chart
+      chartType="PieChart"
+      width="170px"
+      height="240px"
+      data={chartData.data}
+      options={chartData.options}
+      graph_id={`food-chart-${chartData.id}`}
+      border-radius="30px"
+    />
+  </ChartContainer>
+))}*/
 
-  const chartData2 = [
-    ["작업", "하루 시간"],
-    ["탄", 3],
-    ["단", 5],
-    ["지", 2],
-  ];
-
-  const chartOptions2 = {
-    title: "Calorie",
-    pieHole: 0.4,
-    titleTextStyle: {
-      fontSize: 16,
-    },
-  };
 
   return (
     <ChartBox>
