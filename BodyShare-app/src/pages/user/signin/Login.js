@@ -1,5 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import axios from "axios";
+import { userAtom } from "recoil/userRecoil";
+
+//axios.defaults.baseURL = "http://localhost:33000/api";
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api"
+});
 
 const Inputdiv = styled.div`
   grid-row: 3;
@@ -54,19 +63,44 @@ const LoginButton = styled.button`
 const Login = function () {
   const navigate = useNavigate();
 
+  const [userId, setUserId] = useState('abc123');
+  const [password, setPassword] = useState('1234');
+
+  const [userNo, setUserNo] = useRecoilState(userAtom);
+
+  const sendlogin = async function(){
+    try {
+      const response = await instance.post('/users/signin', { userId, password});
+      console.log(response.data);
+
+      if (response.data.login) {
+        // recoil에 userNo 담기
+        setUserNo(response.data.userNo);
+        navigate("/home");
+      } else {
+        // 로그인 실패
+        // 실패 메시지 표시 또는 다른 조치 수행
+      }
+    } catch (error) {
+      // 에러 처리
+      console.error(error);
+    }
+
+  };
+
   return (
     <>
       <Inputdiv>
-        <Input type="text" placeholder="아이디" />
+        <Input type="text" value={userId} placeholder="아이디" onChange={(e)=>{setUserId(e.target.value)}}/>
         <br></br>
         <br></br>
-        <Input type="password" placeholder="비밀번호" />
+        <Input type="password" value={password} placeholder="비밀번호" onChange={(e)=>{setPassword(e.target.value)}}/>
       </Inputdiv>
 
       <StyledLink to="/signup">회원 가입</StyledLink>
 
       <Logindiv>
-        <LoginButton onClick={() => navigate("/home")}>로그인</LoginButton>
+        <LoginButton onClick={ sendlogin }>로그인</LoginButton>
       </Logindiv>
     </>
   );
