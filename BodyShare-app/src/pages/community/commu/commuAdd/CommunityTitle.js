@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Check from "components/commons/Check";
 
 const CommunityTitleContainer = styled.div``;
 
@@ -17,14 +18,6 @@ const Content = styled.input`
   text-align: center;
   padding: 5px 20px;
 `;
-
-const Check = styled.div`
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-`;
-
 
 const CommunityTitle = function ({register, errors}) {
   return (
