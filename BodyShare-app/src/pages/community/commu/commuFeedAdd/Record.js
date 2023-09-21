@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import next from "assets/Img/circletgo.png";
 import { useState } from "react";
+import Check from "components/commons/Check";
 
 const Targets = styled.div``;
 
@@ -101,7 +102,7 @@ const MiddleTime = styled.div`
   margin-right: 10px;
 `;
 
-const Record = function () {
+const Record = function ({ register, errors }) {
   const [click, setClick] = useState({
     click1: false,
     click2: false,
@@ -254,6 +255,16 @@ const Record = function () {
           </DropDown>
         </TargetList>
       </TargetLists>
+
+      <input
+        type="hidden"
+        value={select["select1"]}
+        {...register("record", {
+          required: "한 개의 카테고리를 선택해주세요!",
+        })}
+      />
+
+      <Check>{errors.record?.message}</Check>
     </Targets>
   );
 };

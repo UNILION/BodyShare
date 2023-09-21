@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Check from "components/commons/Check";
 
-const CommunityTitleContainer = styled.div``;
+const FeedTitleContainer = styled.div``;
 
 const Title = styled.div`
   font-weight: bold;
@@ -19,23 +19,23 @@ const Content = styled.input`
   padding: 5px 20px;
 `;
 
-const CommunityTitle = function ({ register, errors }) {
+const FeedTitle = function ({ register, errors }) {
   return (
-    <CommunityTitleContainer>
-      <Title>커뮤니티 명</Title>
+    <FeedTitleContainer>
+      <Title>피드 제목 추가하기</Title>
       <Content
-        {...register("title", {
-          required: "커뮤니티 명을 필수로 적어주세요!",
+        {...register("feedTitle", {
+          required: "피드 제목을 필수로 입력해주세요!",
           maxLength: {
             value: 10,
             message: "최대 10글자까지 가능합니다!",
           },
         })}
-        placeholder="원하는 커뮤니티 이름을 지정해주세요!"
+        placeholder="나의 피드에 제목을 붙여주세요!"
       />
-      <Check>{errors.title?.message}</Check>
-    </CommunityTitleContainer>
+      <Check>{errors.feedTitle?.message}</Check>
+    </FeedTitleContainer>
   );
 };
 
-export default CommunityTitle;
+export default FeedTitle;
