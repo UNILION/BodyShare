@@ -82,6 +82,7 @@ router.post("/signin", async (req, res, next) => {
     if (result.length === 1) {
       // 로그인 성공 시, 유저 번호를 세션에 저장
       req.session.userNo = result[0].userNo; // 유저 번호를 가져와서 세션에 저장
+      console.log(req.session.userNo);
       res.json({ login: true, userNo: req.session.userNo });
     }else {
       // 로그인 실패 시, 클라이언트에게 실패 응답 전송
@@ -90,6 +91,18 @@ router.post("/signin", async (req, res, next) => {
   }catch(err){
     next(err);
   }
+});
+
+//로그 아웃
+router.get('/logout', checkLogin, (req, res, next) => {
+  // 세션 삭제
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('세션 삭제 실패:', err);
+      return res.status(500).json({ success: false, message: '세션 삭제 실패' });
+    }
+    res.status(200).json({ success: true, message: '로그아웃 성공' });
+  });
 });
 
 // 회원 관심사 등록

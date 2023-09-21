@@ -1,4 +1,5 @@
 const checkLogin = function(req, res, next){
+  console.log(req.session.userNo);
   if(req.session.userNo){
     next();
   }else{

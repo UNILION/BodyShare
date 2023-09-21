@@ -5,6 +5,14 @@ import Button from "components/commons/Button";
 import Image5 from "assets/Img/right.png";
 import ButtonT from "pages/mypage/newverst/ButtonT";
 import Image6 from "assets/Img/left.png";
+import { useRecoilState } from 'recoil';
+import { userAtom } from "recoil/userRecoil";
+import axios from "axios";
+
+//axios.defaults.baseURL = "http://localhost:33000/api";
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api"
+});
 
 const All = styled.div`
   margin-left: 3px;
@@ -70,6 +78,34 @@ const Buttons = styled.ul`
 
 const PasswordModify = function () {
   const navigate = useNavigate();
+
+  const [userNo, setUserNo] = useRecoilState(userAtom);
+
+  const Logout = async function(){
+    // Recoil Atom 초기화
+    setUserNo({ userNo: '' });
+
+    // 로컬 스토리지 정보 삭제
+    localStorage.removeItem('userNo');
+    
+    try {
+      // 서버 세션 처리 - 서버에서 세션 삭제 API 호출
+      const response = await instance.get('/users/logout'); // 예시: 로그아웃 요청을 서버로 보냄
+
+      if (response.data.success) {
+        // 서버에서 세션 삭제 성공
+        navigate('/');
+      } else {
+        // 서버에서 세션 삭제 실패 또는 다른 오류 처리
+        console.error('서버에서 로그아웃 실패');
+      }
+    } catch (error) {
+      // 서버와 통신 중 에러 처리
+      console.error('로그아웃 요청 중 에러:', error);
+    }
+    
+  };
+
   return (
     <>
       <All>
@@ -93,7 +129,7 @@ const PasswordModify = function () {
           <Button
             name="로그아웃"
             img={Image5}
-            onClick={() => navigate("/")}
+            onClick={Logout}
             bc="rgba(85, 111, 255, 0.5)"
             width="180px"
           />
