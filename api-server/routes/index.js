@@ -8,15 +8,14 @@ const foodRouter = require("./food");
 const recordRouter = require("./record");
 const postRouter = require("./post");
 const commentRouter = require("./comment");
+const checkLogin = require("../middlewares/checkLogin");
 
 router.use("/users", userRouter);
-router.use("/community", commuRouter);
-router.use("/sports", sportsRouter);
-router.use("/food", foodRouter);
-router.use("/record", recordRouter);
-router.use("/post", postRouter);
-router.use("/comment", commentRouter);
-
+router.use("/community", checkLogin, commuRouter);
+router.use("/sports", checkLogin, sportsRouter);
+router.use("/food", checkLogin, foodRouter);
+router.use("/record", checkLogin, recordRouter);
+router.use("/post", checkLogin, postRouter);
+router.use("/comment", checkLogin, commentRouter);
 
 module.exports = router;
-
