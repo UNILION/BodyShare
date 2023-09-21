@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import userPic from "assets/Img/user.png";
 import Tag from "components/commons/Tag";
 
 const Nickli = styled.li`
@@ -33,11 +32,11 @@ const Pfcommentul = styled.div`
   margin-bottom: 25px;
 `;
 
-const Icon = function ({ id }) {
+const Icon = function ({ id, url }) {
   return (
     <>
       <Pf>
-        <Pfpic src={userPic} />
+        <Pfpic src={`http://localhost:33000/images/users/${url}`} />
         <Pfcommentul>
           <Nickli>{id}</Nickli>
           <Inst>
