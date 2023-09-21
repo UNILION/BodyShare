@@ -58,10 +58,10 @@ const SportSearch = function() {
         <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
       </SearchInput>
       <CategoryList>
-        <Tag tagName="전체" width="80px" height="36px" br="13px" />
-        <Tag tagName="유산소" width="80px" height="36px" br="13px" />
-        <Tag tagName="무산소" width="80px" height="36px" br="13px" />
-        <Tag tagName="근력" width="80px" height="36px" br="13px" />
+        <Tag tagtitle="전체" width="80px" height="36px" br="13px" />
+        <Tag tagtitle="유산소" width="80px" height="36px" br="13px" />
+        <Tag tagtitle="무산소" width="80px" height="36px" br="13px" />
+        <Tag tagtitle="근력" width="80px" height="36px" br="13px" />
       </CategoryList>
       
       <ResultList />

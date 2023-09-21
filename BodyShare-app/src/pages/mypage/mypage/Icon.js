@@ -41,11 +41,11 @@ const Icon = function ({ id, url }) {
           <Nickli>{id}</Nickli>
           <Inst>
             <Tag
-              tagName="요가"
+              tagtitle="요가"
               mr="5px"
             />
             <Tag
-              tagName="필라테스"
+              tagtitle="필라테스"
             />
           </Inst>
         </Pfcommentul>

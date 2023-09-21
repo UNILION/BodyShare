@@ -117,25 +117,25 @@ const ResultCate = function () {
       <Buttons>
         {buttonStates.button1 && (
           <Cateul>
-            <Tag tagName="축구" />
+            <Tag tagtitle="축구" />
             <Xbutton src={xbutton} />
           </Cateul>
         )}
         {buttonStates.button2 && (
           <Cateul>
-            <Tag tagName="수영" />
+            <Tag tagtitle="수영" />
             <Xbutton src={xbutton} />
           </Cateul>
         )}
         {buttonStates.button3 && (
           <Cateul>
-            <Tag tagName="달리기" />
+            <Tag tagtitle="달리기" />
             <Xbutton src={xbutton} />
           </Cateul>
         )}
         {buttonStates.button4 && (
           <Cateul>
-            <Tag tagName="필라테스" />
+            <Tag tagtitle="필라테스" />
             <Xbutton src={xbutton} />
           </Cateul>
         )}

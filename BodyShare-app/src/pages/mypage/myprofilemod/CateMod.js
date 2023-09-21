@@ -57,7 +57,7 @@ const CateMod = function () {
       </Cateckul>
       <Cateul>
         <Tag
-          tagName="요가"
+          tagtitle="요가"
         />
         <Xbutton src={xbutton} />
       </Cateul>

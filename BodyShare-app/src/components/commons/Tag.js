@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledButton = styled.button`
-  display: ${(props) => (props.tagName ? "inline" : "none")};
+  display: ${(props) => (props.tagtitle ? "inline" : "none")};
   width: ${(props) => (props.width ? props.width : "56px")};
   height: ${(props) => (props.height ? props.height : "23px")};
   color: ${(props) => (props.color ? props.color : "#656565")};
@@ -33,7 +33,7 @@ const Name = styled.span`
 const Tag = (props) => {
   return (
     <StyledButton {...props} >
-      <Name>{props.tagName}</Name>
+      <Name>{props.tagtitle}</Name>
     </StyledButton>
   );
 };

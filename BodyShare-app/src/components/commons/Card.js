@@ -63,7 +63,7 @@ const Hr = styled.hr`
 
 const Bottom = styled.div`
   display: grid;
-  grid-template-columns: ${(props) => props.tagName?"1fr 2fr":"1fr"};
+  grid-template-columns: ${(props) => props.tagtitle?"1fr 2fr":"1fr"};
   place-items: center;
   max-width: 180px;
   margin: 3px;
@@ -87,7 +87,7 @@ const Card = (props) => {
       <Contents>{props.contents}</Contents>
       <Hr />
       <Bottom {...props}>
-        {props.tagName?<Tag {...props}></Tag>:null}
+        {props.tagtitle?<Tag {...props}></Tag>:null}
         <Footer>{props.footer}</Footer>
       </Bottom>
     </StyledCard>

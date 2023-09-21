@@ -30,7 +30,7 @@ const Profile = function () {
       </CommuInLi>
         <Inst>
           <Tag 
-            tagName="요가"
+            tagtitle="요가"
             mr="10px;"
             hoverColor="rgba(85,111,255, 0.3)"
             cursor="default"
