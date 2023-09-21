@@ -3,6 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const cors = require("cors");
+const session = require("express-session");
 
 var indexRouter = require('./routes/index');
 
@@ -13,6 +14,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({
+  cookie: {maxAge: 1000*60*60*1},   // 로그인 유지 시간
+  secret: 'your-secret-key',
+  rolling: true,        // 매 응답마다 쿠키 시간 초기화
+  resave: false,        // 세션값이 수정되지 않으면 서버에 다시 저장하지 않음
+  saveUninitialized: true,  //세션에 값이 없으면 쿠키를 전송하지 않음
+}));            // req.session 속성을 만들어서 세션 객체를 저장
 
 app.use(cors());
 app.use('/api', indexRouter);
