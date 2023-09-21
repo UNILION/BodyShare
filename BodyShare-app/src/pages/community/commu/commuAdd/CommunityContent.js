@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Check from "components/commons/Check";
 
 const Title = styled.div`
   font-weight: bold;
@@ -18,32 +19,22 @@ const Contents = styled.textarea`
 
 const CommunityContentContainer = styled.div``;
 
-const Check = styled.div`
-  color: red;
-  font-size: 12px;
-  margin-top: 5px;
-  margin-bottom: 10px;
-`;
-
-
 const CommunityContent = function ({register, errors}) {
   return (
     <CommunityContentContainer>
     <Title>커뮤니티 설명</Title>
     <Contents
       {...register("content", {
-        required: true,
-        maxLength: 60,
+        required: "설명을 필수로 적어주세요!",
+        maxLength: {
+          value: 60,
+          message: "최대 60글자까지 가능합니다!"
+        }
       })}
       placeholder="나의 커뮤니티를 설명해주세요!
 (최대 60글자)"
     />
-    {errors.content?.type === "required" && (
-      <Check>설명을 필수로 적어주세요!</Check>
-    )}
-    {errors.content?.type === "maxLength" && (
-      <Check>최대 60글자까지 가능합니다!</Check>
-    )}
+    <Check>{errors.content?.message}</Check>
   </CommunityContentContainer>
   )
 }
