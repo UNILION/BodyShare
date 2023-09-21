@@ -4,6 +4,13 @@ import { Chart } from "react-google-charts";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
+
+//axios.defaults.baseURL = "http://localhost:33000/api";
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
+}); 
 
 const SliderContainer = styled.div`
   display: grid;
