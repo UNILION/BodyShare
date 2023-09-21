@@ -124,7 +124,7 @@ const Charts = function () {
       graph_id={`food-chart-${chartData.id}`}
       border-radius="30px"
     />
-  </ChartContainer>as
+  </ChartContainer>
 ))}*/
 
   return (
