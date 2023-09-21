@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import seemore from "../../../assets/Img/seemore.png";
+import { useRecoilValue } from 'recoil';
+import { sportTimeState } from "recoil/sportTime";
+import { useSPORTState } from 'recoil/sportList'; // 필요한 Recoil 상태를 불러옵니다.
 
 const SportNoteContainer = styled.div`
   display: grid;
@@ -53,6 +56,10 @@ const Delete = styled.button`
 `;
 
 const Sport = function() {
+  // 불러온 Recoil 상태를 사용할 수 있습니다.
+  const [rp, setRP] = useSPORTState();
+  const sportTime = useRecoilValue(sportTimeState);
+
   const [inputValues, setInputValues] = useState({
     hours: '',
     minutes: '',
@@ -71,16 +78,22 @@ const Sport = function() {
   const toggleSeeMore = () => {
     setSeeMoreVisible(!seeMoreVisible);
   };
+
+    //삭제하기 버튼을 누르면
+    const handleDelete = () => {
+      // Delete 버튼을 누를 때 rp 상태를 디폴트 값으로 변경해준다.
+      setRP("삭제"); 
+    }
   
   return(
     <SportNoteContainer>
-    <SportNote>유산소 달리기</SportNote>
-    <SportTime inputValues={inputValues} onInputChange={handleInputChange} />
+    <SportNote>{rp}</SportNote>
+    <SportTime>운동 시간: {sportTime.hours}:{sportTime.minutes}:{sportTime.seconds}</SportTime>
     <SeeMore onClick={toggleSeeMore}>
       <SmIng src={seemore}></SmIng>
     </SeeMore>
     <SeeMoreDetail isVisible={seeMoreVisible}>
-      <Delete>삭제하기</Delete>
+      <Delete onClick={handleDelete}>삭제하기</Delete>
     </SeeMoreDetail>
   </SportNoteContainer>
   );
