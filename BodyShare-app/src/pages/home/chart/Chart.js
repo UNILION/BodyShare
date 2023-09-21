@@ -2,6 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import { Chart } from "react-google-charts";
 import { Link, useNavigate } from "react-router-dom";
+import { atom, selector } from 'recoil';
+import axios from "axios";
+
+//axios.defaults.baseURL = "http://localhost:33000/api";
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
+}); 
 
 const ChartBox = styled.div`
   grid-row: 2;
@@ -67,65 +75,72 @@ const Charts = function () {
   /*
   const Charts = function () {
   const navigate = useNavigate();
-  const [sportsChartData, setSportsChartData] = useState([]); // 스포츠 차트 데이터 상태 초기화
-  const [foodChartData, setFoodChartData] = useState([]); // 푸드 차트 데이터 상태 초기화
 
-  const chartData = [
-    ["", "운동 분"],
-    ["월", 60],
-    ["화", 45],
-    ["수", 30],
-    ["목", 75],
-    ["금", 90],
-    ["토", 120],
-    ["일", 60],
-  ];
-/*
-// 스포츠 차트 렌더링
-{sportsChartData.map((chartData, index) => (
-  <ChartContainer
-    key={index}
-    onClick={() => {
-      navigate(`/analysis/sportschart/${chartData.id}`);
-    }}
-  >
-    <Chart
-      chartType="Bar"
-      width="170px"
-      height="240px"
-      data={chartData.data}
-      options={chartData.options}
-      graph_id={`sports-chart-${chartData.id}`}
-      border-radius="30px"
-    />
-  </ChartContainer>
-))}
+  const [chartData, setChartData] = useState([]);
+  const [chartData2, setChartData2] = useState([]);
 
-  const chartOptions = {
-    legend: { position: "none" },
-    chart: {
-      title: "Daily Diet",
-    },
+  useEffect(() => {
+    const chartDatas = async () => {
+      try {
+        // 스포츠 차트 데이터 가져오기
+        const sportsResponse = await axios.get(`/api-server/sport/${userId}`);
+        const sportsData = sportsResponse.data;
+        setChartData(sportsData);
+
+        // 푸드 차트 데이터 가져오기
+        const foodResponse = await axios.get(`/api-server/food/${userId}`);
+        const foodData = foodResponse.data;
+        setChartData2(foodData);
+      } catch (error) {
+        console.error("차트 데이터를 불러오는 데 실패했습니다.", error);
+      }
   };
-// 푸드 차트 렌더링
-{foodChartData.map((chartData, index) => (
-  <ChartContainer
-    key={index}
-    onClick={() => {
-      navigate(`/analysis/foodchart/${chartData.id}`);
-    }}
-  >
-    <Chart
-      chartType="PieChart"
-      width="170px"
-      height="240px"
-      data={chartData.data}
-      options={chartData.options}
-      graph_id={`food-chart-${chartData.id}`}
-      border-radius="30px"
-    />
-  </ChartContainer>
-))}*/
+
+  chartDatas();
+}, [userId]);
+
+ return (
+    <ChartBox>
+      {chartData.map((chart, index) => (
+        <ChartContainer
+          key={index}
+          onClick={() => {
+            navigate(`/analysis/sportschart/${chart.id}`);
+          }}
+        >
+          <Chart
+            chartType="Bar"
+            width="170px"
+            height="240px"
+            data={chart.data}
+            options={chart.options}
+            graph_id={`sports-chart-${chart.id}`}
+            border-radius="30px"
+          />
+        </ChartContainer>
+      ))}
+      {chartData2.map((chart, index) => (
+        <ChartContainer
+          key={index}
+          onClick={() => {
+            navigate(`/analysis/foodchart/${chart.id}`);
+          }}
+        >
+          <Chart
+            chartType="PieChart"
+            width="170px"
+            height="240px"
+            data={chart.data}
+            options={chart.options}
+            graph_id={`food-chart-${chart.id}`}
+            border-radius="30px"
+          />
+        </ChartContainer>
+      ))}
+    </ChartBox>
+  );
+};
+*/
 
   return (
     <ChartBox>

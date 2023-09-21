@@ -34,8 +34,8 @@ INSERT INTO usersCommunity (userNo, communityNo) VALUES (1, 5);
 INSERT INTO usersCommunity (userNo, communityNo) VALUES (2, 1);
 
 -------- 유저 운동/식단 기록 등록 ----------
-INSERT INTO exerciseRecord (userNo, sportsNo, date, exerciseTime) VALUES (1, 116, "2023-09-20", 60);
-INSERT INTO dietRecord (userNo, foodNo, date) VALUES (1, 854, "2023-09-20");
+INSERT INTO exerciseRecord (userNo, sportsNo, date, exerciseTime) VALUES (1, 116, "2023-09-21", 60);
+INSERT INTO dietRecord (userNo, foodNo, date) VALUES (1, 854, "2023-09-21");
 
 -------- 커뮤니티 게시물 등록 ----------
 INSERT INTO communityPost (communityNo, userNo, createdDate, title) VALUES (1, 1, "2023-09-20 13:13:00", "클라이밍 완료");
