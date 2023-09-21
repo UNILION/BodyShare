@@ -1,17 +1,21 @@
 import { atom, selector } from 'recoil';
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist()
 
 // 아톰(atom) 정의
-export const yourAtom = atom({
-  key: 'yourAtom',
-  default: [], // 초기 상태
+export const userAtom = atom({
+  key: 'userNo',
+  default: "", // 초기 상태
+  effects_UNSTABLE: [persistAtom]
 });
 
 // 셀렉터(selector) 정의
-export const yourSelector = selector({
-  key: 'yourSelector',
+export const userSelector = selector({
+  key: 'userSelector',
   get: ({ get }) => {
-    const yourAtomValue = get(yourAtom); // 아톰 값 가져오기
+    const userAtomValue = get(userAtom); // 아톰 값 가져오기
     // 여기서 원하는 연산 수행
-    return yourAtomValue; // 연산 결과 반환
+    return userAtomValue; // 연산 결과 반환
   },
 });
