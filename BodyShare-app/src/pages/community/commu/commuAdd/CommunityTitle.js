@@ -19,24 +19,23 @@ const Content = styled.input`
   padding: 5px 20px;
 `;
 
-const CommunityTitle = function ({register, errors}) {
+const CommunityTitle = function ({ register, errors }) {
   return (
-          <CommunityTitleContainer>
-            <Title>커뮤니티 명</Title>
-            <Content
-              {...register("title", {
-                required: "설명을 필수로 적어주세요!",
-                maxLength: {
-                  value: 10,
-                  message: "최대 10글자까지 가능합니다!"
-                },
-              })}
-              placeholder="원하는 커뮤니티 이름을 지정해주세요!"
-            />
-            <Check>{errors.title?.message}</Check>
-
-          </CommunityTitleContainer>
-  )
-}
+    <CommunityTitleContainer>
+      <Title>커뮤니티 명</Title>
+      <Content
+        {...register("title", {
+          required: "커뮤니티 명을 필수로 적어주세요!",
+          maxLength: {
+            value: 10,
+            message: "최대 10글자까지 가능합니다!",
+          },
+        })}
+        placeholder="원하는 커뮤니티 이름을 지정해주세요!"
+      />
+      <Check>{errors.title?.message}</Check>
+    </CommunityTitleContainer>
+  );
+};
 
 export default CommunityTitle;
