@@ -43,6 +43,60 @@ const CommunityRecommend2 = styled.div`
 const CommunityRe = function () {
   const navigate = useNavigate();
 
+  /*
+const CommunityCharts = function () {
+  const navigate = useNavigate();
+  const [communityChartData1, setCommunityChartData1] = useState([]);
+  const [communityChartData2, setCommunityChartData2] = useState([]);
+
+  // 여기에 useEffect를 사용하여 데이터를 가져오는 로직을 작성하면 됩니다.
+
+  return (
+    <ChartBox>
+      {communityChartData1.map((chartData, index) => (
+        <ChartContainer
+          key={index}
+          onClick={() => {
+            navigate(`/community/chart1/${chartData.id}`);
+          }}
+        >
+          <Chart
+            chartType="LineChart"
+            width="170px"
+            height="240px"
+            data={chartData.data}
+            options={chartData.options}
+            graph_id={`community-chart1-${chartData.id}`}
+            border-radius="30px"
+          />
+        </ChartContainer>
+      ))}
+
+      {communityChartData2.map((chartData, index) => (
+        <ChartContainer
+          key={index}
+          onClick={() => {
+            navigate(`/community/chart2/${chartData.id}`);
+          }}
+        >
+          <Chart
+            chartType="BarChart"
+            width="170px"
+            height="240px"
+            data={chartData.data}
+            options={chartData.options}
+            graph_id={`community-chart2-${chartData.id}`}
+            border-radius="30px"
+          />
+        </ChartContainer>
+      ))}
+    </ChartBox>
+  );
+};
+
+export default CommunityCharts;
+*/
+
   return (
     <CommunityDiv>
       <CommunityP>News</CommunityP>
