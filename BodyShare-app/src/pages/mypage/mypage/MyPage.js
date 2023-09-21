@@ -20,6 +20,7 @@ const Title = styled.p`
     margin-left: 5px;
     height: 45px;
     font-size: 23px;
+    font-weight: 600;
 `;
 
 const Buttons = styled.ul`

@@ -32,7 +32,7 @@ const Backbutton = styled.button`
 const Title = styled.p`
   margin-left: 5px;
   font-size: 23px;
-  font-style: bold;
+  font-weight: 600;
 `;
 
 const MyProfileModify = function () {
