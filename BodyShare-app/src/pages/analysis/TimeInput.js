@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from "styled-components";
 import previous from "assets/Img/Previous.png";
 import Button from "components/commons/Button";
 import plus from "assets/Img/buttonplus.png";
 import { useNavigate } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { sportTimeState } from "recoil/sportTime";
 
 const TimeInputContainer = styled.div`
   display: grid;
@@ -100,6 +102,26 @@ const SportName = styled.p`
 const TimeInput = function () {
   const navigate = useNavigate();
 
+  const [sportTime, setSportTime] = useRecoilState(sportTimeState); //시간 recoil에 저장
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+
+      const parsedValue = parseInt(value, 10);
+      if (!isNaN(parsedValue)) {
+      let clampedValue = parsedValue;
+      if (parsedValue < 0) {
+        clampedValue = 0;
+      } else if (parsedValue > 60) {
+        clampedValue = 60;
+      }
+      setSportTime((prevSportTime) => ({
+        ...prevSportTime,
+        [name]: clampedValue.toString(), // 숫자를 문자열로 다시 설정
+      }));
+    }
+  };
+
   return (
     <>
       <TimeInputContainer>
@@ -122,16 +144,25 @@ const TimeInput = function () {
           <SmallBox
             type="text"
             maxLength="2"
+            name="hours" // hours를 구분할 수 있는 이름 설정
+            value={sportTime.hours} // Recoil 상태의 hours 값을 입력값으로 설정
+            onChange={handleInputChange} // 입력값이 변경될 때 핸들러 호출
           />
           <Dot>:</Dot>
           <SmallBox
             type="text"
             maxLength="2"
+            name="minutes" // minutes를 구분할 수 있는 이름 설정
+            value={sportTime.minutes} // Recoil 상태의 minutes 값을 입력값으로 설정
+            onChange={handleInputChange} // 입력값이 변경될 때 핸들러 호출
           />
           <Dot>:</Dot>
           <SmallBox
             type="text"
             maxLength="2"
+            name="seconds" // seconds를 구분할 수 있는 이름 설정
+            value={sportTime.seconds} // Recoil 상태의 seconds 값을 입력값으로 설정
+            onChange={handleInputChange} // 입력값이 변경될 때 핸들러 호출
           />
         </SportTime>
       </TimeInputContainer> 
