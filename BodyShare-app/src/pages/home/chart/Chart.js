@@ -33,35 +33,35 @@ const Charts = function () {
   const navigate = useNavigate();
 
   const chartData = [
+    ["", "운동 분"],
+    ["월", 60],
+    ["화", 45],
+    ["수", 30],
+    ["목", 75],
+    ["금", 90],
+    ["토", 120],
+    ["일", 60],
+  ];
+
+  const chartOptions = {
+    legend: { position: "none" },
+    chart: {
+      title: "Daily Diet",
+    },
+  };
+
+  const chartData2 = [
     ["작업", "하루 시간"],
     ["탄", 3],
     ["단", 5],
     ["지", 2],
   ];
 
-  const chartOptions = {
+  const chartOptions2 = {
     title: "Calorie",
     pieHole: 0.4,
     titleTextStyle: {
       fontSize: 16,
-    },
-  };
-
-  const chartData2 = [
-    ["", "운동 분"],
-    ["M", 60],
-    ["T", 45],
-    ["W", 30],
-    ["T", 75],
-    ["F", 90],
-    ["S", 120],
-    ["S", 60],
-  ];
-
-  const chartOptions2 = {
-    legend: { position: "none" },
-    chart: {
-      title: "Daily Diet",
     },
   };
 
@@ -76,8 +76,8 @@ const Charts = function () {
           chartType="Bar"
           width="170px"
           height="240px"
-          data={chartData2}
-          options={chartOptions2}
+          data={chartData}
+          options={chartOptions}
           graph_id="barchart2"
           border-radius="30px"
         />
@@ -91,8 +91,8 @@ const Charts = function () {
           chartType="PieChart"
           width="170px"
           height="240px"
-          data={chartData}
-          options={chartOptions}
+          data={chartData2}
+          options={chartOptions2}
           graph_id="donutchart"
           border-radius="30px"
         />
