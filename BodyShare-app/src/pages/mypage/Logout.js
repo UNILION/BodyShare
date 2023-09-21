@@ -11,7 +11,8 @@ import axios from "axios";
 
 //axios.defaults.baseURL = "http://localhost:33000/api";
 const instance = axios.create({
-  baseURL: "http://localhost:33000/api"
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
 });
 
 const All = styled.div`
@@ -82,18 +83,14 @@ const PasswordModify = function () {
   const [userNo, setUserNo] = useRecoilState(userAtom);
 
   const Logout = async function(){
-    // Recoil Atom 초기화
-    setUserNo({ userNo: '' });
-
-    // 로컬 스토리지 정보 삭제
-    localStorage.removeItem('userNo');
-    
     try {
       // 서버 세션 처리 - 서버에서 세션 삭제 API 호출
       const response = await instance.get('/users/logout'); // 예시: 로그아웃 요청을 서버로 보냄
 
       if (response.data.success) {
         // 서버에서 세션 삭제 성공
+        // Recoil Atom 초기화
+        setUserNo({ userNo: '' });
         navigate('/');
       } else {
         // 서버에서 세션 삭제 실패 또는 다른 오류 처리

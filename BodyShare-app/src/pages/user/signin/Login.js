@@ -7,7 +7,8 @@ import { userAtom } from "recoil/userRecoil";
 
 //axios.defaults.baseURL = "http://localhost:33000/api";
 const instance = axios.create({
-  baseURL: "http://localhost:33000/api"
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
 });
 
 const Inputdiv = styled.div`

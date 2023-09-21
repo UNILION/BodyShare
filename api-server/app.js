@@ -23,7 +23,10 @@ app.use(session({
   saveUninitialized: true,  //세션에 값이 없으면 쿠키를 전송하지 않음
 }));            // req.session 속성을 만들어서 세션 객체를 저장
 
-app.use(cors());
+app.use(cors({
+  origin: /^http:\/\/localhost/,
+  credentials: true
+}));
 app.use('/api', indexRouter);
 
 // 404 에러 처리
