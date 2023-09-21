@@ -90,7 +90,7 @@ const PasswordModify = function () {
       if (response.data.success) {
         // 서버에서 세션 삭제 성공
         // Recoil Atom 초기화
-        setUserNo({ userNo: '' });
+        setUserNo('');
         navigate('/');
       } else {
         // 서버에서 세션 삭제 실패 또는 다른 오류 처리
