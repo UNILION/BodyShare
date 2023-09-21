@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const checkLogin = require("../middlewares/checkLogin");
 
 const user = require("../models/userModel");
 const multer = require("multer");
@@ -25,7 +26,7 @@ const upload = multer({
 });
 
 // 회원 상세 조회
-router.get("/user/:no", async (req, res, next) => {
+router.get("/user/:no", checkLogin, async (req, res, next) => {
   try{
     const no = Number(req.params.no);
     const result = await user.findByNo(no);
@@ -50,7 +51,7 @@ router.post("/signup", upload.single("profileImg") ,async (req, res, next) => {
 });
 
 // 회원 정보 수정
-router.put("/useredit/:no", upload.fields([{name:"profileImg"}, {name:"bannerImg"}]), async (req, res, next) => {
+router.put("/useredit/:no", checkLogin, upload.fields([{name:"profileImg"}, {name:"bannerImg"}]), async (req, res, next) => {
   try{
     const no = Number(req.params.no);
     // 프로필 이미지와 배너 이미지 가져오기
@@ -76,15 +77,23 @@ router.put("/useredit/:no", upload.fields([{name:"profileImg"}, {name:"bannerImg
 // 로그인
 router.post("/signin", async (req, res, next) => {
   try{
-    const ok = await user.signin(req.body);
-    res.json({ ok });
+    const result = await user.signin(req.body);
+
+    if (result.length === 1) {
+      // 로그인 성공 시, 유저 번호를 세션에 저장
+      req.session.userNo = result[0].userNo; // 유저 번호를 가져와서 세션에 저장
+      res.json({ login: true, userNo: req.session.userNo });
+    }else {
+      // 로그인 실패 시, 클라이언트에게 실패 응답 전송
+      res.json({ login: false });
+    }
   }catch(err){
     next(err);
   }
 });
 
 // 회원 관심사 등록
-router.post("/interestadd", async (req, res, next) => {
+router.post("/interestadd", checkLogin, async (req, res, next) => {
   try{
     const id = await user.createInterest(req.body);
     res.json({ id });
@@ -94,7 +103,7 @@ router.post("/interestadd", async (req, res, next) => {
 });
 
 // 회원 관심사 수정
-router.put("/interestedit/:no", async (req, res, next) => {
+router.put("/interestedit/:no", checkLogin, async (req, res, next) => {
   try{
     const no = Number(req.params.no);
     const count = await user.updateInterest(no, req.body);
@@ -105,7 +114,7 @@ router.put("/interestedit/:no", async (req, res, next) => {
 });
 
 // 회원 관심사 조회
-router.get("/interest/:no", async (req, res, next) => {
+router.get("/interest/:no", checkLogin, async (req, res, next) => {
   try{
     const no = Number(req.params.no);
     const result = await user.findByNoInterest(no);
@@ -116,7 +125,7 @@ router.get("/interest/:no", async (req, res, next) => {
 });
 
 // 회원 가입한 커뮤니티 조회( 회원 no 기반의 검색 조회)
-router.get("/community/:no", async (req, res, next) => {
+router.get("/community/:no", checkLogin, async (req, res, next) => {
   try{
     const no = Number(req.params.no);
     const result = await user.findByNoUsersCommu(no);
@@ -127,7 +136,7 @@ router.get("/community/:no", async (req, res, next) => {
 });
 
 // 회원 가입한 커뮤니티 등록
-router.post("/communityadd", async (req, res, next) => {
+router.post("/communityadd", checkLogin, async (req, res, next) => {
   try{
     const id = await user.createUsersCommu(req.body);
     res.json({ id });
@@ -137,7 +146,7 @@ router.post("/communityadd", async (req, res, next) => {
 });
 
 // 회원 가입한 커뮤니티 탈퇴(삭제)
-router.delete("/communitydel/:no", async (req, res, next) => {
+router.delete("/communitydel/:no", checkLogin, async (req, res, next) => {
   try{
     const no = Number(req.params.no);
     const count = await user.deleteUsersCommu(no);

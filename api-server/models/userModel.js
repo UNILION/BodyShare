@@ -39,7 +39,13 @@ const userModel = {
     try {
       const sql = `select * from user where userId = ? and password = ?`;
       const [result] = await pool.query(sql, [user.userId, user.password]);
-      return result.length === 1;
+      if (result.length === 1) {
+        // 로그인 성공 시 조회된 유저 정보 배열을 반환
+        return result;
+      } else {
+        // 로그인 실패 시 빈 배열 반환
+        return [];
+      }
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
