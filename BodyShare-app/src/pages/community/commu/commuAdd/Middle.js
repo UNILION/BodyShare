@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import Tag from "components/commons/Tag";
+import Tag from "components/commons/useFormTag";
 import Button from "components/commons/Button";
 import xbutton from "assets/Img/xbutton.png";
 import plus from "assets/Img/buttonplus.png";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import CommunityContent from "./CommunityContent"
+import CommunityTitle from "./CommunityTitle"
 
 const MiddleContainer = styled.div`
   display: grid;
@@ -19,16 +23,6 @@ const Title = styled.div`
   margin: 10px 0 10px 0;
 `;
 
-const Content = styled.textarea`
-  width: 310px;
-  height: 50px;
-  font-size: 15px;
-  border: 1px solid rgba(46, 44, 61, 0.3);
-  border-radius: 15px;
-  text-align: center;
-  padding: 5px 20px;
-`;
-
 const Picture = styled.div`
   height: 350px;
   height: 60px;
@@ -40,10 +34,6 @@ const Picture = styled.div`
 `;
 
 const Profile = styled.div``;
-
-const CommunityTitle = styled.div``;
-
-const CommunityContent = styled.div``;
 
 const CommunityCategory = styled.div``;
 
@@ -83,61 +73,74 @@ const Xbutton = styled.img`
 
 const Middle = function () {
   const navigate = useNavigate();
-  return(
+  const [tagtitle, setagTitle] = useState("요가");
+  const {register, handleSubmit, formState: { errors } } = useForm();
+  const onSubmit = (data) => console.log(data);
+
+  return (
     <>
-    <MiddleContainer>
-        <Banner>
-          <Title>배너 사진</Title>
-          <Picture>
-            <input type="file" accept="image/jpg, image/png, image/jpeg" />
-          </Picture>
-        </Banner>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <MiddleContainer>
+          <Banner>
+            <Title>배너 사진</Title>
+            <Picture>
+              <input
+                {...register("bannerImg")}
+                type="file"
+                accept="image/jpg, image/png, image/jpeg"
+              />
+            </Picture>
+          </Banner>
 
-        <Profile>
-          <Title>프로필 사진</Title>
-          <Picture>
-            <input type="file" accept="image/jpg, image/png, image/jpeg" />
-          </Picture>
-        </Profile>
+          <Profile>
+            <Title>프로필 사진</Title>
+            <Picture>
+              <input
+                {...register("profileImg")}
+                type="file"
+                accept="image/jpg, image/png, image/jpeg"
+              />
+            </Picture>
+          </Profile>
 
-        <CommunityTitle>
-          <Title>커뮤니티 명</Title>
-          <Content placeholder="원하는 커뮤니티 이름을 지정해주세요!"></Content>
-        </CommunityTitle>
+          <CommunityTitle register={register} errors={errors} />
 
-        <CommunityContent>
-          <Title>커뮤니티 설명</Title>
-          <Content
-            placeholder="나의 커뮤니티를 설명해주세요!
-        (최대 60글자)"
-          ></Content>
-        </CommunityContent>
+          <CommunityContent register={register} errors={errors} />
 
-        <CommunityCategory>
-          <Title>커뮤니티 카테고리</Title>
-          <CategoryContent onClick={() => navigate("/community/category")}>
-            1개의 카테고리를 필수로 선택해주세요!
-          </CategoryContent>
-          <Check>한 개의 카테고리를 선택해주세요!</Check>
-          <Category>
-            <Tag tagName="요가" />
-            <Xbutton src={xbutton} />
-          </Category>
-        </CommunityCategory>
-      </MiddleContainer>
 
-      <Button
-        name="만들기"
-        img={plus}
-        ml="auto"
-        mb="10px"
-        width="150px"
-        display="block"
-        onClick={() => navigate("/community")}
-      />
-      </>
-  )
+          <CommunityCategory>
+            <Title>커뮤니티 카테고리</Title>
+            <CategoryContent onClick={() => navigate("/community/category")}>
+              1개의 카테고리를 필수로 선택해주세요!
+            </CategoryContent>
+            <Category>
+              <Tag 
+              tagtitle="요가" />
+              <Xbutton src={xbutton} />
+              <input type="hidden" value={tagtitle} 
+              {...register("tag", {
+                required: true,
+              })}
+              />
+            </Category>
+            {errors.tag?.type === "required" && (
+              <Check>한 개의 카테고리를 선택해주세요!</Check>
+            )}
+          </CommunityCategory>
+        </MiddleContainer>
 
-}
+        <Button
+          name="만들기"
+          img={plus}
+          ml="auto"
+          mb="10px"
+          width="150px"
+          display="block"
+          // onClick={() => navigate("/community")}
+        />
+      </form>
+    </>
+  );
+};
 
 export default Middle;
