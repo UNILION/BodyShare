@@ -1,10 +1,16 @@
 import styled from "styled-components";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import Add from "pages/analysis/record/NoteAdd"
 import SportRecord from "pages/analysis/record/SportNote"
 import FoodRecord from "pages/analysis/record/FoodNote"
+import axios from "axios";
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
+});
 
 
 const RecordGrid = styled.div`
@@ -42,14 +48,11 @@ const P = styled.p`
   margin: 0;
 `;
 
-
 const Line = styled.div`
   width: 390px;
   height: 1px;
   background-color: rgba(135, 135, 135, 0.3);
 `;
-
-
 
 const Record = function () {
   // 캘린더
@@ -57,18 +60,16 @@ const Record = function () {
   const [selectedDate, setSelectedDate] = useState(new Date());
   
   const handleDateChange = (date) => {
-    // onChange();
-    // setSelectedDate(date);
-
     const today = new Date();
     today.setHours(0,0,0,0);
     setSelectedDate(date);
-
-    if (date >= today){
-      onChange(date);
-    }
   };
 
+
+  // useEffect(() => {
+  //   // selectedDate가 변경될 때마다 실행되는 부분
+  //   // 이곳에서 NoteGrid 내용을 업데이트하거나 변경 로직을 추가할 예정.
+  // }, [selectedDate]);
 
   return (
     <>
