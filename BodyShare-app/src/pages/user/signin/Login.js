@@ -1,21 +1,30 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import axios from "axios";
 import { userAtom } from "recoil/userRecoil";
+import { useForm } from 'react-hook-form';
+import { sportsAtom } from "recoil/sportList";
+import { foodAtom } from "recoil/foodList";
+import { useState } from "react";
 
-//axios.defaults.baseURL = "http://localhost:33000/api";
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
   withCredentials: true
 });
 
-const Inputdiv = styled.div`
+const Form = styled.form`
   grid-row: 3;
+  margin: 0 auto;
+  display: grid;
+  grid-template-rows: auto auto auto;
+`;
+
+const Inputdiv = styled.div`
+  grid-row: 1;
   width: 360px;
   height: 146.47px;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
 `;
 
 const Input = styled.input`
@@ -29,25 +38,38 @@ const Input = styled.input`
 `;
 
 const StyledLink = styled(Link)`
-  grid-row: 4;
+  grid-row: 2;
   width: 355px;
+  height: 30px;
   color: black;
-  font-size: 14px;
+  font-size: 16px;
   text-decoration: none;
   text-align: center;
-  margin: 0 auto;
+  margin: 10px auto;
   text-decoration: underline;
 `;
 
 const Logindiv = styled.div`
-  grid-row: 5;
+  grid-row: 3;
   width: 390px;
-  height: 60px;
-  margin: 0 auto;
+  height: 90px;
+  display: grid;
+  grid-template-rows: auto auto;
+  margin: 0 auto 0 auto;
   text-align: center;
+  justify-content: center;
+  align-content: end;
+  gap: 10px;
+`;
+
+const LoingError = styled.p`
+  grid-row: 1;
+  color: red;
+  height: 20px;
 `;
 
 const LoginButton = styled.button`
+  grid-row: 2;
   background-color: #556fff;
   width: 355px;
   height: 60px;
@@ -64,23 +86,48 @@ const LoginButton = styled.button`
 const Login = function () {
   const navigate = useNavigate();
 
-  const [userId, setUserId] = useState('abc123');
-  const [password, setPassword] = useState('1234');
+  const [loginError, setLoginError] = useState("");
 
   const [userNo, setUserNo] = useRecoilState(userAtom);
+  const [sports, setSports] = useRecoilState(sportsAtom);
+  const [food, setFood] = useRecoilState(foodAtom);
 
-  const sendlogin = async function(){
+  const { register, handleSubmit } = useForm();
+
+  const loadDB = async function(){
     try {
-      const response = await instance.post('/users/signin', { userId, password});
+      const response = await instance.get('/sports');
+      setSports(response.data)
+    } catch (error) {
+      // 에러 처리
+      console.error(error);
+    }
+
+    try {
+      const response = await instance.get('/food');
+      setFood(response.data)
+    } catch (error) {
+      // 에러 처리
+      console.error(error);
+    }
+    navigate("/home");
+  };
+
+  const onSubmit = async function (formData) {
+    const {userId, password} = formData;
+
+    try {
+      const response = await instance.post('/users/signin', { userId, password });
       console.log(response.data);
 
       if (response.data.login) {
         // recoil에 userNo 담기
         setUserNo(response.data.userNo);
-        navigate("/home");
+        loadDB();
       } else {
         // 로그인 실패
-        // 실패 메시지 표시 또는 다른 조치 수행
+        setLoginError("아이디, 비밀번호를 확인하세요");
+        setTimeout(hideMessage, 3000);
       }
     } catch (error) {
       // 에러 처리
@@ -89,21 +136,36 @@ const Login = function () {
 
   };
 
+  const hideMessage = () => {
+    setLoginError(""); // 메시지를 초기화하여 숨깁니다.
+  };
+
   return (
-    <>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Inputdiv>
-        <Input type="text" value={userId} placeholder="아이디" onChange={(e)=>{setUserId(e.target.value)}}/>
+        <Input
+          type="text"
+          name="userId"
+          placeholder="아이디"
+          {...register('userId')}
+        />
         <br></br>
         <br></br>
-        <Input type="password" value={password} placeholder="비밀번호" onChange={(e)=>{setPassword(e.target.value)}}/>
+        <Input
+          type="password"
+          name="password"
+          placeholder="비밀번호"
+          {...register('password')}
+        />
       </Inputdiv>
 
       <StyledLink to="/signup">회원 가입</StyledLink>
 
       <Logindiv>
-        <LoginButton onClick={ sendlogin }>로그인</LoginButton>
+        {loginError && <LoingError>{loginError}</LoingError>}
+        <LoginButton type="submit">로그인</LoginButton>
       </Logindiv>
-    </>
+    </Form>
   );
 };
 
