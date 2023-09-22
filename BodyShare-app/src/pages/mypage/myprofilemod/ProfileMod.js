@@ -1,7 +1,4 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import checkButton from "assets/Img/circletcheck.png";
-import ButtonTT from "pages/mypage/newverst/ButtonTT";
 import React, { useState } from "react";
 
 const Titleo = styled.p`
