@@ -72,25 +72,17 @@ const Record = function () {
     setCount(sum);
   };
 
-  const filter = function( list ){
-    const date = new Date();
-    const year = date.getFullYear(); // 연도
-    const month = date.getMonth() + 1; // 월 (0부터 시작하므로 1을 더함)
-    const day = date.getDate(); // 일
-    const today = `${year}-${month}-${day}`;
-
-    const result = list.filter(item => dateCal(item.date) == today);
-    return result.length;
+  const filter = function(list) {
+    const today = new Date().toLocaleDateString();
+  
+    return list.filter(item => dateCal(item.date) === today).length;
   };
-
+  
   const dateCal = function(date) {
     const dateObject = new Date(date);
     dateObject.setHours(dateObject.getHours() + 9);
-
-    const year = dateObject.getFullYear(); // 연도
-    const month = dateObject.getMonth() + 1; // 월 (0부터 시작하므로 1을 더함)
-    const day = dateObject.getDate(); // 일
-    return `${year}-${month}-${day}`;
+  
+    return dateObject.toLocaleDateString();
   };
 
   useEffect(() => {
