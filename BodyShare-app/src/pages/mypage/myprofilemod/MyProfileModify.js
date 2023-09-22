@@ -79,7 +79,7 @@ const MyProfileModify = function () {
           </Titleul>
           <br />
           <ProfileMod 
-            password={hidePassword(profileInfo.password)}
+            password={profileInfo.password}
             nickname={profileInfo.nickname}
             height={profileInfo.height}
             weight={profileInfo.weight}
