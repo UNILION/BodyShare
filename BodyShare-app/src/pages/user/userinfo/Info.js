@@ -36,7 +36,7 @@ const InputDiv = styled.div`
   display: grid;
   width: 372px;
   grid-template-rows: auto auto auto auto 1fr;
-  gap: 10px;
+  gap: 20px;
   align-items: center;
   justify-content: center;
 `;
