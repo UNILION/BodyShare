@@ -1,15 +1,15 @@
-import React from "react";
 import styled from "styled-components";
 import { Chart } from "react-google-charts";
-import { Link, useNavigate } from "react-router-dom";
-import { atom, selector } from 'recoil';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { userSelector } from "recoil/userRecoil";
+import { useRecoilValue } from "recoil";
 import axios from "axios";
 
-//axios.defaults.baseURL = "http://localhost:33000/api";
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
-  withCredentials: true
-}); 
+  withCredentials: true,
+});
 
 const ChartBox = styled.div`
   grid-row: 2;
@@ -39,108 +39,54 @@ const ChartContainer = styled.div`
 
 const Charts = function () {
   const navigate = useNavigate();
+  const userNo = useRecoilValue(userSelector);
 
-  const chartData2 = [
-    ["작업", "하루 시간"],
-    ["탄", 3],
-    ["단", 5],
-    ["지", 2],
-  ];
+  const [chartData, setChartData] = useState(0);
+  const [chartData2, setChartData2] = useState(0);
 
-  const chartOptions2 = {
-    title: "Calorie",
-    pieHole: 0.4,
-    titleTextStyle: {
-      fontSize: 16,
-    },
+  const chartDatas = async function () {
+    try {
+      // 스포츠 차트 데이터 가져오기
+      const sportsResponse = await instance.get(`/record/sports/${userNo}`);
+      const sportsData = sportsResponse.data;
+
+      const sportsChartData = [
+        ["", "운동 분"],
+        ["M", 60],
+        ["T", 45],
+        ["W", 30],
+        ["T", 75],
+        ["F", 90],
+        ["S", 120],
+        ["S", 60],
+      ];
+
+      setChartData(sportsChartData);
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      // 푸드 차트 데이터 가져오기
+      const foodResponse = await instance.get(`/record/food/${userNo}`);
+      const foodData = foodResponse.data;
+
+      const foodChartData = [
+        ["작업", "하루 시간"],
+        ["탄", 3],
+        ["단", 5],
+        ["지", 2],
+      ];
+
+      setChartData2(foodChartData);
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-  const chartData = [
-    ["", "운동 분"],
-    ["월", 60],
-    ["화", 45],
-    ["수", 30],
-    ["목", 75],
-    ["금", 90],
-    ["토", 120],
-    ["일", 60],
-  ];
-
-  const chartOptions = {
-    legend: { position: "none" },
-    chart: {
-      title: "Daily Diet",
-    },
-  };
-  /*
-  const Charts = function () {
-  const navigate = useNavigate();
-
-  const [chartData, setChartData] = useState([]);
-  const [chartData2, setChartData2] = useState([]);
 
   useEffect(() => {
-    const chartDatas = async () => {
-      try {
-        // 스포츠 차트 데이터 가져오기
-        const sportsResponse = await axios.get(`/api-server/sport/${userId}`);
-        const sportsData = sportsResponse.data;
-        setChartData(sportsData);
-
-        // 푸드 차트 데이터 가져오기
-        const foodResponse = await axios.get(`/api-server/food/${userId}`);
-        const foodData = foodResponse.data;
-        setChartData2(foodData);
-      } catch (error) {
-        console.error("차트 데이터를 불러오는 데 실패했습니다.", error);
-      }
-  };
-
-  chartDatas();
-}, [userId]);
-
- return (
-    <ChartBox>
-      {chartData.map((chart, index) => (
-        <ChartContainer
-          key={index}
-          onClick={() => {
-            navigate(`/analysis/sportschart/${chart.id}`);
-          }}
-        >
-          <Chart
-            chartType="Bar"
-            width="170px"
-            height="240px"
-            data={chart.data}
-            options={chart.options}
-            graph_id={`sports-chart-${chart.id}`}
-            border-radius="30px"
-          />
-        </ChartContainer>
-      ))}
-      {chartData2.map((chart, index) => (
-        <ChartContainer
-          key={index}
-          onClick={() => {
-            navigate(`/analysis/foodchart/${chart.id}`);
-          }}
-        >
-          <Chart
-            chartType="PieChart"
-            width="170px"
-            height="240px"
-            data={chart.data}
-            options={chart.options}
-            graph_id={`food-chart-${chart.id}`}
-            border-radius="30px"
-          />
-        </ChartContainer>
-      ))}
-    </ChartBox>
-  );
-};
-*/
+    chartDatas();
+  }, [userNo]);
 
   return (
     <ChartBox>
@@ -154,9 +100,13 @@ const Charts = function () {
           width="170px"
           height="240px"
           data={chartData}
-          options={chartOptions}
-          graph_id="barchart2"
-          border-radius="30px"
+          options={{
+            legend: { position: "none" },
+            chart: {
+              title: "Daily Diet",
+            },
+          }}
+          graph_id="sportschart"
         />
       </ChartContainer>
       <ChartContainer
@@ -169,9 +119,14 @@ const Charts = function () {
           width="170px"
           height="240px"
           data={chartData2}
-          options={chartOptions2}
-          graph_id="donutchart"
-          border-radius="30px"
+          options={{
+            title: "Calorie",
+            pieHole: 0.4,
+            titleTextStyle: {
+              fontSize: 16,
+            },
+          }}
+          graph_id="foodchart"
         />
       </ChartContainer>
     </ChartBox>
