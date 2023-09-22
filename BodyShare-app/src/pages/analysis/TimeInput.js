@@ -9,6 +9,7 @@ import { sportTimeState } from "recoil/sportTime";
 
 const TimeInputContainer = styled.div`
   display: grid;
+  margin: auto;
   grid-template-rows: 1fr 1fr 1fr 1fr;
   gap: 5px;
   width: 360px;
@@ -65,17 +66,12 @@ const SportTime = styled.div`
 
 const SmallBox = styled.input`
   float: right;
-  width: 38px;
+  width: 205px;
   height: 44px;
   background-color: rgba(85, 111, 255, 0.3);
   border-radius: 15px;
+  border: none;
   text-align: center;
-`;
-
-const Dot = styled.p`
-  float: right;
-  margin: 0 15px;
-  line-height: 44px;
 `;
 
 const Category = styled.p`
@@ -107,21 +103,15 @@ const TimeInput = function () {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-      const parsedValue = parseInt(value, 10);
-      if (!isNaN(parsedValue)) {
-      let clampedValue = parsedValue;
-      if (parsedValue < 0) {
-        clampedValue = 0;
-      } else if (parsedValue > 60) {
-        clampedValue = 60;
-      }
+    // 숫자 3자리 제한해준다.
+    if (/^\d{0,3}$/.test(value)) {
       setSportTime((prevSportTime) => ({
         ...prevSportTime,
-        [name]: clampedValue.toString(), // 숫자를 문자열로 다시 설정
+        [name]: value,
       }));
     }
   };
-
+  
   return (
     <>
       <TimeInputContainer>
@@ -143,35 +133,19 @@ const TimeInput = function () {
           <P>운동한 시간</P>
           <SmallBox
             type="text"
-            maxLength="2"
+            maxLength="3"
             name="hours" // hours를 구분할 수 있는 이름 설정
             value={sportTime.hours} // Recoil 상태의 hours 값을 입력값으로 설정
-            onChange={handleInputChange} // 입력값이 변경될 때 핸들러 호출
-          />
-          <Dot>:</Dot>
-          <SmallBox
-            type="text"
-            maxLength="2"
-            name="minutes" // minutes를 구분할 수 있는 이름 설정
-            value={sportTime.minutes} // Recoil 상태의 minutes 값을 입력값으로 설정
-            onChange={handleInputChange} // 입력값이 변경될 때 핸들러 호출
-          />
-          <Dot>:</Dot>
-          <SmallBox
-            type="text"
-            maxLength="2"
-            name="seconds" // seconds를 구분할 수 있는 이름 설정
-            value={sportTime.seconds} // Recoil 상태의 seconds 값을 입력값으로 설정
             onChange={handleInputChange} // 입력값이 변경될 때 핸들러 호출
           />
         </SportTime>
       </TimeInputContainer> 
 
       <Button
-          name="수정하기"
+          name="입력하기"
           img={plus}
           ml="auto"
-          mb="10px"
+          mt="130px"
           width="150px"
           display="block"
           onClick={() => navigate('/analysis')}
