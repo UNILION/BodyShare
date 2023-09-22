@@ -62,20 +62,22 @@ const Record = function () {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const today = new Date();
 
-  let sportsList = [];
-  let foodList = [];
-  
+  const [sportsList, setSportsList] = useState();
+  const [foodList, setFoodList] = useState();
+
   const userNo = useRecoilValue(userSelector);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
   };
 
-  const loadRecord = async function() {
+  const loadRecord = async function () {
     try {
       const result = await instance.get(`/record/sports/${userNo}`);
       const tempSportsList = result.data; // API 응답의 구조에 따라 수정
-      sportsList = filter(selectedDate, tempSportsList);
+      let temp_s = [];
+      temp_s.push(...filter(selectedDate, tempSportsList)); // 새로운 내용 추가
+      setSportsList(temp_s);
     } catch (error) {
       // 에러 처리
       console.error(error);
@@ -84,19 +86,21 @@ const Record = function () {
     try {
       const diet = await instance.get(`/record/food/${userNo}`);
       const tempdiet = diet.data; // API 응답의 구조에 따라 수정
-      foodList = filter(selectedDate, tempdiet);
+      let temp_f = [];
+      temp_f.push(...filter(selectedDate, tempdiet)); // 새로운 내용 추가
+      setFoodList(temp_f);
     } catch (error) {
       // 에러 처리
       console.error(error);
     }
   };
 
-  const filter = function( selectedDate, list ){
+  const filter = function (selectedDate, list) {
     const result = list.filter(item => dateCal(item.date) == selectedDate.toLocaleDateString());
     return result;
   };
 
-  const dateCal = function(date) {
+  const dateCal = function (date) {
     const dateObject = new Date(date);
     dateObject.setHours(dateObject.getHours() + 9);
 
@@ -111,8 +115,8 @@ const Record = function () {
     <>
       <RecordGrid>
         <CalendarDiv>
-          <Calendar 
-            onChange={handleDateChange} 
+          <Calendar
+            onChange={handleDateChange}
             value={value}
             // 현재 날짜를 최대로 잡음
             maxDate={new Date()}
@@ -124,11 +128,12 @@ const Record = function () {
           <TitleDate>
             <P>{selectedDate ? selectedDate.toLocaleDateString() : ""}</P>
           </TitleDate>
+
           {/* 운동 기록 부분 */}
-          <SportRecord sportsList={sportsList}/>
+          {sportsList && <SportRecord sportsList={sportsList} />}
           <Line></Line>
           {/* 식단 기록 부분 */}
-          <FoodRecord foodList={foodList}/>
+          {/* <FoodRecord foodList={foodList} /> */}
         </NoteGrid>
 
         {/* 기록 추가하기 */}
@@ -137,6 +142,7 @@ const Record = function () {
 
       </RecordGrid>
     </>
+
   );
 };
 
