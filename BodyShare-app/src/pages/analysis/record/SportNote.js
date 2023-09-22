@@ -55,7 +55,7 @@ const Delete = styled.button`
   }
 `;
 
-const Sport = function() {
+const Sport = function( sportsList ) {
   // 불러온 Recoil 상태를 사용할 수 있습니다.
   const [rp, setRP] = useSPORTState();
   const sportTime = useRecoilValue(sportTimeState);

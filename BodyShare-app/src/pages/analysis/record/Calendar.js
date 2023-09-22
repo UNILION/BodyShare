@@ -6,6 +6,8 @@ import Add from "pages/analysis/record/NoteAdd"
 import SportRecord from "pages/analysis/record/SportNote"
 import FoodRecord from "pages/analysis/record/FoodNote"
 import axios from "axios";
+import { userSelector } from "recoil/userRecoil";
+import { useRecoilValue } from 'recoil';
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -58,18 +60,52 @@ const Record = function () {
   // 캘린더
   const [value, onChange] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const today = new Date();
+
+  let sportsList = [];
+  let foodList = [];
   
+  const userNo = useRecoilValue(userSelector);
+
   const handleDateChange = (date) => {
-    const today = new Date();
-    today.setHours(0,0,0,0);
     setSelectedDate(date);
   };
 
+  const loadRecord = async function() {
+    try {
+      const result = await instance.get(`/record/sports/${userNo}`);
+      const tempSportsList = result.data; // API 응답의 구조에 따라 수정
+      sportsList = filter(selectedDate, tempSportsList);
+    } catch (error) {
+      // 에러 처리
+      console.error(error);
+    }
 
-  // useEffect(() => {
-  //   // selectedDate가 변경될 때마다 실행되는 부분
-  //   // 이곳에서 NoteGrid 내용을 업데이트하거나 변경 로직을 추가할 예정.
-  // }, [selectedDate]);
+    try {
+      const diet = await instance.get(`/record/food/${userNo}`);
+      const tempdiet = diet.data; // API 응답의 구조에 따라 수정
+      foodList = filter(selectedDate, tempdiet);
+    } catch (error) {
+      // 에러 처리
+      console.error(error);
+    }
+  };
+
+  const filter = function( selectedDate, list ){
+    const result = list.filter(item => dateCal(item.date) == selectedDate.toLocaleDateString());
+    return result;
+  };
+
+  const dateCal = function(date) {
+    const dateObject = new Date(date);
+    dateObject.setHours(dateObject.getHours() + 9);
+
+    return dateObject.toLocaleDateString();
+  };
+
+  useEffect(() => {
+    loadRecord();
+  }, [selectedDate]);
 
   return (
     <>
@@ -89,14 +125,15 @@ const Record = function () {
             <P>{selectedDate ? selectedDate.toLocaleDateString() : ""}</P>
           </TitleDate>
           {/* 운동 기록 부분 */}
-          <SportRecord />
+          <SportRecord sportsList={sportsList}/>
           <Line></Line>
           {/* 식단 기록 부분 */}
-          <FoodRecord />
+          <FoodRecord foodList={foodList}/>
         </NoteGrid>
 
         {/* 기록 추가하기 */}
-        <Add />
+        {selectedDate.toLocaleDateString() == today.toLocaleDateString() ? <Add /> : null}
+        {/* <Add /> */}
 
       </RecordGrid>
     </>
