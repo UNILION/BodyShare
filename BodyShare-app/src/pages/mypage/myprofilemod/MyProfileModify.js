@@ -5,7 +5,15 @@ import Button from "components/commons/Button";
 import Image5 from "assets/Img/right.png";
 import ProfileMod from "pages/mypage/myprofilemod/ProfileMod";
 import CateMod from "pages/mypage/myprofilemod/CateMod";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { userSelector } from "recoil/userRecoil";
+import { useRecoilValue } from "recoil";
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
+});
 
 const All = styled.div`
   margin-left: 7px;
@@ -38,38 +46,54 @@ const Title = styled.p`
 const MyProfileModify = function () {
   const navigate = useNavigate();
 
-  const profileInfo = {
-    id: "아이디",
-    password:"********",
-    nickname: "닉네임",
-    height: "167",
-    weight: "50"
+  const userNo = useRecoilValue(userSelector); // userNo를 Recoil 상태인 userSelector로부터 가져옴
+
+  const [profileInfo, setProfileInfo] = useState();
+
+  const loadUser = async function () {
+    try {
+      const response = await instance.get(`/users/user/${userNo}`);
+      const userDataFromApi = response.data;
+      setProfileInfo(userDataFromApi);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadUser();
+  }, []);
+
+  const hidePassword = (password) => {
+    // 비밀번호 문자열의 첫 번째 문자를 제외한 나머지를 '*'로 대체
+    return password.charAt(0) + '*'.repeat(password.length - 1);
   };
 
   return (
     <>
-      <All>
-        <Titleul>
-          <Backbutton onClick={() => { navigate("/mypage") }}></Backbutton>
-          <Title>나의 정보 수정</Title>
-        </Titleul>
-        <br />
-        <ProfileMod 
-          id={profileInfo.id}
-          password={profileInfo.password}
-          nickname={profileInfo.nickname}
-          height={profileInfo.height}
-          weight={profileInfo.weight}
-        />
-        <CateMod />
-        <Button
-          name="수정완료"
-          img={Image5}
-          onClick={() => navigate("/mypage")}
-          mt="15px"
-          ml="170px"
-        />
-      </All>
+      {profileInfo && (
+        <All>
+          <Titleul>
+            <Backbutton onClick={() => { navigate("/mypage") }}></Backbutton>
+            <Title>나의 정보 수정</Title>
+          </Titleul>
+          <br />
+          <ProfileMod 
+            password={hidePassword(profileInfo.password)}
+            nickname={profileInfo.nickname}
+            height={profileInfo.height}
+            weight={profileInfo.weight}
+          />
+          <CateMod />
+          <Button
+            name="수정완료"
+            img={Image5}
+            onClick={() => navigate("/mypage")}
+            mt="10px"
+            ml="170px"
+          />
+        </All>
+      )}
     </>
   );
 };
