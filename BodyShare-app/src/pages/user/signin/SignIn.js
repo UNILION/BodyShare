@@ -5,7 +5,7 @@ import Login from "pages/user/signin/Login";
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: auto auto auto auto auto;
+  grid-template-rows: auto auto auto;
   width: 390px;
   height: 696px;
 `;
