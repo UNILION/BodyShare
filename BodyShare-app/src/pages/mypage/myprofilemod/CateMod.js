@@ -32,12 +32,6 @@ const Xbutton = styled.img`
   margin-top: 2px;
 `;
 
-const Catewarnig = styled.p`
-  margin-top: 5px;
-  font-size: 11px;
-  color: red;
-`;
-
 const CateMod = function () {
   const navigate = useNavigate();
 
@@ -61,7 +55,6 @@ const CateMod = function () {
         />
         <Xbutton src={xbutton} />
       </Cateul>
-      <Catewarnig>한 개 이상의 카테고리를 선택해주세요!</Catewarnig>
     </>
   );
 };
