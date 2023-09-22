@@ -3,7 +3,7 @@ var router = express.Router();
 
 const sports = require("../models/sportsModel");
 
-// 커뮤니티 목록 조회
+// 운동 목록 조회
 router.get("/", async (req, res, next) => {
   try{
     const list = await sports.find();
