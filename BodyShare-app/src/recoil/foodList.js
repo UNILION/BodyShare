@@ -1,12 +1,21 @@
-// RP 상태를 저장할 Recoil 상태를 정의합니다.
-import { atom, useRecoilState } from 'recoil';
+import { atom, selector } from 'recoil';
+import { recoilPersist } from "recoil-persist";
 
-export const rpState = atom({
-  key: 'rpState', // Recoil 상태의 고유 키
-  default: '오늘의 식단을 기록해주세요', // RP 상태의 기본값은 빈 문자열로 설정합니다.
+const { persistAtom } = recoilPersist()
+
+// 아톰(atom) 정의
+export const foodAtom = atom({
+  key: 'food',
+  default: [], // 초기 상태
+  effects_UNSTABLE: [persistAtom]
 });
 
-// RP 상태를 읽고 업데이트할 커스텀 Recoil Hook을 만듭니다.
-export const useRPState = () => {
-  return useRecoilState(rpState);
-};
+// 셀렉터(selector) 정의
+export const foodSelector = selector({
+  key: 'foodSelector',
+  get: ({ get }) => {
+    const foodAtomValue = get(foodAtom); // 아톰 값 가져오기
+    // 여기서 원하는 연산 수행
+    return foodAtomValue; // 연산 결과 반환
+  },
+});
