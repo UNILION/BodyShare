@@ -12,7 +12,7 @@ const checkLogin = require("../middlewares/checkLogin");
 
 router.use("/users", userRouter);
 router.use("/community", checkLogin, commuRouter);
-router.use("/sports", checkLogin, sportsRouter);
+router.use("/sports", sportsRouter);
 router.use("/food", checkLogin, foodRouter);
 router.use("/record", checkLogin, recordRouter);
 router.use("/post", checkLogin, postRouter);

@@ -3,6 +3,15 @@ import IntroMessage from "pages/user/signup/IntroMessage";
 import Interest from "pages/user/signup/Interest";
 import Selected from "pages/user/signup/Selected";
 import Button from 'pages/user/signup/Button';
+import axios from "axios";
+import { useRecoilState } from 'recoil';
+import { sportsAtom } from "recoil/sportList";
+import { useEffect } from "react";
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
+});
 
 const Container = styled.div`
   display: grid;
@@ -13,7 +22,22 @@ const Container = styled.div`
 `;
 
 const SignUp = function() {
+  const [sports, setSports] = useRecoilState(sportsAtom);
 
+  const loadDB = async function(){
+    try {
+      const response = await instance.get('/sports');
+      setSports(response.data)
+    } catch (error) {
+      // 에러 처리
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    loadDB();
+  }, []);
+  
   return (
     <Container>
       <IntroMessage />
