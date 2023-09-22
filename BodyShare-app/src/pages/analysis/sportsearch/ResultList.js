@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { useSPORTState } from 'recoil/sportList'; // RP Recoil 상태 불러오기
+//import { useSPORTState } from 'recoil/sportList'; // RP Recoil 상태 불러오기
 import axios from 'axios'; // Axios를 불러옵니다.
 
 const ResultList = styled.div`
@@ -36,7 +36,7 @@ const Line = styled.div`
 
 const ResultCate = function ({no, name}) {
 
-  const [rp, setRP] = useSPORTState();
+  //const [rp, setRP] = useSPORTState();
   
   const [buttonStates, setButtonStates] = useState({
     button1: false,
@@ -52,7 +52,7 @@ const ResultCate = function ({no, name}) {
     }));
 
     // RP 값을 업데이트합니다.
-    setRP(rpValue);
+    //setRP(rpValue);
   };
 
   return(
@@ -63,7 +63,7 @@ const ResultCate = function ({no, name}) {
           onClick={() => handleButtonClick('button1', '축구')}
           hoverColor="rgba(85, 111, 255, 0.7)"
         >
-          {rp === '축구' && <RP>축구</RP>}
+          {/* {rp === '축구' && <RP>축구</RP>} */}
           <Line></Line>
         </ResultButton>
         {/* <ResultButton

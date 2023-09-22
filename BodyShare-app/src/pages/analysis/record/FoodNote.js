@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from 'react';
 import seemore from "../../../assets/Img/seemore.png";
-import { useRPState } from 'recoil/foodList'; // 필요한 Recoil 상태를 불러옵니다.
+//import { useRPState } from 'recoil/foodList'; // 필요한 Recoil 상태를 불러옵니다.
 
 
 const FoodNoteContainer = styled.div`
@@ -52,7 +52,7 @@ const Delete = styled.button`
 
 const Food = function() {
   // 불러온 Recoil 상태를 사용할 수 있습니다.
-  const [rp, setRP] = useRPState();
+  //const [rp, setRP] = useRPState();
   const [seeMoreVisible, setSeeMoreVisible] = useState(false);
 
   const toggleSeeMore = () => {
@@ -62,13 +62,13 @@ const Food = function() {
   //삭제하기 버튼을 누르면
   const handleDelete = () => {
     // Delete 버튼을 누를 때 rp 상태를 디폴트 값으로 변경해준다.
-    setRP("삭제"); 
+    //setRP("삭제"); 
   }
   
   return(
     <FoodNoteContainer>
       <FoodNote>
-      <p>{rp}</p>
+      <p>음식이름</p>
       </FoodNote>
       <FoodSeeMore onClick={toggleSeeMore}>
         <SmIng src={seemore}></SmIng>

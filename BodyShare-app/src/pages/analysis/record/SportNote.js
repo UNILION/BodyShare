@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import seemore from "../../../assets/Img/seemore.png";
 import { useRecoilValue } from 'recoil';
-import { sportTimeState } from "recoil/sportTime";
-import { useSPORTState } from 'recoil/sportList'; // 필요한 Recoil 상태를 불러옵니다.
+//import { sportTimeState } from "recoil/sportTime";
+//import { useSPORTState } from 'recoil/sportList'; // 필요한 Recoil 상태를 불러옵니다.
+import SportsListItem from "pages/analysis/record/SportsListItem";
 
 const SportNoteContainer = styled.div`
   display: grid;
@@ -56,22 +57,14 @@ const Delete = styled.button`
 `;
 
 const Sport = function( sportsList ) {
+  const list = sportsList.map(record => {
+    return (
+      <SportsListItem key={record.planNo} />
+    );
+  })
   // 불러온 Recoil 상태를 사용할 수 있습니다.
-  const [rp, setRP] = useSPORTState();
-  const sportTime = useRecoilValue(sportTimeState);
-
-  const [inputValues, setInputValues] = useState({
-    hours: '',
-    minutes: '',
-    seconds: '',
-  });
-
-  const handleInputChange = (fieldName, value) => {
-    setInputValues({
-      ...inputValues,
-      [fieldName]: value,
-    });
-  };
+  // const [rp, setRP] = useSPORTState();
+  // const sportTime = useRecoilValue(sportTimeState);
 
   const [seeMoreVisible, setSeeMoreVisible] = useState(false);
 
@@ -82,13 +75,13 @@ const Sport = function( sportsList ) {
     //삭제하기 버튼을 누르면
     const handleDelete = () => {
       // Delete 버튼을 누를 때 rp 상태를 디폴트 값으로 변경해준다.
-      setRP("삭제"); 
+      //setRP("삭제"); 
     }
   
   return(
     <SportNoteContainer>
-    <SportNote>{rp}</SportNote>
-    <SportTime>운동 시간: {sportTime.hours}:{sportTime.minutes}:{sportTime.seconds}</SportTime>
+    <SportNote>"운동이름"</SportNote>
+    <SportTime>운동 시간:  ""분</SportTime>
     <SeeMore onClick={toggleSeeMore}>
       <SmIng src={seemore}></SmIng>
     </SeeMore>

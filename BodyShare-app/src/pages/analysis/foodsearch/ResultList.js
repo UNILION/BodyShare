@@ -1,6 +1,6 @@
 import React, { useState, useEffect  } from 'react';
 import styled from "styled-components";
-import { useRPState } from 'recoil/foodList'; // RP Recoil 상태 불러오기
+//import { useRPState } from 'recoil/foodList'; // RP Recoil 상태 불러오기
 import axios from 'axios'; 
 
 const instance = axios.create({
@@ -42,7 +42,7 @@ const Line = styled.div`
 const ResultCate = function ({ no, name }) {
 
   // RP 상태를 읽고 업데이트할 Recoil 사용
-  const [rp, setRP] = useRPState();
+  //const [rp, setRP] = useRPState();
   
   const [buttonStates, setButtonStates] = useState({
     button1: false,
@@ -76,7 +76,7 @@ const ResultCate = function ({ no, name }) {
     }));
 
     // RP 값을 업데이트합니다.
-    setRP(rpValue);
+    //setRP(rpValue);
   };
 
 
@@ -89,7 +89,7 @@ const ResultCate = function ({ no, name }) {
           onClick={() => handleButtonClick('button1', '닭가슴살')}
           hoverColor="rgba(85, 111, 255, 0.7)"
         >
-          {rp === '닭가슴살' && <RP>닭가슴살</RP>}
+          {/* {rp === '닭가슴살' && <RP>닭가슴살</RP>} */}
           <Line></Line>
         </ResultButton>
         {/* <ResultButton
