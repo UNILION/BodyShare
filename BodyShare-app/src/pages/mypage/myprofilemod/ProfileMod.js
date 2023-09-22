@@ -42,12 +42,6 @@ const ProfilePic = styled.button`
   font-size: 13px;
 `;
 
-const Idul = styled.ul`
-  margin-top: 7px;
-  display: grid;
-  grid-template-columns: 60px auto;
-`;
-
 const Titlej = styled.div`
   border-radius: 15px 0px 0px 15px;
   background-color: #FFFFFF;
@@ -58,36 +52,17 @@ const Titlej = styled.div`
   line-height: 45px;
 `;
 
-const Titlen = styled.div`
-  width: 230px;
-  height: 45px;
-  color: #808080;
-  border-radius: 0px 15px 15px 0px;
-  background-color: #FFFFFF;
-  border: 1px solid rgba(135, 135, 135, 0.3);
-  font-size: 13px;
-  padding-left: 10px;
-  line-height: 45px;
-`;
-
-const Nickul = styled.ul`
-  display: grid;
-  grid-template-columns: 60px auto auto;
-  margin-top: 7px;
-`;
-
-const Nickdiv = styled.div`
+const Titlel = styled.div`
   border-radius: 15px 0px 0px 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
-  width: 60px;
+  width: 95px;
   text-align: center;
   line-height: 45px;
-`;
+`
 
-const Nickname = styled.input`
-  width: 230px;
+const Input = styled.input`
   height: 45px;
   color: #808080;
   border-radius: 0px 15px 15px 0px;
@@ -97,29 +72,18 @@ const Nickname = styled.input`
   padding-left: 10px;
 `;
 
-const Nickbutton = styled.button`
-  background-image: url(${checkButton});
-  background-size: cover;
-  margin-top: 7px;
-  margin-left: 10px;
-  width: 34px;
-  height: 34px;
-  border-radius: 34px;
-  border: none;
-  cursor: pointer;
-`;
-
-const Nickwarnig = styled.p`
-  margin-top: 5px;
-  font-size: 11px;
-  color: red;
-`;
-
-const Pwul = styled.ul`
+const Ul = styled.ul`
   margin-top: 7px;
   display: grid;
-  grid-template-columns: 60px auto auto;
-`;
+  grid-template-columns: 95px auto;
+`
+
+const Warn = styled.p`
+    margin-top: 7px;
+  font-size: 11px;
+  color: red;
+  margin-left: 100px;
+`
 
 const BodyDiv = styled.div`
   margin-top: 7px;
@@ -128,7 +92,7 @@ const BodyDiv = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-const HeightDiv = styled.div`
+const Bodydetail = styled.div`
   display: grid;
   grid-template-columns: 60px auto 50px;
   justify-content: center;
@@ -161,16 +125,8 @@ const BodyP = styled.div`
   line-height: 45px;
 `;
 
-const WeigthDiv = styled.div`
-  display: grid;
-  grid-template-columns: 60px auto 50px;
-  justify-content: center;
-  margin-right: 20px;
-`;
 
-const ProfileMod = function ({ id, password, nickname, height, weight }) {
-  const navigate = useNavigate();
-
+const ProfileMod = function ({ password, nickname, height, weight }) {
   const [heightInput, setHeightInput] = useState(height);
   const [weightInput, setWeightInput] = useState(weight);
 
@@ -197,7 +153,7 @@ const ProfileMod = function ({ id, password, nickname, height, weight }) {
     const formattedValue = `${integerPart}${decimalPart}`;
     setWeightInput(formattedValue);
   };
-  
+
 
   return (
     <>
@@ -213,50 +169,47 @@ const ProfileMod = function ({ id, password, nickname, height, weight }) {
           accept="image/gif, image/jpeg, image/png, image/jpg" name="profileImg">
         </PicInput>
       </ProfilePic>
-      <Idul>
-        <Titlej>아이디</Titlej>
-        <Titlen>{id}</Titlen>
-      </Idul>
-      <Nickul>
-        <Nickdiv>닉네임</Nickdiv>
-        <Nickname placeholder={nickname}></Nickname>
-        <Nickbutton></Nickbutton>
-      </Nickul>
-      <Nickwarnig>중복된 닉네임입니다.</Nickwarnig>
-      <Pwul>
-        <Titlej>비밀번호</Titlej>
-        <Titlen>{password}</Titlen>
-        <ButtonTT
-          name="변경"
-          onClick={() => navigate("/mypage/modify/password")}
-          width="65px"
-          height="31px"
-          fs="15px"
-          mt="8px"
-          ml="5px"
-        />
-      </Pwul>
+      <Ul>
+        <Titlel>닉네임</Titlel>
+        <Input placeholder={nickname}></Input>
+      </Ul>
+      <Warn>중복된 닉네임입니다.</Warn>
+      <Ul>
+        <Titlel>기존 비밀번호</Titlel>
+        <Input type="password" placeholder={password}></Input>
+      </Ul>
+      <Warn>기존 비밀번호와 다릅니다.</Warn>
+      <Ul>
+        <Titlel>변경 비밀번호</Titlel>
+        <Input type="password" placeholder="변경 비밀번호"></Input>
+      </Ul>
+      <Warn>조건에 충족하지 않습니다.</Warn>
+      <Ul>
+        <Titlel>비밀번호 확인</Titlel>
+        <Input type="password" placeholder="변경 비밀번호"></Input>
+      </Ul>
+      <Warn>비밀번호가 다릅니다.</Warn>
       <BodyDiv>
-        <HeightDiv>
+        <Bodydetail>
           <Titlej>키</Titlej>
-          <BInput 
+          <BInput
             placeholder={height}
             value={heightInput}
             onChange={handleHeightChange} // 값이 변경될 때 실행될 함수 설정
             type="text" // 숫자만 입력되도록 설정
           />
           <BodyP>cm</BodyP>
-        </HeightDiv>
-        <WeigthDiv>
+        </Bodydetail>
+        <Bodydetail>
           <Titlej>몸무게</Titlej>
-          <BInput 
+          <BInput
             placeholder={weight}
             value={weightInput}
             onChange={handleWeightChange} // 값이 변경될 때 실행될 함수 설정
             type="text" // 숫자만 입력되도록 설정
           />
           <BodyP>kg</BodyP>
-        </WeigthDiv>
+        </Bodydetail>
       </BodyDiv>
     </>
   );
