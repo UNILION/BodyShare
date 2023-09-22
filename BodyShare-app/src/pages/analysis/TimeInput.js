@@ -103,13 +103,13 @@ const TimeInput = function () {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    // 숫자 3자리 제한해준다.
-    if (/^\d{0,3}$/.test(value)) {
-      setSportTime((prevSportTime) => ({
-        ...prevSportTime,
-        [name]: value,
-      }));
-    }
+  // 숫자 3자리 제한해준다.
+  if (/^\d{0,3}$/.test(value)) {
+    setSportTime((prevSportTime) => ({
+      ...prevSportTime,
+      [name]: value,
+    }));
+  }
   };
   
   return (
@@ -134,9 +134,9 @@ const TimeInput = function () {
           <SmallBox
             type="text"
             maxLength="3"
-            name="hours" // hours를 구분할 수 있는 이름 설정
-            value={sportTime.hours} // Recoil 상태의 hours 값을 입력값으로 설정
-            onChange={handleInputChange} // 입력값이 변경될 때 핸들러 호출
+            name="hours" 
+            value={sportTime.hours} 
+            onChange={handleInputChange} 
           />
         </SportTime>
       </TimeInputContainer> 
