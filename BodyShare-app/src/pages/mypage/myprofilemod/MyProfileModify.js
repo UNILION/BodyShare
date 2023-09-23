@@ -3,12 +3,19 @@ import backButton from "assets/Img/back.png";
 import { useNavigate } from "react-router-dom";
 import Button from "components/commons/Button";
 import Image5 from "assets/Img/right.png";
-import ProfileMod from "pages/mypage/myprofilemod/ProfileMod";
 import CateMod from "pages/mypage/myprofilemod/CateMod";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
+import Banner from "./Banner";
+import Profile from "./Profile";
+import Nickname from "./Nickname";
+import Password from "./Password";
+import AfterPassword from "./AfterPassword";
+import Height from "./Height";
+import Weight from "./Weight";
+import { useForm } from "react-hook-form";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -25,6 +32,13 @@ const Titleul = styled.div`
   display: grid;
   grid-template-columns: auto auto;
   float: left;
+`;
+
+const BodyDiv = styled.div`
+  margin-top: 7px;
+  margin-right: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
 const Backbutton = styled.button`
@@ -64,36 +78,39 @@ const MyProfileModify = function () {
     loadUser();
   }, []);
 
-  const hidePassword = (password) => {
-    // 비밀번호 문자열의 첫 번째 문자를 제외한 나머지를 '*'로 대체
-    return password.charAt(0) + '*'.repeat(password.length - 1);
-  };
+  const {control, handleSubmit, formState:{errors}, register, getValues} = useForm()
+  const onSubmit = (data) => console.log(data);
 
   return (
     <>
-      {profileInfo && (
-        <All>
-          <Titleul>
-            <Backbutton onClick={() => { navigate("/mypage") }}></Backbutton>
-            <Title>나의 정보 수정</Title>
-          </Titleul>
-          <br />
-          <ProfileMod 
-            password={profileInfo.password}
-            nickname={profileInfo.nickname}
-            height={profileInfo.height}
-            weight={profileInfo.weight}
-          />
-          <CateMod />
-          <Button
-            name="수정완료"
-            img={Image5}
-            onClick={() => navigate("/mypage")}
-            mt="10px"
-            ml="170px"
-          />
-        </All>
-      )}
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {profileInfo && (
+          <All>
+            <Titleul>
+              <Backbutton onClick={() => { navigate("/mypage") }}></Backbutton>
+              <Title>나의 정보 수정</Title>
+            </Titleul>
+            <br />
+            <Banner register={register} />
+            <Profile register={register} />
+            <Nickname nickname={profileInfo.nickname} register={register} errors={errors} />
+            <Password password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
+            <AfterPassword register={register} errors={errors} getValues={getValues} />
+            <BodyDiv>
+              <Height height={profileInfo.height} register={register} errors={errors} />
+              <Weight weight={profileInfo.weight} register={register} errors={errors}/>
+            </BodyDiv>
+            <CateMod />
+            <Button
+              name="수정완료"
+              img={Image5}
+              // onClick={() => navigate("/mypage")}
+              mt="10px"
+              ml="170px"
+            />
+          </All>
+        )}
+      </form>
     </>
   );
 };
