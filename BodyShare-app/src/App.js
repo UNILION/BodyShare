@@ -1,8 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import GlobalStyle from "./theme/GlobalStyle";
 import User from "pages/user";
-import SignIn from "pages/user/signin/SignIn"
-import SignUp from "pages/user/signup/SignUp"
+import SignIn from "pages/user/signin/SignIn";
+import SignUp from "pages/user/signup/SignUp";
 import Layout from "./components/layout";
 import Home from "./pages/home";
 import Analysis from "./pages/analysis";
@@ -27,53 +32,76 @@ import InterestModify from "./pages/mypage/intermod/InterestModify";
 import SportHome from "./pages/analysis/sportchart/SportChart";
 import FoodHome from "./pages/analysis/foodchart/FoodChart";
 import LayoutAnalysis from "./pages/analysis/analysislayout";
-import { RecoilRoot } from 'recoil';
+import { userSelector } from "recoil/userRecoil";
+import { useRecoilValue } from "recoil";
 
 function App() {
+  const userNo = useRecoilValue(userSelector);
+
   return (
-    <RecoilRoot>
+    <>
       <GlobalStyle />
       <Router>
-        <Routes>
-          <Route path="/" element={<User />}>
-            <Route index element={<SignIn />} />
-            <Route path="/signup" element={<SignUp />} /> 
-            <Route path="/signup/interestList" element={<InterestList />} />
-            <Route path="/signup/userInfo" element={<UserInfo />} />
-          </Route>
-          <Route path="/home" element={<Layout />}>
-            <Route index element={<Home />} />
-          </Route>
-          <Route path="/analysis" element={<LayoutAnalysis />}>
-            <Route index element={<Analysis />} />
-            <Route path="/analysis/sportschart" element={<SportHome />} />
-            <Route path="/analysis/foodchart" element={<FoodHome />} />
-          </Route>
-          <Route path="/analysis/add" element={<Layout />} >
-            <Route index element={<SportSearch />} />
-            <Route path="/analysis/add/food" element={<FoodSearch />} />
-            <Route path="/analysis/add/time" element={<TimeInput />} />
-          </Route>
-          <Route path="/community" element={<Layout />}>
-            <Route index element={<Community />} />
-            <Route path="/community/commuIn" element={<CommuIn />} />
-            <Route path="/community/search" element={<CommuSearch />} />
-            <Route path="/community/search/after" element={<CommuSearchAfter />} />
-            <Route path="/community/communityAdd" element={<CommuAdd />} />
-            <Route path="/community/category" element={<CommuCategory />} />
-            <Route path="/community/feedAdd" element={<CommuFeedAdd />} />
-            <Route path="/community/feed" element={<CommuFeed />} />
-          </Route>
-          <Route path="/mypage" element={<Layout />}>
-            <Route index element={<Mypage />} />
-            <Route path="/mypage/modify" element={<MyProfileModify />} />
-            <Route path="/mypage/logout" element={<Logout />} />
-            <Route path="/mypage/modify/interest" element={<InterestModify />} />
-            <Route path="/mypage/modify/password" element={<PasswordModify />} />
-          </Route>
-        </Routes>
+        {userNo > 0 ? (
+          <Routes>
+            <Route path="/home" element={<Layout />}>
+              <Route index element={<Home />} />
+            </Route>
+            <Route path="/analysis" element={<LayoutAnalysis />}>
+              <Route index element={<Analysis />} />
+              <Route path="/analysis/sportschart" element={<SportHome />} />
+              <Route path="/analysis/foodchart" element={<FoodHome />} />
+            </Route>
+            <Route path="/analysis/add" element={<Layout />}>
+              <Route index element={<SportSearch />} />
+              <Route path="/analysis/add/food" element={<FoodSearch />} />
+              <Route path="/analysis/add/time" element={<TimeInput />} />
+              <Route
+                path="/analysis/add"
+                element={<Navigate replace to="/" />}
+              />
+            </Route>
+            <Route path="/community" element={<Layout />}>
+              <Route index element={<Community />} />
+              <Route path="/community/commuIn" element={<CommuIn />} />
+              <Route path="/community/search" element={<CommuSearch />} />
+              <Route
+                path="/community/search/after"
+                element={<CommuSearchAfter />}
+              />
+              <Route path="/community/communityAdd" element={<CommuAdd />} />
+              <Route path="/community/category" element={<CommuCategory />} />
+              <Route path="/community/feedAdd" element={<CommuFeedAdd />} />
+              <Route path="/community/feed" element={<CommuFeed />} />
+            </Route>
+            <Route path="/mypage" element={<Layout />}>
+              <Route index element={<Mypage />} />
+              <Route path="/mypage/modify" element={<MyProfileModify />} />
+              <Route path="/mypage/logout" element={<Logout />} />
+              <Route
+                path="/mypage/modify/interest"
+                element={<InterestModify />}
+              />
+              <Route
+                path="/mypage/modify/password"
+                element={<PasswordModify />}
+              />
+            </Route>
+            <Route path="/*" element={<Navigate replace to="/home" />} />
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/" element={<User />}>
+              <Route index element={<SignIn />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/signup/interestList" element={<InterestList />} />
+              <Route path="/signup/userInfo" element={<UserInfo />} />
+              <Route path="/*" element={<Navigate replace to="/" />} />
+            </Route>
+          </Routes>
+        )}
       </Router>
-    </RecoilRoot>
+    </>
   );
 }
 

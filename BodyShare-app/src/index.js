@@ -1,9 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import styled from 'styled-components';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import styled from "styled-components";
+import { RecoilRoot } from "recoil";
 
 const Container = styled.div`
   max-width: 390px;
@@ -14,15 +15,17 @@ const Container = styled.div`
   @media screen and (max-width: 390px) {
     width: 100%;
   }
-`
+`;
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <Container>
-      <App />
-    </Container>
-  </React.StrictMode>
+  <RecoilRoot>
+    <React.StrictMode>
+      <Container>
+        <App />
+      </Container>
+    </React.StrictMode>
+  </RecoilRoot>
 );
 
 // If you want to start measuring performance in your app, pass a function
