@@ -72,9 +72,22 @@ const Charts = function () {
 
   const chartDatas = async function () {
     try {
-      // 스포츠 차트 데이터 가져오기
-      const sportsResponse = await instance.get(`/record/sports/${userNo}`);
-      const sportsData = sportsResponse.data;
+       // 현재 날짜 구하기
+      const currentDate = new Date();
+
+    // 일주일 전 날짜 구하기
+    const oneWeekAgoDate = new Date();
+    oneWeekAgoDate.setDate(currentDate.getDate() - 7);
+
+    // 일주일치 스포츠 차트 데이터 가져오기
+    const sportsResponse = await instance.get(`/record/sports/${userNo}`, {
+      params: {
+        startDate: oneWeekAgoDate.toISOString(), // 일주일 전 날짜
+        endDate: currentDate.toISOString(), // 현재 날짜
+      },
+    });
+
+    const sportsData = sportsResponse.data;
 
       const sportsChartData = [
         ["", "운동 분"],
@@ -88,13 +101,13 @@ const Charts = function () {
       ];
       /*const sportsChartData = [
         ["", "운동 분"],
-        ["월", sportsData.monday],
-        ["화", sportsData.tuesday],
-        ["수", sportsData.wednesday],
-        ["목", sportsData.thursday],
-        ["금", sportsData.friday],
-        ["토", sportsData.saturday],
-        ["일", sportsData.sunday],
+        ["월", sportsData.monday + 9],
+        ["화", sportsData.tuesday + 9],
+        ["수", sportsData.wednesday + 9],
+        ["목", sportsData.thursday + 9],
+        ["금", sportsData.friday + 9],
+        ["토", sportsData.saturday + 9],
+        ["일", sportsData.sunday + 9],
       ];*/
 
       // 차트 데이터 설정
@@ -107,7 +120,7 @@ const Charts = function () {
       // 푸드 차트 데이터 가져오기
       const foodResponse = await instance.get(`/record/food/${userNo}`);
       const foodData = foodResponse.data;
-
+      const filtered = foodData.filter(item => isToday(item.date));
       const foodChartData = [
         ["작업", "하루 시간"],
         ["탄", 3],
@@ -116,9 +129,9 @@ const Charts = function () {
       ];
       /*const foodChartData = [
         ["작업", "하루 시간"],
-        ["탄", foodData.carbohydrate],
-        ["단", foodData.protein],
-        ["지", foodData.fat],
+        ["탄", filtered.reduce((total, item) => total + item.carbohydrate, 0)],
+        ["단", filtered.reduce((total, item) => total + item.protein, 0)],
+        ["지", filtered.reduce((total, item) => total + item.fat, 0)],
       ];*/
 
       setChartData2(foodChartData);
@@ -130,6 +143,14 @@ const Charts = function () {
   useEffect(() => {
     chartDatas();
   }, [userNo]);
+
+  const isToday = function(dateString) {
+    const today = new Date().toLocaleDateString();
+    const dateObject = new Date(dateString);
+    dateObject.setHours(dateObject.getHours() + 9);
+
+    return dateObject.toLocaleDateString() === today;
+  };
 
   return (
     <SliderContainer>
