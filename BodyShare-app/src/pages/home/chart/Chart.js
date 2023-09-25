@@ -5,16 +5,42 @@ import { useNavigate } from "react-router-dom";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
 import axios from "axios";
+import Slider from "react-slick";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
   withCredentials: true,
 });
 
+const SliderContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 100%);
+  overflow: hidden;
+  width: 370px;
+  margin: 5px auto;
+
+  .slick-dots {
+    position: absolute;
+    bottom: 5px;
+  }
+`;
+const settings = {
+  dots: true,
+  infinite: false
+};
+
+const Slide = styled.div`
+  min-width: 100%;
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s ease;
+  grid-column: span 1;
+`;
+
 const ChartBox = styled.div`
   grid-row: 2;
   display: flex;
-  width: 370px;
+  width: 360px;
   height: 280px;
   border-radius: 30px;
   background-color: #ffffff;
@@ -26,7 +52,7 @@ const ChartBox = styled.div`
 `;
 
 const ChartContainer = styled.div`
-  width: 180px;
+  width: 360px;
   height: 270px;
   background-color: white;
   border-radius: 30px;
@@ -49,18 +75,18 @@ const Charts = function () {
       // 스포츠 차트 데이터 가져오기
       const sportsResponse = await instance.get(`/record/sports/${userNo}`);
       const sportsData = sportsResponse.data;
-      
+
       const sportsChartData = [
-      ["", "운동 분"],
-      ["M", 60],
-      ["T", 45],
-      ["W", 30],
-      ["T", 75],
-      ["F", 90],
-      ["S", 120],
-      ["S", 60],
+        ["", "운동 분"],
+        ["월", 60],
+        ["화", 45],
+        ["수", 30],
+        ["목", 75],
+        ["금", 90],
+        ["토", 120],
+        ["일", 60],
       ];
-  /*const sportsChartData = [
+      /*const sportsChartData = [
         ["", "운동 분"],
         ["월", sportsData.monday],
         ["화", sportsData.tuesday],
@@ -86,7 +112,8 @@ const Charts = function () {
         ["작업", "하루 시간"],
         ["탄", 3],
         ["단", 5],
-      ];    
+        ["지", 2],
+      ];
       /*const foodChartData = [
         ["작업", "하루 시간"],
         ["탄", foodData.carbohydrate],
@@ -105,47 +132,57 @@ const Charts = function () {
   }, [userNo]);
 
   return (
-    <ChartBox>
-      <ChartContainer
-        onClick={() => {
-          navigate("/analysis/sportschart");
-        }}
-      >
-        <Chart
-          chartType="Bar"
-          width="170px"
-          height="240px"
-          data={chartData}
-          options={{
-            legend: { position: "none" },
-            chart: {
-              title: "운동 분",
-            },
-          }}
-          graph_id="sportschart"
-        />
-      </ChartContainer>
-      <ChartContainer
-        onClick={() => {
-          navigate("/analysis/foodchart");
-        }}
-      >
-        <Chart
-          chartType="PieChart"
-          width="170px"
-          height="240px"
-          data={chartData2}
-          options={{
-            title: "Calorie",
-            pieHole: 0.4,
-            titleTextStyle: {
-              fontSize: 16,
-            },
-          }}
-          graph_id="foodchart"
-        />
-      </ChartContainer>
-    </ChartBox>
+    <SliderContainer>
+      <Slider {...settings}>
+        <Slide>
+          <ChartBox>
+            <ChartContainer
+              onClick={() => {
+                navigate("/analysis/sportschart");
+              }}
+            >
+              <Chart
+                chartType="Bar"
+                width="350px"
+                height="240px"
+                data={chartData}
+                options={{
+                  legend: { position: "none" },
+                  chart: {
+                    title: "운동 분",
+                  },
+                }}
+                graph_id="sportschart"
+              />
+            </ChartContainer>
+            </ChartBox>
+        </Slide>
+        <Slide>
+          <ChartBox>
+            <ChartContainer
+              onClick={() => {
+                navigate("/analysis/foodchart");
+              }}
+            >
+              <Chart
+                chartType="PieChart"
+                width="350px"
+                height="240px"
+                data={chartData2}
+                options={{
+                  title: "Calorie",
+                  pieHole: 0.4,
+                  titleTextStyle: {
+                    fontSize: 16,
+                  },
+                }}
+                graph_id="foodchart"
+              />
+            </ChartContainer>
+          </ChartBox>
+        </Slide>
+      </Slider>
+    </SliderContainer>
   );
 };
 
