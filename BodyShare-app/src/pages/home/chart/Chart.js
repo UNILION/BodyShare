@@ -41,26 +41,37 @@ const Charts = function () {
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
 
-  const [chartData, setChartData] = useState(0);
-  const [chartData2, setChartData2] = useState(0);
+  const [chartData, setChartData] = useState([]);
+  const [chartData2, setChartData2] = useState([]);
 
   const chartDatas = async function () {
     try {
       // 스포츠 차트 데이터 가져오기
       const sportsResponse = await instance.get(`/record/sports/${userNo}`);
       const sportsData = sportsResponse.data;
-
+      
       const sportsChartData = [
-        ["", "운동 분"],
-        ["M", 60],
-        ["T", 45],
-        ["W", 30],
-        ["T", 75],
-        ["F", 90],
-        ["S", 120],
-        ["S", 60],
+      ["", "운동 분"],
+      ["M", 60],
+      ["T", 45],
+      ["W", 30],
+      ["T", 75],
+      ["F", 90],
+      ["S", 120],
+      ["S", 60],
       ];
+  /*const sportsChartData = [
+        ["", "운동 분"],
+        ["월", sportsData.monday],
+        ["화", sportsData.tuesday],
+        ["수", sportsData.wednesday],
+        ["목", sportsData.thursday],
+        ["금", sportsData.friday],
+        ["토", sportsData.saturday],
+        ["일", sportsData.sunday],
+      ];*/
 
+      // 차트 데이터 설정
       setChartData(sportsChartData);
     } catch (error) {
       console.error(error);
@@ -75,8 +86,13 @@ const Charts = function () {
         ["작업", "하루 시간"],
         ["탄", 3],
         ["단", 5],
-        ["지", 2],
-      ];
+      ];    
+      /*const foodChartData = [
+        ["작업", "하루 시간"],
+        ["탄", foodData.carbohydrate],
+        ["단", foodData.protein],
+        ["지", foodData.fat],
+      ];*/
 
       setChartData2(foodChartData);
     } catch (error) {
@@ -103,7 +119,7 @@ const Charts = function () {
           options={{
             legend: { position: "none" },
             chart: {
-              title: "Daily Diet",
+              title: "운동 분",
             },
           }}
           graph_id="sportschart"
