@@ -1,10 +1,12 @@
 import styled from "styled-components";
 import searchIcon from "assets/Img/search.png";
-import xbutton from "assets/Img/xbutton.png";
 import { useNavigate } from "react-router-dom";
 import Tag from "components/commons/Tag";
-import { useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
+import SearchList from "pages/user/interestlist/SearchList";
+import { useRecoilValue } from 'recoil';
+import { sportsSelector } from "recoil/sportList";
+import Selected from "pages/user/interestlist/Selected";
 
 const SearchInput = styled.div`
   grid-row: 3;
@@ -15,6 +17,10 @@ const SearchInput = styled.div`
 
 const SearchImg = styled.img`
   margin: auto;
+
+  &:hover{
+    cursor: pointer;
+  }
 `;
 
 const Input = styled.input`
@@ -31,88 +37,6 @@ const SportCategory = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   margin-left: 10px;
-`;
-
-const SportSearchResult = styled.div`
-  grid-row: 5;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
-  margin-bottom: 20px;
-  justify-content: center;
-`;
-
-const ResultButton = styled.button`
-  width: 360px;
-  margin-top: 10px;
-  background-color: ${(props) => (props.active ? props.hoverColor : 'white')};
-  border: none;
-  border-radius: 15px;
-  padding-top: 25px;
-  cursor: pointer;
-  transition: background-color 0.2s; 
-
-  &:hover {
-    background-color: ${(props) => (props.active ? props.hoverColor : 'white')};
-  }
-`;
-
-const RP = styled.p`
-  font-size: 17px;
-  text-align: left;
-  margin-bottom: 10px;
-`;
-
-const Line = styled.div`
-  width: 340px;
-  border: 1px solid rgba(135, 135, 135, 0.3);
-`;
-
-const SelectedDiv = styled.div`
-  grid-row: 6;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  width: 300px;
-  height: 25px;
-  margin: 0 auto;
-`;
-
-const Select = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-
-`;
-
-const SelectCircle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 56px;
-  height: 23px;
-  border-radius: 23px;
-  background-color: rgba(85, 111, 255, 0.3);
-`;
-
-const SelectP = styled.p`
-  font-size: 11px;
-  font-weight: bold;
-  color: #656565;
-`;
-const DeleteButtonDiv = styled.div`
-  width: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Xbutton = styled.img`
-  width: 25px;
-  height: 25px;
-  background-color: rgba(85, 111, 255, 0.3);
-  border-radius: 15px;
-  margin-left: 3px;
-  cursor: pointer;
 `;
 
 const Donediv = styled.div`
@@ -140,95 +64,110 @@ const Done = styled.button`
 const Search = function () {
   const navigate = useNavigate();
 
-  const [buttonStates, setButtonStates] = useState({
-    button1: false,
+  const allSports = useRecoilValue(sportsSelector);
+
+  const [list, setList] = useState(allSports);
+  
+  const [buttonState, setButtonState] = useState({
+    button1: true,
     button2: false,
     button3: false,
     button4: false
   });
 
+  // 카테고리 선택
   const handleButtonClick = (buttonName) => {
-    setButtonStates((prevState) => ({
-      ...prevState,
-      [buttonName]: !prevState[buttonName],
+    setButtonState((prevState) => ({
+      ...Object.fromEntries(Object.entries(prevState).map(([key, value]) => [key, key === buttonName ? !value : false]))
     }));
+
+    let tempName;
+    if(buttonName == "button1"){
+      tempName = "";
+    } else if(buttonName == "button2"){
+      tempName = "근력";
+    } else if(buttonName == "button3"){
+      tempName = "유산소";
+    } else if(buttonName == "button4"){
+      tempName = "기타";
+    }
+
+    if(tempName != ""){
+      const tempList = [...allSports].filter(item => item.category == tempName );
+      setList(tempList);
+    }else{
+      setList([...allSports]);
+    }
   };
+
+  // 텍스트 검색
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      // 엔터 키가 눌렸을 때 수행할 동작을 여기에 추가합니다.
+      searchText();
+    }
+  };
+
+  const keyword = useRef("");
+  
+  const searchText = function(){
+    let tempName;
+    if(buttonState.button1 == true){
+      tempName = "";
+    } else if(buttonState.button2 == true){
+      tempName = "근력";
+    } else if(buttonState.button3 == true){
+      tempName = "유산소";
+    } else if(buttonState.button4 == true){
+      tempName = "기타";
+    }
+
+    const regExp = new RegExp(keyword.current);
+
+    if(tempName != ""){
+      const tempList = [...allSports].filter(item => item.category == tempName );
+      const newList = tempList.filter(item => regExp.test(item.name));
+      setList(newList);
+    }else{
+      const tempAll = [...allSports];
+      const newList = tempAll.filter(item => regExp.test(item.name));
+      setList(newList);
+    }
+  };
+
+  // 선택된 항목 리스트
+  const [selectedList, setSelectedList] = useState([]);
+
+  const changeSelected = function(list) {
+    setSelectedList(list);
+  };
+
+  useEffect(() => {
+    changeSelected(selectedList);
+  }, [selectedList]);
 
   return (
     <>
       <SearchInput>
-        <SearchImg src={searchIcon} />
-        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" />
+        <SearchImg src={searchIcon} onClick={searchText} />
+        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" onKeyPress={handleKeyPress} onChange={(e)=>{keyword.current = (e.target.value)}}/>
       </SearchInput>
 
       <SportCategory>
-        <Tag tagtitle="전체" width="80px" height="36px" br="13px" />
-        <Tag tagtitle="근력" width="80px" height="36px" br="13px" />
-        <Tag tagtitle="유산소" width="80px" height="36px" br="13px" />
-        <Tag tagtitle="기타" width="80px" height="36px" br="13px" />
+        <Tag tagtitle="전체" width="80px" height="36px" br="13px"
+        onClick={() => handleButtonClick('button1')} bc={buttonState.button1 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hoverColor="rgba(85, 111, 255, 0.7)"/>
+        <Tag tagtitle="근력" width="80px" height="36px" br="13px" 
+        onClick={() => handleButtonClick('button2')} bc={buttonState.button2 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hoverColor="rgba(85, 111, 255, 0.7)"/>
+        <Tag tagtitle="유산소" width="80px" height="36px" br="13px"
+        onClick={() => handleButtonClick('button3')} bc={buttonState.button3 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hoverColor="rgba(85, 111, 255, 0.7)"/>
+        <Tag tagtitle="기타" width="80px" height="36px" br="13px"
+        onClick={() => handleButtonClick('button4')} bc={buttonState.button4 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hoverColor="rgba(85, 111, 255, 0.7)"/>
       </SportCategory>
 
-      <SportSearchResult>
-        <ResultButton
-          active={buttonStates.button1}
-          onClick={() => handleButtonClick('button1')}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          <RP>축구</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton
-          active={buttonStates.button2}
-          onClick={() => handleButtonClick('button2')}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          <RP>수영</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton
-          active={buttonStates.button3}
-          onClick={() => handleButtonClick('button3')}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          <RP>달리기</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton
-          active={buttonStates.button4}
-          onClick={() => handleButtonClick('button4')}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          <RP>필라테스</RP>
-          <Line></Line>
-        </ResultButton>
-      </SportSearchResult>
+      {/* 조회된 목록과 선택된 관심사 목록 */}
+      <SearchList itemList={list} selectedList={selectedList} changeSelected={changeSelected} />
 
-      <SelectedDiv>
-        <Select>
-          <SelectCircle>
-            <SelectP>요가</SelectP>
-          </SelectCircle>
-          <DeleteButtonDiv>
-            <Xbutton src={xbutton}></Xbutton>
-          </DeleteButtonDiv>
-        </Select>
-        <Select>
-          <SelectCircle>
-            <SelectP>수영</SelectP>
-          </SelectCircle>
-          <DeleteButtonDiv>
-            <Xbutton src={xbutton}></Xbutton>
-          </DeleteButtonDiv>
-        </Select>
-        <Select>
-          <SelectCircle>
-            <SelectP>달리기</SelectP>
-          </SelectCircle>
-          <DeleteButtonDiv>
-            <Xbutton src={xbutton}></Xbutton>
-          </DeleteButtonDiv>
-        </Select>
-      </SelectedDiv>
+      <Selected selectedList={selectedList} changeSelected={changeSelected} ></Selected>
 
       <Donediv>
         <Done onClick={() => navigate("/signup")}>선택완료</Done>
