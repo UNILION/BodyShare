@@ -2,7 +2,16 @@ import styled from "styled-components";
 import CardImage1 from "assets/Img/card_image1.png";
 import CardImage2 from "assets/Img/card_image2.png";
 import Card from "components/commons/Card";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { userSelector } from "recoil/userRecoil";
+import { useRecoilValue } from 'recoil';
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
+});
 
 const CommunityDiv = styled.div`
   grid-row: 3;
@@ -42,36 +51,33 @@ const CommunityRecommend2 = styled.div`
 
 const CommunityRe = function () {
   const navigate = useNavigate();
+  const userNo = useRecoilValue(userSelector);
 
-  /*
-const CommunityRe = function () {
-  const navigate = useNavigate();
-  const [communityData1, setCommunityData] = useState(0);
+  const [communityData, setCommunityData] = useState(0);
   const [communitytData2, setCommunityData2] = useState(0);
 
-  useEffect(() => {
-    const communityDataR = async () => {
-      try {
-        const communityResponse = await communityData1(`/community/${userNo}`); 
-        const communityData = communityResponse.data;
-        setCommunityData(communityData)       
-      } catch (error) {
-        console.error(error);
-      }
-   
+  const communityDatas = async function () {
+    try {
+      const communityResponse = await instance.get(`/community/${userNo}`); 
+      const community = communityResponse.data;
+      setCommunityData(community)       
+    } catch (error) {
+      console.error(error);
+    }
 
     try {
-      const communityResponse = await communityData1(`/community/${userNo}`); 
-      const communityData = communityResponse2.data;
-      setCommunityDat2(communityData)       
+      const communityResponse2 = await instance.get(`/community/${userNo}`); 
+      const community2 = communityResponse2.data;
+      setCommunityData2(community2)       
     } catch (error) {
       console.error(error);
     }
   };
 
-    communityDataR();
-  }, []);
-*/
+useEffect(() => {
+  communityDatas();
+}, [userNo]);
+
 
   return (
     <CommunityDiv>
