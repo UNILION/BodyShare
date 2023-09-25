@@ -50,7 +50,6 @@ const SelectedItem = function ({ record, selectedList, changeSelected }) {
   const handleButtonClick = () => {
     const temp = [...selectedList].filter(item => item.no !== record.no );
     changeSelected(temp);
-    console.log(temp);
   };
 
   return (

@@ -142,10 +142,6 @@ const Search = function () {
     setSelectedList(list);
   };
 
-  useEffect(() => {
-    changeSelected(selectedList);
-  }, [selectedList]);
-
   return (
     <>
       <SearchInput>

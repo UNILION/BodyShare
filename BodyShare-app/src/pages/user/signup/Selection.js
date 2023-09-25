@@ -49,7 +49,7 @@ const Xbutton = styled.img`
   cursor: pointer;
 `;
 
-const Selected = function () {
+const Selection = function () {
   return (
     <SelectedDiv>
       <Select>
@@ -80,4 +80,4 @@ const Selected = function () {
   );
 };
 
-export default Selected;
+export default Selection;
