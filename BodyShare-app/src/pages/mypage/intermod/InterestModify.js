@@ -1,13 +1,14 @@
 import styled from "styled-components";
 import backButton from "assets/Img/back.png";
-import plus from "assets/Img/check.png";
-import Button from "components/commons/Button";
 import { useNavigate } from "react-router-dom";
-import SearchCate from 'pages/mypage/intermod/SearchCate';
-import ResultCate from 'pages/mypage/intermod/ResultCate';
+import Search from "pages/mypage/intermod/Search";
 
 const Container = styled.div`
-  padding: 10px 20px;
+  display: grid;
+  width: 390px;
+  height: 696px;
+  grid-template-rows: auto auto auto auto auto auto 1fr;
+  gap: 10px;
 `;
 
 const PreviousButton = styled.button`
@@ -27,16 +28,7 @@ const InterestModify = function () {
   return (
     <Container>
       <PreviousButton onClick={() => navigate("/mypage/modify")} />
-      <SearchCate />
-      <ResultCate />
-      <Button
-        name="선택완료"
-        img={plus}
-        width="200px"
-        mt="3px"
-        ml="157px"
-        onClick={() => navigate("/mypage/modify")}
-      />
+      <Search />
     </Container>
   );
 };
