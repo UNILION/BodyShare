@@ -72,45 +72,41 @@ const Charts = function () {
 
   const chartDatas = async function () {
     try {
+      // 서버에서 모든 데이터 가져오기
+      const response = await instance.get(`/record/sports/${userNo}`);
+      const allData = response.data;
+
+      // 현재 주의 시작 및 종료 날짜 계산
       const currentDate = new Date();
+      
+      const currentWeekStartDate = new Date(currentDate);
+      currentWeekStartDate.setDate(currentDate.getDate() - currentDate.getDay());
+      
+      const currentWeekEndDate = new Date(currentWeekStartDate);
+      currentWeekEndDate.setDate(currentWeekStartDate.getDate() + 6);
 
-      // 오늘의 요일을 가져옵니다.
-      const todayDayOfWeek = currentDate.getDay();
-
-      // 이번 주의 시작 날짜를 계산합니다.
-      const thisWeekStartDate = new Date(currentDate);
-      thisWeekStartDate.setDate(currentDate.getDate() - todayDayOfWeek);
-
-      // 이번 주의 종료 날짜를 계산합니다.
-      const thisWeekEndDate = new Date(thisWeekStartDate);
-      thisWeekEndDate.setDate(thisWeekStartDate.getDate() + 6);
-
-      // 이번 주치 스포츠 차트 데이터 가져오기
-      const sportsResponse = await instance.get(`/record/sports/${userNo}`, {
-        params: {
-          startDate: thisWeekStartDate.toISOString(),
-          endDate: thisWeekEndDate.toISOString(),
-        },
+      // 현재 주의 데이터만 필터링
+      const currentWeekDate = allData.filter((item) => {
+        const itemDate = new Date(item.date);
+        return itemDate >= currentWeekStartDate && itemDate <= currentWeekEndDate;
       });
 
-      const sportsData = sportsResponse.data;
-      const exerciseTimeData = sportsData.map((item) => item.exerciseTime);
-      // 요일 및 날짜를 함께 표시하는 데이터 생성
 
       const chartData = [["", "운동 분"]];
       const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
       for (let i = 0; i < 7; i++) {
         const day = daysOfWeek[i];
-        const date = new Date(thisWeekStartDate);
-        date.setDate(thisWeekStartDate.getDate() + i);
+        const date = new Date(currentWeekStartDate);
+        date.setDate(currentWeekStartDate.getDate() + i);
         const options = {
           month: "2-digit",
           day: "2-digit",
         };
         const formattedDate = date.toLocaleDateString("ko-KR", options);
         const dateString = `${formattedDate}\n(${day})`; 
-        const exerciseTimeRecord = sportsData.find((record) => {
+
+        const exerciseTimeRecord = currentWeekDate.find((record) => {
           const recordDate = new Date(record.date);
           return recordDate.getDay() === i;
         });
@@ -120,7 +116,7 @@ const Charts = function () {
       }
 
       // 차트 데이터 설정
-
+      
       setChartData(chartData);
     } catch (error) {
       console.error(error);
