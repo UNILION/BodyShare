@@ -1,6 +1,6 @@
 module.exports = {
   mysql: {
-    host: "43.202.150.252",
+    host: "52.78.0.174",
     port: "3306",
     database: "bodyshare",
     user: "bodyshare",
