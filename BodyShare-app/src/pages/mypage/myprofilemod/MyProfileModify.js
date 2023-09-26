@@ -7,6 +7,7 @@ import CateMod from "pages/mypage/myprofilemod/CateMod";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
+import { interestSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
 import Banner from "./Banner";
 import Profile from "./Profile";
@@ -61,7 +62,8 @@ const MyProfileModify = function () {
   const navigate = useNavigate();
 
   const userNo = useRecoilValue(userSelector); // userNo를 Recoil 상태인 userSelector로부터 가져옴
-
+  const interest = useRecoilValue(interestSelector);
+  const [list, setList] = useState(interest); 
   const [profileInfo, setProfileInfo] = useState();
 
   const loadUser = async function () {
@@ -100,7 +102,7 @@ const MyProfileModify = function () {
               <Height height={profileInfo.height} register={register} errors={errors} />
               <Weight weight={profileInfo.weight} register={register} errors={errors}/>
             </BodyDiv>
-            <CateMod />
+            <CateMod usersList={list}/>
             <Button
               name="수정완료"
               img={Image5}
