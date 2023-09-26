@@ -30,11 +30,13 @@ const CalendarDiv = styled.div`
 `;
 
 const NoteGrid = styled.div`
+  width: 370px;
   position: relative;
   background-color: white;
   border: 1px solid rgba(135, 135, 135, 0.3);
   border-radius: 15px;
   padding: 0;
+  box-sizing: border-box;
 `;
 
 const TitleDate = styled.div`
@@ -51,8 +53,9 @@ const P = styled.p`
 `;
 
 const Line = styled.div`
-  width: 390px;
+  width: 350px;
   height: 1px;
+  margin: auto;
   background-color: rgba(135, 135, 135, 0.3);
 `;
 
@@ -128,12 +131,13 @@ const Record = function () {
           <TitleDate>
             <P>{selectedDate ? selectedDate.toLocaleDateString() : ""}</P>
           </TitleDate>
-
-          {/* 운동 기록 부분 */}
-          {sportsList && <SportRecord sportsList={sportsList} />}
-          <Line></Line>
-          {/* 식단 기록 부분 */}
-          {/* <FoodRecord foodList={foodList} /> */}
+          <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+            {/* SportRecord component */}
+            {sportsList && <SportRecord sportsList={sportsList} />}
+            <Line></Line>
+            {/* FoodRecord component */}
+            {foodList && <FoodRecord foodList={foodList} />}
+          </div>
         </NoteGrid>
 
         {/* 기록 추가하기 */}
