@@ -2,6 +2,8 @@ import styled from "styled-components";
 import backButton from "assets/Img/back.png";
 import { useNavigate } from "react-router-dom";
 import Search from "pages/mypage/intermod/Search";
+import { useRecoilValue } from "recoil";
+import { interestSelector } from "recoil/userRecoil"
 
 const Container = styled.div`
   display: grid;
@@ -24,11 +26,12 @@ const PreviousButton = styled.button`
 
 const InterestModify = function () {
   const navigate = useNavigate();
+  const interestList = useRecoilValue(interestSelector);
 
   return (
     <Container>
       <PreviousButton onClick={() => navigate("/mypage/modify")} />
-      <Search />
+      <Search interestList={interestList}/>
     </Container>
   );
 };
