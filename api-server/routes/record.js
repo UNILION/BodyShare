@@ -36,6 +36,20 @@ router.get("/food/:no", async (req, res, next) => {
   }
 });
 
+//음식 세부 기록 목록 조회
+router.get("/fooddetails/:no", async (req, res, next) => {
+  try{
+    const id = Number(req.params.no);
+    const list = await record.findfoodrecord(id);
+    const foodNo = list[0].foodNo;
+    const foodData = await record.findFoodByFoodNo(foodNo);
+    res.json(foodData);
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 // 운동 기록 등록
 router.post("/sportsadd", async (req, res, next) => {
   try{

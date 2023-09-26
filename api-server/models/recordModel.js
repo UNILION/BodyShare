@@ -38,6 +38,18 @@ const recordModel = {
     }
   },
 
+    //음식 세부 기록 목록 조회
+    async findFoodByFoodNo(foodNo) {
+      try {
+        const sql = `SELECT * FROM food WHERE foodNo = ?`;
+        const [result] = await pool.query(sql, [foodNo]);
+        return result;
+      } catch (err) {
+        throw new Error("DB Error", { cause: err });
+      }
+    },
+  
+
   // 운동 기록 등록
   async createsportsrecord(com) {
     try {
