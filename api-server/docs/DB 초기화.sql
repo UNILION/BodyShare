@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`community` (
   `interest` INT NOT NULL,
   `communityName` VARCHAR(255) NOT NULL,
   `createdDate` DATETIME NOT NULL,
-  `intro` VARCHAR(255) NULL DEFAULT NULL COMMENT '커뮤니티 소개',
+  `intro` VARCHAR(255) NOT NULL COMMENT '커뮤니티 소개',
   `profileImageUrl` VARCHAR(255) NULL DEFAULT 'communityProfileDefault.png',
   `bannerImageUrl` VARCHAR(255) NULL DEFAULT 'bannerDefault.png',
   PRIMARY KEY (`communityNo`),
@@ -115,6 +115,7 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`communityPost` (
   `locationLong` DOUBLE NULL DEFAULT NULL COMMENT '경도',
   `likes` INT NULL DEFAULT '0' COMMENT '좋아요',
   `contentImageUrl` VARCHAR(255) NULL DEFAULT 'postDefault.png',
+  `recordDate` DATE NULL DEFAULT NULL COMMENT '불러온 기록의 날짜',
   PRIMARY KEY (`postNo`),
   CONSTRAINT `fk_communityPost_communityId`
     FOREIGN KEY (`communityNo`)
