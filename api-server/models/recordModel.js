@@ -12,6 +12,21 @@ const recordModel = {
     }
   },
 
+  // 해당 유저의 최근 3일 운동 기록 목록 조회
+  async findByRecent(no){
+    try{
+      const sql = `SELECT *
+      FROM exerciseRecord
+      WHERE userNo = ?
+      AND date >= DATE_SUB(CURDATE(), INTERVAL 3 DAY)
+      ORDER BY date DESC;`;
+      const [ result ] = await pool.query(sql, [no]);
+      return result;
+    }catch(err){
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+
   // 음식 기록 목록 조회
   async findfoodrecord(no){
     try{

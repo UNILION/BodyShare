@@ -14,6 +14,17 @@ router.get("/sports/:no", async (req, res, next) => {
   }
 });
 
+// 해당 유저의 최근 3일 운동 기록 목록 조회
+router.get("/sports/recent/:no", async (req, res, next) => {
+  try{
+    const id = Number(req.params.no);
+    const list = await record.findByRecent(id);
+    res.json(list);
+  }catch(err){
+    next(err);
+  }
+});
+
 // 음식 기록 목록 조회
 router.get("/food/:no", async (req, res, next) => {
   try{
