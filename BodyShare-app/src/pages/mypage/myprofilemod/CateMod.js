@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import ButtonTT from "pages/mypage/newverst/ButtonTT"
-import xbutton from "assets/Img/xbutton.png"
-import Tag from "components/commons/Tag";
+import CateItem from "./CateItem"
 
 const Cateckul = styled.div`
   margin-top: 7px;
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto;
 `;
 
 const Catetitle = styled.p`
@@ -18,23 +17,24 @@ const Catetitle = styled.p`
 `;
 
 const Cateul = styled.div`
-  margin-top: 3px;
   display: grid;
-  grid-template-columns: 60px auto;
+  grid-template-columns: 1fr 1fr 1fr 3fr;
+  margin-top: 3px;
 `;
 
-const Xbutton = styled.img`
-  width: 20px;
-  height: 20px;
-  background-color: rgba(85, 111, 255, 0.3);
-  border-radius: 15px;
-  cursor: pointer;
-  margin-top: 2px;
-`;
 
-const CateMod = function () {
+const CateMod = function ({ usersList }) {
   const navigate = useNavigate();
+  if (!usersList || usersList.length === 0) {
+    return null; // 또는 다른 적절한 처리
+  }
 
+  const list = usersList.map(record => {
+    return (
+      <CateItem key={record.no} record={record} />
+    );
+  });
+  
   return (
     <>
       <Cateckul>
@@ -50,10 +50,7 @@ const CateMod = function () {
         />
       </Cateckul>
       <Cateul>
-        <Tag
-          tagtitle="요가"
-        />
-        <Xbutton src={xbutton} />
+        {list}
       </Cateul>
     </>
   );
