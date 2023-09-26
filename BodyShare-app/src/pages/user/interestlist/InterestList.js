@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import IntroMessage from "pages/user/interestlist/IntroMessage";
 import Search from "pages/user/interestlist/Search";
+import { useRecoilValue } from "recoil";
+import { interestSelector } from "recoil/userRecoil"
 
 const Container = styled.div`
   display: grid;
@@ -11,11 +13,13 @@ const Container = styled.div`
 `;
 
 const InterestList = function() {
+  const interestList = useRecoilValue(interestSelector);
+
   return (
     <Container>
       <IntroMessage />
 
-      <Search />
+      <Search interestList={interestList}/>
     </Container>
   );
   

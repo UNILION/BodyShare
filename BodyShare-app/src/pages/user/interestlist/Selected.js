@@ -11,6 +11,10 @@ const Div = styled.div`
 `;
 
 const Selected = function ( { selectedList, changeSelected }) {
+  if (!selectedList || selectedList.length === 0) {
+    return null; // 또는 다른 적절한 처리
+  }
+  
   const list = selectedList.map(record => {
     return (
       <SelectedItem key={record.no} record={record} selectedList={selectedList} changeSelected={changeSelected}/>

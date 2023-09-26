@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { interestSelector } from "recoil/userRecoil";
 
 const ButtonDiv = styled.div`
   grid-row: 5;
@@ -60,8 +62,7 @@ const NextButtonNot = styled.button`
   color: white;
   background-color: #878787;
   border: 1px solid rgba(135, 135, 135, 0.3);
-  margin-bottom: 10px;
-
+  
   &:hover {
     cursor: pointer;
   }
@@ -70,14 +71,15 @@ const NextButtonNot = styled.button`
 const Button = function () {
   const navigate = useNavigate();
 
+  const interestList = useRecoilValue(interestSelector);
+
   return (
     <ButtonDiv>
       <PreviousDiv>
         <PreviousButton onClick={() => navigate("/")}>이전</PreviousButton>
       </PreviousDiv>
       <NextDiv>
-        <NextButtonNot>다음</NextButtonNot>
-        <NextButton onClick={() => navigate("/signup/userInfo")}>다음</NextButton>
+        {interestList.length == 0 ? <NextButtonNot>다음</NextButtonNot> : <NextButton onClick={() => navigate("/signup/userInfo")}>다음</NextButton> }
       </NextDiv>
     </ButtonDiv>
   );

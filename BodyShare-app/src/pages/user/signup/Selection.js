@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import xbutton from "assets/Img/xbutton.png";
+import SelectionItem from "pages/user/signup/SelectionItem";
 
-const SelectedDiv = styled.div`
+const Div = styled.div`
   grid-row: 4;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -10,73 +10,20 @@ const SelectedDiv = styled.div`
   margin: 0 auto;
 `;
 
-const Select = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+const Selection = function ({usersList}) {
+  if (!usersList || usersList.length === 0) {
+    return null; // 또는 다른 적절한 처리
+  }
 
-`;
-
-const SelectCircle = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 56px;
-  height: 23px;
-  border-radius: 23px;
-  background-color: rgba(85, 111, 255, 0.3);
-`;
-
-const SelectP = styled.p`
-  font-size: 11px;
-  font-weight: bold;
-  color: #656565;
-`;
-const DeleteButtonDiv = styled.div`
-  width: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Xbutton = styled.img`
-  width: 25px;
-  height: 25px;
-  background-color: rgba(85, 111, 255, 0.3);
-  border-radius: 15px;
-  margin-left: 3px;
-  cursor: pointer;
-`;
-
-const Selection = function () {
+  const list = usersList.map(record => {
+    return (
+      <SelectionItem key={record.no} record={record} />
+    );
+  });
   return (
-    <SelectedDiv>
-      <Select>
-        <SelectCircle>
-          <SelectP>요가</SelectP>
-        </SelectCircle>
-        <DeleteButtonDiv>
-          <Xbutton src={xbutton} ></Xbutton>
-        </DeleteButtonDiv>
-      </Select>
-      <Select>
-        <SelectCircle>
-          <SelectP>수영</SelectP>
-        </SelectCircle>
-        <DeleteButtonDiv>
-          <Xbutton src={xbutton}></Xbutton>
-        </DeleteButtonDiv>
-      </Select>
-      <Select>
-        <SelectCircle>
-          <SelectP>달리기</SelectP>
-        </SelectCircle>
-        <DeleteButtonDiv>
-          <Xbutton src={xbutton}></Xbutton>
-        </DeleteButtonDiv>
-      </Select>
-    </SelectedDiv>
+    <Div>
+      {list}
+    </Div>
   );
 };
 

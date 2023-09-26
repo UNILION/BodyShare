@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Tag from "components/commons/Tag";
 import { useEffect, useRef, useState } from "react";
 import SearchList from "pages/user/interestlist/SearchList";
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { sportsSelector } from "recoil/sportList";
+import { interestAtom } from "recoil/userRecoil";
 import Selected from "pages/user/interestlist/Selected";
 
 const SearchInput = styled.div`
@@ -61,7 +62,7 @@ const Done = styled.button`
   }
 `;
 
-const Search = function () {
+const Search = function ({interestList}) {
   const navigate = useNavigate();
 
   const allSports = useRecoilValue(sportsSelector);
@@ -136,10 +137,17 @@ const Search = function () {
   };
 
   // 선택된 항목 리스트
-  const [selectedList, setSelectedList] = useState([]);
+  const [selectedList, setSelectedList] = useState(interestList);
 
   const changeSelected = function(list) {
     setSelectedList(list);
+  };
+
+  const [interest, setInterest] = useRecoilState(interestAtom);
+
+  const complete = function() {
+    setInterest(selectedList);
+    navigate("/signup")
   };
 
   return (
@@ -166,7 +174,7 @@ const Search = function () {
       <Selected selectedList={selectedList} changeSelected={changeSelected} ></Selected>
 
       <Donediv>
-        <Done onClick={() => navigate("/signup")}>선택완료</Done>
+        <Done onClick={complete}>선택완료</Done>
       </Donediv>
     </>
   );

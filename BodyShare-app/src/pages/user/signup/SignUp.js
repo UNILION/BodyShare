@@ -4,10 +4,10 @@ import Interest from "pages/user/signup/Interest";
 import Selection from "pages/user/signup/Selection";
 import Button from 'pages/user/signup/Button';
 import axios from "axios";
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { sportsAtom } from "recoil/sportList";
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+import { interestSelector } from "recoil/userRecoil";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -24,6 +24,8 @@ const Container = styled.div`
 
 const SignUp = function () {
   const [sports, setSports] = useRecoilState(sportsAtom);
+  const userInterest = useRecoilValue(interestSelector);
+  const [list, setList] = useState(userInterest); 
 
   const loadDB = async function () {
     try {
@@ -35,16 +37,6 @@ const SignUp = function () {
     }
   };
 
-  // // 선택된 항목 리스트
-  // const [selectedList, setSelectedList] = useState([]);
-
-  // const changeSelected = function (list) {
-  //   setSelectedList(list);
-  // };
-
-  // const location = useLocation();
-  // const { data } = location.state || {};
-
   useEffect(() => {
     loadDB();
   }, []);
@@ -55,7 +47,7 @@ const SignUp = function () {
 
       <Interest />
 
-      <Selection />
+      <Selection usersList={list}/>
 
       <Button />
     </Container>
