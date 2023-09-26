@@ -1,17 +1,14 @@
-import React, { useState, useEffect  } from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-//import { useRPState } from 'recoil/foodList'; // RP Recoil 상태 불러오기
-import axios from 'axios'; 
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
+import { useRecoilState } from 'recoil';
+import { foodAtom } from 'recoil/foodList';
 
 const ResultList = styled.div`
   margin-top: 20px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
+  overflow-y: auto; 
 `;
 
 const ResultButton = styled.button`
@@ -39,94 +36,44 @@ const Line = styled.div`
   border: 1px solid rgba(135, 135, 135, 0.3);
 `;
 
-const ResultCate = function ({ no, name }) {
+const ResultCate = function ({ foodList }) {
+  const [selectedButton, setSelectedButton] = useState(null);
+  const [selectedFood, setSelectedFood] = useRecoilState(foodAtom);
 
-  // RP 상태를 읽고 업데이트할 Recoil 사용
-  //const [rp, setRP] = useRPState();
-  
-  const [buttonStates, setButtonStates] = useState({
-    button1: false,
-    button2: false,
-    button3: false,
-    button4: false,
-    button5: false,
-  });
-
-  useEffect(() => {
-    // 서버에서 음식 데이터를 가져오는 요청
-    const fetchFoodData = async () => {
-      try {
-        const response = await instance.get(`/add/food?id=${no}`);
-        const data = response.data;
-        // 응답 데이터를 적절히 처리하고 필요한 상태 업데이트를 수행
-        console.log("성공", data);
-      } catch (error) {
-        // 요청이 실패하면 에러 처리
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchFoodData();
-  }, [no]);
-
-  const handleButtonClick = (buttonName, rpValue) => {
-    setButtonStates((prevState) => ({
-      ...prevState,
-      [buttonName]: !prevState[buttonName],
-    }));
-
-    // RP 값을 업데이트합니다.
-    //setRP(rpValue);
+  const handleButtonClick = async (buttonIndex, foodName) => {
+    if (selectedButton === buttonIndex) {
+      // 이미 선택한 버튼을 다시 클릭하면 선택 해제
+      setSelectedButton(null);
+      // 해당 음식을 선택 해제할 때, 선택한 음식 리스트에서 제거
+      setSelectedFood((prevSelectedFood) =>
+        prevSelectedFood.filter((food) => food !== foodName)
+      );
+    } else {
+      // 새로운 버튼을 클릭하면 선택
+      setSelectedButton(buttonIndex);
+      // 해당 음식을 선택한 음식 리스트에 추가
+      setSelectedFood((prevSelectedFood) => [...prevSelectedFood, foodName]);
+    }
   };
+  
 
-
-
-  return(
+  return (
     <>
       <ResultList>
-      <ResultButton
-          active={buttonStates.button1}
-          onClick={() => handleButtonClick('button1', '닭가슴살')}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          {/* {rp === '닭가슴살' && <RP>닭가슴살</RP>} */}
-          <Line></Line>
-        </ResultButton>
-        {/* <ResultButton
-          active={buttonStates.button2}
-          onClick={() => handleButtonClick('button2', '닭가슴살')}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          {rp === '닭가슴살' && <RP>닭가슴살</RP>}
-          <Line></Line>
-        </ResultButton> */}
-        {/* <ResultButton
-          active={buttonStates.button3}
-          onClick={() => handleButtonClick('button3')}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          <RP>바나나</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton
-          active={buttonStates.button4}
-          onClick={() => handleButtonClick('button4')}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          <RP>계란</RP>
-          <Line></Line>
-        </ResultButton>
-        <ResultButton
-          active={buttonStates.button5}
-          onClick={() => handleButtonClick('button5')}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          <RP>김밥</RP>
-          <Line></Line>
-        </ResultButton> */}
+        {foodList.map((food, index) => (
+          <ResultButton
+            key={index}
+            active={selectedButton === index}
+            onClick={() => handleButtonClick(index, food.name)}
+            hoverColor="rgba(85, 111, 255, 0.7)"
+          >
+            <RP>{food.name}</RP>
+            <Line></Line>
+          </ResultButton>
+        ))}
       </ResultList>
     </>
-  )
+  );
 };
 
-export default ResultCate
+export default ResultCate;
