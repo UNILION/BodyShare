@@ -110,7 +110,12 @@ const Charts = function () {
         };
         const formattedDate = date.toLocaleDateString("ko-KR", options);
         const dateString = `${formattedDate}\n(${day})`; 
-        const exerciseTime = exerciseTimeData[i]; 
+        const exerciseTimeRecord = sportsData.find((record) => {
+          const recordDate = new Date(record.date);
+          return recordDate.getDay() === i;
+        });
+        
+        const exerciseTime = exerciseTimeRecord ? exerciseTimeRecord.exerciseTime : 0;
         chartData.push([dateString, exerciseTime]);
       }
 
@@ -122,22 +127,29 @@ const Charts = function () {
     }
 
     try {
+      // 오늘 날짜를 가져옵니다.
+      const todayDate = new Date().toISOString().split("T")[0];
+    
       // 푸드 차트 데이터 가져오기
       const foodResponse = await instance.get(`/record/food/${userNo}`);
       const foodData = foodResponse.data;
-      const filtered = foodData.filter((item) => isToday(item.date));
-
-      const chartData2 = [
-        ["작업", "하루 시간"],
-        ["탄", filtered.reduce((total, item) => total + item.carbohydrate, 0)],
-        ["단", filtered.reduce((total, item) => total + item.protein, 0)],
-        ["지", filtered.reduce((total, item) => total + item.fat, 0)],
-      ];
-
+    
+      // 오늘 날짜와 맞는 데이터만 필터링합니다.
+      const filtered = foodData.filter((item) => item.date.split("T")[0] === todayDate);
+    
+      // 차트 데이터 설정
+      const chartData2 = [["", "탄", "단", "지"]];
+    
+      // 필터링된 데이터를 순회하며 각 항목을 차트 데이터에 추가합니다.
+      filtered.forEach((item) => {
+        chartData2.push([item.date, item.carbohydrate, item.protein, item.fat]);
+      });
+    
       setChartData2(chartData2);
     } catch (error) {
       console.error(error);
     }
+    
   };
 
   const isToday = function (dateString) {
