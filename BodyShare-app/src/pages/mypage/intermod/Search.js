@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Tag from "components/commons/Tag";
 import { useEffect, useRef, useState } from "react";
 import SearchList from "pages/mypage/intermod/SearchList";
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { sportsSelector } from "recoil/sportList";
+import { interestAtom } from "recoil/userRecoil";
 import Selected from "pages/mypage/intermod/Selected";
 import Button from "components/commons/Button";
 import plus from "assets/Img/check.png";
@@ -50,7 +51,7 @@ const Donediv = styled.div`
 `;
 
 
-const Search = function () {
+const Search = function ({interestList}) {
   const navigate = useNavigate();
 
   const allSports = useRecoilValue(sportsSelector);
@@ -125,10 +126,17 @@ const Search = function () {
   };
 
   // 선택된 항목 리스트
-  const [selectedList, setSelectedList] = useState([]);
+  const [selectedList, setSelectedList] = useState(interestList);
 
   const changeSelected = function (list) {
     setSelectedList(list);
+  };
+
+  const [interest, setInterest] = useRecoilState(interestAtom);
+
+  const complete = function() {
+    setInterest(selectedList);
+    navigate("/mypage/modify")
   };
 
   return (
@@ -160,7 +168,7 @@ const Search = function () {
           width="200px"
           mt="3px"
           ml="157px"
-          onClick={() => navigate("/mypage/modify")}
+          onClick={complete}
         />
       </Donediv>
     </>
