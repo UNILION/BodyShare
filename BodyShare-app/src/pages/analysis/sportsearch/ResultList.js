@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-//import { useSPORTState } from 'recoil/sportList'; // RP Recoil 상태 불러오기
-import axios from 'axios'; // Axios를 불러옵니다.
 
 const ResultList = styled.div`
   margin-top: 20px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
+  overflow-y: auto; 
 `;
 
 const ResultButton = styled.button`
@@ -34,62 +34,27 @@ const Line = styled.div`
   border: 1px solid rgba(135, 135, 135, 0.3);
 `;
 
-const ResultCate = function ({no, name}) {
+const ResultCate = function ({ sportsList }) {
+  const [selectedButton, setSelectedButton] = useState(null);
 
-  //const [rp, setRP] = useSPORTState();
-  
-  const [buttonStates, setButtonStates] = useState({
-    button1: false,
-    button2: false,
-    button3: false,
-    button4: false
-  });
-
-  const handleButtonClick = (buttonName, rpValue) => {
-    setButtonStates((prevState) => ({
-      ...prevState,
-      [buttonName]: !prevState[buttonName],
-    }));
-
-    // RP 값을 업데이트합니다.
-    //setRP(rpValue);
+  const handleButtonClick = (index, sportsName) => {
+    setSelectedButton(index);
   };
 
-  return(
+  return (
     <>
       <ResultList>
-        <ResultButton
-          active={buttonStates.button1}
-          onClick={() => handleButtonClick('button1', '축구')}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          {/* {rp === '축구' && <RP>축구</RP>} */}
-          <Line></Line>
-        </ResultButton>
-        {/* <ResultButton
-          active={buttonStates.button2}
-          onClick={() => handleButtonClick('button2', name)}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          {rp === name && <RP>{name}</RP>}
-          <Line></Line>
-        </ResultButton>
-        <ResultButton
-          active={buttonStates.button3}
-          onClick={() => handleButtonClick('button3', name)}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          {rp === name && <RP>{name}</RP>}
-          <Line></Line>
-        </ResultButton>
-        <ResultButton
-          active={buttonStates.button4}
-          onClick={() => handleButtonClick('button4', name)}
-          hoverColor="rgba(85, 111, 255, 0.7)"
-        >
-          {rp === name && <RP>{name}</RP>}
-          <Line></Line>
-        </ResultButton> */}
+        {sportsList.map((sports, index) => (
+          <ResultButton
+            key={index}
+            active={index === selectedButton}
+            onClick={() => handleButtonClick(index)}
+            hoverColor="rgba(85, 111, 255, 0.7)"
+          >
+            <RP>{sports.name}</RP>
+            <Line></Line>
+          </ResultButton>
+        ))}
       </ResultList>
     </>
   )
