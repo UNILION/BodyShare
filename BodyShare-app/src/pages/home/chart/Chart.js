@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { Chart } from "react-google-charts";
-import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
-import axios from "axios";
 import Slider from "react-slick";
 
 const instance = axios.create({
@@ -26,7 +26,7 @@ const SliderContainer = styled.div`
 `;
 const settings = {
   dots: true,
-  infinite: false
+  infinite: false,
 };
 
 const Slide = styled.div`
@@ -67,51 +67,56 @@ const Charts = function () {
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
 
-  const [chartData, setChartData] = useState([]);
-  const [chartData2, setChartData2] = useState([]);
+  const [chartData, setChartData] = useState(0);
+  const [chartData2, setChartData2] = useState(0);
 
   const chartDatas = async function () {
     try {
-       // 현재 날짜 구하기
       const currentDate = new Date();
 
-    // 일주일 전 날짜 구하기
-    const oneWeekAgoDate = new Date();
-    oneWeekAgoDate.setDate(currentDate.getDate() - 7);
+      // 오늘의 요일을 가져옵니다.
+      const todayDayOfWeek = currentDate.getDay();
 
-    // 일주일치 스포츠 차트 데이터 가져오기
-    const sportsResponse = await instance.get(`/record/sports/${userNo}`, {
-      params: {
-        startDate: oneWeekAgoDate.toISOString(), // 일주일 전 날짜
-        endDate: currentDate.toISOString(), // 현재 날짜
-      },
-    });
+      // 이번 주의 시작 날짜를 계산합니다.
+      const thisWeekStartDate = new Date(currentDate);
+      thisWeekStartDate.setDate(currentDate.getDate() - todayDayOfWeek);
 
-    const sportsData = sportsResponse.data;
+      // 이번 주의 종료 날짜를 계산합니다.
+      const thisWeekEndDate = new Date(thisWeekStartDate);
+      thisWeekEndDate.setDate(thisWeekStartDate.getDate() + 6);
 
-      const sportsChartData = [
-        ["", "운동 분"],
-        ["월", 60],
-        ["화", 45],
-        ["수", 30],
-        ["목", 75],
-        ["금", 90],
-        ["토", 120],
-        ["일", 60],
-      ];
-      /*const sportsChartData = [
-        ["", "운동 분"],
-        ["월", sportsData.monday + 9],
-        ["화", sportsData.tuesday + 9],
-        ["수", sportsData.wednesday + 9],
-        ["목", sportsData.thursday + 9],
-        ["금", sportsData.friday + 9],
-        ["토", sportsData.saturday + 9],
-        ["일", sportsData.sunday + 9],
-      ];*/
+      // 이번 주치 스포츠 차트 데이터 가져오기
+      const sportsResponse = await instance.get(`/record/sports/${userNo}`, {
+        params: {
+          startDate: thisWeekStartDate.toISOString(),
+          endDate: thisWeekEndDate.toISOString(),
+        },
+      });
+
+      const sportsData = sportsResponse.data;
+      const exerciseTimeData = sportsData.map((item) => item.exerciseTime);
+      // 요일 및 날짜를 함께 표시하는 데이터 생성
+
+      const chartData = [["", "운동 분"]];
+      const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+
+      for (let i = 0; i < 7; i++) {
+        const day = daysOfWeek[i];
+        const date = new Date(thisWeekStartDate);
+        date.setDate(thisWeekStartDate.getDate() + i);
+        const options = {
+          month: "2-digit",
+          day: "2-digit",
+        };
+        const formattedDate = date.toLocaleDateString("ko-KR", options);
+        const dateString = `${formattedDate}\n(${day})`; 
+        const exerciseTime = exerciseTimeData[i]; 
+        chartData.push([dateString, exerciseTime]);
+      }
 
       // 차트 데이터 설정
-      setChartData(sportsChartData);
+
+      setChartData(chartData);
     } catch (error) {
       console.error(error);
     }
@@ -120,37 +125,37 @@ const Charts = function () {
       // 푸드 차트 데이터 가져오기
       const foodResponse = await instance.get(`/record/food/${userNo}`);
       const foodData = foodResponse.data;
-      const filtered = foodData.filter(item => isToday(item.date));
-      const foodChartData = [
-        ["작업", "하루 시간"],
-        ["탄", 3],
-        ["단", 5],
-        ["지", 2],
-      ];
-      /*const foodChartData = [
+      const filtered = foodData.filter((item) => isToday(item.date));
+
+      const chartData2 = [
         ["작업", "하루 시간"],
         ["탄", filtered.reduce((total, item) => total + item.carbohydrate, 0)],
         ["단", filtered.reduce((total, item) => total + item.protein, 0)],
         ["지", filtered.reduce((total, item) => total + item.fat, 0)],
-      ];*/
+      ];
 
-      setChartData2(foodChartData);
+      setChartData2(chartData2);
     } catch (error) {
       console.error(error);
     }
   };
 
-  useEffect(() => {
-    chartDatas();
-  }, [userNo]);
-
-  const isToday = function(dateString) {
+  const isToday = function (dateString) {
     const today = new Date().toLocaleDateString();
     const dateObject = new Date(dateString);
-    dateObject.setHours(dateObject.getHours() + 9);
+    dateObject.setHours(dateObject.getHours());
 
     return dateObject.toLocaleDateString() === today;
   };
+
+  useEffect(() => {
+    chartDatas();
+    const interval = setInterval(() => {
+      chartDatas(); // 일정 간격으로 데이터 갱신
+    }, 24 * 60 * 60 * 1000); // 매일 한 번 갱신 (24시간 간격)
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <SliderContainer>
@@ -172,11 +177,23 @@ const Charts = function () {
                   chart: {
                     title: "운동 분",
                   },
+                  hAxis: {
+                    title: "날짜",
+                  },
+                  // 텍스트 렌더링 함수 사용
+                  vAxis: {
+                    format: "decimal",
+                    title: "운동 분",
+                    textStyle: {
+                      fontSize: 12,
+                    },
+                  },
                 }}
                 graph_id="sportschart"
+                rootProps={{ "data-testid": "1" }}
               />
             </ChartContainer>
-            </ChartBox>
+          </ChartBox>
         </Slide>
         <Slide>
           <ChartBox>
