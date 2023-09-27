@@ -38,21 +38,14 @@ const Line = styled.div`
 
 const ResultCate = function ({ foodList }) {
   const [selectedButton, setSelectedButton] = useState(null);
-  const [selectedFood, setSelectedFood] = useRecoilState(foodAtom);
 
   const handleButtonClick = async (buttonIndex, foodName) => {
     if (selectedButton === buttonIndex) {
       // 이미 선택한 버튼을 다시 클릭하면 선택 해제
       setSelectedButton(null);
-      // 해당 음식을 선택 해제할 때, 선택한 음식 리스트에서 제거
-      setSelectedFood((prevSelectedFood) =>
-        prevSelectedFood.filter((food) => food !== foodName)
-      );
     } else {
       // 새로운 버튼을 클릭하면 선택
       setSelectedButton(buttonIndex);
-      // 해당 음식을 선택한 음식 리스트에 추가
-      setSelectedFood((prevSelectedFood) => [...prevSelectedFood, foodName]);
     }
   };
   
