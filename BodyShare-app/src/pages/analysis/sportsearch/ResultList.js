@@ -30,15 +30,18 @@ const RP = styled.p`
 `;
 
 const Line = styled.div`
-  width: 340px;
+  width: 330px;
+  display: inline-block;
+  margin: auto;
   border: 1px solid rgba(135, 135, 135, 0.3);
 `;
 
-const ResultCate = function ({ sportsList }) {
+const ResultCate = function ({ sportsList, changeSelected }) {
   const [selectedButton, setSelectedButton] = useState(null);
 
-  const handleButtonClick = (index, sportsName) => {
+  const handleButtonClick = function(index, data){
     setSelectedButton(index);
+    changeSelected(data);
   };
 
   return (
@@ -48,7 +51,9 @@ const ResultCate = function ({ sportsList }) {
           <ResultButton
             key={index}
             active={index === selectedButton}
-            onClick={() => handleButtonClick(index)}
+            onClick={() => {
+              handleButtonClick(index, sports);
+            }}
             hoverColor="rgba(85, 111, 255, 0.7)"
           >
             <RP>{sports.name}</RP>
