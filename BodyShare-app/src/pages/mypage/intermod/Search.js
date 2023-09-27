@@ -10,6 +10,13 @@ import { interestAtom } from "recoil/userRecoil";
 import Selected from "pages/mypage/intermod/Selected";
 import Button from "components/commons/Button";
 import plus from "assets/Img/check.png";
+import axios from "axios";
+import { userSelector } from "recoil/userRecoil";
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
+});
 
 const SearchInput = styled.div`
   grid-row: 3;
@@ -53,7 +60,7 @@ const Donediv = styled.div`
 
 const Search = function ({interestList}) {
   const navigate = useNavigate();
-
+  const userNo = useRecoilValue(userSelector);
   const allSports = useRecoilValue(sportsSelector);
 
   const [list, setList] = useState(allSports);
@@ -134,9 +141,19 @@ const Search = function ({interestList}) {
 
   const [interest, setInterest] = useRecoilState(interestAtom);
 
-  const complete = function() {
+  const complete = async () => {
     setInterest(selectedList);
-    navigate("/mypage/modify")
+    
+    // 선택이 완료되면 선택된 항목들을 서버에 업데이트
+    for (const categoryNo of selectedList) {
+      try {
+        await instance.put(`/users/interest/${userNo}`, { sportsNo: categoryNo });
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    navigate("/mypage/modify");
   };
 
   return (

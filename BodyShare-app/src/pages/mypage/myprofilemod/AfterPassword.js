@@ -45,7 +45,7 @@ const AfterPassword = function ({ register, errors, getValues }) {
         <Titlel>변경 비밀번호</Titlel>
         <Input
           {...register("afterpassword", {
-            required: "바꿀 비밀번호를 작성해주세요",
+            //required: "바꿀 비밀번호를 작성해주세요",
             pattern: {
               value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/,
               message: "비밀번호는 대문자, 소문자, 숫자, 특수 문자(@#$%^&+=)를 최소 한 개씩 포함해야 합니다."
@@ -59,8 +59,14 @@ const AfterPassword = function ({ register, errors, getValues }) {
         <Titlel>비밀번호 확인</Titlel>
         <Input
           {...register("checkpassword", {
-            validate: (value) =>
-              value === getValues().afterpassword || "비밀번호와 일치하지 않습니다."
+            // validate 규칙 수정
+            validate: (value) => {
+              // 비밀번호 확인 필드와 변경 비밀번호 필드가 모두 빈 값인 경우 유효성 통과
+              if (!value && !getValues().afterpassword) {
+                return true;
+              }
+              return value === getValues().afterpassword || "비밀번호와 일치하지 않습니다.";
+            },
           })}
           placeholder="비밀번호 확인"
         />

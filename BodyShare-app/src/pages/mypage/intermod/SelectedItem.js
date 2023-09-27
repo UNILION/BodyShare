@@ -51,6 +51,7 @@ const SelectedItem = function ({ record, selectedList, changeSelected }) {
     const temp = [...selectedList].filter(item => item.no !== record.no );
     changeSelected(temp);
   };
+  
 
   return (
     < SelectedDiv >

@@ -63,7 +63,7 @@ const MyProfileModify = function () {
 
   const userNo = useRecoilValue(userSelector); // userNo를 Recoil 상태인 userSelector로부터 가져옴
   const interest = useRecoilValue(interestSelector);
-  const [list, setList] = useState(interest); 
+  const [list, setList] = useState(interest);
   const [profileInfo, setProfileInfo] = useState();
 
   const loadUser = async function () {
@@ -80,14 +80,39 @@ const MyProfileModify = function () {
     loadUser();
   }, []);
 
-  const {control, handleSubmit, formState:{errors}, register, getValues} = useForm()
-  const onSubmit = (data) => console.log(data);
+  const { control, handleSubmit, formState: { errors }, register, getValues } = useForm()
+
+  const onSubmit = async (data) => {
+    try {
+      // 사용자가 입력한 정보를 서버로 전송합니다.
+      const response = await instance.put(`/users/useredit/${userNo}`, data);
+
+      // 업데이트가 성공하면 사용자를 리디렉션하거나 성공 메시지를 표시할 수 있습니다.
+      if (response.status === 200) {
+        navigate("/mypage"); // 성공적으로 업데이트된 경우 메인 페이지로 이동
+      } else {
+        console.error("업데이트 실패");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  console.log(interest);
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         {profileInfo && (
           <All>
+            {interest.map(item => {
+              return <input {...register('sportsNo')}
+                type="hidden"
+                value={item.no}
+              />;
+            })}
+          
+
             <Titleul>
               <Backbutton onClick={() => { navigate("/mypage") }}></Backbutton>
               <Title>나의 정보 수정</Title>
@@ -100,13 +125,14 @@ const MyProfileModify = function () {
             <AfterPassword register={register} errors={errors} getValues={getValues} />
             <BodyDiv>
               <Height height={profileInfo.height} register={register} errors={errors} />
-              <Weight weight={profileInfo.weight} register={register} errors={errors}/>
+              <Weight weight={profileInfo.weight} register={register} errors={errors} />
             </BodyDiv>
-            <CateMod usersList={list}/>
+            <CateMod usersList={list} interest={interest} />
             <Button
               name="수정완료"
               img={Image5}
               // onClick={() => navigate("/mypage")}
+              type="submit"
               mt="10px"
               ml="170px"
             />
