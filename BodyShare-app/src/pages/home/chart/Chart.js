@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
+import { foodSelector } from "recoil/foodList";
 import { useRecoilValue } from "recoil";
 import Slider from "react-slick";
 
@@ -24,6 +25,7 @@ const SliderContainer = styled.div`
     bottom: 5px;
   }
 `;
+
 const settings = {
   dots: true,
   infinite: false,
@@ -66,9 +68,11 @@ const ChartContainer = styled.div`
 const Charts = function () {
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
+  const food = useRecoilValue(foodSelector);
 
-  const [chartData, setChartData] = useState(0);
-  const [chartData2, setChartData2] = useState(0);
+  const [sportsChartData, setSportsChartData] = useState([]);
+  const [foodChartData, setFoodChartData] = useState([]);
+  
 
   const chartDatas = async function () {
     try {
@@ -78,21 +82,24 @@ const Charts = function () {
 
       // 현재 주의 시작 및 종료 날짜 계산
       const currentDate = new Date();
-      
+
       const currentWeekStartDate = new Date(currentDate);
-      currentWeekStartDate.setDate(currentDate.getDate() - currentDate.getDay());
-      
+      currentWeekStartDate.setDate(
+        currentDate.getDate() - currentDate.getDay()
+      );
+
       const currentWeekEndDate = new Date(currentWeekStartDate);
       currentWeekEndDate.setDate(currentWeekStartDate.getDate() + 6);
 
       // 현재 주의 데이터만 필터링
       const currentWeekDate = allData.filter((item) => {
         const itemDate = new Date(item.date);
-        return itemDate >= currentWeekStartDate && itemDate <= currentWeekEndDate;
+        return (
+          itemDate >= currentWeekStartDate && itemDate <= currentWeekEndDate
+        );
       });
 
-
-      const chartData = [["", "운동 분"]];
+      const sportsChartData = [["", "운동 분"]];
       const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
       for (let i = 0; i < 7; i++) {
@@ -104,48 +111,64 @@ const Charts = function () {
           day: "2-digit",
         };
         const formattedDate = date.toLocaleDateString("ko-KR", options);
-        const dateString = `${formattedDate}\n(${day})`; 
+        const dateString = `${formattedDate}\n(${day})`;
 
         const exerciseTimeRecord = currentWeekDate.find((record) => {
           const recordDate = new Date(record.date);
           return recordDate.getDay() === i;
         });
-        
-        const exerciseTime = exerciseTimeRecord ? exerciseTimeRecord.exerciseTime : 0;
-        chartData.push([dateString, exerciseTime]);
+
+        const exerciseTime = exerciseTimeRecord
+          ? exerciseTimeRecord.exerciseTime
+          : 0;
+        sportsChartData.push([dateString, exerciseTime]);
       }
 
       // 차트 데이터 설정
-      
-      setChartData(chartData);
+      setSportsChartData(sportsChartData);
     } catch (error) {
       console.error(error);
     }
 
     try {
+      // 서버에서 음식 데이터 가져오기
+      const responseFood = await instance.get(`/record/food/${userNo}`);
+      const allDataFood = responseFood.data;
+
       // 오늘 날짜를 가져옵니다.
-      const todayDate = new Date().toISOString().split("T")[0];
-    
-      // 푸드 차트 데이터 가져오기
-      const foodResponse = await instance.get(`/record/food/${userNo}`);
-      const foodData = foodResponse.data;
-    
+      const todayDate = new Date().toLocaleDateString();
+
       // 오늘 날짜와 맞는 데이터만 필터링합니다.
-      const filtered = foodData.filter((item) => item.date.split("T")[0] === todayDate);
-    
-      // 차트 데이터 설정
-      const chartData2 = [["", "탄", "단", "지"]];
-    
-      // 필터링된 데이터를 순회하며 각 항목을 차트 데이터에 추가합니다.
-      filtered.forEach((item) => {
-        chartData2.push([item.date, item.carbohydrate, item.protein, item.fat]);
+      const filteredData = Array.isArray(allDataFood) ? allDataFood : [];
+      const filtered = filteredData.filter((item) => {
+        const itemDate = new Date(item.date).toLocaleDateString();
+        return itemDate === todayDate;
       });
-    
-      setChartData2(chartData2);
+
+      // 탄수화물, 단백질, 지방을 저장할 변수를 초기화합니다.
+      let carbohydrate = 0;
+      let protein = 0;
+      let fat = 0;
+
+      // 필터링된 데이터를 순회하며 각 항목을 합산합니다.
+      filtered.forEach((item) => {
+        carbohydrate += item.carbohydrate || 0;
+        protein += item.protein || 0;
+        fat += item.fat || 0;
+      });
+
+      // 차트 데이터 설정
+      const updatedFoodChartData = [
+        ["영양소", "그램"],
+        ["탄수화물", carbohydrate],
+        ["단백질", protein],
+        ["지방", fat],
+      ];
+
+      setFoodChartData(updatedFoodChartData);
     } catch (error) {
       console.error(error);
     }
-    
   };
 
   const isToday = function (dateString) {
@@ -179,7 +202,7 @@ const Charts = function () {
                 chartType="Bar"
                 width="350px"
                 height="240px"
-                data={chartData}
+                data={sportsChartData}
                 options={{
                   legend: { position: "none" },
                   chart: {
@@ -214,7 +237,7 @@ const Charts = function () {
                 chartType="PieChart"
                 width="350px"
                 height="240px"
-                data={chartData2}
+                data={foodChartData}
                 options={{
                   title: "Calorie",
                   pieHole: 0.4,
