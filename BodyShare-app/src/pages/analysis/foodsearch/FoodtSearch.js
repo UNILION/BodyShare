@@ -87,10 +87,14 @@ const FoodtSearch = function () {
       const dietDate = String(new Date().toLocaleDateString());
     
       // 선택한 음식 정보를 담은 객체를 생성
-      const foodNo = selected.no;
-      
-      const response = await instance.post('/record/foodadd', {userNo, foodNo, dietDate});
+      const foodData = {
+        userNo,
+        foodNo: selected.no,
+        dietDate
+      };
 
+      const response = await instance.post('/record/foodadd', foodData);
+      
       console.log('POST 요청이 성공적으로 보내졌습니다.');
       console.log('서버 응답:', response.data);
     } catch (error) {
