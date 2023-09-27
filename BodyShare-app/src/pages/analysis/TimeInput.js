@@ -5,7 +5,9 @@ import Button from "components/commons/Button";
 import plus from "assets/Img/buttonplus.png";
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { sportTimeState } from "recoil/sportTime";
+import { selectedSportNameState } from 'recoil/sportList'; 
 
 const TimeInputContainer = styled.div`
   display: grid;
@@ -97,9 +99,9 @@ const SportName = styled.p`
 
 const TimeInput = function () {
   const navigate = useNavigate();
-
   const [sportTime, setSportTime] = useRecoilState(sportTimeState); //시간 recoil에 저장
-
+  const selectedSportName = useRecoilValue(selectedSportNameState);
+  const today = new Date().toLocaleDateString();
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -118,15 +120,15 @@ const TimeInput = function () {
         <PreviousButton src={previous} onClick={() => navigate('/analysis')}></PreviousButton>
         
         <SportTitle>
-          <Category>유산소</Category>
-          <SmallLine></SmallLine>
-          <SportName>달리기</SportName>
+          {/* <Category>유산소</Category> */}
+          {/* <SmallLine></SmallLine> */}
+          <SportName>{selectedSportName}</SportName>
           <Line></Line>
         </SportTitle>
         <SportDate>
           <P>날짜</P>
           <BoxContainer>
-            <Box>2023.09.08</Box>
+            <Box>{today}</Box>
           </BoxContainer>
         </SportDate>
         <SportTime>
