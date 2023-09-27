@@ -10,6 +10,16 @@ const instance = axios.create({
   withCredentials: true,
 });
 
+const Group = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  margin-bottom: 30px;
+
+  margin-top: 10px;
+  max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
+  overflow-y: auto;
+`;
+
 const Img = styled.img`
   margin-top: 20px;
   width: 83px;
@@ -35,6 +45,10 @@ const Member = styled.div`
   font-size: 13px;
   font-weight: bold;
   margin-top: 10px;
+`;
+
+const Hr = styled.hr`
+  border-color: rgba(0, 0, 0, 0.25);
 `;
 
 const MyCommu = function ({ commu }) {
@@ -66,27 +80,31 @@ const MyCommu = function ({ commu }) {
 
   return (
     <>
-      <Img
-        src={`http://localhost:33000/images/communitys/${commu.profileImageUrl}`}
-        onClick={() => navigate("/community/commuIn")}
-      />
-      <Register>
-        <Title onClick={() => navigate("/community/commuIn")}>
-          {commu.communityName}
-        </Title>
-        {memberList > 0 ? (
-          <>
-            <Member>{memberList}명의 회원</Member>
-            {feeds.map((feed, idx) => (
-              <MyItem feed={feed} key={idx} />
-            ))}
-          </>
-        ) : (
-          <div style={{ marginTop: "20px" }}>
-            현재 새롭게 등록된 글이 없습니다.
-          </div>
-        )}
-      </Register>
+      <Group>
+        <Img
+          src={`http://localhost:33000/images/communitys/${commu.profileImageUrl}`}
+          onClick={() => navigate("/community/commuIn")}
+        />
+        <Register>
+          <Title onClick={() => navigate("/community/commuIn")}>
+            {commu.communityName}
+          </Title>
+          {memberList > 0 ? (
+            <>
+              <Member>{memberList}명의 회원</Member>
+              {feeds.map((feed, idx) => (
+                <MyItem feed={feed} key={idx} />
+              ))}
+            </>
+          ) : (
+            <div style={{ marginTop: "20px" }}>
+              현재 새롭게 등록된 글이 없습니다.
+            </div>
+          )}
+        </Register>
+      </Group>
+
+      <Hr />
     </>
   );
 };

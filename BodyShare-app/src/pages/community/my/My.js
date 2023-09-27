@@ -17,17 +17,11 @@ const Text = styled.div`
 `;
 
 const Group = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
   margin-bottom: 30px;
 
   margin-top: 10px;
   max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
   overflow-y: auto;
-`;
-
-const Hr = styled.hr`
-  border-color: rgba(0, 0, 0, 0.25);
 `;
 
 const My = function () {
@@ -55,14 +49,14 @@ const My = function () {
       <Text>내가 가입한 커뮤니티</Text>
 
       <Group>
-        {communityData
-          ? communityData.map((commu, idx) => (
-              <MyCommu commu={commu} key={idx} />
-            ))
-          : null}
+        <>
+          {communityData
+            ? communityData.map((commu, idx) => (
+                <MyCommu commu={commu} key={idx} />
+              ))
+            : null}
+        </>
       </Group>
-
-      <Hr />
     </>
   );
 };
