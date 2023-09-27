@@ -21,16 +21,16 @@ const Inst = styled.div`
     margin-top: 10px;
 `;
 
-const Profile = function () {
+const Profile = function ( {title, intro, sports} ) {
   return(
     <Pfcommentul>
-      <CommuName>클라이밍이 좋은 사람들</CommuName>
+      <CommuName>{title}</CommuName>
       <CommuInLi>
-        <CommuIntro>저희는 그저 클라이밍이 좋아서 모인 사람들입니다.</CommuIntro>
+        <CommuIntro>{intro}</CommuIntro>
       </CommuInLi>
         <Inst>
           <Tag 
-            tagtitle="요가"
+            tagtitle={sports}
             mr="10px;"
             hoverColor="rgba(85,111,255, 0.3)"
             cursor="default"
