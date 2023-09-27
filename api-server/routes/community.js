@@ -34,6 +34,27 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+// 관심사 기반 커뮤니티 목록 조회
+router.get("/byinterest/:no", async (req, res, next) => {
+  try{
+    const no = Number(req.params.no);
+    const list = await community.findByInterest(no);
+    res.json(list);
+  }catch(err){
+    next(err);
+  }
+});
+
+// 인기 기반 커뮤니티 목록 조회
+router.get("/bypopular", async (req, res, next) => {
+  try{
+    const list = await community.findByPopular();
+    res.json(list);
+  }catch(err){
+    next(err);
+  }
+});
+
 // 커뮤니티 상세 조회
 router.get("/:no", async (req, res, next) => {
   try{
