@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 
 const ResultList = styled.div`
+  width: 100%;
   margin-top: 20px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
+  max-height: 400px; /* 스크롤 가능한 최대 높이 설정 */
   overflow-y: auto; 
 `;
 
