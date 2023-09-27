@@ -8,8 +8,10 @@ import plus from "assets/Img/buttonplus.png";
 import ResultList from "pages/analysis/foodsearch/ResultList";
 import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
-import { foodAtom } from "recoil/foodList";
+import { foodSelector } from "recoil/foodList";
 import axios from "axios";
+import { userSelector } from "recoil/userRecoil";
+import { useRecoilValue } from 'recoil';
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -55,23 +57,16 @@ const Search = styled.img`
 
 const FoodtSearch = function () {
 
-  const [foodList, setFoodList] = useRecoilState(foodAtom);
-  const [search, setSearch] = useState(""); 
-
-  const foodDB = async function(){
-    try {
-      const response = await instance.get('/food');
-      setFoodList(response.data)
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    foodDB();
-  }, []);
-
+  const foodList = useRecoilValue(foodSelector);
+  const [search, setSearch] = useState("");
+  const [selected, setSelected] = useState(""); 
+  const userNo = useRecoilValue(userSelector);
+ 
   const navigate = useNavigate();
+
+  const changeSelected = function (data) {
+    setSelected(data);
+  };
 
   //검색기능 추가 ---
   //input창에 검색어가 적히면 search에 업데이트
@@ -89,18 +84,12 @@ const FoodtSearch = function () {
   
   const sendFoodDataToServer = async () => {
     try {
-      const userNo = 1; 
-      const currentDate = new Date(); 
-      const formattedDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
-      
+      const dietDate = String(new Date().toLocaleDateString());
+    
       // 선택한 음식 정보를 담은 객체를 생성
-      const foodData = {
-        foodNo: 25, 
-        userNo,
-        date: formattedDate
-      };
-
-      const response = await instance.post('/record/foodadd', foodData);
+      const foodNo = selected.no;
+      
+      const response = await instance.post('/record/foodadd', {userNo, foodNo, dietDate});
 
       console.log('POST 요청이 성공적으로 보내졌습니다.');
       console.log('서버 응답:', response.data);
@@ -122,7 +111,7 @@ const FoodtSearch = function () {
       </SearchInput>
 
       {/* 검색결과 => 검색어와 일치하는 항목만 보이도록.. */}
-      <ResultList foodList={filterFoodList}/> 
+      <ResultList foodList={filterFoodList} changeSelected={changeSelected} /> 
 
       <Button
         name="선택하기"

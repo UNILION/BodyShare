@@ -34,17 +34,13 @@ const Line = styled.div`
   border: 1px solid rgba(135, 135, 135, 0.3);
 `;
 
-const ResultCate = function ({ foodList }) {
+const ResultCate = function ({ foodList, changeSelected }) {
   const [selectedButton, setSelectedButton] = useState(null);
-  const handleButtonClick = async (buttonIndex, foodNo) => {
-    if (selectedButton === buttonIndex) {
-      setSelectedButton(null);
-    } else {
-      setSelectedButton(buttonIndex);
-      }
+  const handleButtonClick = function(index, data){
+    setSelectedButton(index);
+    changeSelected(data);
   };
   
-
   return (
     <>
       <ResultList>
@@ -53,7 +49,7 @@ const ResultCate = function ({ foodList }) {
             key={index}
             active={selectedButton === index}
             onClick={() => {
-              handleButtonClick(index);
+              handleButtonClick(index, food);
             }}
             hoverColor="rgba(85, 111, 255, 0.7)"
           >
