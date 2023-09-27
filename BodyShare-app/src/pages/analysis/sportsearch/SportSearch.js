@@ -7,9 +7,12 @@ import Tag from "components/commons/Tag";
 import ResultList from "pages/analysis/sportsearch/ResultList";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from 'recoil';
-import { sportsAtom } from "recoil/sportList";
 import { useEffect, useState } from "react";
+import { sportsSelector } from "recoil/sportList";
 import axios from "axios";
+import { userSelector } from "recoil/userRecoil";
+import { useRecoilValue } from 'recoil';
+import { selectedSportNameState } from 'recoil/sportList';
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -61,22 +64,17 @@ const CategoryList = styled.div`
 const SportSearch = function() {
   const navigate = useNavigate();
 
-  const [sportsList, setSportsList] = useRecoilState(sportsAtom);
+  const sportsList = useRecoilValue(sportsSelector);
   const [sportsTag, setSportsTag] = useState('전체'); // 초기값은 전체로
   const [search, setSearch] = useState("");
+  const [selected, setSelected] = useState(""); 
+  const [selectedSportName, setSelectedSportName] = useRecoilState(selectedSportNameState);
+  const userNo = useRecoilValue(userSelector);
 
-  const sportsDB = async function(){
-    try {
-      const response = await instance.get('/sports');
-      setSportsList(response.data)
-    } catch (error) {
-      console.error(error);
-    }
+  const changeSelected = function (data) {
+    setSelected(data);
+    setSelectedSportName(data.name);
   };
-
-  useEffect(() => {
-    sportsDB();
-  }, []);
 
   // 태그에 맞게 운동 리스트들이 나오도록 함
   const hadleTagfilter = (tag) => {
@@ -97,20 +95,18 @@ const SportSearch = function() {
 
   const sendFoodDataToServer = async () => {
     try {
-      const userNo = 1; 
-      const currentDate = new Date(); 
-      const formattedDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
-      const exerciseTime = 40
 
+      const exerciseDate = String(new Date().toLocaleDateString());
+    
       // 선택한 음식 정보를 담은 객체를 생성
-      const foodData = {
-        sportsNo: 25, 
+      const sportsData = {
         userNo,
-        recordDate: formattedDate,
-        exerciseTime
+        sportsNo: selected.no,
+        exerciseDate,
+        exerciseTime: 60
       };
 
-      const response = await instance.post('/record/sportsadd', foodData);
+      const response = await instance.post('/record/sportsadd', sportsData);
 
       console.log('POST 요청이 성공적으로 보내졌습니다.');
       console.log('서버 응답:', response.data);
@@ -133,7 +129,7 @@ const SportSearch = function() {
         <Tag tagtitle="기타" width="80px" height="36px" br="13px" onClick={() => hadleTagfilter('기타')}/>
       </CategoryList>
       
-      <ResultList sportsList={filterSportsList}/>
+      <ResultList sportsList={filterSportsList} changeSelected={changeSelected}/>
 
       <Button
         name="선택하기"

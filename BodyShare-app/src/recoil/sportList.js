@@ -19,3 +19,8 @@ export const sportsSelector = selector({
     return sportsAtomValue; // 연산 결과 반환
   },
 });
+
+export const selectedSportNameState = atom({
+  key: 'selectedSportName',
+  default: '', // 초기값은 빈 문자열로 설정합니다.
+});
