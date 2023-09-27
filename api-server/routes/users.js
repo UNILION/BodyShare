@@ -115,11 +115,11 @@ router.post("/interestadd", checkLogin, async (req, res, next) => {
   }
 });
 
-// 회원 관심사 수정
-router.put("/interestedit/:no", checkLogin, async (req, res, next) => {
+// 회원 관심사 삭제
+router.delete("/interestdel/:no", checkLogin, async (req, res, next) => {
   try{
     const no = Number(req.params.no);
-    const count = await user.updateInterest(no, req.body);
+    const count = await user.deleteInterest(no, req.body);
     res.json({ count });
   }catch(err){
     next(err);

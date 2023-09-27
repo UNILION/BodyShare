@@ -62,10 +62,10 @@ const userModel = {
     }
   },
 
-  //회원 관심사 수정
-  async updateInterest(no, user) {
+  //회원 관심사 삭제
+  async deleteInterest(no, user) {
     try {
-      const sql = `update userInterest set ? where no = ?`;
+      const sql = `DELETE FROM userInterest WHERE userNo = ?`;
       const [result] = await pool.query(sql, [user, no]);
       return result.affectedRows;
     } catch (err) {
