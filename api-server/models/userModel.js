@@ -63,10 +63,10 @@ const userModel = {
   },
 
   //회원 관심사 삭제
-  async deleteInterest(no, user) {
+  async deleteInterest(no) {
     try {
       const sql = `DELETE FROM userInterest WHERE userNo = ?`;
-      const [result] = await pool.query(sql, [user, no]);
+      const [result] = await pool.query(sql, [no]);
       return result.affectedRows;
     } catch (err) {
       throw new Error("DB Error", { cause: err });

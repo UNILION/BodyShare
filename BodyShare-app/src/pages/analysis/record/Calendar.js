@@ -79,7 +79,7 @@ const Record = function () {
       const result = await instance.get(`/record/sports/${userNo}`);
       const tempSportsList = result.data; // API 응답의 구조에 따라 수정
       let temp_s = [];
-      temp_s.push(...filter(selectedDate, tempSportsList)); // 새로운 내용 추가
+      temp_s.push(...filterS(selectedDate, tempSportsList)); // 새로운 내용 추가
       setSportsList(temp_s);
     } catch (error) {
       // 에러 처리
@@ -90,7 +90,7 @@ const Record = function () {
       const diet = await instance.get(`/record/food/${userNo}`);
       const tempdiet = diet.data; // API 응답의 구조에 따라 수정
       let temp_f = [];
-      temp_f.push(...filter(selectedDate, tempdiet)); // 새로운 내용 추가
+      temp_f.push(...filterF(selectedDate, tempdiet)); // 새로운 내용 추가
       setFoodList(temp_f);
     } catch (error) {
       // 에러 처리
@@ -98,14 +98,18 @@ const Record = function () {
     }
   };
 
-  const filter = function (selectedDate, list) {
-    const result = list.filter(item => dateCal(item.date) == selectedDate.toLocaleDateString());
+  const filterS = function (selectedDate, list) {
+    const result = list.filter(item => dateCal(item.exerciseDate) == selectedDate.toLocaleDateString());
+    return result;
+  };
+
+  const filterF = function (selectedDate, list) {
+    const result = list.filter(item => dateCal(item.dietDate) == selectedDate.toLocaleDateString());
     return result;
   };
 
   const dateCal = function (date) {
     const dateObject = new Date(date);
-    dateObject.setHours(dateObject.getHours() + 9);
 
     return dateObject.toLocaleDateString();
   };

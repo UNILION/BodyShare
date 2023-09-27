@@ -54,7 +54,7 @@ const Record = function () {
     try {
       const result = await instance.get(`/record/sports/${userNo}`);
       const sportsList = result.data; // API 응답의 구조에 따라 수정
-      sum = filter(sportsList);
+      sum = filterS(sportsList);
     } catch (error) {
       // 에러 처리
       console.error(error);
@@ -63,7 +63,7 @@ const Record = function () {
     try {
       const diet = await instance.get(`/record/food/${userNo}`);
       const tempdiet = diet.data; // API 응답의 구조에 따라 수정
-      sum += filter(tempdiet);
+      sum += filterF(tempdiet);
     } catch (error) {
       // 에러 처리
       console.error(error);
@@ -72,15 +72,20 @@ const Record = function () {
     setCount(sum);
   };
 
-  const filter = function(list) {
+  const filterS = function(list) {
     const today = new Date().toLocaleDateString();
   
-    return list.filter(item => dateCal(item.date) === today).length;
+    return list.filter(item => dateCal(item.exerciseDate) === today).length;
   };
+
+  const filterF = function(list) {
+    const today = new Date().toLocaleDateString();
   
+    return list.filter(item => dateCal(item.dietDate) === today).length;
+  };
+
   const dateCal = function(date) {
     const dateObject = new Date(date);
-    dateObject.setHours(dateObject.getHours() + 9);
   
     return dateObject.toLocaleDateString();
   };

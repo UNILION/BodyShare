@@ -54,20 +54,56 @@ router.post("/signup", upload.single("profileImg") ,async (req, res, next) => {
 router.put("/useredit/:no", checkLogin, upload.fields([{name:"profileImg"}, {name:"bannerImg"}]), async (req, res, next) => {
   try{
     const no = Number(req.params.no);
+    const userInfo = {
+      nickname: req.body.nickname,
+      password: req.body.password,
+      height: req.body.height,
+      weight: req.body.weight
+    };
+    if(req.body.afterpassword){
+      userInfo.afterpassword = req.body.afterpassword;
+    }
+
     // 프로필 이미지와 배너 이미지 가져오기
-    const profileImages = req.files["profileImg"];
-    const bannerImages = req.files["bannerImg"];
+    const profileImages = req.files?.profileImg;
+    const bannerImages = req.files?.bannerImg;
 
     // 파일이 업로드되었을 때만 처리
     if (profileImages) {
-      req.body.profileImageUrl = profileImages[0].filename;
+      userInfo.profileImageUrl = profileImages[0].filename;
     }
 
     if (bannerImages) {
-      req.body.bannerImageUrl = bannerImages[0].filename;
+      userInfo.bannerImageUrl = bannerImages[0].filename;
     }
 
-    const count = await user.update(no, req.body);
+    console.log(req.body);
+
+
+
+    const count = await user.update(no, userInfo);
+
+    if(req.body.sportsNo){
+      await user.deleteInterest(no);
+      await user.createInterest({
+        userNo: no,
+        sportsNo: req.body.sportsNo
+      });
+    }
+    // // 프로필 이미지와 배너 이미지 가져오기
+    // const profileImages = req.files["profileImg"];
+    // const bannerImages = req.files["bannerImg"];
+
+    // // 파일이 업로드되었을 때만 처리
+    // if (profileImages) {
+    //   req.body.profileImageUrl = profileImages[0].filename;
+    // }
+
+    // if (bannerImages) {
+    //   req.body.bannerImageUrl = bannerImages[0].filename;
+    // }
+
+    // const count = await user.update(no, req.body);
     res.json({ count });
   }catch(err){
     next(err);
