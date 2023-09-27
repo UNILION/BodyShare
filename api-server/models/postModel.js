@@ -4,7 +4,9 @@ const postModel = {
   // 해당 커뮤니티 게시물 목록 조회
   async find(no){
     try{
-      const sql = `select * from communityPost where communityNo = ?`;
+      const sql = `select * from communityPost 
+      where communityNo = ?
+      ORDER BY createdDate DESC;`;
       const [ result ] = await pool.query(sql, [no]);
       return result;
     }catch(err){
