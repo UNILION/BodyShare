@@ -2,24 +2,24 @@ const pool = require("./pool");
 
 const comuModel = {
   // 커뮤니티 목록 조회
-  async find(){
-    try{
+  async find() {
+    try {
       const sql = `SELECT c.*, s.name AS sportsName, COUNT(DISTINCT cp.postNo) AS postCount, COUNT(DISTINCT uc.userNo) AS userCount
       FROM community c
       INNER JOIN sports s ON c.interest = s.no
       LEFT JOIN communityPost cp ON c.communityNo = cp.communityNo
       LEFT JOIN usersCommunity uc ON c.communityNo = uc.communityNo
       GROUP BY c.communityNo;`;
-      const [ result ] = await pool.query(sql);
+      const [result] = await pool.query(sql);
       return result;
-    }catch(err){
+    } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
   },
 
   // 관심사 기반 커뮤니티 목록 조회
-  async findByInterest(no){
-    try{
+  async findByInterest(no) {
+    try {
       const sql = `SELECT c.*, s.name AS sportsName, COUNT(DISTINCT cp.postNo) AS postCount, COUNT(DISTINCT uc.userNo) AS userCount
       FROM community c
       INNER JOIN sports s ON c.interest = s.no
@@ -28,16 +28,16 @@ const comuModel = {
       WHERE c.interest = ?
       GROUP BY c.communityNo
       ORDER BY userCount DESC;`;
-      const [ result ] = await pool.query(sql, [no]);
+      const [result] = await pool.query(sql, [no]);
       return result;
-    }catch(err){
+    } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
   },
 
   // 인기 기반 커뮤니티 목록 조회
-  async findByPopular(){
-    try{
+  async findByPopular() {
+    try {
       const sql = `SELECT c.*, s.name AS sportsName, COUNT(DISTINCT cp.postNo) AS postCount, COUNT(DISTINCT uc.userNo) AS userCount
       FROM community c
       INNER JOIN sports s ON c.interest = s.no
@@ -45,13 +45,12 @@ const comuModel = {
       LEFT JOIN usersCommunity uc ON c.communityNo = uc.communityNo
       GROUP BY c.communityNo
       ORDER BY userCount DESC;`;
-      const [ result ] = await pool.query(sql);
+      const [result] = await pool.query(sql);
       return result;
-    }catch(err){
+    } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
   },
-  
 
   // 커뮤니티 상세 조회
   async findByNo(no) {
@@ -90,7 +89,23 @@ const comuModel = {
     } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
-  }
+  },
+
+  async findCommunityPost(commuNo, limit) {
+    try {
+      const sql = `SELECT communityPost.title, user.nickname, (select count(communityNo) from usersCommunity where communityNo = ? group by communityNo) as member
+      FROM bodyshare.communityPost
+      left join user on communityPost.userNo = user.userNo
+      where communityNo = ? limit ?;
+      `;
+      const [result] = await pool.query(sql, [commuNo, commuNo, limit]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 };
+
+//
 
 module.exports = comuModel;
