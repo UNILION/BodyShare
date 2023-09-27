@@ -63,7 +63,7 @@ function App() {
             </Route>
             <Route path="/community" element={<Layout />}>
               <Route index element={<Community />} />
-              <Route path="/community/commuIn" element={<CommuIn />} />
+              <Route path="/community/commuIn/:commu" element={<CommuIn />} />
               <Route path="/community/search" element={<CommuSearch />} />
               <Route
                 path="/community/search/after"
