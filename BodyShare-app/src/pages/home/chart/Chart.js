@@ -93,7 +93,7 @@ const Charts = function () {
 
       // 현재 주의 데이터만 필터링
       const currentWeekDate = allData.filter((item) => {
-        const itemDate = new Date(item.date);
+        const itemDate = new Date(item.exerciseDate);
         return (
           itemDate >= currentWeekStartDate && itemDate <= currentWeekEndDate
         );
@@ -114,7 +114,7 @@ const Charts = function () {
         const dateString = `${formattedDate}\n(${day})`;
 
         const exerciseTimeRecord = currentWeekDate.find((record) => {
-          const recordDate = new Date(record.date);
+          const recordDate = new Date(record.exerciseDate);
           return recordDate.getDay() === i;
         });
 
@@ -141,7 +141,7 @@ const Charts = function () {
       // 오늘 날짜와 맞는 데이터만 필터링합니다.
       const filteredData = Array.isArray(allDataFood) ? allDataFood : [];
       const filtered = filteredData.filter((item) => {
-        const itemDate = new Date(item.date).toLocaleDateString();
+        const itemDate = new Date(item.dietDate).toLocaleDateString();
         return itemDate === todayDate;
       });
 
@@ -169,14 +169,6 @@ const Charts = function () {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const isToday = function (dateString) {
-    const today = new Date().toLocaleDateString();
-    const dateObject = new Date(dateString);
-    dateObject.setHours(dateObject.getHours());
-
-    return dateObject.toLocaleDateString() === today;
   };
 
   useEffect(() => {
