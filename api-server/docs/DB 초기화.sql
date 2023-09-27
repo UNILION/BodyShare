@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`communityPost` (
   `locationLong` DOUBLE NULL DEFAULT NULL COMMENT '경도',
   `likes` INT NULL DEFAULT '0' COMMENT '좋아요',
   `contentImageUrl` VARCHAR(255) NULL DEFAULT 'postDefault.png',
-  `recordDate` VARCHAR(10) NULL,
+  `recordDate` VARCHAR(20) NULL,
   PRIMARY KEY (`postNo`),
   CONSTRAINT `fk_communityPost_communityId`
     FOREIGN KEY (`communityNo`)
