@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`dietRecord` (
   `planNo` INT NOT NULL AUTO_INCREMENT,
   `userNo` INT NOT NULL,
   `foodNo` INT NOT NULL,
-  `dietDate` VARCHAR(10) NOT NULL COMMENT '식단 날짜',
+  `dietDate` VARCHAR(20) NOT NULL COMMENT '식단 날짜',
   `mealTime` DATETIME NULL DEFAULT NULL COMMENT '식사 시간( 아침, 점심, 저녁)',
   PRIMARY KEY (`planNo`),
   CONSTRAINT `fk_dietPlan_userNo`
@@ -193,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`exerciseRecord` (
   `planNo` INT NOT NULL AUTO_INCREMENT,
   `userNo` INT NOT NULL,
   `sportsNo` INT NOT NULL,
-  `exerciseDate` VARCHAR(10) NOT NULL COMMENT '계획 날짜 및 시간',
+  `exerciseDate` VARCHAR(20) NOT NULL COMMENT '계획 날짜 및 시간',
   `exerciseTime` INT NOT NULL COMMENT '실제 운동 시간',
   `sets` INT NULL DEFAULT NULL COMMENT '세트 수',
   `weight` INT NULL DEFAULT NULL COMMENT '중량',
