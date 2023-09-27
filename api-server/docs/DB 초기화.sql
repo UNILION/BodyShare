@@ -4,7 +4,6 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-
 USE `bodyshare` ;
 
 -- -----------------------------------------------------
@@ -32,8 +31,6 @@ AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 CREATE UNIQUE INDEX `userId_UNIQUE` ON `bodyshare`.`user` (`userId` ASC);
-
-
 
 
 -- -----------------------------------------------------
@@ -78,7 +75,7 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`community` (
   `adminUserNo` INT NOT NULL,
   `interest` INT NOT NULL,
   `communityName` VARCHAR(255) NOT NULL,
-  `createdDate` DATETIME NOT NULL,
+  `createdDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `intro` VARCHAR(255) NOT NULL COMMENT '커뮤니티 소개',
   `profileImageUrl` VARCHAR(255) NULL DEFAULT 'communityProfileDefault.png',
   `bannerImageUrl` VARCHAR(255) NULL DEFAULT 'bannerDefault.png',
@@ -107,15 +104,15 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`communityPost` (
   `postNo` INT NOT NULL AUTO_INCREMENT,
   `communityNo` INT NOT NULL,
   `userNo` INT NOT NULL,
-  `createdDate` DATETIME NOT NULL,
-  `modifiedDate` DATETIME NULL DEFAULT NULL,
+  `createdDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifiedDate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `title` VARCHAR(255) NOT NULL,
   `content` VARCHAR(255) NULL,
   `locationLat` DOUBLE NULL DEFAULT NULL COMMENT '위도',
   `locationLong` DOUBLE NULL DEFAULT NULL COMMENT '경도',
   `likes` INT NULL DEFAULT '0' COMMENT '좋아요',
   `contentImageUrl` VARCHAR(255) NULL DEFAULT 'postDefault.png',
-  `recordDate` DATE NULL DEFAULT NULL COMMENT '불러온 기록의 날짜',
+  `recordDate` VARCHAR(10) NULL,
   PRIMARY KEY (`postNo`),
   CONSTRAINT `fk_communityPost_communityId`
     FOREIGN KEY (`communityNo`)
@@ -142,8 +139,8 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`communityPostComment` (
   `postNo` INT NOT NULL,
   `userNo` INT NOT NULL,
   `content` VARCHAR(255) NOT NULL,
-  `createdDate` DATETIME NOT NULL,
-  `modifiedDate` DATETIME NULL DEFAULT NULL,
+  `createdDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modifiedDate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`commentNo`),
   CONSTRAINT `fk_communityPostComment_postNo`
     FOREIGN KEY (`postNo`)
@@ -160,8 +157,6 @@ CREATE INDEX `fk_communityPostComment_communityPost1_idx` ON `bodyshare`.`commun
 CREATE INDEX `fk_communityPostComment_userNo_idx` ON `bodyshare`.`communityPostComment` (`userNo` ASC);
 
 
-
-
 -- -----------------------------------------------------
 -- Table `bodyshare`.`dietRecord`
 -- -----------------------------------------------------
@@ -171,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`dietRecord` (
   `planNo` INT NOT NULL AUTO_INCREMENT,
   `userNo` INT NOT NULL,
   `foodNo` INT NOT NULL,
-  `date` DATE NOT NULL COMMENT '식단 날짜',
+  `dietDate` VARCHAR(10) NOT NULL COMMENT '식단 날짜',
   `mealTime` DATETIME NULL DEFAULT NULL COMMENT '식사 시간( 아침, 점심, 저녁)',
   PRIMARY KEY (`planNo`),
   CONSTRAINT `fk_dietPlan_userNo`
@@ -198,7 +193,7 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`exerciseRecord` (
   `planNo` INT NOT NULL AUTO_INCREMENT,
   `userNo` INT NOT NULL,
   `sportsNo` INT NOT NULL,
-  `date` DATE NOT NULL COMMENT '계획 날짜 및 시간',
+  `exerciseDate` VARCHAR(10) NOT NULL COMMENT '계획 날짜 및 시간',
   `exerciseTime` INT NOT NULL COMMENT '실제 운동 시간',
   `sets` INT NULL DEFAULT NULL COMMENT '세트 수',
   `weight` INT NULL DEFAULT NULL COMMENT '중량',
