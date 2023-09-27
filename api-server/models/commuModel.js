@@ -25,8 +25,9 @@ const comuModel = {
       INNER JOIN sports s ON c.interest = s.no
       LEFT JOIN communityPost cp ON c.communityNo = cp.communityNo
       LEFT JOIN usersCommunity uc ON c.communityNo = uc.communityNo
-      where c.interest = ?
-      GROUP BY c.communityNo;`;
+      WHERE c.interest = ?
+      GROUP BY c.communityNo
+      ORDER BY userCount DESC;`;
       const [ result ] = await pool.query(sql, [no]);
       return result;
     }catch(err){
