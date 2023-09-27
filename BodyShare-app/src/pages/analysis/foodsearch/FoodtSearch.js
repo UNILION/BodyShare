@@ -86,6 +86,29 @@ const FoodtSearch = function () {
     return food.name && food.name.includes(search);
   })
 
+  
+  const sendFoodDataToServer = async () => {
+    try {
+      const userNo = 1; 
+      const currentDate = new Date(); 
+      const formattedDate = `${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${currentDate.getDate()}`;
+      
+      // 선택한 음식 정보를 담은 객체를 생성
+      const foodData = {
+        foodNo: 25, 
+        userNo,
+        date: formattedDate
+      };
+
+      const response = await instance.post('/record/foodadd', foodData);
+
+      console.log('POST 요청이 성공적으로 보내졌습니다.');
+      console.log('서버 응답:', response.data);
+    } catch (error) {
+      console.error('POST 요청 실패:', error);
+    }
+  }
+
   return (
     <Container>
       <PreviousButton onClick={() => navigate("/analysis")} />
@@ -108,7 +131,10 @@ const FoodtSearch = function () {
         display="block"
         ml="190px"
         mt="30px"
-        onClick={() => navigate("/analysis")}
+          onClick={() => {
+            sendFoodDataToServer();
+            navigate("/analysis");
+      }}
       />
     </Container>
   );

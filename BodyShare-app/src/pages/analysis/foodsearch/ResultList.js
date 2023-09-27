@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { useRecoilState } from 'recoil';
-import { foodAtom } from 'recoil/foodList';
 
 const ResultList = styled.div`
   margin-top: 20px;
@@ -38,15 +36,12 @@ const Line = styled.div`
 
 const ResultCate = function ({ foodList }) {
   const [selectedButton, setSelectedButton] = useState(null);
-
-  const handleButtonClick = async (buttonIndex, foodName) => {
+  const handleButtonClick = async (buttonIndex, foodNo) => {
     if (selectedButton === buttonIndex) {
-      // 이미 선택한 버튼을 다시 클릭하면 선택 해제
       setSelectedButton(null);
     } else {
-      // 새로운 버튼을 클릭하면 선택
       setSelectedButton(buttonIndex);
-    }
+      }
   };
   
 
@@ -57,7 +52,9 @@ const ResultCate = function ({ foodList }) {
           <ResultButton
             key={index}
             active={selectedButton === index}
-            onClick={() => handleButtonClick(index, food.name)}
+            onClick={() => {
+              handleButtonClick(index);
+            }}
             hoverColor="rgba(85, 111, 255, 0.7)"
           >
             <RP>{food.name}</RP>
