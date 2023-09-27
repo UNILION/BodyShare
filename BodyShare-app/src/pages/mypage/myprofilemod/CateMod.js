@@ -38,24 +38,24 @@ const CateMod = function ({ usersList }) {
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
   const sports = useRecoilValue(sportsSelector);
-  const [userInfo, setUserInfo] = useState();
-  const [sportData, setSportData] = useState([]);
+  // const [userInfo, setUserInfo] = useState();
+  // const [sportData, setSportData] = useState([]);
   const [matchingSportNames, setMatchingSportNames] = useState([]);
 
   const loadMatchingSportNames = async () => {
     try {
-      const response = await instance.get(`/users/user/${userNo}`);
-      const userDataFromApi = response.data;
-      setUserInfo(userDataFromApi);
+      // const response = await instance.get(`/users/user/${userNo}`);
+      // const userDataFromApi = response.data;
+      // setUserInfo(userDataFromApi);
 
-      const responseSport = await instance.get(`/sports`);
-      const sportsDataFromApi = responseSport.data;
-      setSportData(sportsDataFromApi);
+      // const responseSport = await instance.get(`/sports`);
+      // const sportsDataFromApi = responseSport.data;
+      // setSportData(sportsDataFromApi);
 
       const userInterestData = await instance.get(`/users/interest/${userNo}`);
       const userInterestNo = userInterestData.data.map(item => item.sportsNo);
 
-      const matchingSportNames = sportsDataFromApi
+      const matchingSportNames = sports
         .filter(sport => userInterestNo.includes(sport.no))
         .map(sport => sport.name);
 

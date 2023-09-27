@@ -8,7 +8,7 @@ const multer = require("multer");
 const upload = multer({
   storage: multer.diskStorage({ // 저장한공간 정보 : 하드디스크에 저장
       destination(req, file, done) { // 저장 위치
-          done(null, 'imgaes/users/'); // uploads라는 폴더 안에 저장
+          done(null, 'images/users/'); // uploads라는 폴더 안에 저장
       },
       filename(req, file, done) { // 파일명을 어떤 이름으로 올릴지
           const userNo = req.body.userNo;
@@ -68,6 +68,9 @@ router.put("/useredit/:no", checkLogin, upload.fields([{name:"profileImg"}, {nam
     const profileImages = req.files?.profileImg;
     const bannerImages = req.files?.bannerImg;
 
+    console.log(profileImages);
+    console.log(bannerImages);
+
     // 파일이 업로드되었을 때만 처리
     if (profileImages) {
       userInfo.profileImageUrl = profileImages[0].filename;
@@ -79,31 +82,7 @@ router.put("/useredit/:no", checkLogin, upload.fields([{name:"profileImg"}, {nam
 
     console.log(req.body);
 
-
-
     const count = await user.update(no, userInfo);
-
-    if(req.body.sportsNo){
-      await user.deleteInterest(no);
-      await user.createInterest({
-        userNo: no,
-        sportsNo: req.body.sportsNo
-      });
-    }
-    // // 프로필 이미지와 배너 이미지 가져오기
-    // const profileImages = req.files["profileImg"];
-    // const bannerImages = req.files["bannerImg"];
-
-    // // 파일이 업로드되었을 때만 처리
-    // if (profileImages) {
-    //   req.body.profileImageUrl = profileImages[0].filename;
-    // }
-
-    // if (bannerImages) {
-    //   req.body.bannerImageUrl = bannerImages[0].filename;
-    // }
-
-    // const count = await user.update(no, req.body);
     res.json({ count });
   }catch(err){
     next(err);

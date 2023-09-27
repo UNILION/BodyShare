@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { sportsSelector } from 'recoil/sportList';
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { interestAtom } from "recoil/userRecoil";
 import Tag from "components/commons/Tag";
 
 
@@ -46,33 +47,32 @@ const Pfcommentul = styled.div`
 const Icon = function ({ id, url }) {
   const userNo = useRecoilValue(userSelector);
   const sports = useRecoilValue(sportsSelector);
-  const [userInfo, setUserInfo] = useState();
-  const [sportData, setSportData] = useState([]);
+  const [interestList, setInterestList] = useRecoilState(interestAtom);
   const [matchingSportNames, setMatchingSportNames] = useState([]);
-
-  const loadUser = async function () {
-    try {
-      const response = await instance.get(`/users/user/${userNo}`);
-      const userDataFromApi = response.data;
-      console.log('user Data:', userDataFromApi);
-      setUserInfo(userDataFromApi);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  
+  const interestInit = function (list) {
+    setInterestList(list);
+  }
 
   const loadSport = async function () {
     try {
-      const response = await instance.get(`/sports`);
-      const sportsDataFromApi = response.data;
-      console.log('sports Data:', sportsDataFromApi);
-      setSportData(sportsDataFromApi);
-
       // 스포츠 데이터를 가져온 후, 사용자의 관심 스포츠를 필터링하여 일치하는 스포츠를 설정
       const userInterestData = await instance.get(`/users/interest/${userNo}`);
       const userInterestNo = userInterestData.data.map(item => item.sportsNo); // 관심 스포츠 번호 추출
+      let tempList = [];
 
-      const matchingSportNames = sportsDataFromApi
+      if (Array.isArray(userInterestData.data)) {
+        for(let i=0; i<userInterestData.data.length; i++){
+          const matchingSport = sports.find(item => item.no === userInterestData.data[i].sportsNo);
+          if (matchingSport) {
+            tempList.push(matchingSport);
+          }
+        }
+        interestInit(tempList);
+      }
+      
+
+      const matchingSportNames = sports
         .filter(sport => userInterestNo.includes(sport.no))
         .map(sport => sport.name); // 매칭되는 스포츠의 이름 추출
       console.log('matchingSport', matchingSportNames)
@@ -92,7 +92,6 @@ const Icon = function ({ id, url }) {
   };
 
   useEffect(() => {
-    loadUser();
     loadSport();
   }, []);
 

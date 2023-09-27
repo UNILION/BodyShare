@@ -96,21 +96,41 @@ const MyProfileModify = function () {
     } catch (error) {
       console.error(error);
     }
+
+    // 유저 관심사 정보 전부 삭제
+    try{
+      await instance.delete(`/users/interestdel/${userNo}`);
+    }catch(error){
+      console.error(error);
+    }
+
+    // 관심사 정보 모두 등록
+    for(let i=0; i<list.length; i++){
+      const data = {
+        userNo,
+        sportsNo: list[i].no
+      }
+      try{
+        await instance.post("/users/interestadd", data )
+      }catch(error){
+        console.error(error);
+      }
+    }
   };
 
-  console.log(interest);
+  // console.log(interest);
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         {profileInfo && (
           <All>
-            {interest.map(item => {
+            {/* {interest.map(item => {
               return <input {...register('sportsNo')}
                 type="hidden"
                 value={item.no}
               />;
-            })}
+            })} */}
           
 
             <Titleul>
@@ -131,7 +151,6 @@ const MyProfileModify = function () {
             <Button
               name="수정완료"
               img={Image5}
-              // onClick={() => navigate("/mypage")}
               type="submit"
               mt="10px"
               ml="170px"
