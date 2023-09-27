@@ -7,7 +7,7 @@ const multer = require("multer");
 const upload = multer({
   storage: multer.diskStorage({ // 저장한공간 정보 : 하드디스크에 저장
       destination(req, file, done) { // 저장 위치
-          done(null, 'imgaes/posts/'); // uploads라는 폴더 안에 저장
+          done(null, 'images/posts/'); // uploads라는 폴더 안에 저장
       },
       filename(req, file, done) { // 파일명을 어떤 이름으로 올릴지
           const postNo = req.body.postNo;
