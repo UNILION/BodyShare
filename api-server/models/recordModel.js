@@ -18,7 +18,7 @@ const recordModel = {
       const sql = `SELECT *
       FROM exerciseRecord
       WHERE userNo = ?
-      AND date >= DATE_SUB(CURDATE(), INTERVAL 3 DAY)
+      AND date >= DATE_SUB(DATE_ADD(CURDATE(), INTERVAL 9 HOUR), INTERVAL 3 DAY)
       ORDER BY date DESC;`;
       const [ result ] = await pool.query(sql, [no]);
       return result;
