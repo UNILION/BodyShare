@@ -41,6 +41,17 @@ router.get("/:no", async (req, res, next) => {
   }
 });
 
+// 커뮤니티 게시물 상세 조회
+router.get("/commu/:no", async (req, res, next) => {
+  try{
+    const no = Number(req.params.no);
+    const result = await post.commuFindByNo(no);
+    res.json(result);
+  }catch(err){
+    next(err);
+  }
+});
+
 // 게시물 등록
 router.post("/postadd", upload.single("contentImg"), async (req, res, next) => {
   try{

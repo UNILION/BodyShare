@@ -23,6 +23,21 @@ const postModel = {
     }
   },
 
+  // 커뮤니티 게시물 상세 조회
+  async commuFindByNo(no) {
+    try {
+      const sql = `SELECT cp.*, er.*, s.name AS sportsName
+      FROM communityPost cp
+      INNER JOIN exerciseRecord er ON cp.userNo = er.userNo AND cp.recordDate = er.date
+      INNER JOIN sports s ON er.sportsNo = s.no
+      WHERE cp.postNo = ?`;
+      const [result] = await pool.query(sql, [no]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+
   // 게시물 생성
   async create(com) {
     try {
