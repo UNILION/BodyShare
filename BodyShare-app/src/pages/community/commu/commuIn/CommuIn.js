@@ -1,12 +1,16 @@
 import styled from "styled-components";
-import { useState } from "react";
-import bannerPic from "assets/Img/card_image2.png";
-import userPic from "assets/Img/user.png";
+import { useEffect, useState } from "react";
 import Plus from "assets/Img/buttonplus.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import Mainbar from "./Mainbar";
 import Groups from "./Groups";
+import axios from "axios";
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true,
+});
 
 const BannerPic = styled.div`
   width: 100%;
@@ -18,7 +22,6 @@ const BannerPic = styled.div`
 const Banner = styled.img`
   width: 100%;
   position: absolute;
-  top: -100px;
 `;
 
 const Pf = styled.ul`
@@ -41,14 +44,28 @@ const Img = styled.img`
   cursor: pointer;
 `;
 
-const CommuHome = function () {
-  const [page, setPage] = useState(1);
+const CommuIn = function () {
   const [register, setRegister] = useState(false);
+  const [communityData, setCommunityData] = useState([]);
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const handleChange = (page) => {
-    setPage(page);
+  const commuList = async function () {
+    try {
+      const communityResponse = await instance.get(
+        `/community/${location.pathname.split('/')[3]}`
+      );
+      console.log(communityResponse)
+      setCommunityData(communityResponse.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
+
+  useEffect(() => {
+    commuList();
+  }, []);
 
   const registerChange = (register) => {
     setRegister(!register);
@@ -57,11 +74,11 @@ const CommuHome = function () {
   return (
     <>
       <BannerPic>
-        <Banner src={bannerPic} />
+        <Banner src={`http://localhost:33000/images/communitys/${communityData.bannerImageUrl}`} />
       </BannerPic>
       <Pf>
-        <Pfpic src={userPic} />
-        <Profile />
+        <Pfpic src={`http://localhost:33000/images/communitys/${communityData.profileImageUrl}`} />
+        <Profile title={communityData.communityName} intro={communityData.intro} sports={communityData.sportsName}/>
       </Pf>
       <Mainbar register={register} registerChange={registerChange} />
       <Groups />
@@ -70,4 +87,4 @@ const CommuHome = function () {
   );
 };
 
-export default CommuHome;
+export default CommuIn;
