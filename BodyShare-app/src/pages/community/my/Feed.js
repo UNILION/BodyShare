@@ -25,7 +25,6 @@ const MiniMember = styled.span`
 const Writing = styled.div``;
 
 const Feed = function ({ feed }) {
-  console.log(feed);
   const navigate = useNavigate();
 
   return (
