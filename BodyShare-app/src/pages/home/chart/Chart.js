@@ -68,11 +68,10 @@ const ChartContainer = styled.div`
 const Charts = function () {
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
-  const food = useRecoilValue(foodSelector);
+  const selectedFood = useRecoilValue(foodSelector);
 
   const [sportsChartData, setSportsChartData] = useState([]);
   const [foodChartData, setFoodChartData] = useState([]);
-  
 
   const chartDatas = async function () {
     try {
@@ -142,7 +141,10 @@ const Charts = function () {
       const filteredData = Array.isArray(allDataFood) ? allDataFood : [];
       const filtered = filteredData.filter((item) => {
         const itemDate = new Date(item.dietDate).toLocaleDateString();
-        return itemDate === todayDate;
+        return (
+          itemDate === todayDate &&
+          selectedFood.some((selected) => selected.no === item.foodNo)
+        );
       });
 
       // 탄수화물, 단백질, 지방을 저장할 변수를 초기화합니다.
@@ -152,9 +154,12 @@ const Charts = function () {
 
       // 필터링된 데이터를 순회하며 각 항목을 합산합니다.
       filtered.forEach((item) => {
-        carbohydrate += item.carbohydrate || 0;
-        protein += item.protein || 0;
-        fat += item.fat || 0;
+        const foodItem = selectedFood.find((food) => food.no === item.foodNo);
+        if (foodItem) {
+          carbohydrate += foodItem.carbohydrates || 0;
+          protein += foodItem.protein || 0;
+          fat += foodItem.fat || 0;
+        }
       });
 
       // 차트 데이터 설정
@@ -164,7 +169,6 @@ const Charts = function () {
         ["단백질", protein],
         ["지방", fat],
       ];
-
       setFoodChartData(updatedFoodChartData);
     } catch (error) {
       console.error(error);
@@ -178,7 +182,7 @@ const Charts = function () {
     }, 24 * 60 * 60 * 1000); // 매일 한 번 갱신 (24시간 간격)
 
     return () => clearInterval(interval);
-  }, []);
+  }, [userNo, selectedFood]);
 
   return (
     <SliderContainer>
