@@ -55,8 +55,7 @@ const Delete = styled.button`
 const FoodListItem = function (props) {
 
   const allFoods = useRecoilValue(foodSelector);
-  const selectedFood = useRecoilValue(foodAtom);
-  console.log('음식' , selectedFood);
+
   let result = [];
   result = allFoods.filter(item => item.no === props.record.foodNo);
 
@@ -77,7 +76,6 @@ const FoodListItem = function (props) {
         {result.map((item, index) => (
           <li key={index}>
             <FoodNote>{item.name}</FoodNote>
-              <p>선택한 음식: {selectedFood.join(', ')}</p>
           </li>
         ))}
       </ul>
