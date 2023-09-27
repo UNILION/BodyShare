@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import Pagination from "react-js-pagination";
-import "assets/css/Pagination.css";
 import Card from "components/commons/Card";
 import Plus from "assets/Img/buttonplus.png";
 import Image1 from "assets/Img/Climing1.jpg";
@@ -27,12 +25,8 @@ const AddImg = styled.img`
 `;
 
 const Middle = function () {
-  const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
-  const handleChange = (page) => {
-    setPage(page);
-  };
   return (
     <>
       <Group>
@@ -72,15 +66,6 @@ const Middle = function () {
           onClick={() => navigate("/community/commuIn")}
         />
       </Group>
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={4}
-        totalItemsCount={24}
-        pageRangeDisplayed={5}
-        prevPageText={"‹"}
-        nextPageText={"›"}
-        onChange={handleChange}
-      />
       <AddImg src={Plus} onClick={() => navigate("/community/communityAdd")} />
     </>
   );

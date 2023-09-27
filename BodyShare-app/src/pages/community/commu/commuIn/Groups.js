@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Pagination from "react-js-pagination";
 import Card from "components/commons/Card";
 import Image1 from "assets/Img/Climing1.jpg";
 import Image2 from "assets/Img/Climing2.jpg";
@@ -11,9 +10,11 @@ const Group = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 10px;
+  max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
+  overflow-y: auto;
 `;
 
-const Groups = function ({ page, handleChange }) {
+const Groups = function () {
   const navigate = useNavigate();
   return (
     <>
@@ -50,15 +51,6 @@ const Groups = function ({ page, handleChange }) {
           onClick={() => navigate("/community/feed")}
         />
       </Group>
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={4}
-        totalItemsCount={24}
-        pageRangeDisplayed={5}
-        prevPageText={"‹"}
-        nextPageText={"›"}
-        onChange={handleChange}
-      />
     </>
   );
 };
