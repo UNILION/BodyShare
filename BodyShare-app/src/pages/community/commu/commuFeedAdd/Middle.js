@@ -46,7 +46,7 @@ const Middle = function () {
         mb="10px"
         width="150px"
         display="block"
-        // onClick={() => navigate("/community/commuIn")}
+        // onClick={() => navigate("/community/commuIn/1")}
       />
     </form>
   );

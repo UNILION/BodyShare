@@ -36,7 +36,7 @@ const Middle = function () {
           contents="클라이밍 좋아하는 사람들 모두 모두 모여라"
           tagtitle="클라이밍"
           footer="956명의 회원이 가입함"
-          onClick={() => navigate("/community/commuIn")}
+          onClick={() => navigate("/community/commuIn/1")}
         />
         <Card
           img={Image2}
@@ -44,7 +44,7 @@ const Middle = function () {
           contents="대전에서 클라이밍 하실 분?"
           tagtitle="클라이밍"
           footer="543명의 회원이 가입함"
-          onClick={() => navigate("/community/commuIn")}
+          onClick={() => navigate("/community/commuIn/1")}
         />
       </Group>
 
@@ -55,7 +55,7 @@ const Middle = function () {
           contents="수도권 사람들만 오세요:)"
           tagtitle="클라이밍"
           footer="321명의 회원이 가입함"
-          onClick={() => navigate("/community/commuIn")}
+          onClick={() => navigate("/community/commuIn/1")}
         />
         <Card
           img={Image4}
@@ -63,7 +63,7 @@ const Middle = function () {
           contents="클라이밍에 재미를 붙이셨네요 :)"
           tagtitle="클라이밍"
           footer="123명의 회원이 가입함"
-          onClick={() => navigate("/community/commuIn")}
+          onClick={() => navigate("/community/commuIn/1")}
         />
       </Group>
       <AddImg src={Plus} onClick={() => navigate("/community/communityAdd")} />

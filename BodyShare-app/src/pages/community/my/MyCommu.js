@@ -83,10 +83,10 @@ const MyCommu = function ({ commu }) {
       <Group>
         <Img
           src={`http://localhost:33000/images/communitys/${commu.profileImageUrl}`}
-          onClick={() => navigate("/community/commuIn")}
+          onClick={() => navigate("/community/commuIn/1")}
         />
         <Register>
-          <Title onClick={() => navigate("/community/commuIn")}>
+          <Title onClick={() => navigate("/community/commuIn/1")}>
             {commu.communityName}
           </Title>
           {memberList > 0 ? (

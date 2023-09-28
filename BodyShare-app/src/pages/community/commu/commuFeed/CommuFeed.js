@@ -23,7 +23,7 @@ const CommuFeed = function () {
       <Previous
         src={previous}
         alt="뒤로가기"
-        onClick={() => navigate("/community/commuIn")}
+        onClick={() => navigate("/community/commuIn/1")}
       />
       <FeedCard
         img={Image1}
