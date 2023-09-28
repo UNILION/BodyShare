@@ -52,7 +52,7 @@ const comuModel = {
     }
   },
 
-  // 커뮤니티 상세 조회
+  // 커뮤니티 상세 소개
   async findByNo(commuNo, userNo) {
     try {
       const sql = `SELECT c.*, s.name AS sportsName, COUNT(DISTINCT cp.postNo) AS postCount, COUNT(DISTINCT uc.userNo) AS userCount, (select count(*) from usersCommunity where communityNo = ? and userNo = ?) as RegisterMember
@@ -91,9 +91,10 @@ const comuModel = {
     }
   },
 
-  async findCommunityPost(commuNo, limit) {
+  // 커뮤니티 상세 피드 내용
+  async findCommunityPost(commuNo, limit = 1000) {
     try {
-      const sql = `SELECT communityPost.title, user.nickname, (select count(communityNo) from usersCommunity where communityNo = ? group by communityNo) as member
+      const sql = `SELECT communityPost.postNo, communityPost.title, communityPost.content, communityPost.contentImageUrl, communityPost.createdDate ,user.nickname, (select count(communityNo) from usersCommunity where communityNo = ? group by communityNo) as member
       FROM bodyshare.communityPost
       left join user on communityPost.userNo = user.userNo
       where communityNo = ? limit ?;
