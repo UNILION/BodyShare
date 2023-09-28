@@ -14,6 +14,7 @@ import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
 import { selectedSportNameState } from 'recoil/sportList';
 
+
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
   withCredentials: true
@@ -93,27 +94,27 @@ const SportSearch = function() {
     return TagResult && SearchResult;
   });
 
-  const sendFoodDataToServer = async () => {
-    try {
+  // const sendFoodDataToServer = async () => {
+  //   try {
 
-      const exerciseDate = String(new Date().toLocaleDateString());
+  //     const exerciseDate = String(new Date().toLocaleDateString());
     
-      // 선택한 음식 정보를 담은 객체를 생성
-      const sportsData = {
-        userNo,
-        sportsNo: selected.no,
-        exerciseDate,
-        exerciseTime: 60
-      };
+  //     // 선택한 음식 정보를 담은 객체를 생성
+  //     const sportsData = {
+  //       userNo,
+  //       sportsNo: selected.no,
+  //       exerciseDate,
+  //       exerciseTime: 60
+  //     };
 
-      const response = await instance.post('/record/sportsadd', sportsData);
+  //     const response = await instance.post('/record/sportsadd', sportsData);
 
-      console.log('POST 요청이 성공적으로 보내졌습니다.');
-      console.log('서버 응답:', response.data);
-    } catch (error) {
-      console.error('POST 요청 실패:', error);
-    }
-  }
+  //     console.log('POST 요청이 성공적으로 보내졌습니다.');
+  //     console.log('서버 응답:', response.data);
+  //   } catch (error) {
+  //     console.error('POST 요청 실패:', error);
+  //   }
+  // }
 
   return (
     <Container>
@@ -139,7 +140,6 @@ const SportSearch = function() {
         ml="auto"
         mt="30px"
         onClick={() =>{
-          sendFoodDataToServer();
           navigate("/analysis/add/time");
         }}
       />
