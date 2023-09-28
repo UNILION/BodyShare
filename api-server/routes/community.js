@@ -57,18 +57,6 @@ router.get("/bypopular", async (req, res, next) => {
   }
 });
 
-// 커뮤니티 상세 조회
-router.get("/:commuNo/:userNo", async (req, res, next) => {
-  try {
-    const commuNo = Number(req.params.commuNo);
-    const userNo = Number(req.params.userNo);
-    const result = await community.findByNo(commuNo, userNo);
-    res.json(result);
-  } catch (err) {
-    next(err);
-  }
-});
-
 // 커뮤니티 생성
 router.post(
   "/commuadd",
@@ -112,9 +100,12 @@ router.get("/:commuNo/feeds/:limit", async (req, res, next) => {
     const commuNo = Number(req.params.commuNo);
 
     const result = await community.findCommunityPost(commuNo, limit);
-    console.log(result);
     const list = result.map((post) => ({
+      postNo: post.postNo,
+      createdDate: post.createdDate,
       title: post.title,
+      content: post.content,
+      contentImageUrl: post.contentImageUrl,
       nickname: post.nickname,
       member: post.member,
     }));
@@ -125,13 +116,14 @@ router.get("/:commuNo/feeds/:limit", async (req, res, next) => {
   }
 });
 
-router.get("/:commuNo/feeds", async (req, res, next) => {
+// 커뮤니티 상세 조회
+router.get("/:commuNo/:userNo", async (req, res, next) => {
   try {
-    const limit = Number(req.params.limit);
     const commuNo = Number(req.params.commuNo);
-    const list = await community.findCommunityPost(commuNo, limit);
+    const userNo = Number(req.params.userNo);
 
-    res.json(list);
+    const result = await community.findByNo(commuNo, userNo);
+    res.json(result);
   } catch (err) {
     next(err);
   }
