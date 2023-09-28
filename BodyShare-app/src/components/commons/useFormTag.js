@@ -21,7 +21,7 @@ const StyledButton = styled.button`
   text-overflow: ellipsis;  /* 말줄임 적용 */
 
   &:hover {
-    background-color: ${(props) => props.hoverColor ? props.hoverColor : "#A6B2F3"};
+    background-color: ${(props) => props.hovercolor ? props.hovercolor : "#A6B2F3"};
   }
 `
 

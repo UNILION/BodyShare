@@ -159,13 +159,13 @@ const Search = function ({interestList}) {
 
       <SportCategory>
         <Tag tagtitle="전체" width="80px" height="36px" br="13px"
-        onClick={() => handleButtonClick('button1')} bc={buttonState.button1 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hoverColor="rgba(85, 111, 255, 0.7)"/>
+        onClick={() => handleButtonClick('button1')} bc={buttonState.button1 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)"/>
         <Tag tagtitle="근력" width="80px" height="36px" br="13px" 
-        onClick={() => handleButtonClick('button2')} bc={buttonState.button2 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hoverColor="rgba(85, 111, 255, 0.7)"/>
+        onClick={() => handleButtonClick('button2')} bc={buttonState.button2 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)"/>
         <Tag tagtitle="유산소" width="80px" height="36px" br="13px"
-        onClick={() => handleButtonClick('button3')} bc={buttonState.button3 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hoverColor="rgba(85, 111, 255, 0.7)"/>
+        onClick={() => handleButtonClick('button3')} bc={buttonState.button3 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)"/>
         <Tag tagtitle="기타" width="80px" height="36px" br="13px"
-        onClick={() => handleButtonClick('button4')} bc={buttonState.button4 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hoverColor="rgba(85, 111, 255, 0.7)"/>
+        onClick={() => handleButtonClick('button4')} bc={buttonState.button4 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)"/>
       </SportCategory>
 
       {/* 조회된 목록과 선택된 관심사 목록 */}

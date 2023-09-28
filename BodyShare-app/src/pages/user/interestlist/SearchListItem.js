@@ -9,7 +9,7 @@ const SportSearchResult = styled.div`
 const ResultButton = styled.button`
   width: 360px;
   //margin-top: 10px;
-  background-color: ${(props) => (props.active ? props.hoverColor : 'white')};
+  background-color: ${(props) => (props.active ? props.hovercolor : 'white')};
   border: none;
   border-radius: 15px;
   padding-top: 25px;
@@ -17,7 +17,7 @@ const ResultButton = styled.button`
   transition: background-color 0.2s; 
 
   &:hover {
-    background-color: ${(props) => (props.active ? props.hoverColor : 'white')};
+    background-color: ${(props) => (props.active ? props.hovercolor : 'white')};
   }
 `;
 
@@ -76,7 +76,7 @@ const SearchListItem = function ( { record, selectedList, changeSelected } ) {
       <ResultButton
         active={buttonActive}
         onClick={handleButtonClick}
-        hoverColor="rgba(85, 111, 255, 0.7)"
+        hovercolor="rgba(85, 111, 255, 0.7)"
       >
         <RP>{record.name}</RP>
         <Line></Line>

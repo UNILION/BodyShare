@@ -11,7 +11,7 @@ const ResultList = styled.div`
 
 const ResultButton = styled.button`
   margin-top: 10px;
-  background-color: ${(props) => (props.active ? props.hoverColor : 'white')};
+  background-color: ${(props) => (props.active ? props.hovercolor : 'white')};
   border: none;
   border-radius: 15px;
   padding-top: 40px;
@@ -19,7 +19,7 @@ const ResultButton = styled.button`
   transition: background-color 0.2s; 
 
   &:hover {
-    background-color: ${(props) => (props.active ? props.hoverColor : 'white')};
+    background-color: ${(props) => (props.active ? props.hovercolor : 'white')};
   }
 `;
 
@@ -51,7 +51,7 @@ const ResultCate = function ({ foodList, changeSelected }) {
             onClick={() => {
               handleButtonClick(index, food);
             }}
-            hoverColor="rgba(85, 111, 255, 0.7)"
+            hovercolor="rgba(85, 111, 255, 0.7)"
           >
             <RP>{food.name}</RP>
             <Line></Line>

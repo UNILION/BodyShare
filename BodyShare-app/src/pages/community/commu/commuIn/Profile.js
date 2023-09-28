@@ -32,7 +32,7 @@ const Profile = function ( {title, intro, sports} ) {
           <Tag 
             tagtitle={sports}
             mr="10px;"
-            hoverColor="rgba(85,111,255, 0.3)"
+            hovercolor="rgba(85,111,255, 0.3)"
             cursor="default"
           />
         </Inst>
