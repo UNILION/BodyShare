@@ -103,10 +103,10 @@ const userModel = {
   },
 
   //회원 가입한 커뮤니티 등록
-  async createUsersCommu(user) {
+  async createUsersCommu(userNo, CommunityNo) {
     try {
-      const sql = `insert into usersCommunity set ?`;
-      const [result] = await pool.query(sql, [user]);
+      const sql = `INSERT INTO usersCommunity (userNo, communityNo) VALUES (?, ?);`;
+      const [result] = await pool.query(sql, [userNo, CommunityNo]);
       return result.insertId;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
@@ -114,10 +114,10 @@ const userModel = {
   },
 
   // 회원 가입한 커뮤니티 탈퇴(삭제)
-  async deleteUsersCommu(id, conn = pool) {
+  async deleteUsersCommu(commuNo, userNo, conn = pool) {
     try {
-      const sql = `delete from usersCommunity where no = ?`;
-      const [result] = await conn.query(sql, [id]);
+      const sql = `delete from usersCommunity where userNo = ? and communityNo = ?`;
+      const [result] = await conn.query(sql, [commuNo, userNo]);
       return result.affectedRows;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
