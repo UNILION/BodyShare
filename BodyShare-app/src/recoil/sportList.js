@@ -20,7 +20,15 @@ export const sportsSelector = selector({
   },
 });
 
+//선택한 이름
 export const selectedSportNameState = atom({
   key: 'selectedSportName',
-  default: '', // 초기값은 빈 문자열로 설정합니다.
+  default: '',
+});
+
+//선택한 sportsNo
+// recoil/selectedSportNo.js
+export const selectedSportNoState = atom({
+  key: 'selectedSportNoState',
+  default: null
 });
