@@ -58,10 +58,11 @@ router.get("/bypopular", async (req, res, next) => {
 });
 
 // 커뮤니티 상세 조회
-router.get("/:no", async (req, res, next) => {
+router.get("/:commuNo/:userNo", async (req, res, next) => {
   try {
-    const no = Number(req.params.no);
-    const result = await community.findByNo(no);
+    const commuNo = Number(req.params.commuNo);
+    const userNo = Number(req.params.userNo);
+    const result = await community.findByNo(commuNo, userNo);
     res.json(result);
   } catch (err) {
     next(err);
