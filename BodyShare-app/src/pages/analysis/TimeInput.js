@@ -4,10 +4,16 @@ import previous from "assets/Img/Previous.png";
 import Button from "components/commons/Button";
 import plus from "assets/Img/buttonplus.png";
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
+import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { sportTimeState } from "recoil/sportTime";
-import { selectedSportNameState } from 'recoil/sportList'; 
+import { selectedSportNameState, selectedSportNoState } from 'recoil/sportList'; 
+import axios from "axios";
+import { userSelector } from 'recoil/userRecoil';
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
+});
 
 const TimeInputContainer = styled.div`
   display: grid;
@@ -99,20 +105,38 @@ const SportName = styled.p`
 
 const TimeInput = function () {
   const navigate = useNavigate();
-  const [sportTime, setSportTime] = useRecoilState(sportTimeState); //시간 recoil에 저장
   const selectedSportName = useRecoilValue(selectedSportNameState);
+  const selectedSportNo = useRecoilValue(selectedSportNoState);
   const today = new Date().toLocaleDateString();
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
+  const userNo = useRecoilValue(userSelector);
 
-  // 숫자 3자리 제한해준다.
-  if (/^\d{0,3}$/.test(value)) {
-    setSportTime((prevSportTime) => ({
-      ...prevSportTime,
-      [name]: value,
-    }));
+  const [exerciseTime, setExerciseTime] = useState("");
+
+  const handleExerciseTime = (e) => {
+    setExerciseTime(e.target.value);
   }
-  };
+
+  const sendSportsDataToServer = async () => {
+    try {
+  
+      const exerciseDate = String(new Date().toLocaleDateString());
+    
+      // 선택한 음식 정보를 담은 객체를 생성
+      const sportsData = {
+        userNo,
+        sportsNo: selectedSportNo,
+        exerciseDate,
+        exerciseTime: exerciseTime
+      };
+  
+      const response = await instance.post('/record/sportsadd', sportsData);
+  
+      console.log('POST 요청이 성공적으로 보내졌습니다.');
+      console.log('서버 응답:', response.data);
+    } catch (error) {
+      console.error('POST 요청 실패:', error);
+    }
+  }
   
   return (
     <>
@@ -136,9 +160,8 @@ const TimeInput = function () {
           <SmallBox
             type="text"
             maxLength="3"
-            name="hours" 
-            value={sportTime.hours} 
-            onChange={handleInputChange} 
+            value={exerciseTime} // 사용자 입력 값을 설정
+            onChange={handleExerciseTime} 
           />
         </SportTime>
       </TimeInputContainer> 
@@ -150,7 +173,10 @@ const TimeInput = function () {
           mt="130px"
           width="150px"
           display="block"
-          onClick={() => navigate('/analysis')}
+          onClick={() => {
+            sendSportsDataToServer(); // 서버로 데이터 전송
+            navigate('/analysis');
+          }}
       />     
     </>
   );
