@@ -6,13 +6,17 @@ import Profile from "./Profile";
 import Mainbar from "./Mainbar";
 import Groups from "./Groups";
 import axios from "axios";
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
   withCredentials: true,
 });
+
+const Container = styled.div`
+  margin: 10px;
+`;
 
 const BannerPic = styled.div`
   width: 100%;
@@ -48,65 +52,90 @@ const Img = styled.img`
 
 const CommuIn = function () {
   const [communityData, setCommunityData] = useState([]);
+  const [groupData, setGroupData] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
-  const userNo = useRecoilValue(userSelector);
+  let userNo = useRecoilValue(userSelector);
   const [register, setRegister] = useState(0);
+  let commuNo = location.pathname.split("/")[3];
 
   const deleteCommu = async function () {
-    try{
-      await instance.delete(
-      `users/communitydel/${location.pathname.split('/')[3]}/${userNo}`
-      )
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const registerCommu = async function () {
-    try{
-      await instance.post(
-      `users/communityadd/${location.pathname.split('/')[3]}/${userNo}`
-      )
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const commuList = async function () {
     try {
-      const communityResponse = await instance.get(
-        `/community/${location.pathname.split('/')[3]}/${userNo}`
-      );
-      setCommunityData(communityResponse.data);
-      setRegister(communityData.RegisterMember);
+      await instance.delete(`users/communitydel/${commuNo}/${userNo}`);
     } catch (error) {
       console.error(error);
     }
   };
 
+  const registerCommu = async function () {
+    try {
+      await instance.post(`users/communityadd/${commuNo}/${userNo}`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const commuList = async function () {
+    try {
+      const communityResponse = await instance.get(
+        `/community/${commuNo}/${userNo}`
+      );
+      setCommunityData(communityResponse.data);
+      setRegister(communityData.RegisterMember);
+      groupList();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const groupList = async function () {
+    try {
+      const groupResponse = await instance.get(
+        `/community/${commuNo}/feeds/1000`
+      );
+      setGroupData(groupResponse.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     commuList();
   }, [register]);
 
   const registerChange = (registerMember) => {
-    {registerMember ? deleteCommu() : registerCommu()}
-    setRegister(!(registerMember))
+    {
+      registerMember ? deleteCommu() : registerCommu();
+    }
+    setRegister(!registerMember);
   };
 
   return (
     <>
       <BannerPic>
-        <Banner src={`http://localhost:33000/images/communitys/${communityData.bannerImageUrl}`} />
+        <Banner
+          src={`http://localhost:33000/images/communitys/${communityData.bannerImageUrl}`}
+        />
       </BannerPic>
-      <Pf>
-        <Pfpic src={`http://localhost:33000/images/communitys/${communityData.profileImageUrl}`} />
-        <Profile title={communityData.communityName} intro={communityData.intro} sports={communityData.sportsName}/>
-      </Pf>
-      <Mainbar registerMember = {communityData.RegisterMember} userCnt = {communityData.userCount} postCnt = {communityData.postCount} registerChange={registerChange} />
-      <Groups />
-      <Img src={Plus} onClick={() => navigate("/community/feedAdd")} />
+      <Container>
+        <Pf>
+          <Pfpic
+            src={`http://localhost:33000/images/communitys/${communityData.profileImageUrl}`}
+          />
+          <Profile
+            title={communityData.communityName}
+            intro={communityData.intro}
+            sports={communityData.sportsName}
+          />
+        </Pf>
+        <Mainbar
+          registerMember={communityData.RegisterMember}
+          userCnt={communityData.userCount}
+          postCnt={communityData.postCount}
+          registerChange={registerChange}
+        />
+        <Groups groupLists={groupData} />
+        <Img src={Plus} onClick={() => navigate("/community/feedAdd")} />
+      </Container>
     </>
   );
 };
