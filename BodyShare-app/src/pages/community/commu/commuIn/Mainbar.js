@@ -32,32 +32,31 @@ const Member = styled.div`
   font-weight: bold;
 `;
 
-const Mainbar = function ({register, registerChange}) {
-  
+const Mainbar = function ({registerMember, userCnt, postCnt, registerChange}) {
   return (
     <MainBar>
       <Info>
         <Feed>
-          <p>404</p>
+          <p>{postCnt}</p>
           <p>게시물</p>
         </Feed>
         <Member>
-          <p>298</p>
+          <p>{userCnt}</p>
           <p>회원</p>
         </Member>
       </Info>
       <Button
-        name={register ? "탈퇴하기" : "가입하기"}
-        bc={register ? "#FF3131" : "#556FFF"}
-        img={register ? Image6 : Image5}
-        hoverColor={register ? "#FF0000" : ""}
-        iwidth={register ? "40px" : "30px"}
-        iheight={register ? "40px" : "30px"}
-        imt={register ? "5px" : "0"}
+        name={registerMember ? "탈퇴하기" : "가입하기"}
+        bc={registerMember ? "#FF3131" : "#556FFF"}
+        img={registerMember ? Image6 : Image5}
+        hovercolor={registerMember ? "#FF0000" : ""}
+        iwidth={registerMember ? "40px" : "30px"}
+        iheight={registerMember ? "40px" : "30px"}
+        imt={registerMember ? "5px" : "0"}
         width="130px"
         fs="15px"
         ml="10px"
-        onClick={() => registerChange(register)}
+        onClick={() => registerChange(registerMember)}
       />
     </MainBar>
   );
