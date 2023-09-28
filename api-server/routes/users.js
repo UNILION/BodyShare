@@ -164,9 +164,11 @@ router.get("/community/:no", checkLogin, async (req, res, next) => {
 });
 
 // 회원 가입한 커뮤니티 등록
-router.post("/communityadd", checkLogin, async (req, res, next) => {
+router.post("/communityadd/:commuNo/:userNo", checkLogin, async (req, res, next) => {
   try{
-    const id = await user.createUsersCommu(req.body);
+    const userNo = Number(req.params.userNo);
+    const commuNo = Number(req.params.commuNo);
+    const id = await user.createUsersCommu(userNo,commuNo);
     res.json({ id });
   }catch(err){
     next(err);
@@ -174,10 +176,11 @@ router.post("/communityadd", checkLogin, async (req, res, next) => {
 });
 
 // 회원 가입한 커뮤니티 탈퇴(삭제)
-router.delete("/communitydel/:no", checkLogin, async (req, res, next) => {
+router.delete("/communitydel/:commuNo/:userNo", checkLogin, async (req, res, next) => {
   try{
-    const no = Number(req.params.no);
-    const count = await user.deleteUsersCommu(no);
+    const commuNo = Number(req.params.commuNo);
+    const userNo = Number(req.params.userNo);
+    const count = await user.deleteUsersCommu(commuNo, userNo);
     res.json({ count });
   }catch(err){
     next(err);
