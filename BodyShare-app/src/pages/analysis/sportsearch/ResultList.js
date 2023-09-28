@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
+import { selectedSportNoState } from 'recoil/sportList';
+import { userSelector } from "recoil/userRecoil";
+import { useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 const ResultList = styled.div`
   width: 100%;
@@ -39,10 +43,12 @@ const Line = styled.div`
 
 const ResultCate = function ({ sportsList, changeSelected }) {
   const [selectedButton, setSelectedButton] = useState(null);
+  const [selectedSportNo, setSelectedSportNo] = useRecoilState(selectedSportNoState);
 
   const handleButtonClick = function(index, data){
     setSelectedButton(index);
     changeSelected(data);
+    setSelectedSportNo(data.no);
   };
 
   return (
