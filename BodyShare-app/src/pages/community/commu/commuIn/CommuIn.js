@@ -6,6 +6,8 @@ import Profile from "./Profile";
 import Mainbar from "./Mainbar";
 import Groups from "./Groups";
 import axios from "axios";
+import { useRecoilValue } from 'recoil';
+import { userSelector } from "recoil/userRecoil";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -45,18 +47,39 @@ const Img = styled.img`
 `;
 
 const CommuIn = function () {
-  const [register, setRegister] = useState(false);
   const [communityData, setCommunityData] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
+  const userNo = useRecoilValue(userSelector);
+  const [register, setRegister] = useState(0);
+
+  const deleteCommu = async function () {
+    try{
+      await instance.delete(
+      `users/communitydel/${location.pathname.split('/')[3]}/${userNo}`
+      )
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const registerCommu = async function () {
+    try{
+      await instance.post(
+      `users/communityadd/${location.pathname.split('/')[3]}/${userNo}`
+      )
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const commuList = async function () {
     try {
       const communityResponse = await instance.get(
-        `/community/${location.pathname.split('/')[3]}`
+        `/community/${location.pathname.split('/')[3]}/${userNo}`
       );
-      console.log(communityResponse)
       setCommunityData(communityResponse.data);
+      setRegister(communityData.RegisterMember);
     } catch (error) {
       console.error(error);
     }
@@ -65,10 +88,11 @@ const CommuIn = function () {
 
   useEffect(() => {
     commuList();
-  }, []);
+  }, [register]);
 
-  const registerChange = (register) => {
-    setRegister(!register);
+  const registerChange = (registerMember) => {
+    {registerMember ? deleteCommu() : registerCommu()}
+    setRegister(!(registerMember))
   };
 
   return (
@@ -80,7 +104,7 @@ const CommuIn = function () {
         <Pfpic src={`http://localhost:33000/images/communitys/${communityData.profileImageUrl}`} />
         <Profile title={communityData.communityName} intro={communityData.intro} sports={communityData.sportsName}/>
       </Pf>
-      <Mainbar register={register} registerChange={registerChange} />
+      <Mainbar registerMember = {communityData.RegisterMember} userCnt = {communityData.userCount} postCnt = {communityData.postCount} registerChange={registerChange} />
       <Groups />
       <Img src={Plus} onClick={() => navigate("/community/feedAdd")} />
     </>
