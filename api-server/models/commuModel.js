@@ -53,16 +53,16 @@ const comuModel = {
   },
 
   // 커뮤니티 상세 조회
-  async findByNo(no) {
+  async findByNo(commuNo, userNo) {
     try {
-      const sql = `SELECT c.*, s.name AS sportsName, COUNT(DISTINCT cp.postNo) AS postCount, COUNT(DISTINCT uc.userNo) AS userCount
+      const sql = `SELECT c.*, s.name AS sportsName, COUNT(DISTINCT cp.postNo) AS postCount, COUNT(DISTINCT uc.userNo) AS userCount, (select count(*) from usersCommunity where communityNo = ? and userNo = ?) as RegisterMember
       FROM community c
       INNER JOIN sports s ON c.interest = s.no
       LEFT JOIN communityPost cp ON c.communityNo = cp.communityNo
       LEFT JOIN usersCommunity uc ON c.communityNo = uc.communityNo
       WHERE c.communityNo = ?
       GROUP BY c.communityNo;`;
-      const [result] = await pool.query(sql, [no]);
+      const [result] = await pool.query(sql, [commuNo, userNo, commuNo]);
       return result[0];
     } catch (err) {
       throw new Error("DB Error", { cause: err });
