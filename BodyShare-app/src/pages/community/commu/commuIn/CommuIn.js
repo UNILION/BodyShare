@@ -134,7 +134,7 @@ const CommuIn = function () {
           registerChange={registerChange}
         />
         <Groups groupLists={groupData} />
-        <Img src={Plus} onClick={() => navigate("/community/feedAdd")} />
+        <Img src={Plus} onClick={() => navigate("/community/feedAdd/1")} />
       </Container>
     </>
   );

@@ -71,7 +71,7 @@ function App() {
               />
               <Route path="/community/communityAdd" element={<CommuAdd />} />
               <Route path="/community/category" element={<CommuCategory />} />
-              <Route path="/community/feedAdd" element={<CommuFeedAdd />} />
+              <Route path="/community/feedAdd/:commu" element={<CommuFeedAdd />} />
               <Route path="/community/feed" element={<CommuFeed />} />
             </Route>
             <Route path="/mypage" element={<Layout />}>
