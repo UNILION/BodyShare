@@ -1,9 +1,24 @@
 import styled from "styled-components";
-import user from "assets/Img/user.png"
+import user from "assets/Img/userProfileDefault.png"
 import { useNavigate } from "react-router-dom";
+import { useForm, Controller} from 'react-hook-form';
+import { ErrorMessage } from "@hookform/error-message"
+import axios from "axios";
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
+});
+
+const Form = styled.form`
+  grid-row: 3;
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  gap: 10px;
+`;
 
 const ProfileDiv = styled.div`
-  grid-row: 3;
+  grid-row: 1;
   width: 372px;
   height: 130px;
   display: flex;
@@ -32,7 +47,7 @@ const ProfileButton = styled.button`
 `;
 
 const InputDiv = styled.div`
-  grid-row: 4;
+  grid-row: 2;
   display: grid;
   width: 372px;
   grid-template-rows: auto auto auto auto 1fr;
@@ -123,7 +138,6 @@ const CheckPw = styled.input.attrs({ type: "password" })`
 `;
 
 const BodyDiv = styled.div`
-  grid-row: 5;
   display: flex;
 `;
 
@@ -175,7 +189,7 @@ const WeigthP = styled.p`
 `;
 
 const ButtonDiv = styled.div`
-  grid-row: 6;
+  grid-row: 3;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -215,45 +229,163 @@ const NextButton = styled.button`
 const Info = function () {
   const navigate = useNavigate();
 
+  const { handleSubmit, control, formState: { errors }, getValues } = useForm();
+
+  const onSubmit = async (data) => {
+    // FormData 생성 및 데이터 추가
+    const formData = new FormData();
+    formData.append('profileImage', data.profileImage[0]);
+    formData.append('id', data.id);
+    formData.append('nickname', data.nickname);
+    formData.append('password', data.password);
+    formData.append('checkPassword', data.checkPassword);
+    formData.append('height', data.height);
+    formData.append('weight', data.weight);
+
+    try {
+      // axios 수정필요, 관심사 부분 보내서 등록하는 기능 필요
+      const response = await instance.put("/register", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      // 서버 응답 처리
+      if (response.status === 200) {
+        // 성공적으로 가입된 경우 처리
+        // 로그인 페이지로 이동
+        navigate("/")
+      } else {
+        // 가입 실패 시 에러 처리
+        console.error('가입 실패');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
+  };
+
   return (
-    <>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <ProfileDiv>
         <ProfileImg src={user}></ProfileImg>
-        <ProfileButton>등록하기</ProfileButton>
+        <Controller
+          name="profileImage"
+          control={control}
+          render={({ field }) => (
+            <>
+            <input
+              type="file"
+              style={{ display: 'none' }} // 원래 input 숨김
+              id="profileImageInput"
+              onChange={(e) => field.onChange(e.target.files[0])}
+            />
+            <label htmlFor="profileImageInput">
+              <ProfileButton as="span">등록하기</ProfileButton>
+            </label>
+          </>
+          )}
+        />
       </ProfileDiv>
 
       <InputDiv>
-        <IdDiv>
-          <Id placeholder="아이디"></Id>
-          <IdButton>중복확인</IdButton>
-        </IdDiv>
+        <Controller
+          name="id"
+          control={control}
+          rules={{
+            required: '아이디를 입력하세요',
+            // 추가적인 유효성 검사 규칙을 여기에 추가할 수 있습니다.
+          }}
+          render={({ field }) => (
+            <IdDiv>
+              <Id {...field} placeholder="아이디" />
+              <IdButton>중복확인</IdButton>
+            </IdDiv>
+          )}
+        />
 
-        <NicknameDiv>
-          <Nickname placeholder="닉네임"></Nickname>
-          <NicknameButton>중복확인</NicknameButton>
-        </NicknameDiv>
+        <Controller
+          name="nickname"
+          control={control}
+          rules={{
+            required: '닉네임을 입력하세요',
+          }}
+          render={({ field }) => (
+            <NicknameDiv>
+              <Nickname {...field} placeholder="닉네임" />
+              <NicknameButton>중복확인</NicknameButton>
+            </NicknameDiv>
+          )}
+        />
 
-        <Pw placeholder="비밀번호 영문, 숫자 포함 8~16글자"></Pw>
-
-        <CheckPw placeholder="비밀번호 재확인"></CheckPw>
-
+        <Controller
+          name="password"
+          control={control}
+          rules={{
+            required: '비밀번호 영문, 숫자 포함 8~16글자',
+          }}
+          render={({ field }) => (
+            <Pw {...field} placeholder="비밀번호 영문, 숫자 포함 8~16글자"></Pw>
+          )}
+        />
+        
+        <Controller
+          name="checkPassword"
+          control={control}
+          rules={{
+            required: '비밀번호를 확인해주세요',
+            validate: (value) => {
+              // value는 비밀번호 확인 필드의 값입니다.
+              const password = getValues('password'); // 비밀번호 필드의 값 가져오기
+              return value === password || '비밀번호와 일치하지 않습니다';
+            },
+          }}
+          render={({ field, fieldState }) => (
+            <>
+              <CheckPw {...field} placeholder="비밀번호 재확인" />
+              {fieldState.error && (
+                <ErrorMessage>{fieldState.error.message}</ErrorMessage>
+              )}
+            </>
+          )}
+        />
+        
         <BodyDiv>
-          <HeightDiv>
-            <Height placeholder="키"></Height>
-            <HeightP>cm</HeightP>
-          </HeightDiv>
-          <WeigthDiv>
-            <Weight placeholder="몸무게"></Weight>
-            <WeigthP>kg</WeigthP>
-          </WeigthDiv>
+          <Controller
+            name="height"
+            control={control}
+            rules={{
+              required: '키',
+            }}
+            render={({ field }) => (
+              <HeightDiv>
+                <Height {...field} placeholder="키"></Height>
+                <HeightP>cm</HeightP>
+              </HeightDiv>
+            )}
+          />
+          
+          <Controller
+            name="weight"
+            control={control}
+            rules={{
+              required: '몸무게',
+            }}
+            render={({ field }) => (
+              <WeigthDiv>
+                <Weight placeholder="몸무게"></Weight>
+                <WeigthP>kg</WeigthP>
+              </WeigthDiv>
+            )}
+          />
         </BodyDiv>
       </InputDiv>
 
       <ButtonDiv>
         <PreviousButton onClick={() => navigate("/signup")}>이전</PreviousButton>
-        <NextButton onClick={() => navigate("/")}>회원가입</NextButton>
+        <NextButton type="submit">회원가입</NextButton>
       </ButtonDiv>
-    </>
+    </Form>
   );
 };
 
