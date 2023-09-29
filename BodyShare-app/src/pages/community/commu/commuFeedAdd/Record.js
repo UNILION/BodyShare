@@ -102,7 +102,7 @@ const MiddleTime = styled.div`
   margin-right: 10px;
 `;
 
-const Record = function ({ register, errors }) {
+const Record = function ({ register, setRecordDate, errors }) {
   const [click, setClick] = useState({
     click1: false,
     click2: false,

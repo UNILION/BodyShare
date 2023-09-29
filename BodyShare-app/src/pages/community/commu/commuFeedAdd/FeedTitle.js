@@ -19,7 +19,7 @@ const Content = styled.input`
   padding: 5px 20px;
 `;
 
-const FeedTitle = function ({ register, errors }) {
+const FeedTitle = function ({ register, setPostTitle, errors }) {
   return (
     <FeedTitleContainer>
       <Title>피드 제목 추가하기</Title>
