@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { interestSelector } from "recoil/userRecoil";
+import { interestAtom } from "recoil/userRecoil";
 
 const ButtonDiv = styled.div`
   grid-row: 5;
@@ -72,11 +73,17 @@ const Button = function () {
   const navigate = useNavigate();
 
   const interestList = useRecoilValue(interestSelector);
+  const [interestRecoil, setInterestRecoil] = useRecoilState(interestAtom);
+  // 로그인 페이지로 돌아갈때 관심사 리코일 초기화
+  const previous = function() {
+    setInterestRecoil([]);
+    navigate("/")
+  };
 
   return (
     <ButtonDiv>
       <PreviousDiv>
-        <PreviousButton onClick={() => navigate("/")}>이전</PreviousButton>
+        <PreviousButton onClick={previous}>이전</PreviousButton>
       </PreviousDiv>
       <NextDiv>
         {interestList.length == 0 ? <NextButtonNot>다음</NextButtonNot> : <NextButton onClick={() => navigate("/signup/userInfo")}>다음</NextButton> }
