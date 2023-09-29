@@ -35,7 +35,6 @@ const Banner = function () {
   const [postData, setPostData] = useState([]);
   const location = useLocation();
   let commuNo = location.pathname.split("/")[3];
-  console.log(postData);
   const post = async function () {
     try {
       const postResponse = await instance.get(`/post/postadd/${commuNo}`);
