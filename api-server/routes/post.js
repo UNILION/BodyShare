@@ -52,6 +52,18 @@ router.get("/commu/:no", async (req, res, next) => {
   }
 });
 
+// 커뮤니티 게시물 추가 상단 내용
+router.get("/postadd/:no", async (req, res, next) => {
+  try{
+    const no = Number(req.params.no);
+    const result = await post.postBanner(no);
+    res.json(result);
+  }catch(err){
+    next(err);
+  }
+});
+
+
 // 게시물 등록
 router.post("/postadd", upload.single("contentImg"), async (req, res, next) => {
   try{

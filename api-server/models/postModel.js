@@ -40,6 +40,20 @@ const postModel = {
     }
   },
 
+  
+  // 커뮤니티 게시물 추가 상단 내용
+  async postBanner(no) {
+    try {
+      const sql = `SELECT communityName, bannerImageUrl
+      FROM bodyshare.community
+      where communityNo=?`;
+      const [result] = await pool.query(sql, [no]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+
   // 게시물 생성
   async create(com) {
     try {
