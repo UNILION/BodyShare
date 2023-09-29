@@ -55,9 +55,9 @@ const CommuIn = function () {
   const [groupData, setGroupData] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
-  let userNo = useRecoilValue(userSelector);
+  const userNo = useRecoilValue(userSelector);
   const [register, setRegister] = useState(0);
-  let commuNo = location.pathname.split("/")[3];
+  const commuNo = location.pathname.split("/")[3];
 
   const deleteCommu = async function () {
     try {
