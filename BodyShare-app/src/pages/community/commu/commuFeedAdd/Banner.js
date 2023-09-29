@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import bannerImg from "assets/Img/card_image2.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -8,7 +7,6 @@ const instance = axios.create({
   baseURL: "http://localhost:33000/api",
   withCredentials: true,
 });
-
 
 const BannerContainer = styled.div`
   width: 100%;
@@ -37,12 +35,10 @@ const Banner = function () {
   const [postData, setPostData] = useState([]);
   const location = useLocation();
   let commuNo = location.pathname.split("/")[3];
-  console.log(postData)
+  console.log(postData);
   const post = async function () {
     try {
-      const postResponse = await instance.get(
-        `/post/postadd/${commuNo}`
-      );
+      const postResponse = await instance.get(`/post/postadd/${commuNo}`);
       setPostData(postResponse.data[0]);
     } catch (error) {
       console.error(error);
@@ -54,7 +50,9 @@ const Banner = function () {
   }, []);
   return (
     <BannerContainer>
-      <BannerPic src={`http://localhost:33000/images/communitys/${postData.bannerImageUrl}`} />
+      <BannerPic
+        src={`http://localhost:33000/images/communitys/${postData.bannerImageUrl}`}
+      />
       <Text>{postData.communityName}</Text>
     </BannerContainer>
   );
