@@ -123,6 +123,40 @@ const userModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+
+  // 아이디 중복확인
+  async checkId(user) {
+    try {
+      const sql = `select * from user where userId = ?`;
+      const [result] = await pool.query(sql, [user.id]);
+      if (result.length === 1) {
+        // 중복 존재
+        return result;
+      } else {
+        // 중복 없을 때
+        return [];
+      }
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+
+  // 닉네임 중복확인
+  async checkNic(user) {
+    try {
+      const sql = `select * from user where nickname = ?`;
+      const [result] = await pool.query(sql, [user.nic]);
+      if (result.length === 1) {
+        // 중복 존재
+        return result;
+      } else {
+        // 중복 없을 때
+        return [];
+      }
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
 };
 
 module.exports = userModel;

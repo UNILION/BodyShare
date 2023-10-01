@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import user from "assets/Img/userProfileDefault.png"
 import { useNavigate } from "react-router-dom";
-import { useForm, Controller} from 'react-hook-form';
-import { ErrorMessage } from "@hookform/error-message"
+import { useForm } from 'react-hook-form';
 import axios from "axios";
+import { useState } from "react";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -50,8 +50,8 @@ const InputDiv = styled.div`
   grid-row: 2;
   display: grid;
   width: 372px;
-  grid-template-rows: auto auto auto auto 1fr;
-  gap: 20px;
+  grid-template-rows: auto auto auto auto auto;
+  gap: 10px;
   align-items: center;
   justify-content: center;
 `;
@@ -138,10 +138,23 @@ const CheckPw = styled.input.attrs({ type: "password" })`
 `;
 
 const BodyDiv = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto;
 `;
 
 const HeightDiv = styled.div`
+  grid-column: 1;
+  width: 155px;
+  height: 70px;
+  display: grid;
+  grid-template-rows: auto auto;
+  justify-content: center;
+  align-items: center;
+`;
+
+const HDiv = styled.div`
+  grid-row: 1;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -165,10 +178,22 @@ const HeightP = styled.p`
 `;
 
 const WeigthDiv = styled.div`
-  display: flex;
+  grid-column: 2;
+  width: 155px;
+  height: 70px;
+  display: grid;
+  grid-template-rows: auto auto;
   justify-content: center;
   align-items: center;
   margin-left: 20px;
+`;
+
+const WDiv = styled.div`
+  grid-row: 1;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Weight = styled.input`
@@ -190,7 +215,7 @@ const WeigthP = styled.p`
 
 const ButtonDiv = styled.div`
   grid-row: 3;
-  height: 100px;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -226,10 +251,17 @@ const NextButton = styled.button`
   }
 `;
 
+const ErrorP = styled.p`
+  color: red;
+  font-size: 10px;
+`;
+
 const Info = function () {
   const navigate = useNavigate();
 
-  const { handleSubmit, control, formState: { errors }, getValues } = useForm();
+  const [image, setImage] = useState(user);
+
+  const { handleSubmit, register, formState: { errors }, getValues } = useForm({ mode: "onChange" });
 
   const onSubmit = async (data) => {
     // FormData 생성 및 데이터 추가
@@ -238,7 +270,6 @@ const Info = function () {
     formData.append('id', data.id);
     formData.append('nickname', data.nickname);
     formData.append('password', data.password);
-    formData.append('checkPassword', data.checkPassword);
     formData.append('height', data.height);
     formData.append('weight', data.weight);
 
@@ -265,119 +296,189 @@ const Info = function () {
 
   };
 
+  // id 중복검사 useState
+  const [checkId, setCheckId] = useState("1");
+
+  const checkIdServer = async function(id){
+    try{
+      const response = await instance.post('/users/checkid', { id });
+      if (response.data.check){
+        //중복 있음
+        setCheckId("2");
+      } else {
+        //중복 없음
+        setCheckId("3");
+      }
+    } catch(error){
+      // 에러 처리
+      console.error(error);
+    }
+  };
+
+  const checkIdValidate = function(){
+    if(checkId==1){
+      return "중복확인을 해주세요";
+    }
+    else if(checkId==2){
+      return "중복된 아이디입니다."
+    }
+    else{
+      return ;
+    }
+  };
+
+  // nickname 중복검사 useState
+  const [checkNic, setCheckNic] = useState("1");
+
+  const checkNicServer = async function(nic){
+    try{
+      const response = await instance.post('/users/checknic', { nic });
+      if (response.data.check){
+        //중복 있음
+        setCheckNic("2");
+      } else {
+        //중복 없음
+        setCheckNic("3");
+      }
+    } catch(error){
+      // 에러 처리
+      console.error(error);
+    }
+  };
+
+  const checkNicValidate = function(){
+    if(checkNic==1){
+      return "중복확인을 해주세요";
+    }
+    else if(checkNic==2){
+      return "중복된 닉네임입니다."
+    }
+    else{
+      return ;
+    }
+  };
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <ProfileDiv>
-        <ProfileImg src={user}></ProfileImg>
-        <Controller
-          name="profileImage"
-          control={control}
-          render={({ field }) => (
-            <>
-            <input
-              type="file"
-              style={{ display: 'none' }} // 원래 input 숨김
-              id="profileImageInput"
-              onChange={(e) => field.onChange(e.target.files[0])}
-            />
-            <label htmlFor="profileImageInput">
-              <ProfileButton as="span">등록하기</ProfileButton>
-            </label>
-          </>
-          )}
+        <ProfileImg src={image}></ProfileImg>
+        <label htmlFor="profileImageInput">
+          <ProfileButton as="span">등록하기</ProfileButton>
+        </label>
+        <input
+          type="file"
+          id="profileImageInput"
+          {...register('profileImage', {
+            required: '프로필 이미지를 업로드하세요',
+          })}
+          style={{ display: 'none' }} // 원래 input 숨김
         />
       </ProfileDiv>
 
       <InputDiv>
-        <Controller
-          name="id"
-          control={control}
-          rules={{
-            required: '아이디를 입력하세요',
-            // 추가적인 유효성 검사 규칙을 여기에 추가할 수 있습니다.
-          }}
-          render={({ field }) => (
-            <IdDiv>
-              <Id {...field} placeholder="아이디" />
-              <IdButton>중복확인</IdButton>
-            </IdDiv>
-          )}
-        />
+        <IdDiv>
+          <Id
+            {...register('id', {
+              required: '아이디를 입력하세요',
+              pattern: {
+                value: /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}$/,
+                message: '영문과 숫자로 이루어진 6~16자의 아이디를 입력하세요',
+              },
+              validate: checkIdValidate,
+            })}
+            placeholder="아이디"
+          />
+          <IdButton onClick={() => checkIdServer(getValues('id'))}>중복확인</IdButton>
+        </IdDiv>
+        {errors.id && (
+          <ErrorP>{errors.id.message}</ErrorP>
+        )}
 
-        <Controller
-          name="nickname"
-          control={control}
-          rules={{
-            required: '닉네임을 입력하세요',
-          }}
-          render={({ field }) => (
-            <NicknameDiv>
-              <Nickname {...field} placeholder="닉네임" />
-              <NicknameButton>중복확인</NicknameButton>
-            </NicknameDiv>
-          )}
-        />
+        <NicknameDiv>
+          <Nickname
+            {...register('nickname', {
+              required: '닉네임을 입력하세요',
+              pattern: {
+                value: /^[a-zA-Z0-9가-힣]{4,16}$/,
+                message: '영문, 한글, 숫자로 이루어진 4~16자',
+              },
+              validate: checkNicValidate,
+            })}
+            placeholder="닉네임"
+          />
+          <NicknameButton onClick={() => checkNicServer(getValues('nickname'))}>중복확인</NicknameButton>
+        </NicknameDiv>
+        {errors.nickname && (
+          <ErrorP>{errors.nickname.message}</ErrorP>
+        )}
 
-        <Controller
-          name="password"
-          control={control}
-          rules={{
+        <Pw
+          {...register('password', {
             required: '비밀번호 영문, 숫자 포함 8~16글자',
-          }}
-          render={({ field }) => (
-            <Pw {...field} placeholder="비밀번호 영문, 숫자 포함 8~16글자"></Pw>
-          )}
+            pattern: {
+              value: /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9가-힣]{8,16}$/,
+              message: '영문, 숫자를 최소 1개씩 포함하여 8~16글자',
+            },
+          })}
+          placeholder="비밀번호 영문, 숫자 포함 8~16글자"
         />
-        
-        <Controller
-          name="checkPassword"
-          control={control}
-          rules={{
+        {errors.password && (
+          <ErrorP>{errors.password.message}</ErrorP>
+        )}
+
+        <CheckPw
+          {...register('checkPassword', {
             required: '비밀번호를 확인해주세요',
             validate: (value) => {
-              // value는 비밀번호 확인 필드의 값입니다.
-              const password = getValues('password'); // 비밀번호 필드의 값 가져오기
+              const password = getValues('password');
               return value === password || '비밀번호와 일치하지 않습니다';
             },
-          }}
-          render={({ field, fieldState }) => (
-            <>
-              <CheckPw {...field} placeholder="비밀번호 재확인" />
-              {fieldState.error && (
-                <ErrorMessage>{fieldState.error.message}</ErrorMessage>
-              )}
-            </>
-          )}
+          })}
+          placeholder="비밀번호 재확인"
         />
-        
+        {errors.checkPassword && (
+          <ErrorP>{errors.checkPassword.message}</ErrorP>
+        )}
+
+
         <BodyDiv>
-          <Controller
-            name="height"
-            control={control}
-            rules={{
-              required: '키',
-            }}
-            render={({ field }) => (
-              <HeightDiv>
-                <Height {...field} placeholder="키"></Height>
-                <HeightP>cm</HeightP>
-              </HeightDiv>
+          <HeightDiv>
+            <HDiv>
+              <Height
+                {...register('height', {
+                  required: '키',
+                  pattern: {
+                    value: /^\d{3}(\.\d{1})?$/,
+                    message: '3자리 숫자, 소수점 포함 4자리 숫자',
+                  },
+                })}
+                placeholder="키"
+              />
+              <HeightP>cm</HeightP>
+            </HDiv>
+            {errors.height && (
+              <ErrorP>{errors.height.message}</ErrorP>
             )}
-          />
+          </HeightDiv>
           
-          <Controller
-            name="weight"
-            control={control}
-            rules={{
-              required: '몸무게',
-            }}
-            render={({ field }) => (
-              <WeigthDiv>
-                <Weight placeholder="몸무게"></Weight>
-                <WeigthP>kg</WeigthP>
-              </WeigthDiv>
+          <WeigthDiv>
+            <WDiv>
+              <Weight
+                {...register('weight', {
+                  required: '몸무게',
+                  pattern: {
+                    value: /^\d+(\.\d{1})?$/,
+                    message: '2~3자리 숫자, 소수점 포함 3~4자리 숫자',
+                  },
+                })}
+                placeholder="몸무게"
+              />
+              <WeigthP>kg</WeigthP>
+            </WDiv>
+            {errors.weight && (
+              <ErrorP>{errors.weight.message}</ErrorP>
             )}
-          />
+          </WeigthDiv>
         </BodyDiv>
       </InputDiv>
 

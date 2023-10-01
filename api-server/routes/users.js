@@ -187,5 +187,38 @@ router.delete("/communitydel/:commuNo/:userNo", checkLogin, async (req, res, nex
   }
 });
 
+// 아이디 중복 확인
+router.post("/checkid", async (req, res, next) => {
+  try{
+    const result = await user.checkId(req.body);
+
+    // 중복 존재
+    if (result.length === 1) {
+      res.json({ check: true});
+    }else {
+      // 중복 없음
+      res.json({ check: false });
+    }
+  }catch(err){
+    next(err);
+  }
+});
+
+// 닉네임 중복 확인
+router.post("/checknic", async (req, res, next) => {
+  try{
+    const result = await user.checkNic(req.body);
+
+    // 중복 존재
+    if (result.length === 1) {
+      res.json({ check: true});
+    }else {
+      // 중복 없음
+      res.json({ check: false });
+    }
+  }catch(err){
+    next(err);
+  }
+});
 
 module.exports = router;
