@@ -6,7 +6,7 @@ const Container = styled.div`
   display: grid;
   width: 390px;
   height: 696px;
-  grid-template-rows: auto auto auto auto auto 1fr;
+  grid-template-rows: auto auto auto ;
   gap: 10px;
   
 `;
