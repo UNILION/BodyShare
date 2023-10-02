@@ -7,6 +7,12 @@ import Profile from "./Profile";
 import CommunityTitle from "./CommunityTitle";
 import CommunityContent from "./CommunityContent";
 import CommunityCategory from "./CommunityCategory";
+import axios from "axios";
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true
+});
 
 const MiddleContainer = styled.div`
   display: grid;
@@ -15,12 +21,24 @@ const MiddleContainer = styled.div`
 `;
 
 const Middle = function () {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      // 서버로 데이터를 전송합니다.
+      const response = await instance.post("/community/commuadd", data);
+
+      // 성공적으로 업데이트된 경우 메인 페이지로 이동
+      if (response.status === 200) {
+        // 리디렉션 등 필요한 동작 수행
+      } else {
+        console.error("업데이트 실패");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
