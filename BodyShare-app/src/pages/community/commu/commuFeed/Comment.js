@@ -1,5 +1,13 @@
 import styled from "styled-components";
 import circle from "assets/Img/circletgo.png";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true,
+});
 
 const CommentContainer = styled.div`
   color: #878787;
@@ -49,23 +57,41 @@ const Nick = styled.span`
 const Commend = styled.span``;
 
 const Comment = function () {
+  const [commentData, setCommentData] = useState();
+  const location = useLocation();
+  const feedNo = location.pathname.split("/")[3];
+
+  const commentList = async function () {
+    try {
+      const commentResponse = await instance.get(
+        `comment/post/${feedNo}`
+      );
+      console.log(commentResponse.data);
+      setCommentData(commentResponse.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    commentList();
+  }, []);
+
   return (
     <CommentContainer>
-      <Count>댓글 2개</Count>
+      <Count>댓글 {commentData ? commentData[0].commentCnt : 0}개</Count>
       <InputBox>
         <Input />
         <Circle src={circle} />
       </InputBox>
       <CommentList>
-        <Profile>
-          <Nick>ho.jae_</Nick>
-          <Commend>이야 재밌었겠네요~!</Commend>
+        {commentData ? commentData.map((comment, idx) => (
+          <Profile key={idx}>
+          <Nick>{comment.commenter_nickname}</Nick>
+          <Commend>{comment.content}</Commend>
         </Profile>
-
-        <Profile>
-          <Nick>to_see_tt</Nick>
-          <Commend>저도 한번 배워봐야겠네요</Commend>
-        </Profile>
+        )) : null}
+        
       </CommentList>
     </CommentContainer>
   );
