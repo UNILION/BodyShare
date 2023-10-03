@@ -98,6 +98,17 @@ const Record = function () {
     }
   };
 
+  //운동 삭제
+  const deleteSportsRecord = async (planNo) => {
+    try{
+      await instance.delete(`/record/sportsdel/${planNo}`);
+      //삭제후에 다시 스포츠 리스트 불러옴
+      loadRecord();
+    }catch(error){
+      console.log("오류",error);
+    };
+  };
+
   const filterS = function (selectedDate, list) {
     const result = list.filter(item => dateCal(item.exerciseDate) == selectedDate.toLocaleDateString());
     return result;
@@ -137,7 +148,10 @@ const Record = function () {
           </TitleDate>
           <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
             {/* SportRecord component */}
-            {sportsList && <SportRecord sportsList={sportsList} />}
+            {sportsList && 
+              <SportRecord sportsList={sportsList} 
+              onDelete={(planNo) => deleteSportsRecord(planNo)}
+            />}
             <Line></Line>
             {/* FoodRecord component */}
             {foodList && <FoodRecord foodList={foodList} />}
