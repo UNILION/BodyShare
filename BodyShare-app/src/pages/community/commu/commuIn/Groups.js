@@ -23,7 +23,7 @@ const Groups = function ({groupLists}) {
           title={data.title}
           contents={data.content}
           footer={data.createdDate}
-          onClick={() => navigate("/community/feed")}
+          onClick={() => navigate("/community/feed/1")}
           mb="10px"
         />
         ))}
