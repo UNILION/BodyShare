@@ -66,12 +66,6 @@ const SportsListItem = function (props) {
     setSeeMoreVisible(!seeMoreVisible);
   };
 
-  //삭제하기 버튼을 누르면
-  const handleDelete = () => {
-    // Delete 버튼을 누를 때 rp 상태를 디폴트 값으로 변경해준다.
-    //setRP("삭제"); 
-  }
-
   return (
     <SportNoteContainer>
       <SportNote>{result[0].name}</SportNote>
@@ -80,8 +74,11 @@ const SportsListItem = function (props) {
         <SmIng src={seemore}></SmIng>
       </SeeMore>
       <SeeMoreDetail isVisible={seeMoreVisible}>
-        <Delete onClick={handleDelete}>삭제하기</Delete>
+      <Delete onClick={() => props.onDelete(props.record.planNo)}>
+        삭제하기
+      </Delete>
       </SeeMoreDetail>
+
     </SportNoteContainer>
   );
 
