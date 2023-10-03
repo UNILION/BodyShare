@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS `bodyshare`.`user` ;
 CREATE TABLE IF NOT EXISTS `bodyshare`.`user` (
   `userNo` INT NOT NULL AUTO_INCREMENT,
   `userId` VARCHAR(45) NOT NULL,
-  `userName` VARCHAR(45) NOT NULL,
+  `userName` VARCHAR(45) NULL DEFAULT NULL,
   `password` VARCHAR(255) NOT NULL,
   `nickname` VARCHAR(255) NOT NULL,
   `gender` VARCHAR(45) NULL DEFAULT NULL,
