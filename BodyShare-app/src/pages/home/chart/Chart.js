@@ -66,6 +66,14 @@ const ChartContainer = styled.div`
 `;
 
 const Charts = function () {
+  const settings = {
+    dots: true, 
+    infinite: true, // 무한 루프
+    speed: 500, // 애니메이션 속도
+    slidesToShow: 1, // 보여질 슬라이드 수
+    slidesToScroll: 1, // 스크롤할 슬라이드 수
+  };
+
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
   const selectedFood = useRecoilValue(foodSelector);
@@ -138,7 +146,7 @@ const Charts = function () {
       const todayDate = new Date().toLocaleDateString();
 
       // 오늘 날짜와 맞는 데이터만 필터링합니다.
-      const filteredData = Array.isArray(allDataFood) ? allDataFood : [];
+      const filteredData = Array.isArray(allDataFood) ? allDataFood : null;
       const filtered = filteredData.filter((item) => {
         const itemDate = new Date(item.dietDate).toLocaleDateString();
         return (
@@ -186,7 +194,7 @@ const Charts = function () {
 
   return (
     <SliderContainer>
-      <Slider {...settings}>
+      <Slider>
         <Slide>
           <ChartBox>
             <ChartContainer
