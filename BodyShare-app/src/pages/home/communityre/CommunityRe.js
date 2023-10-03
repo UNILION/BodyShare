@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import CardImage1 from "assets/Img/card_image1.png";
-import CardImage2 from "assets/Img/card_image2.png";
 import Card from "components/commons/Card";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
@@ -53,60 +51,67 @@ const CommunityRe = function () {
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
 
-  const [communityData, setCommunityData] = useState(0);
-  const [communitytData2, setCommunityData2] = useState(0);
+  const [communityData, setCommunityData] = useState([]);
 
-  const communityDatas = async function () {
+  const fetchData = async (commuNo) => {
     try {
-      const communityResponse = await instance.get(`/community/${userNo}`); 
+      const communityResponse = await instance.get(`/community/${commuNo}/${userNo}`);
       const community = communityResponse.data;
-      setCommunityData(community)       
+      return community;
     } catch (error) {
       console.error(error);
-    }
-
-    try {
-      const communityResponse2 = await instance.get(`/community/${userNo}`); 
-      const community2 = communityResponse2.data;
-      setCommunityData2(community2)       
-    } catch (error) {
-      console.error(error);
+      return null;
     }
   };
 
-useEffect(() => {
-  communityDatas();
-}, [userNo]);
+  useEffect(() => {
+    const fetchCommunityData = async () => {
+      const community1 = await fetchData(1);
+      setCommunityData([community1]);
 
+      const community2 = await fetchData(2);
+      setCommunityData(prevData => [...prevData, community2]);
+    };
+
+    fetchCommunityData();
+  }, [userNo]);
 
   return (
     <CommunityDiv>
       <CommunityP>News</CommunityP>
       <PostDiv>
-        <CommunityRecommend
-          onClick={() => {
-            navigate("/community");
-          }}
-        >
-          <Card
-            img={CardImage1}
-            title="요가 아무나 오세요"
-            contents="요가에 재미를 붙이셨네요 :)"
-            footer="2023년 9월 16일"
-          />
-        </CommunityRecommend>
-        <CommunityRecommend2
-          onClick={() => {
-            navigate("/community");
-          }}
-        >
-          <Card
-            img={CardImage2}
-            title="클라이밍 아무나 오세요"
-            contents="클라이밍에 재미를 붙이셨네요 :)"
-            footer="2023년 9월 15일"
-          />
-        </CommunityRecommend2>
+        {communityData.map((community, index) => (
+          <div key={index}>
+            {index === 0 && (
+              <CommunityRecommend
+                onClick={() => {
+                  navigate(`/community/${community.communityNo}`);
+                }}
+              >
+                <Card
+                  img={community.profileImageUrl}
+                  title={community.communityName}
+                  contents={community.intro}
+                  footer={` ${community.createdDate}`}
+                />
+              </CommunityRecommend>
+            )}
+            {index === 1 && (
+              <CommunityRecommend2
+                onClick={() => {
+                  navigate(`/community/${community.communityNo}`);
+                }}
+              >
+                <Card
+                  img={community.profileImageUrl}
+                  title={community.communityName}
+                  contents={community.intro}
+                  footer={` ${community.createdDate}`}
+                />
+              </CommunityRecommend2>
+            )}
+          </div>
+        ))}
       </PostDiv>
     </CommunityDiv>
   );
