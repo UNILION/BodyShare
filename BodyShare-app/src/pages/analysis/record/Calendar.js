@@ -8,6 +8,7 @@ import FoodRecord from "pages/analysis/record/FoodNote"
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
+import { async } from "q";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -109,6 +110,17 @@ const Record = function () {
     };
   };
 
+   //음식 삭제
+   const deleteFoodRecord = async (planNo) => {
+    try{
+      await instance.delete(`/record/fooddel/${planNo}`);
+      //삭제후에 다시 스포츠 리스트 불러옴
+      loadRecord();
+    }catch(error){
+      console.log("오류",error);
+    };
+  };
+
   const filterS = function (selectedDate, list) {
     const result = list.filter(item => dateCal(item.exerciseDate) == selectedDate.toLocaleDateString());
     return result;
@@ -147,14 +159,21 @@ const Record = function () {
             <P>{selectedDate ? selectedDate.toLocaleDateString() : ""}</P>
           </TitleDate>
           <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
-            {/* SportRecord component */}
+
+            {/* 운동 기록 부분 */}
             {sportsList && 
               <SportRecord sportsList={sportsList} 
               onDelete={(planNo) => deleteSportsRecord(planNo)}
             />}
+            
             <Line></Line>
-            {/* FoodRecord component */}
-            {foodList && <FoodRecord foodList={foodList} />}
+
+            {/* 음식 기록 부분 */}
+            {foodList && 
+              <FoodRecord foodList={foodList} 
+              onDelete={(planNo) => deleteFoodRecord(planNo)}
+            />}
+
           </div>
         </NoteGrid>
 

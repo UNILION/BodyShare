@@ -13,7 +13,7 @@ const FoodNoteContainer = styled.div`
   padding: 20px;
 `;
 
-const FoodSeeMore = styled.button`
+const SeeMore = styled.button`
   width: 20px;
   height: 26px;
   border: none;
@@ -22,7 +22,7 @@ const FoodSeeMore = styled.button`
   padding: 0;
 `;
 
-const FoodSeeMoreDetail = styled.div`
+const SeeMoreDetail = styled.div`
   width: 158px;
   position: absolute; 
   top: 130px;
@@ -65,16 +65,18 @@ const FoodListItem = function (props) {
     setSeeMoreVisible(!seeMoreVisible);
   }
 
-  
+
   return (
     <FoodNoteContainer>
-      <ul>
-        {result.map((item, index) => (
-          <li key={index}>
-            <FoodNote>{item.name}</FoodNote>
-          </li>
-        ))}
-      </ul>
+      <FoodNote>{result[0].name}</FoodNote>
+      <SeeMore onClick={toggleSeeMore}>
+        <SmIng src={seemore}></SmIng>
+      </SeeMore>
+      <SeeMoreDetail isVisible={seeMoreVisible}>
+        <Delete onClick={() => props.onDelete(props.record.planNo)}>
+          삭제하기
+        </Delete>
+      </SeeMoreDetail>
     </FoodNoteContainer>
   );
 };
