@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import axios from "axios";
 import { useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { interestAtom, interestSelector } from "recoil/userRecoil";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -260,14 +262,18 @@ const Info = function () {
   const navigate = useNavigate();
 
   const [image, setImage] = useState(user);
+  const [interest, setInterest] = useRecoilState(interestAtom);
+  const interestList = useRecoilValue(interestSelector);
 
   const { handleSubmit, register, formState: { errors }, getValues } = useForm({ mode: "onChange" });
 
   const onSubmit = async (data) => {
     // FormData 생성 및 데이터 추가
     const formData = new FormData();
-    formData.append('profileImage', data.profileImage[0]);
-    formData.append('id', data.id);
+    if (data.profileImage[0]) {
+      formData.append('profileImg', data.profileImage[0]);
+    }
+    formData.append('userId', data.id);
     formData.append('nickname', data.nickname);
     formData.append('password', data.password);
     formData.append('height', data.height);
@@ -275,17 +281,34 @@ const Info = function () {
 
     try {
       // axios 수정필요, 관심사 부분 보내서 등록하는 기능 필요
-      const response = await instance.put("/register", formData, {
+      const response = await instance.post("/users/signup", formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
       // 서버 응답 처리
-      if (response.status === 200) {
+      if (response.data.id) {
         // 성공적으로 가입된 경우 처리
-        // 로그인 페이지로 이동
-        navigate("/")
+
+        // 관심사 추가 코드 (for 문 이용), 추가 후 recoil에 있는 관심사 리스트 초기화 해야함
+        try{
+          for(let i=0; i<interestList.length; i++){
+            const data = {
+              userNo: response.data.id,
+              sportsNo: interestList[i].no
+            };
+            const result = await instance.post("/users/interestadd", data);
+          }
+          // recoil 초기화
+          setInterest([]);
+
+          // 로그인 페이지로 이동
+          navigate("/")
+        } catch (error) {
+          console.error(error);
+        }
+        
       } else {
         // 가입 실패 시 에러 처리
         console.error('가입 실패');
@@ -369,7 +392,7 @@ const Info = function () {
           type="file"
           id="profileImageInput"
           {...register('profileImage', {
-            required: '프로필 이미지를 업로드하세요',
+            //required: '프로필 이미지를 업로드하세요',
           })}
           style={{ display: 'none' }} // 원래 input 숨김
         />
