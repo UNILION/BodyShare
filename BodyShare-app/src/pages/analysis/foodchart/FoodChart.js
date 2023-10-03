@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Chart } from "react-google-charts";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "recoil/userRecoil";
+import { foodSelector } from "recoil/foodList";
+import Slide1 from "./Slide1";
 
-//axios.defaults.baseURL = "http://localhost:33000/api";
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
-  withCredentials: true
+  withCredentials: true,
 }); 
 
 const SliderContainer = styled.div`
@@ -59,38 +62,75 @@ const ChartContainer = styled.div`
 `;
 
 const FoodChart = function () {
-  // 차트
-  const chartData1 = [
-    ["작업", "하루 시간"],
-    ["탄", 3],
-    ["단", 5],
-    ["지", 2],
-  ];
+  const userNo = useRecoilValue(userSelector);
+  const [selectedFood] = useRecoilValue(foodSelector);
+  const [foodChartData, setFoodChartData] = useState([]);
 
-  const chartOptions1 = {
-    title: "Calorie",
-    pieHole: 0.4,
-    titleTextStyle: {
-      fontSize: 20,
-    },
-    chartArea: {
-      left: "10%", 
-      top: "20%", 
-      width: "100%",
-      height: "100%",
-    },
-  };
+  const parseDateString = (dateString) => {
+    const dateParts = dateString.split(".");
+    const year = parseInt(dateParts[0],10);
+    const month = parseInt(dateParts[1], 10) -1 // 월은 0부터 시작하니까 1 뺴줌
+    const day = parseInt(dateParts[2],10);
+    return new Date(year, month, day);
+  }
 
-  const chartData2 = [
-    ["요일", "칼로리"],
-    ["월", 1000],
-    ["화", 1170],
-    ["수", 660],
-    ["목", 1030],
-    ["금", 1030],
-    ["토", 1030],
-    ["일", 1030],
-  ];
+
+
+
+
+// 요일별 칼로리 
+// const chartDatas2 = async function () {
+//   try {
+//     const response = await instance.get(`/record/food/${userNo}`);
+//     const allData = response.data;
+
+//     const currentDate = new Date();
+//     const currentWeekStartDate = new Date(currentDate);
+//     currentWeekStartDate.setDate(
+//       currentDate.getDate() - currentDate.getDay()
+//     );
+//     const currentWeekEndDate = new Date(currentWeekStartDate);
+//     currentWeekEndDate.setDate(currentWeekStartDate.getDate() + 6);
+
+//     let totalCalories = 0; // 주간 칼로리 누적값을 저장할 변수
+
+//     for (let i = 0; i < 7; i++) {
+//       const day = currentWeekStartDate.getDate() + i; // 현재 주의 시작일부터 7일 동안
+//       const foodItem = allData.find((record) => {
+//         const recordDate = new Date(record.dietDate);
+//         return recordDate.getDate() === day;
+//       });
+
+//         totalCalories += foodItem.calories;
+//     }
+
+//     // 주간 칼로리 정보를 그래프에 추가
+//     const foodChartData = [
+//       ["요일", "주간 칼로리"],
+//       ["일", 0],
+//       ["월", 0],
+//       ["화", 0],
+//       ["수", 0],
+//       ["목", 0],
+//       ["금", 0],
+//       ["토", 0],
+//     ];
+
+//     foodChartData[1][1] = totalCalories; // 해당 요일에 주간 칼로리 누적값 설정
+
+//     setFoodChartData(foodChartData);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
+//   useEffect(() => {
+//     chartDatas2();
+//     const interval = setInterval(() => {
+//       chartDatas2(); 
+//     }, 24 * 60 * 60 * 1000); 
+
+//     return () => clearInterval(interval);
+//   }, [userNo, selectedFood]);
 
   const chartOptions2 = {
     title: "요일별 칼로리 섭취량",
@@ -106,20 +146,7 @@ const FoodChart = function () {
   return (
     <SliderContainer>
       <Slider {...settings}>
-        <Slide>
-          <ChartBox>
-            <ChartContainer>
-              <Chart
-                chartType="PieChart"
-                width="100%"
-                height="456px"
-                data={chartData1}
-                options={chartOptions1}
-                graph_id="donutchart"
-              />
-            </ChartContainer>
-          </ChartBox>
-        </Slide>
+        <Slide1 />
 
         <Slide>
           <ChartBox>
@@ -128,7 +155,7 @@ const FoodChart = function () {
                 chartType="ComboChart"
                 width="340px"
                 height="456px"
-                data={chartData2}
+                data={foodChartData}
                 options={chartOptions2}
                 graph_id="curve_chart"
               />

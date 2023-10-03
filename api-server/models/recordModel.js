@@ -31,7 +31,7 @@ const recordModel = {
   // 음식 기록 목록 조회
   async findfoodrecord(no){
     try{
-      const sql = `select * from dietRecord where userNo = ?`;
+      const sql = `select * from dietRecord left join food on dietRecord.foodNo = food.no where userNo = ?`;
       const [ result ] = await pool.query(sql, [no]);
       return result;
     }catch(err){

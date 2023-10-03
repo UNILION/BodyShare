@@ -5,6 +5,7 @@ import { useRecoilValue } from 'recoil';
 import { useRecoilState } from 'recoil';
 import { foodSelector } from "recoil/foodList";
 import { foodAtom } from 'recoil/foodList';
+import { all } from "axios";
 
 const FoodNoteContainer = styled.div`
   display: grid;
@@ -27,7 +28,7 @@ const SeeMoreDetail = styled.div`
   position: absolute; 
   top: 130px;
   left: 200px;
-  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+  display: ${( isVisible ) => (isVisible ? 'block' : 'none')};
 `;
 
 const SmIng = styled.img`
@@ -57,7 +58,8 @@ const FoodListItem = function (props) {
   const allFoods = useRecoilValue(foodSelector);
 
   let result = [];
-  result = allFoods.filter(item => item.no === props.record.foodNo);
+
+  result = allFoods.filter(item => item.no === props.record.foodNo); 
 
   const [seeMoreVisible, setSeeMoreVisible] = useState(false);
 
