@@ -6,7 +6,8 @@ const commentModel = {
     try {
       const sql = `SELECT
         cpc.*,
-        u.nickname AS commenter_nickname
+        u.nickname AS commenter_nickname,
+        (select count(*) from communityPostComment) as commentCnt
       FROM
         communityPostComment AS cpc
       JOIN
