@@ -65,11 +65,7 @@ const FoodListItem = function (props) {
     setSeeMoreVisible(!seeMoreVisible);
   }
 
-  // 삭제하기 버튼을 누르면
-  const handleDelete = () => {
-    // setRP("삭제"); 
-  }
-
+  
   return (
     <FoodNoteContainer>
       <ul>
