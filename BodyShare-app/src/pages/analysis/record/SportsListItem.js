@@ -55,7 +55,7 @@ const Delete = styled.button`
 
 const SportsListItem = function (props) {
   const allSports = useRecoilValue(sportsSelector);
-  const [isExpanded, setIsExpanded] = useState(false); // Track expansion state
+  const [isExpanded, setIsExpanded] = useState(false); 
   const seeMoreDetailRef = useRef(null);
 
   let result = [];
