@@ -19,7 +19,8 @@ const Content = styled.textarea`
   padding: 5px 20px;
 `;
 
-const FeedContent = function ({ register, errors, setPostContent }) {
+const FeedContent = function ({ register, errors }) {
+
   return (
     <FeedContentContainer>
       <Title>오늘 무슨 일이 있었나요?</Title>

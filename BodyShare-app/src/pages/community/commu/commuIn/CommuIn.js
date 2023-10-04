@@ -133,7 +133,9 @@ const CommuIn = function () {
           postCnt={communityData.postCount}
           registerChange={registerChange}
         />
+        {groupData ?
         <Groups groupLists={groupData} />
+        : null}
         <Img src={Plus} onClick={() => navigate("/community/feedAdd/1")} />
       </Container>
     </>

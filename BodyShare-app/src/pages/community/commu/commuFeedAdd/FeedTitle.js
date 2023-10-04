@@ -19,7 +19,8 @@ const Content = styled.input`
   padding: 5px 20px;
 `;
 
-const FeedTitle = function ({ register, setPostTitle, errors }) {
+const FeedTitle = function ({ register, errors }) {
+
   return (
     <FeedTitleContainer>
       <Title>피드 제목 추가하기</Title>
@@ -30,7 +31,8 @@ const FeedTitle = function ({ register, setPostTitle, errors }) {
             value: 10,
             message: "최대 10글자까지 가능합니다!",
           },
-        })}
+        })
+      }
         placeholder="나의 피드에 제목을 붙여주세요!"
       />
       <Check>{errors.feedTitle?.message}</Check>
