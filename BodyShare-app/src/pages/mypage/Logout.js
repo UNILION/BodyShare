@@ -6,7 +6,7 @@ import Image5 from "assets/Img/right.png";
 import ButtonT from "pages/mypage/newverst/ButtonT";
 import Image6 from "assets/Img/left.png";
 import { useRecoilState } from 'recoil';
-import { userAtom } from "recoil/userRecoil";
+import { userAtom, interestAtom } from "recoil/userRecoil";
 import { sportsAtom } from "recoil/sportList";
 import { foodAtom } from "recoil/foodList";
 import axios from "axios";
@@ -85,6 +85,7 @@ const PasswordModify = function () {
   const [userNo, setUserNo] = useRecoilState(userAtom);
   const [sports, setSports] = useRecoilState(sportsAtom);
   const [food, setFood] = useRecoilState(foodAtom);
+  const [interest, setInterest] = useRecoilState(interestAtom);
 
   const Logout = async function(){
     try {
@@ -97,6 +98,7 @@ const PasswordModify = function () {
         setUserNo('');
         setSports([]);
         setFood([]);
+        setInterest([]);
         navigate('/');
       } else {
         // 서버에서 세션 삭제 실패 또는 다른 오류 처리
