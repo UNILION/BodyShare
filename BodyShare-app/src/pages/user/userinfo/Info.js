@@ -32,6 +32,7 @@ const ProfileDiv = styled.div`
 const ProfileImg = styled.img`
   width: 98px;
   height: 98px;
+  cursor: pointer;
 `;
 
 const ProfileButton = styled.button`
@@ -381,10 +382,21 @@ const Info = function () {
     }
   };
 
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <ProfileDiv>
-        <ProfileImg src={image}></ProfileImg>
+        <ProfileImg src={image} onClick={() => document.getElementById("profileImageInput").click()}></ProfileImg>
         <label htmlFor="profileImageInput">
           <ProfileButton as="span">등록하기</ProfileButton>
         </label>
@@ -395,6 +407,7 @@ const Info = function () {
             //required: '프로필 이미지를 업로드하세요',
           })}
           style={{ display: 'none' }} // 원래 input 숨김
+          onChange={handleProfileImageChange}
         />
       </ProfileDiv>
 
