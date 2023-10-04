@@ -64,8 +64,8 @@ router.post(
   async (req, res, next) => {
     try {
       // 프로필 이미지와 배너 이미지 가져오기
-      const profileImages = req.files["profileImg"];
-      const bannerImages = req.files["bannerImg"];
+      const profileImages = req.files?.profileImg;
+      const bannerImages = req.files?.bannerImg;
 
       // 파일이 업로드되었을 때만 처리
       if (profileImages) {
