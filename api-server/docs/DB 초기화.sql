@@ -31,6 +31,7 @@ AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 CREATE UNIQUE INDEX `userId_UNIQUE` ON `bodyshare`.`user` (`userId` ASC);
+CREATE UNIQUE INDEX `nickname_UNIQUE` ON `bodyshare`.`user` (`nickname` ASC);
 
 
 -- -----------------------------------------------------
