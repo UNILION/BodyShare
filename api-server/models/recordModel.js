@@ -13,15 +13,16 @@ const recordModel = {
   },
 
   // 해당 유저의 최근 3일 운동 기록 목록 조회
-  async findByRecent(no){
+  async findByRecent(no, day){
     try{
       const sql = `SELECT er.*, s.name AS sportsName
       FROM exerciseRecord er
       INNER JOIN sports s ON er.sportsNo = s.no
       WHERE er.userNo = ?
-      AND er.date >= DATE_SUB(DATE_ADD(CURDATE(), INTERVAL 9 HOUR), INTERVAL 3 DAY)
-      ORDER BY er.date DESC;`;
-      const [ result ] = await pool.query(sql, [no]);
+      AND DATE(STR_TO_DATE(er.exerciseDate, '%Y. %m. %d.')) >= DATE(STR_TO_DATE(?, '%Y. %m. %d.')) - INTERVAL 2 DAY
+      AND DATE(STR_TO_DATE(er.exerciseDate, '%Y. %m. %d.')) <= DATE(STR_TO_DATE(?, '%Y. %m. %d.'))
+      ORDER BY er.exerciseDate DESC;`;
+      const [ result ] = await pool.query(sql, [no, day, day]);
       return result;
     }catch(err){
       throw new Error("DB Error", { cause: err });
