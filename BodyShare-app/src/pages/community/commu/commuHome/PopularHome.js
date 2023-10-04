@@ -29,8 +29,9 @@ const PopularHome = function () {
     try {
       const response = await instance.get("/community/bypopular");
       const community = response.data;
-      console.log(community);
-      setPopularCommunityData(community);
+      const sortedCommunity = community.sort((a, b) => b.interest - a.interest);
+
+      setPopularCommunityData(sortedCommunity);
     } catch (error) {
       console.error(error);
     }
