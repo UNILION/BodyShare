@@ -34,33 +34,41 @@ const Middle = function () {
   } = useForm();
   const [imagePreview, setImagePreview] = useState("");
   const image = watch("contentImageURL");
-  const [postTitle, setPostTitle] = useState();
-  const [postContent, setPostContent] = useState();
-  const [postContentImageURL, setPostContentImageURL] = useState();
-  const [recordDate, setRecordDate] = useState();
+  const [imageInfo, setImageInfo] = useState();
+  const [recordDate, setRecordDate] = useState(0);
   const location = useLocation();
   const commuNo = location.pathname.split("/")[3];
   const userNo = useRecoilValue(userSelector);
   const navigate = useNavigate();
-  const postTime = String(new Date().toLocaleDateString())
 
-  
-  const onSubmit = async function (data) {
+  const onSubmit = async (data) => {
+    const formData = new FormData()
+    if (imageInfo) {
+      formData.append('contentImg', imageInfo);
+    }
+    formData.append("communityNo", commuNo)
+    formData.append("userNo", userNo)
+    formData.append("title", data.feedTitle)
+    formData.append("content", data.feedContent)
+    formData.append("recordDate", recordDate)
+
     try {
-      console.log("data" + JSON.stringify(data))
-      const postData = {
-        communityNo: commuNo,
-        userNo,
-        createdDate: postTime,
-        title : postTitle,
-        content: postContent,
-        contentImageURL: postContentImageURL,
-        recordDate : recordDate
-      }
-      console.log("포스트" + JSON.stringify(postData))
-      // const response = await instance.post(`post/postadd`, postData);
+      await instance.post(`post/postadd`, formData);
+      navigate(`/community/commuIn/${commuNo}`)
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleImageChange = (e) => {
+    setImageInfo(e.target.files[0])
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setImagePreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -76,12 +84,11 @@ const Middle = function () {
     <form onSubmit={handleSubmit(onSubmit)}>
       <MiddleContainer>
         <Banner />
+        <Profile register={register} handleImageChange={handleImageChange} imagePreview={imagePreview} />
 
-        <Profile register={register} imagePreview={imagePreview} setImagePreview = {setImagePreview} />
+        <FeedTitle register={register} errors={errors} />
 
-        <FeedTitle register={register} setPostTitle = {setPostTitle} errors={errors} />
-
-        <FeedContent register={register} setPostContent = {setPostContent} errors={errors} />
+        <FeedContent register={register} errors={errors} />
 
         <Record register={register} setRecordDate={setRecordDate} errors={errors} />
       </MiddleContainer>
@@ -93,7 +100,7 @@ const Middle = function () {
         mb="10px"
         width="150px"
         display="block"
-        // onClick={() => navigate("/community/commuIn/1")}
+        type="submit"
       />
     </form>
   );
