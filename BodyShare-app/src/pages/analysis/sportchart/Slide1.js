@@ -1,68 +1,39 @@
 import React, { useState, useEffect  } from "react";
 import styled from "styled-components";
 import { Chart } from "react-google-charts";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
-import Slide1 from "./Slide1";
-import Slide2 from "./Slide2";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
-
-const SliderContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 100%);
-  overflow: hidden;
-  width: 370px;
-  margin: 35px auto;
-
-.slick-dots {
-  position: absolute;
-  bottom: 10px;
-}
-
-`;
+import axios from "axios";
 
 const Slide = styled.div`
-  min-width: 100%;
+  width: 360px;
   display: grid;
   place-items: center;
   transition: transform 0.3s ease;
   grid-column: span 1;
-`;
-
-const ChartBox = styled.div`
-  width: 360px;
-  height: 476px;
   border-radius: 30px;
   background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.25);
   margin: 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
+
 const ChartContainer = styled.div`
-  width: 340px;
+  width: 330px;
   height: 476px;
   background-color: white;
   border-radius: 15px;
   /* border: 1px solid rgba(135, 135, 135, 0.3); */
   cursor: pointer;
-  margin-left: 10px;
 `;
 
-//운동 차트 1
-const SportChart = function () {
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true,
+});
+const Slide1 = function (){
   const userNo = useRecoilValue(userSelector);
   const [sportsChartData, setSportsChartData] = useState([]);
 
@@ -73,6 +44,7 @@ const SportChart = function () {
     const day = parseInt(dateParts[2],10);
     return new Date(year, month, day);
   }
+
   const chartDatas = async function () {
     try{
       const response = await instance.get(`/record/sports/${userNo}`);
@@ -109,16 +81,23 @@ const SportChart = function () {
         const formattedDate = date.toLocaleDateString("ko-KR", options); // 월/일 (요일)
         const dateString = `${formattedDate}\n(${day})`;
 
-        const exerciseTimeRecord = currentWeekDate.find((record) => { // 현재 요일에 해당되는 운동기록이 있는지 확인
+        let totalExerciseTime = 0;
+  
+        // 해당 날짜에 대한 운동 기록 더하기
+        allData.forEach((record) => {
           const recordDate = new Date(record.exerciseDate);
-          return recordDate.getDay() === i;
+          const recordDateString = recordDate.toLocaleDateString("ko-KR", options);
+  
+          if (recordDateString === formattedDate) {
+            totalExerciseTime += record.exerciseTime;
+          }
         });
 
-        const exerciseTime = exerciseTimeRecord
-          ? exerciseTimeRecord.exerciseTime
-          : 0;
-        sportsChartData.push([dateString, exerciseTime]); // 있으면 운동시간 가져오기
+
+        sportsChartData.push([dateString, totalExerciseTime]); // 있으면 운동시간 가져오기
       }
+
+      
 
       setSportsChartData(sportsChartData);
     }catch(error){
@@ -133,27 +112,27 @@ const SportChart = function () {
 
     return () => clearInterval(interval);
   }, [userNo]);
-    
 
-
-
-
-  // 슬라이드
-  const settings = {
-    dots: true,
-    infinite: false
+  const chartOptions1 = {
+    title: "일주일 운동 시간",
+    width: 320,
+    height: 430,
+    legend: { position: "none" },
   };
 
-  return (
-    <SliderContainer>
-      <Slider {...settings}>
-
-        <Slide1 />
-
-        <Slide2 />
-      </Slider>
-    </SliderContainer>
+  return(
+    <Slide>
+      <ChartContainer>
+      <Chart
+          chartType="ColumnChart"
+          data={sportsChartData}
+          options={chartOptions1}
+          graph_id="columnchart_values"
+          rootProps={{ "data-testid": "1" }}
+        />
+      </ChartContainer>
+  </Slide>
   );
 };
 
-export default SportChart;
+export default Slide1;
