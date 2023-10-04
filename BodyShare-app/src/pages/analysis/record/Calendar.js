@@ -8,7 +8,6 @@ import FoodRecord from "pages/analysis/record/FoodNote"
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
-import bodyParser from "body-parser";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
