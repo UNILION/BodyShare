@@ -51,7 +51,6 @@ const Slide2 = function () {
       const currentWeekEndDate = new Date(currentWeekStartDate);
       currentWeekEndDate.setDate(currentWeekStartDate.getDate() + 6);
   
-      // Filter and keep only the records for the current week
       const currentWeekData = allData.filter((record) => {
         const recordDate = new Date(record.dietDate);
         return (
@@ -92,6 +91,7 @@ const Slide2 = function () {
   }, []);
 
   const chartOptions2 = {
+    legend: { position: "none" },
     title: "요일별 칼로리 섭취량",
     width: "320px",
     height: "450px",

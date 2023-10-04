@@ -25,13 +25,12 @@ const Slide = styled.div`
 `;
 
 const ChartContainer = styled.div`
-  width: 340px;
-  height: 476px;
+  width: 330px;
+  height: 470px;
   background-color: white;
   border-radius: 15px;
   /* border: 1px solid rgba(135, 135, 135, 0.3); */
   cursor: pointer;
-  margin-left: 10px;
 `;
 const Slide1 = function () {
   const userNo = useRecoilValue(userSelector);
@@ -79,6 +78,14 @@ const Slide1 = function () {
       console.error(error);
     }
   };
+
+  const chartOptions1 = {
+    legend: { position: "top" },
+    title: "영양성분",
+    pieHole: 0.2,
+    width: 340,
+    height: 450
+  };
  
   useEffect(() => {
     chartDatas1();
@@ -89,13 +96,8 @@ const Slide1 = function () {
       <ChartContainer>
       <Chart
           chartType="PieChart"
-          width={"340px"}
-          height={"450px"}
           data={foodChartData}
-          options={{
-            title: "Calorie",
-            pieHole: 0.2,
-          }}
+          options={chartOptions1}
           graph_id="donutchart"
         />
       </ChartContainer>
