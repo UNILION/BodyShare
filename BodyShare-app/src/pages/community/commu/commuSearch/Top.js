@@ -1,11 +1,10 @@
 import styled from "styled-components";
-import Tag from "components/commons/Tag";
-import search from "assets/Img/search.png";
 import backButton from "assets/Img/back.png";
 import { useNavigate } from "react-router-dom";
 
 const PreviousButton = styled.button`
   margin-top: 3px;
+  margin-left: 5px;
   grid-row: 1;
   width: 20px;
   height: 20px;
@@ -16,59 +15,12 @@ const PreviousButton = styled.button`
   cursor: pointer;
 `;
 
-const SearchInput = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  margin-bottom: 20px;
-`;
-
-const Input = styled.input`
-  width: 260px;
-  height: 45px;
-  border: 1px solid rgba(135, 135, 135, 0.3);
-  border-radius: 15px;
-  text-align: center;
-  padding: 0 20px;
-`;
-
-const Search = styled.img`
-  margin: auto;
-  cursor: pointer;
-`;
-
-const CategoryList = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-`;
-
 const Top = function () {
   const navigate = useNavigate();
-  const handleOnKeyDown = (e) => {
-    if (e.key === "Enter") {
-      navigate("/community/search/after");
-    }
-  };
 
   return (
     <>
       <PreviousButton onClick={() => navigate("/community")} />
-      <SearchInput>
-        <Search
-          src={search}
-          onClick={() => navigate("/community/search/after")}
-        />
-        <Input
-          type="text"
-          placeholder="찾으시는 운동을 검색해주세요"
-          onKeyDown={handleOnKeyDown}
-        />
-      </SearchInput>
-      <CategoryList>
-        <Tag tagtitle="전체" width="80px" height="36px" br="13px" />
-        <Tag tagtitle="근력" width="80px" height="36px" br="13px" />
-        <Tag tagtitle="유산소" width="80px" height="36px" br="13px" />
-        <Tag tagtitle="기타" width="80px" height="36px" br="13px" />
-      </CategoryList>
     </>
   );
 };
