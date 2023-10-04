@@ -53,11 +53,10 @@ const CommunityRe = function () {
 
   const [communityData, setCommunityData] = useState([]);
 
-  const fetchData = async (commuNo) => {
+  const fetchData = async () => {
     try {
-      const communityResponse = await instance.get(`/community/${commuNo}/${userNo}`);
-      const community = communityResponse.data;
-      return community;
+      const response = await instance.get(`/post/community/${userNo}`);
+      return response.data;
     } catch (error) {
       console.error(error);
       return null;
@@ -66,11 +65,8 @@ const CommunityRe = function () {
 
   useEffect(() => {
     const fetchCommunityData = async () => {
-      const community1 = await fetchData(1);
-      setCommunityData([community1]);
-
-      const community2 = await fetchData(2);
-      setCommunityData(prevData => [...prevData, community2]);
+      const data = await fetchData();
+      setCommunityData(data);
     };
 
     fetchCommunityData();
@@ -80,40 +76,25 @@ const CommunityRe = function () {
     <CommunityDiv>
       <CommunityP>News</CommunityP>
       <PostDiv>
-        {communityData.map((community, index) => (
+        {communityData.slice(0, 2).map((communityPost, index) => (
           <div key={index}>
-            {index === 0 && (
-              <CommunityRecommend
-                onClick={() => {
-                  navigate(`/community/${community.communityNo}`);
-                }}
-              >
-                <Card
-                  img={community.profileImageUrl}
-                  title={community.communityName}
-                  contents={community.intro}
-                  footer={` ${community.createdDate}`}
-                />
-              </CommunityRecommend>
-            )}
-            {index === 1 && (
-              <CommunityRecommend2
-                onClick={() => {
-                  navigate(`/community/${community.communityNo}`);
-                }}
-              >
-                <Card
-                  img={community.profileImageUrl}
-                  title={community.communityName}
-                  contents={community.intro}
-                  footer={` ${community.createdDate}`}
-                />
-              </CommunityRecommend2>
-            )}
+            <CommunityRecommend
+              onClick={() => {
+                navigate(`/community/${communityPost.communityNo}`);
+              }}
+            >
+              <Card
+                img={communityPost.contentImageUrl}
+                title={communityPost.title}
+                contents={communityPost.content}
+                footer={` ${communityPost.createdDate}`}
+              />
+            </CommunityRecommend>
           </div>
         ))}
       </PostDiv>
     </CommunityDiv>
   );
 };
+
 export default CommunityRe;
