@@ -4,6 +4,8 @@ import Tag from "components/commons/useFormTag";
 import xbutton from "assets/Img/xbutton.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { categorySelector } from "recoil/commuRecoil";
 
 const CommunityCategoryContainer = styled.div``;
 
@@ -42,25 +44,27 @@ const Xbutton = styled.img`
 
 const CommunityCategory = function ({ register, errors }) {
   const navigate = useNavigate();
-  const [tagtitle, setagTitle] = useState("요가");
+  const categoryList = useRecoilValue(categorySelector);
   return (
     <CommunityCategoryContainer>
       <Title>커뮤니티 카테고리</Title>
       <CategoryContent onClick={() => navigate("/community/category")}>
         1개의 카테고리를 필수로 선택해주세요!
       </CategoryContent>
-      <Category>
-        <Tag tagtitle="요가" />
+      {categoryList.length > 0 && (
+        <Category>
+        <Tag tagtitle={categoryList[0].name} />
         <Xbutton src={xbutton} />
         <input
           type="hidden"
-          value={tagtitle}
+          value={categoryList[0].name}
           {...register("tag", {
             required: "한 개의 카테고리를 선택해주세요!",
           })}
         />
       </Category>
-
+      )}
+  
       <Check>{errors.tag?.message}</Check>
     </CommunityCategoryContainer>
   );

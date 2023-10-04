@@ -8,6 +8,10 @@ import CommunityTitle from "./CommunityTitle";
 import CommunityContent from "./CommunityContent";
 import CommunityCategory from "./CommunityCategory";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "recoil/userRecoil";
+import { categorySelector } from "recoil/commuRecoil";
+import { useNavigate } from "react-router-dom";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -21,16 +25,47 @@ const MiddleContainer = styled.div`
 `;
 
 const Middle = function () {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
+  const userNo = useRecoilValue(userSelector);
+  const categoryList = useRecoilValue(categorySelector);
+
+  const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onChange" });
 
   const onSubmit = async (data) => {
+    // FormData 생성 및 데이터 추가
+    const formData = new FormData();
+    if (data.profileImg[0]) {
+      formData.append('profileImg', data.profileImg[0]);
+    }
+    if (data.bannerImg[0]){
+      formData.append('bannerImg', data.bannerImg[0]);
+    }
+    formData.append('adminUserNo', userNo);
+    formData.append('interest', categoryList[0].no);
+    formData.append('communityName', data.title);
+    formData.append('intro', data.content);
+
     try {
       // 서버로 데이터를 전송합니다.
-      const response = await instance.post("/community/commuadd", data);
+      const response = await instance.post("/community/commuadd", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        }, 
+      });
 
-      // 성공적으로 업데이트된 경우 메인 페이지로 이동
+      // 성공적으로 업데이트된 경우 usesCommunity에 등록 하고 메인 페이지로 이동
       if (response.status === 200) {
-        // 리디렉션 등 필요한 동작 수행
+        console.log(response.data);
+        console.log(response.data.id);
+        
+        try{
+          const result = await instance.post(`/users/communityadd/${response.data.id}/${userNo}`);
+          if(result.data)
+          // 성공시 메인 페이지 이동
+          navigate("/community");
+        }catch(err){
+          console.error("usersCommunity 업데이트 실패")
+        }
       } else {
         console.error("업데이트 실패");
       }
@@ -61,7 +96,7 @@ const Middle = function () {
         mb="10px"
         width="150px"
         display="block"
-        // onClick={() => navigate("/community")}
+        type="submit"
       />
     </form>
   );

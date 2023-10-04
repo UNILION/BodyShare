@@ -3,14 +3,14 @@ import searchIcon from "assets/Img/search.png";
 import { useNavigate } from "react-router-dom";
 import Tag from "components/commons/Tag";
 import { useRef, useState, useEffect } from "react";
-import SearchList from "./SearchList";
+import SearchList from "pages/community/commu/commuCategory/SearchList";
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { sportsSelector } from "recoil/sportList";
-// import { interestAtom } from "recoil/userRecoil";
-import Selected from "./Selected";
+import Selected from "pages/community/commu/commuCategory/Selected";
 import Button from "components/commons/Button";
 import plus from "assets/Img/check.png";
 import axios from "axios";
+import { categoryAtom } from "recoil/commuRecoil";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -57,7 +57,7 @@ const Donediv = styled.div`
 `;
 
 
-const Search = function ({interestList}) {
+const Search = function ({categoryList}) {
   const navigate = useNavigate();
   
   const allSports = useRecoilValue(sportsSelector);
@@ -132,45 +132,17 @@ const Search = function ({interestList}) {
   };
 
   // 선택된 항목 리스트
-  const [selectedList, setSelectedList] = useState([]);
+  const [selectedList, setSelectedList] = useState(categoryList);
   
   const changeSelected = function (list) {
     setSelectedList(list);
   };
 
-  const [commuNo, setCommuNo] = useState(null);
+  const [categoryItem, setCategoryItem] = useRecoilState(categoryAtom);
 
-  // 컴포넌트가 마운트된 후에 커뮤니티 넘버를 가져오는 useEffect를 추가합니다.
-  useEffect(() => {
-    // 커뮤니티 넘버를 가져오는 비동기 함수를 호출합니다.
-    const fetchCommunityNo = async () => {
-      try {
-        // 커뮤니티 넘버를 가져오는 API 호출
-        const response = await instance.get(`/community/${commuNo}`);
-        // API 응답에서 커뮤니티 넘버를 추출하고 상태로 설정합니다.
-        setCommuNo(response.data.commuNo);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    // 컴포넌트가 마운트된 후에 커뮤니티 넘버를 가져오도록 호출합니다.
-    fetchCommunityNo();
-  }, []); // 빈 배열을 전달하여 컴포넌트가 마운트될 때 한 번만 호출되도록 합니다.
-
-  
   // complete 함수에서 커뮤니티 넘버를 사용합니다.
-  const complete = async () => {
-    try {
-      // 커뮤니티 넘버를 사용하여 API 호출
-      if (commuNo !== null) {
-        const communityInterestData = await instance.post(`/community/interest/${commuNo}`);
-        console.log('communityInterestData', communityInterestData);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    
+  const complete = function () {
+    setCategoryItem(selectedList);
     navigate(`/community/communityAdd`);
   };
 

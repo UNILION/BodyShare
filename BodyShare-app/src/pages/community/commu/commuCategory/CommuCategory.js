@@ -1,11 +1,9 @@
 import styled from "styled-components";
-import Top from "./Top";
-import Middle from "./Middle";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { interestSelector } from "recoil/userRecoil"
 import backButton from "assets/Img/back.png";
-import Search from "./Search";
+import Search from "pages/community/commu/commuCategory/Search";
+import { categorySelector } from "recoil/commuRecoil";
 
 const Container = styled.div`
   display: grid;
@@ -29,12 +27,12 @@ const PreviousButton = styled.button`
 
 const CommuSearch = function () {
   const navigate = useNavigate();
-  // const interestList = useRecoilValue(interestSelector);
+  const categoryList = useRecoilValue(categorySelector);
   
   return (
     <Container>
       <PreviousButton onClick={() => navigate("/community")} />
-      <Search />
+      <Search categoryList={categoryList}/>
     </Container>
   );
 };
