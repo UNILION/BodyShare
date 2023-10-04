@@ -3,6 +3,8 @@ import circle from "assets/Img/circletgo.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "recoil/userRecoil";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -58,8 +60,11 @@ const Commend = styled.span``;
 
 const Comment = function () {
   const [commentData, setCommentData] = useState();
+  const [comment, setComment] = useState('')
+  const [isValid, setIsValid] = useState(false);
   const location = useLocation();
   const feedNo = location.pathname.split("/")[3];
+  const userNo = useRecoilValue(userSelector);
 
   const commentList = async function () {
     try {
@@ -73,6 +78,23 @@ const Comment = function () {
     }
   }
 
+  const onSubmit = async (e) => {
+    if (isValid === false) return
+    const formData = new FormData()
+    formData.append("postNo", feedNo)
+    formData.append("userNo", userNo)
+    formData.append("content", comment)
+    console.log(formData)
+    for (let value of formData.values()) {
+      console.log(value);
+}
+    try {
+      await instance.post(`comment/commentadd`, formData);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   useEffect(() => {
     commentList();
   }, []);
@@ -81,8 +103,13 @@ const Comment = function () {
     <CommentContainer>
       <Count>댓글 {commentData ? commentData[0].commentCnt : 0}개</Count>
       <InputBox>
-        <Input />
-        <Circle src={circle} />
+        <Input onChange={e => {setComment(e.target.value)}} 
+        onKeyUp={e => {
+          e.target.value.length > 0 ? setIsValid(true) : setIsValid(false);
+          if(e.key === "Enter") onSubmit()
+        }}
+        value={comment}/>
+        <Circle src={circle} onClick={onSubmit}/>
       </InputBox>
       <CommentList>
         {commentData ? commentData.map((comment, idx) => (
