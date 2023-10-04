@@ -80,12 +80,29 @@ const MyProfileModify = function () {
     loadUser();
   }, []);
 
-  const { control, handleSubmit, formState: { errors }, register, getValues } = useForm()
+  const { control, handleSubmit, formState: { errors }, register, getValues } = useForm({ mode: "onChange" })
 
   const onSubmit = async (data) => {
+    // FormData 생성 및 데이터 추가
+    const formData = new FormData();
+    if (data.profileImg[0]) {
+      formData.append('profileImg', data.profileImg[0]);
+    }
+    if (data.bannerImg[0]){
+      formData.append('bannerImg', data.bannerImg[0]);
+    }
+    formData.append('nickname', data.nickname);
+    formData.append('password', data.afterpassword);
+    formData.append('height', data.height);
+    formData.append('weight', data.weight);
+
     try {
       // 사용자가 입력한 정보를 서버로 전송합니다.
-      const response = await instance.put(`/users/useredit/${userNo}`, data);
+      const response = await instance.put(`/users/useredit/${userNo}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
       // 업데이트가 성공하면 사용자를 리디렉션하거나 성공 메시지를 표시할 수 있습니다.
       if (response.status === 200) {
