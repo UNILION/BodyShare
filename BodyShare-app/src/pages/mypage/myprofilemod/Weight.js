@@ -65,8 +65,8 @@ const Weight = function ({weight, register, errors}) {
           {...register("weight", {
             required: "몸무게를 작성해주세요",
             pattern: {
-              value: /^\d{1,3}(\.\d{0,1})?$/,
-              message: "올바른 몸무게 형식을 입력하세요"
+              value: /^\d{2,3}(\.\d{0,1})?$/,
+              message: "2~3자리 숫자, 소수점 포함 3~4자리 숫자"
             }
           })}
           defaultValue={weight}
