@@ -34,19 +34,19 @@ INSERT INTO usersCommunity (userNo, communityNo) VALUES (1, 5);
 INSERT INTO usersCommunity (userNo, communityNo) VALUES (2, 1);
 
 -------- 유저 운동/식단 기록 등록 ----------
-INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 116, "2023-09-21", 60);
-INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 116, "2023-09-22", 60);
-INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 128, "2023-09-24", 30);
-INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 2, "2023-09-25", 60);
-INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 1, "2023-09-26", 120);
-INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 115, "2023-09-27", 60);
-INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 854, "2023-09-21");
-INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 854, "2023-09-22");
-INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 455, "2023-09-27");
-INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 144, "2023-09-27");
-INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 244, "2023-09-27");
-INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 244, "2023-09-27");
-INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 25, "2023-09-27");
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 116, "2023. 9. 21.", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 116, "2023. 9. 22.", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 128, "2023. 9. 24.", 30);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 2, "2023. 9. 25.", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 1, "2023. 9. 26.", 120);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (1, 115, "2023. 9. 27.", 60);
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 854, "2023. 9. 21.");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 854, "2023. 9. 22.");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 455, "2023. 9. 27.");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 144, "2023. 9. 27.");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 244, "2023. 9. 27.");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 244, "2023. 9. 27.");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (1, 25, "2023. 9. 27.");
 
 -------- 커뮤니티 게시물 등록 ----------
 INSERT INTO communityPost (communityNo, userNo, title) VALUES (1, 1, "클라이밍 완료1");
