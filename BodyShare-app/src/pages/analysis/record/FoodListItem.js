@@ -1,17 +1,19 @@
 import styled from "styled-components";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import seemore from "../../../assets/Img/seemore.png";
 import { useRecoilValue } from 'recoil';
-import { useRecoilState } from 'recoil';
 import { foodSelector } from "recoil/foodList";
-import { foodAtom } from 'recoil/foodList';
-import { all } from "axios";
+
 
 const FoodNoteContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   padding: 20px;
+`;
+
+const FoodNote = styled.div`
+  font-size: 14px;
 `;
 
 const SeeMore = styled.button`
@@ -25,10 +27,7 @@ const SeeMore = styled.button`
 
 const SeeMoreDetail = styled.div`
   width: 158px;
-  position: absolute; 
-  top: 130px;
-  left: 200px;
-  display: ${( isVisible ) => (isVisible ? 'block' : 'none')};
+  position: relative; 
 `;
 
 const SmIng = styled.img`
@@ -36,11 +35,9 @@ const SmIng = styled.img`
   height: 26px;
 `;
 
-const FoodNote = styled.p`
-  font-size: 14px;
-`;
-
 const Delete = styled.button`
+  position: absolute; 
+  left: 160px;
   width: 158px;
   height: 40px;
   border-radius: 15px;
@@ -54,31 +51,50 @@ const Delete = styled.button`
 `;
 
 const FoodListItem = function (props) {
-
   const allFoods = useRecoilValue(foodSelector);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const seeMoreDetailRef = useRef(null);
 
   let result = [];
-
   result = allFoods.filter(item => item.no === props.record.foodNo); 
 
-  const [seeMoreVisible, setSeeMoreVisible] = useState(false);
+  const toggleExpansion = () => {
+    setIsExpanded(!isExpanded);
+  };
 
-  const toggleSeeMore = () => {
-    setSeeMoreVisible(!seeMoreVisible);
-  }
+  const handleClickOutside = (event) => {
+    if (seeMoreDetailRef.current && !seeMoreDetailRef.current.contains(event.target)) {
+      setIsExpanded(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isExpanded) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isExpanded]);
 
 
   return (
     <FoodNoteContainer>
       <FoodNote>{result[0].name}</FoodNote>
-      <SeeMore onClick={toggleSeeMore}>
+      <SeeMore onClick={toggleExpansion}>
         <SmIng src={seemore}></SmIng>
       </SeeMore>
-      <SeeMoreDetail isVisible={seeMoreVisible}>
+      {isExpanded && (
+        <SeeMoreDetail ref={seeMoreDetailRef}>
         <Delete onClick={() => props.onDelete(props.record.planNo)}>
           삭제하기
         </Delete>
-      </SeeMoreDetail>
+        </SeeMoreDetail>
+      )}
+
     </FoodNoteContainer>
   );
 };
