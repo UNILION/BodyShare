@@ -19,3 +19,20 @@ export const searchSelector = selector({
     return searchAtomValue; // 연산 결과 반환
   },
 });
+
+// 아톰(atom) 정의
+export const categoryAtom = atom({
+  key: 'category',
+  default: [], // 초기 상태
+  effects_UNSTABLE: [persistAtom]
+});
+
+// 셀렉터(selector) 정의
+export const categorySelector = selector({
+  key: 'categorySelector',
+  get: ({ get }) => {
+    const categoryAtomValue = get(categoryAtom); // 아톰 값 가져오기
+    // 여기서 원하는 연산 수행
+    return categoryAtomValue; // 연산 결과 반환
+  },
+});
