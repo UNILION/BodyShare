@@ -67,11 +67,13 @@ const Nickname = function ({ nickname, register, errors, getValues }) {
   const [checkNic, setCheckNic] = useState("1");
 
   const checkNicServer = async function (nic) {
+    console.log(nickname, nic);
+    if (nic == nickname) {
+      // 닉네임이 비어 있는 경우 중복 확인을 하지 않음
+      setCheckNic("4");
+      return;
+    }
     try {
-      if (!nic) {
-        // 닉네임이 비어 있는 경우 중복 확인을 하지 않음
-        return;
-      }
       const response = await instance.post('/users/checknic', { nic });
       if (response.data.check) {
         //중복 있음
@@ -111,6 +113,7 @@ const Nickname = function ({ nickname, register, errors, getValues }) {
             },
             validate: checkNicValidate,
           })}
+          defaultValue={nickname}
           placeholder={nickname}
         >
         </Input>

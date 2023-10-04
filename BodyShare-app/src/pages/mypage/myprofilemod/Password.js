@@ -53,6 +53,7 @@ const Password = function ({password, register, errors, getValues}) {
               value === password || "기존 비밀번호와 일치하지 않습니다."
           })}
           placeholder={hidePassword(password)}
+          type="password"
         />
         <Warn>{errors.password?.message}</Warn>
         </Ul>
