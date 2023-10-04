@@ -1,7 +1,15 @@
 import styled from "styled-components";
 import next from "assets/Img/circletgo.png";
-import { useState } from "react";
 import Check from "components/commons/Check";
+import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "recoil/userRecoil";
+import { useEffect, useState } from "react";
+
+const instance = axios.create({
+  baseURL: "http://localhost:33000/api",
+  withCredentials: true,
+});
 
 const Targets = styled.div``;
 
@@ -23,7 +31,7 @@ const TargetListTop = styled.div`
   align-content: space-between;
   border-radius: 15px 15px 0 0;
   background-color: ${(props) =>
-    props.select ? "rgba(85, 111, 255, 0.7)" : "rgba(85, 111, 255, 0.2)"};
+    (props.select) ? "rgba(85, 111, 255, 0.7)" : "rgba(85, 111, 255, 0.2)"};
   margin-top: 10px;
 `;
 
@@ -60,7 +68,7 @@ const DropDown = styled.div`
 
 const TargetListMiddle = styled.div`
   background-color: rgba(85, 111, 255, 0.1);
-  display: ${(props) => (props.first < 1 ? "none" : "")};
+  display: ${(props) => ((props.first < 1) ? "none" : "")};
 
   @keyframes dropdown1 {
     0% {
@@ -75,7 +83,7 @@ const TargetListMiddle = styled.div`
   @keyframes dropdown2 {
     0% {
       transform: translateY(0);
-      display: ${(props) => (props.first < 2 ? "none" : "")};
+      display: ${(props) => ((props.first < 2) ? "none" : "")};
     }
     100% {
       transform: translateY(-100%);
@@ -83,7 +91,7 @@ const TargetListMiddle = styled.div`
     }
   }
   animation: ${(props) =>
-    props.click ? "dropdown1 0.4s ease" : "dropdown2 0.4s ease forwards"};
+    (props.click) ? "dropdown1 0.4s ease" : "dropdown2 0.4s ease forwards"};
 `;
 
 const MiddleDetail = styled.div`
@@ -114,6 +122,55 @@ const Record = function ({ register, setRecordDate, errors }) {
     select3: false,
   });
   const [first, setFirst] = useState(0);
+  const [todayList, setTodayList] = useState([])
+  const [yesterdayList, setYesterdayList] = useState([])
+  const [beforeYesterdayList, setBeforeYesterdayList] = useState([])
+  const userNo = useRecoilValue(userSelector);
+  const date = new Date();
+  const today = new Date().toLocaleDateString();
+  const yesterday = new Date(date.setDate(date.getDate() - 1)).toLocaleDateString();
+  const beforeYesterday = new Date(date.setDate(date.getDate() - 1)).toLocaleDateString();
+  let week = ["(일)", "(월)", "(화)", "(수)", "(목)", "(금)", "(토)"]
+  const handleRecord = async function () {
+    try {
+      const recordResponse = await instance.get(
+        `/record/sports/recent/${userNo}/${today}`
+      );
+      handleDay(recordResponse.data)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const handleDay = function (recordList) {
+    const todayFilter = recordList.filter((record) => {
+      return (
+        record.exerciseDate === today
+      )
+    })
+
+    setTodayList(todayFilter)
+
+    const yesterdayFilter = recordList.filter((record) => {
+      return (
+        record.exerciseDate === yesterday
+      )
+    })
+
+    setYesterdayList(yesterdayFilter)
+
+    const beforeYesterdayFilter = recordList.filter((record) => {
+      return (
+        record.exerciseDate === beforeYesterday
+      )
+    })
+
+    setBeforeYesterdayList(beforeYesterdayFilter)
+  }
+
+  useEffect(() => {
+    handleRecord()
+  }, []);
 
   return (
     <Targets>
@@ -126,10 +183,14 @@ const Record = function ({ register, setRecordDate, errors }) {
               onClick={() =>
                 setSelect((prevState) => ({
                   ["select1"]: !prevState["select1"],
-                }))
+                  ["select2"]: false,
+                  ["select3"]: false,
+                }),
+                select["select1"] ? setRecordDate("NULL") : setRecordDate(beforeYesterday)
+                )
               }
             >
-              9월 16일 토
+              {beforeYesterday} {week[new Date(beforeYesterday).getDay()]}
             </TargetListTitle>
             <Next
               src={next}
@@ -150,21 +211,19 @@ const Record = function ({ register, setRecordDate, errors }) {
               onClick={() =>
                 setSelect((prevState) => ({
                   ["select1"]: !prevState["select1"],
-                }))
+                  ["select2"]: false,
+                  ["select3"]: false,
+                }),
+                select["select1"] ? setRecordDate("NULL") : setRecordDate(beforeYesterday)
+                )
               }
             >
-              <MiddleDetail>
-                <MiddleTitle>유산소 | 달리기</MiddleTitle>
-                <MiddleTime>30분</MiddleTime>
-              </MiddleDetail>
-              <MiddleDetail>
-                <MiddleTitle>유산소 | 조깅</MiddleTitle>
-                <MiddleTime>20분</MiddleTime>
-              </MiddleDetail>
-              <MiddleDetail>
-                <MiddleTitle>유산소 | 마라톤</MiddleTitle>
-                <MiddleTime>100분</MiddleTime>
-              </MiddleDetail>
+              {beforeYesterdayList ? beforeYesterdayList.map((record, idx) => (
+                <MiddleDetail key={idx}>
+                  <MiddleTitle>{record.sportsName}</MiddleTitle>
+                  <MiddleTime>{record.exerciseTime}분</MiddleTime>
+                </MiddleDetail>
+              )) : null}
             </TargetListMiddle>
           </DropDown>
         </TargetList>
@@ -174,11 +233,15 @@ const Record = function ({ register, setRecordDate, errors }) {
             <TargetListTitle
               onClick={() =>
                 setSelect((prevState) => ({
+                  ["select1"]: false,
                   ["select2"]: !prevState["select2"],
-                }))
+                  ["select3"]: false,
+                }),
+                select["select2"] ? setRecordDate("NULL") : setRecordDate(yesterday)
+                )
               }
             >
-              9월 17일 일
+              {yesterday} {week[new Date(yesterday).getDay()]}
             </TargetListTitle>
             <Next
               src={next}
@@ -193,19 +256,23 @@ const Record = function ({ register, setRecordDate, errors }) {
             />
           </TargetListTop>
           <DropDown>
-            <TargetListMiddle first={first} click={click["click2"]}>
-              <MiddleDetail>
-                <MiddleTitle>근력 | 스쿼트</MiddleTitle>
-                <MiddleTime>30분</MiddleTime>
-              </MiddleDetail>
-              <MiddleDetail>
-                <MiddleTitle>근력 | 데드리프트</MiddleTitle>
-                <MiddleTime>20분</MiddleTime>
-              </MiddleDetail>
-              <MiddleDetail>
-                <MiddleTitle>근력 | 파워리프팅</MiddleTitle>
-                <MiddleTime>10분</MiddleTime>
-              </MiddleDetail>
+            <TargetListMiddle first={first} click={click["click2"]}
+                          onClick={() =>
+                            setSelect((prevState) => ({
+                              ["select1"]: false,
+                              ["select2"]: !prevState["select2"],
+                              ["select3"]: false,
+                            }),
+                            select["select2"] ? setRecordDate("NULL") : setRecordDate(yesterday)
+                            )
+                          }
+            >
+              {yesterdayList ? yesterdayList.map((record, idx) => (
+                <MiddleDetail key={idx}>
+                  <MiddleTitle>{record.sportsName}</MiddleTitle>
+                  <MiddleTime>{record.exerciseTime}분</MiddleTime>
+                </MiddleDetail>
+              )) : null}
             </TargetListMiddle>
           </DropDown>
         </TargetList>
@@ -215,11 +282,15 @@ const Record = function ({ register, setRecordDate, errors }) {
             <TargetListTitle
               onClick={() =>
                 setSelect((prevState) => ({
+                  ["select1"]: false,
+                  ["select2"]: false,
                   ["select3"]: !prevState["select3"],
-                }))
+                }),
+                select["select3"] ? setRecordDate("NULL") : setRecordDate(today)
+                )
               }
             >
-              9월 18일 월
+              {today} {week[new Date(today).getDay()]}
             </TargetListTitle>
             <Next
               src={next}
@@ -237,20 +308,22 @@ const Record = function ({ register, setRecordDate, errors }) {
             <TargetListMiddle
               first={first}
               click={click["click3"]}
-              onClick={() => setSelect(!select["select3"])}
+              onClick={() =>
+                setSelect((prevState) => ({
+                  ["select1"]: false,
+                  ["select2"]: false,
+                  ["select3"]: !prevState["select3"],
+                }),
+                select["select3"] ? setRecordDate("NULL") : setRecordDate(today)
+                )
+              }
             >
-              <MiddleDetail>
-                <MiddleTitle>기타 | 수영</MiddleTitle>
-                <MiddleTime>70분</MiddleTime>
-              </MiddleDetail>
-              <MiddleDetail>
-                <MiddleTitle>기타 | 농구</MiddleTitle>
-                <MiddleTime>20분</MiddleTime>
-              </MiddleDetail>
-              <MiddleDetail>
-                <MiddleTitle>기타 | 축구</MiddleTitle>
-                <MiddleTime>100분</MiddleTime>
-              </MiddleDetail>
+              {todayList ? todayList.map((record, idx) => (
+                <MiddleDetail key={idx}>
+                  <MiddleTitle>{record.sportsName}</MiddleTitle>
+                  <MiddleTime>{record.exerciseTime}분</MiddleTime>
+                </MiddleDetail>
+              )) : null}
             </TargetListMiddle>
           </DropDown>
         </TargetList>
