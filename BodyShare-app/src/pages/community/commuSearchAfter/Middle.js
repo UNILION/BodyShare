@@ -51,7 +51,8 @@ const Middle = function ({ searchItemList }) {
       <Group>
         {list.length > 0 && list.map((community, index) => (        
           <Card
-            img={`http://localhost:33000/public/images/communitys/${community.profileImageUrl}`}
+            key={index}
+            img={`http://localhost:33000/images/communitys/${community.profileImageUrl}`}
             title={community.communityName}
             contents={community.intro}
             tagtitle={community.sportsName}
