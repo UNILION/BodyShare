@@ -8,7 +8,6 @@ import FoodRecord from "pages/analysis/record/FoodNote"
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
-import { async } from "q";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -18,7 +17,6 @@ const instance = axios.create({
 
 const RecordGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
   gap: 10px;
   justify-content: center;
   align-items: center;

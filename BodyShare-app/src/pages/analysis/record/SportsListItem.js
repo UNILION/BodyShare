@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
 import seemore from "assets/Img/seemore.png";
 import { useRecoilValue } from 'recoil';
@@ -30,10 +30,7 @@ const SeeMore = styled.button`
 
 const SeeMoreDetail = styled.div`
   width: 158px;
-  position: absolute; 
-  top: 70px;
-  left: 200px;
-  display: ${({ isVisible }) => (isVisible ? 'block' : 'none')};
+  position: relative;
 `;
 
 const SmIng = styled.img`
@@ -42,6 +39,8 @@ const SmIng = styled.img`
 `;
 
 const Delete = styled.button`
+  position: absolute;
+  left: 160px;
   width: 158px;
   height: 40px;
   border-radius: 15px;
@@ -56,32 +55,50 @@ const Delete = styled.button`
 
 const SportsListItem = function (props) {
   const allSports = useRecoilValue(sportsSelector);
-  
-  let result = []; 
+  const [isExpanded, setIsExpanded] = useState(false); // Track expansion state
+  const seeMoreDetailRef = useRef(null);
+
+  let result = [];
   result = allSports.filter(item => item.no == props.record.sportsNo);
 
-  const [seeMoreVisible, setSeeMoreVisible] = useState(false);
-
-  const toggleSeeMore = () => {
-    setSeeMoreVisible(!seeMoreVisible);
+  const toggleExpansion = () => {
+    setIsExpanded(!isExpanded);
   };
+
+  const handleClickOutside = (event) => {
+    if (seeMoreDetailRef.current && !seeMoreDetailRef.current.contains(event.target)) {
+      setIsExpanded(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isExpanded) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isExpanded]);
 
   return (
     <SportNoteContainer>
       <SportNote>{result[0].name}</SportNote>
       <SportTime>운동 시간: {props.record.exerciseTime}분</SportTime>
-      <SeeMore onClick={toggleSeeMore}>
+      <SeeMore onClick={toggleExpansion}>
         <SmIng src={seemore}></SmIng>
       </SeeMore>
-      <SeeMoreDetail isVisible={seeMoreVisible}>
-      <Delete onClick={() => props.onDelete(props.record.planNo)}>
-        삭제하기
-      </Delete>
-      </SeeMoreDetail>
-
+      {isExpanded && (
+        <SeeMoreDetail ref={seeMoreDetailRef}>
+          <Delete onClick={() => props.onDelete(props.record.planNo)}>
+            삭제하기
+          </Delete>
+        </SeeMoreDetail>
+      )}
     </SportNoteContainer>
   );
-
 };
 
 export default SportsListItem;
