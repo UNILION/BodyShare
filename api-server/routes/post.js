@@ -3,17 +3,17 @@ var router = express.Router();
 
 const post = require("../models/postModel");
 const multer = require("multer");
+const path = require('path'); // 추가됨
 
 const upload = multer({
   storage: multer.diskStorage({ // 저장한공간 정보 : 하드디스크에 저장
       destination(req, file, done) { // 저장 위치
-          done(null, 'images/posts/'); // uploads라는 폴더 안에 저장
+          done(null, 'public/images/posts/'); // uploads라는 폴더 안에 저장
       },
       filename(req, file, done) { // 파일명을 어떤 이름으로 올릴지
-          const postNo = req.body.postNo;
           const fieldname = file.fieldname;
           const ext = path.extname(file.originalname); // 파일의 확장자
-          done(null, `${postNo}_c_${ext}`); // 게시물 번호 + content + 확장자 이름으로 저장
+          done(null, `${path.basename(file.originalname, ext)}_${Date.now()}_c_${ext}`); // 파일 이름 + 날짜 + content + 확장자 이름으로 저장
       }
   }),
   limits: { fileSize: 5 * 1024 * 1024 } // 5메가로 용량 제한

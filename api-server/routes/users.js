@@ -15,10 +15,10 @@ const upload = multer({
           const fieldname = file.fieldname;
           const ext = path.extname(file.originalname); // 파일의 확장자
           if(fieldname == "profileImg"){
-            done(null, `${path.basename(file.originalname, ext)}_${Date.now()}_p_${ext}`); // 유저 아이디 + 프로필or배너 + 확장자 이름으로 저장
+            done(null, `${path.basename(file.originalname, ext)}_${Date.now()}_p_${ext}`); // 파일 이름 + 날짜 + 프로필or배너 + 확장자 이름으로 저장
           }
           else if(fieldname == "bannerImg"){
-            done(null, `${path.basename(file.originalname, ext)}_${Date.now()}_b_${ext}`); // 유저 아이디 + 프로필or배너 + 확장자 이름으로 저장
+            done(null, `${path.basename(file.originalname, ext)}_${Date.now()}_b_${ext}`); // 파일 이름 + 날짜 + 프로필or배너 + 확장자 이름으로 저장
           }
       }
   }),
