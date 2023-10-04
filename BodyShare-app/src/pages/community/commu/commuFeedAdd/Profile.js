@@ -2,6 +2,20 @@ import styled from "styled-components";
 
 const ProfileContainer = styled.div``;
 
+const Button = styled.div`
+margin-bottom : 10px;
+background-color: #556FFF;
+color: white;
+border: 1px solid rgba(135,135,135,0.3);
+border-radius: 15px;
+font-size: 20px;
+width: 150px;
+height: 35px;
+text-align: center;
+line-height: 35px;
+cursor: pointer;
+`;
+
 const Title = styled.div`
   font-weight: bold;
   font-size: 20px;
@@ -16,29 +30,16 @@ const Picture = styled.div`
   line-height: 100px;
 `;
 
-const Profile = function ({ register, imagePreview, setImagePreview }) {
+const Profile = function ({ register, imagePreview, handleImageChange }) {
   
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        console.log(e.target)
-        setImagePreview(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   return (
     <ProfileContainer>
       <Title>피드 사진 추가하기</Title>
-        <button><label htmlFor="imgUpload">이미지 추가하기</label></button>
+        <Button type="text"><label htmlFor="imgUpload" Style="cursor: pointer;">이미지 추가하기</label></Button>
       <Picture>
         <input
-          {...register("contentImageURL")}
+          {...register("contentImageUrl")}
           type="file"
-          name="contentImageURL"
           accept="image/jpg, image/png, image/jpeg"
           id = "imgUpload"
           style={{display:"none"}}
