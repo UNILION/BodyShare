@@ -60,10 +60,7 @@ router.put("/useredit/:no", checkLogin, upload.fields([{name:"profileImg"}, {nam
       height: req.body.height,
       weight: req.body.weight
     };
-    if(req.body.afterpassword){
-      userInfo.afterpassword = req.body.afterpassword;
-    }
-
+    
     // 프로필 이미지와 배너 이미지 가져오기
     const profileImages = req.files?.profileImg;
     const bannerImages = req.files?.bannerImg;
