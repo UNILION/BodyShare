@@ -8,9 +8,9 @@ import CommunityTitle from "./CommunityTitle";
 import CommunityContent from "./CommunityContent";
 import CommunityCategory from "./CommunityCategory";
 import axios from "axios";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
-import { categorySelector } from "recoil/commuRecoil";
+import { categoryAtom, categorySelector } from "recoil/commuRecoil";
 import { useNavigate } from "react-router-dom";
 
 const instance = axios.create({
@@ -28,6 +28,7 @@ const Middle = function () {
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
   const categoryList = useRecoilValue(categorySelector);
+  const [categoryItem, setCategoryItem] = useRecoilState(categoryAtom);
 
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onChange" });
 
@@ -53,15 +54,13 @@ const Middle = function () {
         }, 
       });
 
-      // 성공적으로 업데이트된 경우 usesCommunity에 등록 하고 메인 페이지로 이동
+      // 성공적으로 업데이트된 경우 usesCommunity에 등록 하고 관련 recoil 초기화하고 메인 페이지로 이동
       if (response.status === 200) {
-        console.log(response.data);
-        console.log(response.data.id);
-        
         try{
           const result = await instance.post(`/users/communityadd/${response.data.id}/${userNo}`);
           if(result.data)
           // 성공시 메인 페이지 이동
+          setCategoryItem([]);
           navigate("/community");
         }catch(err){
           console.error("usersCommunity 업데이트 실패")
