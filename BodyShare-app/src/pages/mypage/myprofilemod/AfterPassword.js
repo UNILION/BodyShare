@@ -45,32 +45,35 @@ const AfterPassword = function ({ register, errors, getValues }) {
         <Titlel>변경 비밀번호</Titlel>
         <Input
           {...register("afterpassword", {
-            //required: "바꿀 비밀번호를 작성해주세요",
+            required: '비밀번호 영문, 숫자 포함 8~16글자',
             pattern: {
-              value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$/,
-              message: "비밀번호는 대문자, 소문자, 숫자, 특수 문자(@#$%^&+=)를 최소 한 개씩 포함해야 합니다."
+              value: /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9가-힣]{8,16}$/,
+              message: '영문, 숫자를 최소 1개씩 포함하여 8~16글자',
             }
           })}
           placeholder="비밀번호 입력"
+          type="password"
         />
-        <Warn>{errors.afterpassword?.message}</Warn>
+        {errors.afterpassword && (
+          <Warn>{errors.afterpassword.message}</Warn>
+        )}
       </Ul>
-      <Ul>
+      <Ul> 
         <Titlel>비밀번호 확인</Titlel>
         <Input
           {...register("checkpassword", {
-            // validate 규칙 수정
+            required: '비밀번호를 확인해주세요',
             validate: (value) => {
-              // 비밀번호 확인 필드와 변경 비밀번호 필드가 모두 빈 값인 경우 유효성 통과
-              if (!value && !getValues().afterpassword) {
-                return true;
-              }
-              return value === getValues().afterpassword || "비밀번호와 일치하지 않습니다.";
+              const afterpassword = getValues('afterpassword');
+              return value === afterpassword || '비밀번호와 일치하지 않습니다';
             },
           })}
           placeholder="비밀번호 확인"
+          type="password"
         />
-        <Warn>{errors.checkpassword?.message}</Warn>
+        {errors.checkpassword && (
+          <Warn>{errors.checkpassword.message}</Warn>
+        )}
       </Ul>
     </>
   )
