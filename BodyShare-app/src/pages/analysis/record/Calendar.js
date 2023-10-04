@@ -8,12 +8,12 @@ import FoodRecord from "pages/analysis/record/FoodNote"
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
+import bodyParser from "body-parser";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
   withCredentials: true
 });
-
 
 const RecordGrid = styled.div`
   display: grid;
@@ -49,13 +49,6 @@ const P = styled.p`
   color: #556FFF;
   font-weight: bold;
   margin: 0;
-`;
-
-const Line = styled.div`
-  width: 350px;
-  height: 1px;
-  margin: auto;
-  background-color: rgba(135, 135, 135, 0.3);
 `;
 
 const Record = function () {
@@ -154,26 +147,32 @@ const Record = function () {
         <NoteGrid>
           {/* 날짜 부분 */}
           <TitleDate>
-            <P>{selectedDate ? selectedDate.toLocaleDateString() : ""}</P>
+            <P>{selectedDate ? selectedDate.toLocaleDateString() : ""} 운동 기록</P>
           </TitleDate>
           <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
-
             {/* 운동 기록 부분 */}
             {sportsList && 
               <SportRecord sportsList={sportsList} 
               onDelete={(planNo) => deleteSportsRecord(planNo)}
             />}
-            
-            <Line></Line>
-
-            {/* 음식 기록 부분 */}
-            {foodList && 
-              <FoodRecord foodList={foodList} 
-              onDelete={(planNo) => deleteFoodRecord(planNo)}
-            />}
-
           </div>
         </NoteGrid>
+
+        <NoteGrid>
+          {/* 날짜 부분 */}
+          <TitleDate>
+            <P>{selectedDate ? selectedDate.toLocaleDateString() : ""} 식단 기록</P>
+          </TitleDate>
+          <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
+            {/* 음식 기록 부분 */}
+            {foodList && 
+            <FoodRecord foodList={foodList} 
+            onDelete={(planNo) => deleteFoodRecord(planNo)}
+          />}
+          </div>
+        </NoteGrid>
+
+
 
         {/* 기록 추가하기 */}
         {selectedDate.toLocaleDateString() == today.toLocaleDateString() ? <Add /> : null}
