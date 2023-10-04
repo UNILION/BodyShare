@@ -5,7 +5,7 @@ import { userSelector } from "recoil/userRecoil";
 import { sportsSelector } from 'recoil/sportList';
 import { useRecoilState, useRecoilValue } from "recoil";
 import { interestAtom } from "recoil/userRecoil";
-import Tag from "components/commons/Tag";
+import Tag from "components/commons/useFormTag";
 
 
 const instance = axios.create({
