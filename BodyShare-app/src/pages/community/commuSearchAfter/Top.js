@@ -22,11 +22,11 @@ const Img = styled.img`
   cursor: pointer;
 `;
 
-const Top = function () {
+const Top = function ({searchItemList}) {
   const navigate = useNavigate();
   return (
     <TopContainer>
-      <Title>클라이밍</Title>
+      <Title>{searchItemList[0].name}</Title>
       <Img src={Search} onClick={() => navigate("/community/search")} />
     </TopContainer>
   );
