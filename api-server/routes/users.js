@@ -65,9 +65,6 @@ router.put("/useredit/:no", checkLogin, upload.fields([{name:"profileImg"}, {nam
     const profileImages = req.files?.profileImg;
     const bannerImages = req.files?.bannerImg;
 
-    console.log(profileImages);
-    console.log(bannerImages);
-
     // 파일이 업로드되었을 때만 처리
     if (profileImages) {
       userInfo.profileImageUrl = profileImages[0].filename;
