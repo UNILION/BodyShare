@@ -9,6 +9,8 @@ import { useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
 import { foodSelector } from "recoil/foodList";
 import Slide1 from "./Slide1";
+import Slide2 from "./Slide2";
+
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -62,10 +64,6 @@ const ChartContainer = styled.div`
 `;
 
 const FoodChart = function () {
-  const userNo = useRecoilValue(userSelector);
-  const [selectedFood] = useRecoilValue(foodSelector);
-  const [foodChartData, setFoodChartData] = useState([]);
-
   const parseDateString = (dateString) => {
     const dateParts = dateString.split(".");
     const year = parseInt(dateParts[0],10);
@@ -75,67 +73,6 @@ const FoodChart = function () {
   }
 
 
-
-
-
-// 요일별 칼로리 
-// const chartDatas2 = async function () {
-//   try {
-//     const response = await instance.get(`/record/food/${userNo}`);
-//     const allData = response.data;
-
-//     const currentDate = new Date();
-//     const currentWeekStartDate = new Date(currentDate);
-//     currentWeekStartDate.setDate(
-//       currentDate.getDate() - currentDate.getDay()
-//     );
-//     const currentWeekEndDate = new Date(currentWeekStartDate);
-//     currentWeekEndDate.setDate(currentWeekStartDate.getDate() + 6);
-
-//     let totalCalories = 0; // 주간 칼로리 누적값을 저장할 변수
-
-//     for (let i = 0; i < 7; i++) {
-//       const day = currentWeekStartDate.getDate() + i; // 현재 주의 시작일부터 7일 동안
-//       const foodItem = allData.find((record) => {
-//         const recordDate = new Date(record.dietDate);
-//         return recordDate.getDate() === day;
-//       });
-
-//         totalCalories += foodItem.calories;
-//     }
-
-//     // 주간 칼로리 정보를 그래프에 추가
-//     const foodChartData = [
-//       ["요일", "주간 칼로리"],
-//       ["일", 0],
-//       ["월", 0],
-//       ["화", 0],
-//       ["수", 0],
-//       ["목", 0],
-//       ["금", 0],
-//       ["토", 0],
-//     ];
-
-//     foodChartData[1][1] = totalCalories; // 해당 요일에 주간 칼로리 누적값 설정
-
-//     setFoodChartData(foodChartData);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-//   useEffect(() => {
-//     chartDatas2();
-//     const interval = setInterval(() => {
-//       chartDatas2(); 
-//     }, 24 * 60 * 60 * 1000); 
-
-//     return () => clearInterval(interval);
-//   }, [userNo, selectedFood]);
-
-  const chartOptions2 = {
-    title: "요일별 칼로리 섭취량",
-    curveType: "function",
-  };
 
   // 슬라이드
   const settings = {
@@ -148,20 +85,7 @@ const FoodChart = function () {
       <Slider {...settings}>
         <Slide1 />
 
-        <Slide>
-          <ChartBox>
-            <ChartContainer>
-              <Chart
-                chartType="ComboChart"
-                width="340px"
-                height="456px"
-                data={foodChartData}
-                options={chartOptions2}
-                graph_id="curve_chart"
-              />
-            </ChartContainer>
-          </ChartBox>
-        </Slide>
+        <Slide2 />
       </Slider>
     </SliderContainer>
   );
