@@ -62,6 +62,16 @@ const CategoryList = styled.div`
   grid-template-columns: 1fr 1fr 1fr 1fr;
 `;
 
+const StyledTag = styled(Tag)`
+  background-color: ${(props) => (props.isSelected ? "#556FFF" : "rgba(85,111,255, 0.3)")};
+  color: ${(props) => (props.isSelected ? "#fff" : "#000")};
+  &:hover {
+    background-color: #556fff;
+    color: #fff;
+  }
+`;
+
+
 const SportSearch = function() {
   const navigate = useNavigate();
 
@@ -94,40 +104,20 @@ const SportSearch = function() {
     return TagResult && SearchResult;
   });
 
-  // const sendFoodDataToServer = async () => {
-  //   try {
-
-  //     const exerciseDate = String(new Date().toLocaleDateString());
-    
-  //     // 선택한 음식 정보를 담은 객체를 생성
-  //     const sportsData = {
-  //       userNo,
-  //       sportsNo: selected.no,
-  //       exerciseDate,
-  //       exerciseTime: 60
-  //     };
-
-  //     const response = await instance.post('/record/sportsadd', sportsData);
-
-  //     console.log('POST 요청이 성공적으로 보내졌습니다.');
-  //     console.log('서버 응답:', response.data);
-  //   } catch (error) {
-  //     console.error('POST 요청 실패:', error);
-  //   }
-  // }
-
   return (
     <Container>
       <PreviousButton onClick={() => navigate("/analysis")} />
+
       <SearchInput>
         <Search src={searchImg} />
         <Input type="text" placeholder="찾으시는 운동을 검색해주세요" onChange={handleSearch}/>
       </SearchInput>
+
       <CategoryList>
-        <Tag tagtitle="전체" width="80px" height="36px" br="13px" onClick={() => hadleTagfilter('전체')}/>
-        <Tag tagtitle="근력" width="80px" height="36px" br="13px" onClick={() => hadleTagfilter('근력')}/>
-        <Tag tagtitle="유산소" width="80px" height="36px" br="13px" onClick={() => hadleTagfilter('유산소')}/>
-        <Tag tagtitle="기타" width="80px" height="36px" br="13px" onClick={() => hadleTagfilter('기타')}/>
+        <StyledTag tagtitle="전체" width="80px" height="36px" br="13px" isSelected={sportsTag === "전체"} onClick={() => hadleTagfilter('전체')}/>
+        <StyledTag tagtitle="근력" width="80px" height="36px" br="13px" isSelected={sportsTag === "근력"} onClick={() => hadleTagfilter('근력')}/>
+        <StyledTag tagtitle="유산소" width="80px" height="36px" br="13px" isSelected={sportsTag === "유산소"} onClick={() => hadleTagfilter('유산소')}/>
+        <StyledTag tagtitle="기타" width="80px" height="36px" br="13px" isSelected={sportsTag === "기타"} onClick={() => hadleTagfilter('기타')}/>
       </CategoryList>
       
       <ResultList sportsList={filterSportsList} changeSelected={changeSelected}/>
