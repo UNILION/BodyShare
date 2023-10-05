@@ -1,18 +1,21 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import './Calendar.css'
 import Add from "pages/analysis/record/NoteAdd"
 import SportRecord from "pages/analysis/record/SportNote"
 import FoodRecord from "pages/analysis/record/FoodNote"
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
+import moment from 'moment';
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
   withCredentials: true
 });
+
+
 
 const RecordGrid = styled.div`
   display: grid;
@@ -140,6 +143,7 @@ const Record = function () {
             value={value}
             // 현재 날짜를 최대로 잡음
             maxDate={new Date()}
+            formatDay={(locale, date) => moment(date).format('D')}
           />
         </CalendarDiv>
 
