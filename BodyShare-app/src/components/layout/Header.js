@@ -1,5 +1,9 @@
 import styled from "styled-components";
 import logo from "../../assets/Img/logo.png"
+import React, { useState } from "react";
+import { DarkModeSwitch } from 'react-toggle-dark-mode'
+import { useSetRecoilState } from "recoil";
+import { isDarkAtom } from "recoil/themeRecoil";
 
 const Container = styled.div`
   position:relative;
@@ -24,10 +28,31 @@ const Logo = styled.img`
   margin: 0 auto;
 `
 
+const Dark = styled.div`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+`
+
 const Header = function () {
+  const [isDark, setIsDark] = useState(false);
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDark = (checked) => {
+    setDarkAtom((prev) => !prev);
+    setIsDark(checked)
+  }
   return (
     <Container>
       <Logo src={logo} />
+      <Dark>
+      <DarkModeSwitch
+        checked={isDark}
+        onChange={toggleDark}
+        size={50}
+        sunColor='red'
+        moonColor='royalblue'
+        />
+        </Dark>
     </Container>
   )
 };

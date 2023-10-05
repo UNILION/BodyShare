@@ -5,6 +5,8 @@ import {
   Navigate,
 } from "react-router-dom";
 import GlobalStyle from "./theme/GlobalStyle";
+import { theme } from "theme/Theme";
+import { ThemeProvider } from "styled-components";
 import User from "pages/user";
 import SignIn from "pages/user/signin/SignIn";
 import SignUp from "pages/user/signup/SignUp";
@@ -33,19 +35,20 @@ import SportHome from "./pages/analysis/sportchart/SportChart";
 import FoodHome from "./pages/analysis/foodchart/FoodChart";
 import LayoutAnalysis from "./pages/analysis/analysislayout";
 import { userSelector } from "recoil/userRecoil";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import ChallAdd from "./pages/community/challenge/challAdd/ChallAdd";
 import ChallIn from "./pages/community/challenge/challIn/ChallIn";
 import ChallMain from "./pages/community/challenge/challMain/ChallMain";
 import ChallSearch from "./pages/community/challenge/challSearch/ChallSearch"
 import ChallCategory from "./pages/community/challenge/challCategory/ChallCategory"
 import ChallSearchAfter from "./pages/community/challenge/challSearchAfter/ChallSearchAfter"
+import { isDarkAtom } from "recoil/themeRecoil";
 
 function App() {
   const userNo = useRecoilValue(userSelector);
-
+  const isDarkMode = useRecoilValue(isDarkAtom);
   return (
-    <>
+    <ThemeProvider theme={isDarkMode ? theme.darkTheme : theme.lightTheme}>
       <GlobalStyle />
       <Router>
         {userNo > 0 ? (
@@ -115,7 +118,7 @@ function App() {
           </Routes>
         )}
       </Router>
-    </>
+      </ThemeProvider>
   );
 }
 
