@@ -37,6 +37,9 @@ import { useRecoilValue } from "recoil";
 import ChallAdd from "./pages/community/challenge/challAdd/ChallAdd";
 import ChallIn from "./pages/community/challenge/challIn/ChallIn";
 import ChallMain from "./pages/community/challenge/challMain/ChallMain";
+import ChallSearch from "./pages/community/challenge/challSearch/ChallSearch"
+import ChallCategory from "./pages/community/challenge/challCategory/ChallCategory"
+import ChallSearchAfter from "./pages/community/challenge/challSearchAfter/ChallSearchAfter"
 
 function App() {
   const userNo = useRecoilValue(userSelector);
@@ -78,8 +81,11 @@ function App() {
               <Route path="/community/feed/:feedNo" element={<CommuFeed />} />
               
               <Route path="/community/challenge/challAdd" element={<ChallAdd />} />
-              <Route path="/community/challenge/challIn" element={<ChallIn />} />
+              <Route path="/community/challenge/challIn/:challNo" element={<ChallIn />} />
               <Route path="/community/challenge/challMain" element={<ChallMain />} />
+              <Route path="/community/challenge/challSearch" element={<ChallSearch />} />
+              <Route path="/community/challenge/challSearchAfter" element={<ChallSearchAfter />} />
+              <Route path="/community/challenge/challCategory" element={<ChallCategory />} />
               
             </Route>
             <Route path="/mypage" element={<Layout />}>
