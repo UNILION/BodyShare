@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import dumbbell from "assets/Img/dumbbell.png"
+import timer from "assets/Img/timer.png"
 
 const StyledCard = styled.div`
   width: ${(props) => (props.width ? props.width : "370px")};
@@ -16,7 +18,7 @@ const StyledCard = styled.div`
 
 const Image = styled.img`
   width: ${(props) => (props.iwidth ? props.iwidth : "300px")};
-  height: ${(props) => (props.iheight ? props.iheight : "200px")};
+  height: ${(props) => (props.iheight ? props.iheight : "300px")};
   margin-top: ${(props) => (props.imt ? props.imt : "10px")};
   margin-right: ${(props) => (props.imr ? props.imr : "auto")};
   margin-bottom: ${(props) => (props.imb ? props.imb : "auto")};
@@ -44,7 +46,7 @@ const Contents = styled.div`
   margin-right: ${(props) => (props.cmr ? props.cmr : "5px")};
   margin-bottom: ${(props) => (props.cmb ? props.cmb : "0px")};
   margin-left: ${(props) => (props.cml ? props.cml : "5px")};
-  font-size: ${(props) => (props.cfs ? props.cfs : "12px")};
+  font-size: ${(props) => (props.cfs ? props.cfs : "15px")};
   color: ${(props) => (props.ccolor ? props.ccolor : "#878787")};
   display: block;
   border: none;
@@ -55,19 +57,37 @@ const Contents = styled.div`
 
 const Footer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
+`
+
+const Left = styled.div`
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 0.5fr 1fr;
+`
+
+const Img = styled.img`
+  width: 15px;
+  height: 15px;
+  margin: auto;
 `
 
 const Exer = styled.div`
   color: #878787;
-  font-size: 12px;
+  font-size: 14px;
+  text-align: start;
+  margin: 20px;
+`
+
+const Time = styled.div`
+  color: #878787;
+  font-size: 14px;
   text-align: start;
   margin: 20px;
 `
 
 const Upload = styled.div`
   color: #878787;
-  font-size: 12px;
+  font-size: 14px;
   text-align: end;
   margin: 20px;
 `
@@ -87,8 +107,13 @@ const FeedCard = (props) => {
       <Hr />
       <Contents>{props.contents}</Contents>
       <Footer>
-        <Exer>{props.exercise}</Exer>
-        <Upload>{props.upload}</Upload>
+        <Left>
+          <Img src={dumbbell} />
+          <Exer>{props.exercise}</Exer>
+          <Img src={timer} />
+          <Time>{props.time}</Time>
+        </Left>
+          <Upload>{props.upload}</Upload>
       </Footer>
     </StyledCard>
   );
