@@ -109,9 +109,9 @@ const FeedCard = (props) => {
       <Footer>
         <Left>
           <Img src={dumbbell} />
-          <Exer>{props.exercise}</Exer>
+          <Exer>{props.exercise}개</Exer>
           <Img src={timer} />
-          <Time>{props.time}</Time>
+          <Time>{props.time}분</Time>
         </Left>
           <Upload>{props.upload}</Upload>
       </Footer>
