@@ -47,8 +47,8 @@ const CommunityCategory = function ({ register, errors }) {
   const categoryList = useRecoilValue(categorySelector);
   return (
     <CommunityCategoryContainer>
-      <Title>커뮤니티 카테고리</Title>
-      <CategoryContent onClick={() => navigate("/community/category")}>
+      <Title>챌린지 카테고리</Title>
+      <CategoryContent onClick={() => navigate("/community/challenge/challCategory")}>
         1개의 카테고리를 필수로 선택해주세요!
       </CategoryContent>
       {categoryList.length > 0 && (
