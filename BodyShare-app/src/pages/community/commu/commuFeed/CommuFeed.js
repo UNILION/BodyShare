@@ -62,7 +62,8 @@ const CommuFeed = function () {
         img={`http://localhost:33000/images/posts/${feedData.contentImageUrl}`}
         title={feedData.title}
         contents={feedData.content}
-        exercise="클라이밍 30분"
+        exercise="3개"
+        time="30분"
         upload={feedTime}
       />
       :null
