@@ -18,7 +18,7 @@ const instance = axios.create({
 const Cateckul = styled.div`
   margin-top: 7px;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 3fr 1fr;
 `;
 
 const Catetitle = styled.p`
@@ -94,7 +94,7 @@ const CateMod = function ({ usersList }) {
             height="31px"
             fs="15px"
             mt="8px"
-            ml="173px"
+            ml="20px"
           />
         </Cateckul>
         {matchingSportNames.map((sport, index) => (
@@ -125,7 +125,7 @@ const CateMod = function ({ usersList }) {
           height="31px"
           fs="15px"
           mt="8px"
-          ml="173px"
+          ml="20px"
         />
       </Cateckul>
       <Cateul>
