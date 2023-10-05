@@ -46,7 +46,7 @@ const ChallMain = function () {
     <>
       <Top>
         <Title>챌린지</Title>
-      <Img src={Search} onClick={() => navigate("/community/search")} />
+      <Img src={Search} onClick={() => navigate("/community/challenge/challSearch")} />
       </Top>
       
       <Group>
@@ -56,7 +56,7 @@ const ChallMain = function () {
           contents="클라이밍 좋아하는 사람들 모두 모두 모여라"
           tagtitle="클라이밍"
           footer="956명의 회원이 가입함"
-          onClick={() => navigate("/community/commuIn/1")}
+          onClick={() => navigate("/community/challenge/challIn/1")}
         />
         <Card
           img={Image2}
@@ -84,7 +84,7 @@ const ChallMain = function () {
           onClick={() => navigate("/community/commuIn/1")}
         />
       </Group>
-      <Img src={Plus} onClick={() => navigate("/community/communityAdd")} />
+      <Img src={Plus} onClick={() => navigate("/community/challenge/challAdd")} />
     </>
   );
 };
