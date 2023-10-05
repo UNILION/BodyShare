@@ -22,7 +22,7 @@ const CommunityContentContainer = styled.div``;
 const CommunityContent = function ({register, errors}) {
   return (
     <CommunityContentContainer>
-    <Title>커뮤니티 설명</Title>
+    <Title>챌린지 설명</Title>
     <Contents
       {...register("content", {
         required: "설명을 필수로 적어주세요!",
@@ -31,7 +31,7 @@ const CommunityContent = function ({register, errors}) {
           message: "최대 60글자까지 가능합니다!"
         }
       })}
-      placeholder="나의 커뮤니티를 설명해주세요!
+      placeholder="나의 챌린지를 설명해주세요!
 (최대 60글자)"
     />
     <Check>{errors.content?.message}</Check>
