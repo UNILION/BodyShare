@@ -2,7 +2,8 @@ import styled from "styled-components";
 import FeedCard from "components/commons/FeedCard";
 import previous from "assets/Img/Previous.png";
 import { useLocation, useNavigate } from "react-router-dom";
-import Image1 from "assets/Img/Climing1.jpg";
+import { useRecoilValue } from "recoil";
+import { userSelector } from "recoil/userRecoil";
 import Comment from "./Comment";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -25,21 +26,37 @@ const Previous = styled.img`
 
 const CommuFeed = function () {
   const [feedData, setFeedData] = useState();
+  const [recordData, setRecordData] = useState();
   const location = useLocation();
   const feedNo = location.pathname.split("/")[3];
   const navigate = useNavigate();
+  const userNo = useRecoilValue(userSelector);
   const year = feedData ? String(feedData.createdDate.split('-')[0]) : 0
   const month = feedData ? String(feedData.createdDate.split('-')[1]) : 0
   const day = feedData ? String(feedData.createdDate.split('-')[2]) : 0
   const feedTime = feedData ? year + "년" + month + "월" + day.substring(0,2) + "일" : 0
+  const createTime = feedData ? year + ". " + month + ". " + day.substring(0,2) + ". " : 0
 
-  const feedList = async function () {
+
+   const feedList = async function () {
     try {
       const feedResponse = await instance.get(
         `/post/${feedNo}`
       );
-      console.log(feedResponse.data);
       setFeedData(feedResponse.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const recordList = async function () {
+    try {
+      const recordResponse = await instance.get(
+        `/record/sports/recentToday/${userNo}/${createTime}`
+      );
+      setRecordData(recordResponse.data);
+      console.log(recordResponse.data)
+
     } catch (error) {
       console.error(error);
     }
@@ -48,6 +65,10 @@ const CommuFeed = function () {
   useEffect(() => {
     feedList();
   }, []);
+  
+  useEffect(() => {
+    recordList();
+  }, [feedData]);
 
   return (
     <Container>
@@ -62,9 +83,10 @@ const CommuFeed = function () {
         img={`http://localhost:33000/images/posts/${feedData.contentImageUrl}`}
         title={feedData.title}
         contents={feedData.content}
-        exercise="3개"
-        time="30분"
+        exercise= {(recordData.length > 0) ? recordData[0].cnt_exercise : 0}
+        time={(recordData.length > 0) ? recordData[0].total_time : 0}
         upload={feedTime}
+        recordData={recordData}
       />
       :null
     }
