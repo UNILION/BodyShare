@@ -39,7 +39,7 @@ const Img = styled.img`
   cursor: pointer;
 `
 
-const InterestHome = function () {
+const ChallMain = function () {
   const navigate = useNavigate();
 
   return (
@@ -89,4 +89,4 @@ const InterestHome = function () {
   );
 };
 
-export default InterestHome;
+export default ChallMain;

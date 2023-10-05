@@ -34,6 +34,9 @@ import FoodHome from "./pages/analysis/foodchart/FoodChart";
 import LayoutAnalysis from "./pages/analysis/analysislayout";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
+import ChallAdd from "./pages/community/challenge/challAdd/ChallAdd";
+import ChallIn from "./pages/community/challenge/challIn/ChallIn";
+import ChallMain from "./pages/community/challenge/challMain/ChallMain";
 
 function App() {
   const userNo = useRecoilValue(userSelector);
@@ -73,6 +76,11 @@ function App() {
               <Route path="/community/category" element={<CommuCategory />} />
               <Route path="/community/feedAdd/:commu" element={<CommuFeedAdd />} />
               <Route path="/community/feed/:feedNo" element={<CommuFeed />} />
+              
+              <Route path="/community/challenge/challAdd" element={<ChallAdd />} />
+              <Route path="/community/challenge/challIn" element={<ChallIn />} />
+              <Route path="/community/challenge/challMain" element={<ChallMain />} />
+              
             </Route>
             <Route path="/mypage" element={<Layout />}>
               <Route index element={<Mypage />} />
