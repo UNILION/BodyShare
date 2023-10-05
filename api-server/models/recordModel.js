@@ -4,7 +4,7 @@ const recordModel = {
   // 운동 기록 목록 조회
   async findsportsrecord(no){
     try{
-      const sql = `select * from exerciseRecord where userNo = ?`;
+      const sql = `select * from exerciseRecord left join sports on exerciseRecord.sportsNo = sports.no where userNo = ?`;
       const [ result ] = await pool.query(sql, [no]);
       return result;
     }catch(err){
