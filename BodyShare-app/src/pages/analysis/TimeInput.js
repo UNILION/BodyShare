@@ -113,7 +113,8 @@ const TimeInput = function () {
   const [exerciseTime, setExerciseTime] = useState("");
 
   const handleExerciseTime = (e) => {
-    setExerciseTime(e.target.value);
+    const numVal = e.target.value.replace(/[^0-9]/g, "");
+    setExerciseTime(numVal);
   }
 
   const sendSportsDataToServer = async () => {
@@ -126,7 +127,7 @@ const TimeInput = function () {
         userNo,
         sportsNo: selectedSportNo,
         exerciseDate,
-        exerciseTime: exerciseTime
+        exerciseTime:  parseInt(exerciseTime)
       };
   
       const response = await instance.post('/record/sportsadd', sportsData);
