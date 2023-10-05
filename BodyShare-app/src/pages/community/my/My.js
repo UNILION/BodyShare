@@ -14,13 +14,13 @@ const Text = styled.div`
   font-size: 20px;
   font-weight: bold;
   margin-top: 20px;
+  margin-left: 5px;
 `;
 
 const Group = styled.div`
   margin-bottom: 30px;
-
   margin-top: 10px;
-  max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
+  max-height: 270px; /* 스크롤 가능한 최대 높이 설정 */
   overflow-y: auto;
 `;
 
@@ -57,6 +57,17 @@ const My = function () {
             : null}
         </>
       </Group>
+      <Text>내가 참여하는 챌린지</Text>
+      <Group>
+        <>
+          {communityData
+            ? communityData.map((commu, idx) => (
+                <MyCommu commu={commu} key={idx} />
+              ))
+            : null}
+        </>
+      </Group>
+
     </>
   );
 };

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import My from "./my/My";
 import CommuHome from "./commu/commuHome/CommuHome";
+import ChallMain from "./challenge/challMain/ChallMain"
 
 const Container = styled.div`
   margin-bottom: 30px;
@@ -9,7 +10,7 @@ const Container = styled.div`
 
 const Tab = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   cursor: pointer;
   font-weight: bold;
 `;
@@ -43,6 +44,20 @@ const Tab2 = styled.div`
   }
 `;
 
+const Tab3 = styled.div`
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 50px;
+  border-radius: 23px 23px 0 0;
+  background-color: ${(props) => props.bg};
+  border-bottom: ${(props) => props.under};
+
+  &:hover{
+    background-color: rgba(85,111,255,0.3);
+  }
+`;
+
 const Text = styled.span`
   color: ${(props) => props.color};
 `;
@@ -50,15 +65,24 @@ const Text = styled.span`
 const Category = function () {
   const [Mypage, setMypage] = useState(true);
   const [Commu, setCommu] = useState(false);
+  const [Chall, setChall] = useState(false);
 
   const showMypage = async () => {
     setMypage(true);
     setCommu(false);
+    setChall(false);
   };
 
   const showCommu = async () => {
     setMypage(false);
     setCommu(true);
+    setChall(false);
+  };
+
+  const showChall = async () => {
+    setMypage(false);
+    setCommu(false);
+    setChall(true);
   };
 
   useEffect(() => {
@@ -86,9 +110,21 @@ const Category = function () {
             커뮤니티
           </Text>
         </Tab2>
+        <Tab3
+          onClick={showChall}
+          bg={Chall ? "rgba(85,111,255,0.3)" : "white"}
+          under={Chall ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
+        >
+          <Text
+            color={Chall ? "#556FFF" : "rgba(0,0,0,0.2)"}
+          >
+            챌린지
+          </Text>
+        </Tab3>
       </Tab>
       {Mypage ? <My /> : null}
       {Commu ? <CommuHome /> : null}
+      {Chall ? <ChallMain /> : null}
     </Container>
   );
 };
