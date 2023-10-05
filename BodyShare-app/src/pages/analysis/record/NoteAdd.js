@@ -13,6 +13,10 @@ const Add = styled.div`
   border-radius: 15px;
   background-color: rgba(85, 111, 255, 0.3);
   display: flex;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const BtImg = styled.img`
@@ -37,11 +41,11 @@ const NoteAdd = function () {
   return(
     <>
       <NoteAddGrid>
-        <Add>
+        <Add  onClick={() => navigate("/analysis/add")}>
           <BtImg src={buttonplus} onClick={() => navigate("/analysis/add")}></BtImg>
           <P>운동 기록 추가</P>
         </Add>
-        <Add>
+        <Add onClick={() => navigate("/analysis/add/food")}>
           <BtImg src={buttonplus} onClick={() => navigate("/analysis/add/food")}></BtImg>
           <P>식단 기록 추가</P>
         </Add>
