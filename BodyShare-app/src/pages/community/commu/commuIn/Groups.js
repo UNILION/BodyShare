@@ -13,6 +13,7 @@ const Group = styled.div`
 const Groups = function ({groupLists}) {
   const navigate = useNavigate();
 
+
   return (
     <>
       <Group>
@@ -22,7 +23,7 @@ const Groups = function ({groupLists}) {
           img={`http://localhost:33000/images/posts/${data.contentImageUrl}`}
           title={data.title}
           contents={data.content}
-          footer={data.createdDate}
+          footer={String(data.createdDate.split('-')[0]) + "년" + String(data.createdDate.split('-')[1]) + "월" + String(data.createdDate.split('-')[2]).substring(0,2) + "일"}
           onClick={() => navigate("/community/feed/1")}
           mb="10px"
         />
