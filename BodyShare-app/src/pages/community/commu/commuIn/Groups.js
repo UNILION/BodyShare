@@ -6,7 +6,7 @@ const Group = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 10px;
-  max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
+  max-height: 320px; /* 스크롤 가능한 최대 높이 설정 */
   overflow-y: auto;
 `;
 
