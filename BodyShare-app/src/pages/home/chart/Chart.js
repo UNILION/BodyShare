@@ -247,8 +247,8 @@ const Charts = function () {
                 graph_id="foodchart"
                 
               />
-              <div style={{ marginTop: "0px", fontSize: "16px" }}>
-                총 칼로리: {totalCalories.toFixed(2)} kcal
+              <div style={{  position: "absolute", top: "50%", right: 15, fontSize: "16px" }}>
+                칼로리: {totalCalories.toFixed(2)} kcal
               </div>
             </ChartContainer>
           </ChartBox>
