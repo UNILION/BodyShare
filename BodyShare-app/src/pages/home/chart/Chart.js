@@ -75,6 +75,8 @@ const Charts = function () {
 
   const [sportsChartData, setSportsChartData] = useState([]);
   const [foodChartData, setFoodChartData] = useState([]);
+  const [totalCalories, setTotalCalories] = useState(0);
+
 
   const chartDatas = async function () {
     try {
@@ -147,6 +149,7 @@ const Charts = function () {
       let carbohydrate = 0;
       let protein = 0;
       let fat = 0;
+      let totalCalories = 0;
 
       // 필터링된 데이터를 순회하며 각 항목을 합산합니다.
       filtered.forEach((item) => {
@@ -155,6 +158,8 @@ const Charts = function () {
           carbohydrate += foodItem.carbohydrates || 0;
           protein += foodItem.protein || 0;
           fat += foodItem.fat || 0;
+          totalCalories += foodItem.calories || 0;
+        
         }
       });
 
@@ -165,6 +170,8 @@ const Charts = function () {
         ["단백질", protein],
         ["지방", fat],
       ];
+      setTotalCalories(totalCalories);
+
       setFoodChartData(updatedFoodChartData);
     } catch (error) {
       console.error(error);
@@ -231,14 +238,18 @@ const Charts = function () {
                 height="240px"
                 data={foodChartData}
                 options={{
-                  title: "Calorie",
+                  title: "영양정보",
                   pieHole: 0.4,
                   titleTextStyle: {
                     fontSize: 16,
                   },
                 }}
                 graph_id="foodchart"
+                
               />
+              <div style={{ marginTop: "0px", fontSize: "16px" }}>
+                총 칼로리: {totalCalories.toFixed(2)} kcal
+              </div>
             </ChartContainer>
           </ChartBox>
         </Slide>

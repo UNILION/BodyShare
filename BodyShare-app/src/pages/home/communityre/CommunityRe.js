@@ -80,11 +80,11 @@ const CommunityRe = function () {
           <div key={index}>
             <CommunityRecommend
               onClick={() => {
-                navigate(`/community/${communityPost.communityNo}`);
+                navigate(`/community/commuIn/${communityPost.communityNo}`);
               }}
             >
               <Card
-                img={communityPost.contentImageUrl}
+                img={`http://localhost:33000/images/posts/${communityPost.contentImageUrl}`}
                 title={communityPost.title}
                 contents={communityPost.content}
                 footer={` ${communityPost.createdDate}`}

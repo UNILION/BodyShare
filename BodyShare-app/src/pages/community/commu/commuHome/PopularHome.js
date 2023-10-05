@@ -43,17 +43,17 @@ const PopularHome = function () {
 
   return (
     <Group>
-      {(Array.isArray(popularCommunityData) 
-        ? popularCommunityData : [])
-        .slice(0, 4).map((community, index) => (
-          <div key={index} onClick={() => navigate(`/community/${community.communityNo}`)}>
+       {popularCommunityData.length > 0 && 
+        popularCommunityData.map((community, index) => ( 
             <Card
-              img={community.profileImageUrl} 
-              title={community.communityName}
-              contents={community.intro}
-              footer={`${community.interest}명의 회원이 가입함`}
-            />
-          </div>
+            key={index}
+            img={`http://localhost:33000/images/communitys/${community.profileImageUrl}`}
+            title={community.communityName}
+            contents={community.intro}
+            tagtitle={community.sportsName}
+            footer={`${community.interest}명의 회원이 가입함`}
+            onClick={() => navigate(`/community/commuIn/${community.communityNo}`)}
+          />
         ))}
     </Group>
   );
