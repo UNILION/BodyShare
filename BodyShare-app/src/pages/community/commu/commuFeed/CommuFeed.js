@@ -55,7 +55,6 @@ const CommuFeed = function () {
         `/record/sports/recentToday/${userNo}/${createTime}`
       );
       setRecordData(recordResponse.data);
-      console.log(recordResponse.data)
 
     } catch (error) {
       console.error(error);
@@ -83,8 +82,8 @@ const CommuFeed = function () {
         img={`http://localhost:33000/images/posts/${feedData.contentImageUrl}`}
         title={feedData.title}
         contents={feedData.content}
-        exercise= {(recordData.length > 0) ? recordData[0].cnt_exercise : 0}
-        time={(recordData.length > 0) ? recordData[0].total_time : 0}
+        exercise= {recordData ? (recordData.length > 0) ? recordData[0].cnt_exercise : 0 : 0}
+        time={recordData ? (recordData.length > 0) ? recordData[0].total_time : 0 : 0}
         upload={feedTime}
         recordData={recordData}
       />

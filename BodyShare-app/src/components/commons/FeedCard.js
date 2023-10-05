@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import dumbbell from "assets/Img/dumbbell.png"
 import timer from "assets/Img/timer.png"
+import DropDown from "./DropDown"
 
 const StyledCard = styled.div`
   width: ${(props) => (props.width ? props.width : "370px")};
@@ -61,8 +62,9 @@ const Footer = styled.div`
 `
 
 const Left = styled.div`
+  position: relative;
   display: grid;
-  grid-template-columns: 0.5fr 1fr 0.5fr 1fr;
+  grid-template-columns: 0.4fr 1.2fr 0.4fr 1.3fr;
 `
 
 const Img = styled.img`
@@ -85,6 +87,61 @@ const Time = styled.div`
   margin: 20px;
 `
 
+const Menu = styled.div`
+  background: gray;
+  position: absolute;
+  top: 550px;
+  left: 30%;
+  width: 200px;
+  text-align: center;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  opacity: ${(props) => props.isDropped ? 1 : 0 };
+  visibility: ${(props) => props.isDropped ? "visible": "hidden" };
+  transform: ${(props) => props.isDropped ? "translate(-50%, 0)": "translate(-50%, -20px)" };
+  transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+  z-index: 9;
+
+  &:after {
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 12px solid transparent;
+    border-top-width: 0;
+    border-bottom-color: gray;
+  }
+`
+   
+const Ul = styled.ul`
+  & > li {
+    margin-bottom: 10px;
+  }
+
+  & > li:first-of-type {
+    margin-top: 10px;
+  }
+
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const Li = styled.li``;
+
+const LinkWrapper = styled.a`
+  font-size: 16px;
+  text-decoration: none;
+  color: white;
+`;
+
 const Upload = styled.div`
   color: #878787;
   font-size: 14px;
@@ -99,7 +156,10 @@ const Hr = styled.hr`
 `
 
 
+
 const FeedCard = (props) => {
+  const [myPageIsOpen, myPageRef, myPageHandler] = DropDown(false);
+  console.log(myPageIsOpen)
   return (
     <StyledCard {...props} >
       <Image {...props} src={props.img}></Image>
@@ -107,12 +167,24 @@ const FeedCard = (props) => {
       <Hr />
       <Contents>{props.contents}</Contents>
       <Footer>
-        <Left>
+        <Left
+        onClick = {myPageHandler}
+        ref = {myPageRef}
+        >
           <Img src={dumbbell} />
           <Exer>{props.exercise}개</Exer>
           <Img src={timer} />
           <Time>{props.time}분</Time>
         </Left>
+        <Menu isDropped={myPageIsOpen}>
+            <Ul>
+            {props.recordData ? props.recordData.map((record, idx) => (
+            <Li key={idx}>
+              <LinkWrapper>{record.sportsName} {record.exerciseTime}분</LinkWrapper>
+            </Li>
+          )):null}
+            </Ul>
+        </Menu>
           <Upload>{props.upload}</Upload>
       </Footer>
     </StyledCard>
