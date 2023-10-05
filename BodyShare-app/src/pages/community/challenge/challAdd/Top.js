@@ -41,8 +41,8 @@ const Top = function() {
       onClick={() => navigate("/community")}
     />
     <TopRight>
-      <TopTitle>커뮤니티 만들기</TopTitle>
-      <TopContent>나에게 맞는 커뮤니티를 만들어보세요! 😛</TopContent>
+      <TopTitle>챌린지 만들기</TopTitle>
+      <TopContent>함께하고 싶은 챌린지를 만들어보세요! 😛</TopContent>
     </TopRight>
   </TopContainer>
   );
