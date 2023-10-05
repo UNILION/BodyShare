@@ -2,8 +2,7 @@ import styled from "styled-components";
 import Button from "components/commons/Button";
 import plus from "assets/Img/buttonplus.png";
 import { useForm } from "react-hook-form";
-import Banner from "./Banner";
-import Profile from "./Profile";
+import Pic from "./Pic";
 import ChallTitle from "./ChallTitle";
 import ChallContent from "./ChallContent";
 import ChallCategory from "./ChallCategory";
@@ -61,7 +60,7 @@ const Middle = function () {
           if(result.data)
           // 성공시 메인 페이지 이동
           setCategoryItem([]);
-          navigate("/community");
+          navigate("/community/challenge/challMain");
         }catch(err){
           console.error("usersCommunity 업데이트 실패")
         }
@@ -77,9 +76,7 @@ const Middle = function () {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <MiddleContainer>
-        <Banner register={register} />
-
-        <Profile register={register} />
+        <Pic register={register} />
 
         <ChallTitle register={register} errors={errors} />
 
