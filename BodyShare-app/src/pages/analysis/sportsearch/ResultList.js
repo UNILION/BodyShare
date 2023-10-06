@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 import { selectedSportNoState } from 'recoil/sportList';
-import { userSelector } from "recoil/userRecoil";
-import { useRecoilValue } from 'recoil';
 import { useRecoilState } from 'recoil';
 
 const ResultList = styled.div`
@@ -10,7 +8,7 @@ const ResultList = styled.div`
   margin-top: 20px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  max-height: 400px; /* 스크롤 가능한 최대 높이 설정 */
+  max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
   overflow-y: auto; 
 `;
 
@@ -19,7 +17,7 @@ const ResultButton = styled.button`
   background-color: ${(props) => (props.active ? props.hovercolor : 'white')};
   border: none;
   border-radius: 15px;
-  padding-top: 40px;
+  padding-top: 30px;
   cursor: pointer;
   transition: background-color 0.2s; 
 
@@ -46,10 +44,21 @@ const ResultCate = function ({ sportsList, changeSelected }) {
   const [selectedSportNo, setSelectedSportNo] = useRecoilState(selectedSportNoState);
 
   const handleButtonClick = function(index, data){
-    setSelectedButton(index);
-    changeSelected(data);
-    setSelectedSportNo(data.no);
+    //이미 선택한 버튼이면 비활성화
+    if (selectedButton === index) {
+      selectedButton(null);
+      changeSelected(null);
+      setSelectedSportNo(null);
+    }else {
+      setSelectedButton(index);
+      changeSelected(data);
+      setSelectedSportNo(data.no);
+    }
   };
+
+  useEffect(() => {
+    setSelectedButton(null);
+  }, [sportsList])
 
   return (
     <>

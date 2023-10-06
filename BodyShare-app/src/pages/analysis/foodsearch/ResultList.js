@@ -44,6 +44,7 @@ const ResultCate = function ({ foodList, changeSelected }) {
   };
 
   useEffect(() => {
+    setSelectedButtonData(null);
   }, [foodList]);
   
   return (
