@@ -7,14 +7,14 @@ const commentModel = {
       const sql = `SELECT
         cpc.*,
         u.nickname AS commenter_nickname,
-        (select count(*) from communityPostComment) as commentCnt
+        (select count(*) from communityPostComment where postNo = ?) as commentCnt
       FROM
         communityPostComment AS cpc
       JOIN
         user AS u ON cpc.userNo = u.userNo
       WHERE
         cpc.postNo = ?;`;
-      const [result] = await pool.query(sql, [no]);
+      const [result] = await pool.query(sql, [no, no]);
       return result;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
