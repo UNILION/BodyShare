@@ -17,26 +17,6 @@ const comuModel = {
     }
   },
 
- // 관심사 기반 커뮤니티 목록 조회 (최대 3개)
- async findByInterestsLimited(no) {
-  try {
-    const sql = `
-    SELECT c.*, s.name AS sportsName, COUNT(DISTINCT uc.userNo) AS userCount
-    FROM community c
-    INNER JOIN sports s ON c.interest = s.no
-    LEFT JOIN communityPost cp ON c.communityNo = cp.communityNo
-    LEFT JOIN usersCommunity uc ON c.communityNo = uc.communityNo
-    WHERE uc.userNo = ?
-    GROUP BY c.communityNo
-    ORDER BY userCount DESC;
-  `;
-
-    const [result] = await pool.query(sql, [no]);
-    return result;
-  } catch (err) {
-    throw new Error("DB Error", { cause: err });
-  }
-},
   // 관심사 기반 커뮤니티 목록 조회
   async findByInterest(no) {
     try {
