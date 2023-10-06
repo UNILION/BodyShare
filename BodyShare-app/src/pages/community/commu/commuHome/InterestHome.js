@@ -17,7 +17,18 @@ const Group = styled.div`
   margin-top: 10px;
   max-height: 450px;
   overflow-y: auto;
+  overflow-x: hidden;
 `;
+
+const Not = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  width: 310px;
+  max-height: 450px;
+  overflow-y: hidden;
+`
+
 
 const InterestHome = function () {
   const navigate = useNavigate();
@@ -52,7 +63,7 @@ const InterestHome = function () {
   return (
     <>
       <Group>
-        {interestCommunityData.length > 0 &&
+        {interestCommunityData.length > 0 ?
           interestCommunityData.map((community, index) => (
             <Card
               key={index}
@@ -63,7 +74,7 @@ const InterestHome = function () {
               footer={`${community.userCount}명의 회원이 가입함`}
               onClick={() => navigate(`/community/commuIn/${community.communityNo}`)}
             />
-          ))}
+            )): <Not>관심사에 알맞은 커뮤니티가 존재하지 않습니다.</Not>}
       </Group>
     </>
   );
