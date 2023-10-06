@@ -20,11 +20,9 @@ const Container = styled.div`
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <RecoilRoot>
-    <React.StrictMode>
       <Container>
         <App />
       </Container>
-    </React.StrictMode>
   </RecoilRoot>
 );
 
