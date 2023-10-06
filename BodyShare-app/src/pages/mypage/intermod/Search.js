@@ -58,7 +58,7 @@ const Donediv = styled.div`
 `;
 
 
-const Search = function ({interestList}) {
+const Search = function ({ interestList }) {
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
   const allSports = useRecoilValue(sportsSelector);
@@ -143,7 +143,7 @@ const Search = function ({interestList}) {
 
   const complete = async () => {
     setInterest(selectedList);
-    
+
     // 선택이 완료되면 선택된 항목들을 서버에 업데이트
     for (const categoryNo of selectedList) {
       try {
@@ -179,14 +179,16 @@ const Search = function ({interestList}) {
 
       <Selected selectedList={selectedList} changeSelected={changeSelected} ></Selected>
       <Donediv>
-        <Button
-          name="선택완료"
-          img={plus}
-          width="200px"
-          mt="3px"
-          ml="157px"
-          onClick={complete}
-        />
+        {selectedList.length > 0 && (
+          <Button
+            name="선택완료"
+            img={plus}
+            width="200px"
+            mt="3px"
+            ml="157px"
+            onClick={complete}
+          />
+        )}
       </Donediv>
     </>
   );
