@@ -29,9 +29,8 @@ const PopularHome = function () {
     try {
       const response = await instance.get("/community/bypopular");
       const community = response.data;
-      const sortedCommunity = community.sort((a, b) => b.interest - a.interest);
 
-      setPopularCommunityData(sortedCommunity);
+      setPopularCommunityData(community);
     } catch (error) {
       console.error(error);
     }
@@ -51,7 +50,7 @@ const PopularHome = function () {
             title={community.communityName}
             contents={community.intro}
             tagtitle={community.sportsName}
-            footer={`${community.interest}명의 회원이 가입함`}
+            footer={`${community.userCount}명의 회원이 가입함`}
             onClick={() => navigate(`/community/commuIn/${community.communityNo}`)}
           />
         ))}
