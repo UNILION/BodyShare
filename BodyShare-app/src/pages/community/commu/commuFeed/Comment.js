@@ -59,13 +59,14 @@ const Nick = styled.span`
 const Commend = styled.span``;
 
 const Comment = function () {
-  const [commentData, setCommentData] = useState();
+  const [commentData, setCommentData] = useState([]);
   const [comment, setComment] = useState('')
   const [isValid, setIsValid] = useState(false);
   const [flag, setFlag] = useState(0);
   const location = useLocation();
   const feedNo = location.pathname.split("/")[3];
   const userNo = useRecoilValue(userSelector);
+
 
   const commentList = async function () {
     try {
@@ -81,11 +82,11 @@ const Comment = function () {
   const onSubmit = async (e) => {
     if (isValid === false) return
     try {
-      const response = await instance.post(`comment/commentadd`, { postNo:feedNo, userNo, content:comment });
-      if(response.data){
-      setFlag(flag + 1)
-      setComment("")
-    }
+      const response = await instance.post(`comment/commentadd`, { postNo: feedNo, userNo, content: comment });
+      if (response.data) {
+        setFlag(flag + 1)
+        setComment("")
+      }
     } catch (error) {
       console.error(error);
     }
@@ -97,24 +98,24 @@ const Comment = function () {
 
   return (
     <CommentContainer>
-      <Count>댓글 {commentData ? commentData[0].commentCnt : 0}개</Count>
+      <Count>댓글 {(commentData.length > 0) ? commentData[0].commentCnt : 0}개</Count>
       <InputBox>
-        <Input onChange={e => {setComment(e.target.value)}} 
-        onKeyUp={e => {
-          e.target.value.length > 0 ? setIsValid(true) : setIsValid(false);
-          if(e.key === "Enter") onSubmit()
-        }}
-        value={comment}/>
-        <Circle src={circle} onClick={onSubmit}/>
+        <Input onChange={e => { setComment(e.target.value) }}
+          onKeyUp={e => {
+            e.target.value.length > 0 ? setIsValid(true) : setIsValid(false);
+            if (e.key === "Enter") onSubmit()
+          }}
+          value={comment} />
+        <Circle src={circle} onClick={onSubmit} />
       </InputBox>
       <CommentList>
         {commentData ? commentData.map((comment, idx) => (
           <Profile key={idx}>
-          <Nick>{comment.commenter_nickname}</Nick>
-          <Commend>{comment.content}</Commend>
-        </Profile>
+            <Nick>{comment.commenter_nickname}</Nick>
+            <Commend>{comment.content}</Commend>
+          </Profile>
         )) : null}
-        
+
       </CommentList>
     </CommentContainer>
   );
