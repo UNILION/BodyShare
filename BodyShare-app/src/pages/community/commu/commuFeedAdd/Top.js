@@ -30,14 +30,14 @@ const TopContent = styled.div`
   margin-top: 5px;
 `;
 
-const Top = function () {
+const Top = function ({commuNo}) {
   const navigate = useNavigate();
   return (
     <TopContainer>
       <Previous
         src={previous}
         alt="뒤로가기"
-        onClick={() => navigate("/community")}
+        onClick={() => navigate(`/community/commuIn/${commuNo}`)}
       />
       <TopRight>
         <TopTitle>커뮤니티 피드 쓰기</TopTitle>
