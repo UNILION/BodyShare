@@ -93,7 +93,7 @@ const Icon = function ({ id, url }) {
 
   useEffect(() => {
     loadSport();
-  }, [matchingSportNames]);
+  }, []);
 
   return (
     <>
