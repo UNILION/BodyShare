@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Card from "components/commons/Card";
-import Plus from "assets/Img/buttonplus.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -14,17 +13,19 @@ const Group = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 10px;
+  max-height: 450px;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
-const AddImg = styled.img`
-  display: grid;
-  align-items: end;
-  margin-left: auto;
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  margin-top: 20px;
-`;
+const Not = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  width: 300px;
+  max-height: 450px;
+  overflow-y: hidden;
+`
 
 const Middle = function ({ searchItemList }) {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const Middle = function ({ searchItemList }) {
   return (
     <>
       <Group>
-        {list.length > 0 && list.map((community, index) => (        
+        {list.length > 0 ? list.map((community, index) => (        
           <Card
             key={index}
             img={`http://localhost:33000/images/communitys/${community.profileImageUrl}`}
@@ -59,10 +60,8 @@ const Middle = function ({ searchItemList }) {
             footer={`${community.userCount}명의 회원이 가입함`}
             onClick={() => navigate(`/community/commuIn/${community.communityNo}`)}
           />
-        ))}
+          )): <Not>{searchItemList[0].name}에 알맞은 커뮤니티가 존재하지 않습니다.</Not>}
       </Group>
-      
-      <AddImg src={Plus} onClick={() => navigate("/community/communityAdd")} />
     </>
   );
 };
