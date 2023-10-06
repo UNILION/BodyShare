@@ -27,7 +27,7 @@ const PopularHome = function () {
 
   const fetchPopularData = async () => {
     try {
-      const response = await instance.get("/community/bypopular");
+      const response = await instance.get(`/community/bypopular/${userNo}`);
       const community = response.data;
 
       setPopularCommunityData(community);

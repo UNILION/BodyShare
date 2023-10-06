@@ -57,16 +57,17 @@ const comuModel = {
   },
 
   // 인기 기반 커뮤니티 목록 조회
-  async findByPopular() {
+  async findByPopular(no) {
     try {
       const sql = `SELECT c.*, s.name AS sportsName, COUNT(DISTINCT cp.postNo) AS postCount, COUNT(DISTINCT uc.userNo) AS userCount
       FROM community c
       INNER JOIN sports s ON c.interest = s.no
       LEFT JOIN communityPost cp ON c.communityNo = cp.communityNo
       LEFT JOIN usersCommunity uc ON c.communityNo = uc.communityNo
+      WHERE (uc.userNo <> ? OR uc.userNo IS NULL) AND c.communityNo NOT IN (SELECT communityNo FROM usersCommunity WHERE userNo = ?)
       GROUP BY c.communityNo
       ORDER BY userCount DESC;`;
-      const [result] = await pool.query(sql);
+      const [result] = await pool.query(sql, [no, no]);
       return result;
     } catch (err) {
       throw new Error("DB Error", { cause: err });

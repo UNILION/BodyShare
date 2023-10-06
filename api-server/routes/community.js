@@ -60,9 +60,10 @@ router.get("/byinterestlimited/:no", async (req, res, next) => {
 
 
 // 인기 기반 커뮤니티 목록 조회
-router.get("/bypopular", async (req, res, next) => {
+router.get("/bypopular/:no", async (req, res, next) => {
   try {
-    const list = await community.findByPopular();
+    const no = Number(req.params.no);
+    const list = await community.findByPopular(no);
     res.json(list);
   } catch (err) {
     next(err);
