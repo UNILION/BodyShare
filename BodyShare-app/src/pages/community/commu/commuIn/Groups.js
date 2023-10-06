@@ -8,6 +8,7 @@ const Group = styled.div`
   margin-top: 10px;
   max-height: 320px; /* 스크롤 가능한 최대 높이 설정 */
   overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const Groups = function ({groupLists}) {
