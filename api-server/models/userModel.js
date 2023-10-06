@@ -117,7 +117,7 @@ const userModel = {
   async deleteUsersCommu(commuNo, userNo, conn = pool) {
     try {
       const sql = `delete from usersCommunity where userNo = ? and communityNo = ?`;
-      const [result] = await conn.query(sql, [commuNo, userNo]);
+      const [result] = await conn.query(sql, [userNo, commuNo]);
       return result.affectedRows;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
