@@ -136,7 +136,7 @@ const CommuIn = function () {
         {groupData ?
         <Groups groupLists={groupData} />
         : null}
-        <Img src={Plus} onClick={() => navigate("/community/feedAdd/1")} />
+        <Img src={Plus} onClick={() => navigate(`/community/feedAdd/${communityData.communityNo}`)} />
       </Container>
     </>
   );
