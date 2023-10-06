@@ -174,7 +174,9 @@ const Middle = function ({searchItemList}) {
     <Selected selectedList={selectedList} changeSelected={changeSelected} ></Selected>
 
     <Donediv>
-      <Done onClick={complete}>검색</Done>
+      {selectedList.length > 0 && (
+        <Done onClick={complete}>검색</Done>
+      )}
     </Donediv>
   </>
   );
