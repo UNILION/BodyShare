@@ -7,7 +7,7 @@ import { searchSelector } from "recoil/commuRecoil";
 const Container = styled.div`
   display: grid;
   width: 390px;
-  height: 696px;
+  height: 600px;
   grid-template-rows: auto auto auto auto auto auto 1fr;
   gap: 10px;
 `;
