@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from "styled-components";
 import previous from "assets/Img/Previous.png";
 import Button from "components/commons/Button";
@@ -6,7 +6,7 @@ import plus from "assets/Img/buttonplus.png";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { selectedSportNameState, selectedSportNoState } from 'recoil/sportList'; 
+import { selectedSportNameState, selectedSportNoState, sportsSelector } from 'recoil/sportList'; 
 import axios from "axios";
 import { userSelector } from 'recoil/userRecoil';
 
@@ -109,6 +109,9 @@ const TimeInput = function () {
   const selectedSportNo = useRecoilValue(selectedSportNoState);
   const today = new Date().toLocaleDateString();
   const userNo = useRecoilValue(userSelector);
+  const sportsList = useRecoilValue(sportsSelector);
+  let user;
+  let met;
 
   const [exerciseTime, setExerciseTime] = useState("");
 
@@ -118,27 +121,49 @@ const TimeInput = function () {
   }
 
   const sendSportsDataToServer = async () => {
+    try{
+      const response = await instance.get(`/users/user/${userNo}`);
+      if(response.data)
+      {
+        user = response.data;
+      }
+    } catch(err){
+      console.error(err);
+    }
+
     try {
   
       const exerciseDate = String(new Date().toLocaleDateString());
-    
+      
+      // 일치 하는 운동 찾아서 met 계수 찾기
+      const list = sportsList.filter(item => item.no == selectedSportNo);
+      met = list[0].met;
+
+      // 칼로리 계산하기
+      console.log(user);
+      console.log(met);
+      const consum = Math.floor(((3.5 * met * user.weight * parseInt(exerciseTime))/1000)*5);
+
       // 선택한 음식 정보를 담은 객체를 생성
       const sportsData = {
         userNo,
         sportsNo: selectedSportNo,
         exerciseDate,
-        exerciseTime:  parseInt(exerciseTime)
+        exerciseTime:  parseInt(exerciseTime),
+        consum: consum
       };
   
       const response = await instance.post('/record/sportsadd', sportsData);
-  
-      console.log('POST 요청이 성공적으로 보내졌습니다.');
-      console.log('서버 응답:', response.data);
+      if(response.data){
+        console.log('POST 요청이 성공적으로 보내졌습니다.');
+        console.log('서버 응답:', response.data);
+        navigate('/analysis');
+      }
     } catch (error) {
       console.error('POST 요청 실패:', error);
     }
   }
-  
+ 
   return (
     <>
       <TimeInputContainer>
@@ -176,7 +201,6 @@ const TimeInput = function () {
           display="block"
           onClick={() => {
             sendSportsDataToServer(); // 서버로 데이터 전송
-            navigate('/analysis');
           }}
       />     
     </>

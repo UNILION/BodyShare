@@ -9,7 +9,6 @@ import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
 import Slide1 from "./Slide1";
 import Slide2 from "./Slide2";
-import Slide3 from "./Slide3";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -30,37 +29,6 @@ const SliderContainer = styled.div`
 
 `;
 
-const Slide = styled.div`
-  min-width: 100%;
-  display: grid;
-  place-items: center;
-  transition: transform 0.3s ease;
-  grid-column: span 1;
-`;
-
-const ChartBox = styled.div`
-  width: 360px;
-  height: 476px;
-  border-radius: 30px;
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  margin: 0 auto;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ChartContainer = styled.div`
-  width: 340px;
-  height: 476px;
-  background-color: white;
-  border-radius: 15px;
-  /* border: 1px solid rgba(135, 135, 135, 0.3); */
-  cursor: pointer;
-  margin-left: 10px;
-`;
 
 //운동 차트 1
 const SportChart = function () {
@@ -153,8 +121,6 @@ const SportChart = function () {
 
         <Slide2 />
 
-        <Slide3 />
-        
       </Slider>
     </SliderContainer>
   );
