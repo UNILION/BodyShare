@@ -136,6 +136,9 @@ const Slide2 = function () {
     title: "운동 시간과 섭취 칼로리 비교",
     legend: { position: "top" },
     bars: "horizontal",
+    titleTextStyle: {
+      fontSize: 15,
+    },
   };
 
   return (

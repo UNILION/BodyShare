@@ -95,6 +95,9 @@ const Slide2 = function () {
     title: "요일별 칼로리 섭취량",
     width: "320px",
     height: "450px",
+    titleTextStyle: {
+      fontSize: 18,
+    },
     
   };
 

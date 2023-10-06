@@ -28,6 +28,15 @@ const ChartContainer = styled.div`
   /* border: 1px solid rgba(135, 135, 135, 0.3); */
   cursor: pointer;
 `;
+const Title = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  left: 3px;
+  top: 30px;
+  z-index: 1;
+`;
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -114,15 +123,18 @@ const Slide1 = function (){
   }, [userNo]);
 
   const chartOptions1 = {
-    title: "일주일 운동 시간",
     width: 320,
     height: 430,
     legend: { position: "none" },
+    titleTextStyle: {
+      fontSize: 18,
+    },
   };
 
   return(
     <Slide>
       <ChartContainer>
+      <Title>일주일 운동 시간</Title>
       <Chart
           chartType="ColumnChart"
           data={sportsChartData}
