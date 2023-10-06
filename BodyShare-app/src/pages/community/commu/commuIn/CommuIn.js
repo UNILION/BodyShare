@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Profile from "./Profile";
 import Mainbar from "./Mainbar";
 import Groups from "./Groups";
+import previous from "assets/Img/Previous.png";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
@@ -28,6 +29,14 @@ const BannerPic = styled.div`
 const Banner = styled.img`
   width: 100%;
   position: absolute;
+`;
+
+const Previous = styled.img`
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin: 10px;
 `;
 
 const Pf = styled.ul`
@@ -115,6 +124,11 @@ const CommuIn = function () {
         <Banner
           src={`http://localhost:33000/images/communitys/${communityData.bannerImageUrl}`}
         />
+      <Previous
+      src={previous}
+      alt="뒤로가기"
+      onClick={() => navigate("/community")}
+    />
       </BannerPic>
       <Container>
         <Pf>
