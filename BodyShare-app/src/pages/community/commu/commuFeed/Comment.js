@@ -82,7 +82,10 @@ const Comment = function () {
     if (isValid === false) return
     try {
       const response = await instance.post(`comment/commentadd`, { postNo:feedNo, userNo, content:comment });
+      if(response.data){
       setFlag(flag + 1)
+      setComment("")
+    }
     } catch (error) {
       console.error(error);
     }
