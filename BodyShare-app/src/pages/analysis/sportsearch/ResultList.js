@@ -39,7 +39,7 @@ const Line = styled.div`
   border: 1px solid rgba(135, 135, 135, 0.3);
 `;
 
-const ResultCate = function ({ sportsList, changeSelected }) {
+const ResultCate = function ({ sportsList, changeSelected, search }) {
   const [selectedButton, setSelectedButton] = useState(null);
   const [selectedSportNo, setSelectedSportNo] = useRecoilState(selectedSportNoState);
 
@@ -58,7 +58,7 @@ const ResultCate = function ({ sportsList, changeSelected }) {
 
   useEffect(() => {
     setSelectedButton(null);
-  }, [sportsList])
+  }, [search])
 
   return (
     <>

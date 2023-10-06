@@ -120,7 +120,8 @@ const SportSearch = function() {
         <StyledTag tagtitle="기타" width="80px" height="36px" br="13px" isSelected={sportsTag === "기타"} onClick={() => hadleTagfilter('기타')}/>
       </CategoryList>
       
-      <ResultList sportsList={filterSportsList} changeSelected={changeSelected}/>
+      <ResultList sportsList={filterSportsList} changeSelected={changeSelected} search={search} />
+
 
       <Button
         name="선택하기"
