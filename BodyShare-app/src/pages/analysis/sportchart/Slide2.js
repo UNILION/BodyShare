@@ -76,7 +76,7 @@ const Slide2 = function () {
         );
       });
 
-      const chartData = [["일자", "운동 분", "섭취 칼로리"]];
+      const chartData = [["일자", "소모 칼로리", "섭취 칼로리"]];
       const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
       for (let i = 0; i < 7; i++) {
@@ -92,7 +92,7 @@ const Slide2 = function () {
         const formattedDate = date.toLocaleDateString("ko-KR", options); // 월/일 (요일)
         const dateString = `${formattedDate}\n(${day})`;
 
-        let totalExerciseTime = 0;
+        let Totalconsum = 0;
   
         // 해당 날짜에 대한 운동 기록 더하기
         exerciseData.forEach((record) => {
@@ -100,7 +100,7 @@ const Slide2 = function () {
           const recordDateString = recordDate.toLocaleDateString("ko-KR", options);
   
           if (recordDateString === formattedDate) {
-            totalExerciseTime += record.exerciseTime;
+            Totalconsum += record.consum;
           }
         });
 
@@ -114,7 +114,7 @@ const Slide2 = function () {
           ? consumedCaloriesRecord.calories
           : 0;
 
-        chartData.push([dateString, totalExerciseTime, consumedCalories]);
+        chartData.push([dateString, Totalconsum, consumedCalories]);
       }
 
       setChartData(chartData);
