@@ -159,7 +159,7 @@ const MyProfileModify = function () {
             <Profile register={register} />
             <Nickname nickname={profileInfo.nickname} register={register} errors={errors} getValues={getValues}/>
             <Password password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
-            <AfterPassword register={register} errors={errors} getValues={getValues} />
+            <AfterPassword password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
             <BodyDiv>
               <Height height={profileInfo.height} register={register} errors={errors} />
               <Weight weight={profileInfo.weight} register={register} errors={errors} />

@@ -115,7 +115,7 @@ const FoodSearch = function () {
         />
       </SearchInput>
 
-      <ResultList foodList={filterFoodList} changeSelected={changeSelected} /> 
+      <ResultList foodList={filterFoodList} changeSelected={changeSelected} search={search} /> 
 
       <Button
         name="선택하기"

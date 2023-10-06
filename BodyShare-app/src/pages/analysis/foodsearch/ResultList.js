@@ -30,7 +30,7 @@ const Line = styled.div`
   border: 1px solid rgba(135, 135, 135, 0.3);
 `;
 
-const ResultCate = function ({ foodList, changeSelected }) {
+const ResultCate = function ({ foodList, changeSelected, search }) {
   const [selectedButtonData, setSelectedButtonData] = useState(null);
 
   const handleButtonClick = function(data){
@@ -45,7 +45,7 @@ const ResultCate = function ({ foodList, changeSelected }) {
 
   useEffect(() => {
     setSelectedButtonData(null);
-  }, [foodList]);
+  }, [search]);
   
   return (
     <>
