@@ -52,7 +52,6 @@ const CommunityRe = function () {
   const userNo = useRecoilValue(userSelector);
 
   const [communityData, setCommunityData] = useState([]);
-
   const fetchData = async () => {
     try {
       const response = await instance.get(`/post/community/${userNo}`);
@@ -77,20 +76,19 @@ const CommunityRe = function () {
       <CommunityP>News</CommunityP>
       <PostDiv>
         {communityData.slice(0, 2).map((communityPost, index) => (
-          <div key={index}>
-            <CommunityRecommend
-              onClick={() => {
-                navigate(`/community/commuIn/${communityPost.communityNo}`);
-              }}
-            >
-              <Card
-                img={`http://localhost:33000/images/posts/${communityPost.contentImageUrl}`}
-                title={communityPost.title}
-                contents={communityPost.content}
-                footer={` ${communityPost.createdDate}`}
-              />
-            </CommunityRecommend>
-          </div>
+          <CommunityRecommend
+            key={index}
+            onClick={() => {
+              navigate(`/community/commuIn/${communityPost.communityNo}`);
+            }}
+          >
+            <Card
+              img={`http://localhost:33000/images/posts/${communityPost.contentImageUrl}`}
+              title={communityPost.title}
+              contents={communityPost.content}
+              footer={String(communityPost.createdDate.split('-')[0]) + "년" + String(communityPost.createdDate.split('-')[1]) + "월" + String(communityPost.createdDate.split('-')[2]).substring(0, 2) + "일"}
+            />
+          </CommunityRecommend>
         ))}
       </PostDiv>
     </CommunityDiv>
