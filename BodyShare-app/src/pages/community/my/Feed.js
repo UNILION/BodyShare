@@ -31,7 +31,7 @@ const Feed = function ({ feed }) {
     <>
       <Writing>
         <Mini>
-          <MiniTitle onClick={() => navigate("/community/feed")}>
+          <MiniTitle onClick={() => navigate(`/community/feed/${feed.postNo}`)}>
             {feed.title}
           </MiniTitle>
           <MiniMember>{feed.nickname}</MiniMember>

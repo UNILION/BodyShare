@@ -37,7 +37,6 @@ const CommuFeed = function () {
   const feedTime = feedData ? year + "년" + month + "월" + day.substring(0,2) + "일" : 0
   const createTime = feedData ? year + ". " + month + ". " + day.substring(0,2) + ". " : 0
 
-
    const feedList = async function () {
     try {
       const feedResponse = await instance.get(
@@ -74,7 +73,7 @@ const CommuFeed = function () {
       <Previous
         src={previous}
         alt="뒤로가기"
-        onClick={() => navigate("/community/commuIn/1")}
+        onClick={() => navigate(`/community/commuIn/${feedData.communityNo}`)}
       />
 
     {feedData?

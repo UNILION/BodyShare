@@ -24,7 +24,7 @@ const Groups = function ({groupLists}) {
           title={data.title}
           contents={data.content}
           footer={String(data.createdDate.split('-')[0]) + "년" + String(data.createdDate.split('-')[1]) + "월" + String(data.createdDate.split('-')[2]).substring(0,2) + "일"}
-          onClick={() => navigate("/community/feed/1")}
+          onClick={() => navigate(`/community/feed/${data.postNo}`)}
           mb="10px"
         />
         ))}
