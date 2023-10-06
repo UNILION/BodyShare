@@ -5,6 +5,6 @@ module.exports = {
     database: "bodyshare",
     user: "bodyshare",
     password: "Bodyshare12$$",
-    timezone: "-0900"
+    timezone: "-09:00",
   }
 };
