@@ -7,12 +7,16 @@ import { foodSelector } from "recoil/foodList";
 
 const FoodNoteContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   padding: 20px;
 `;
 
 const FoodNote = styled.div`
+  font-size: 14px;
+`;
+
+const Calorie = styled.p`
   font-size: 14px;
 `;
 
@@ -43,6 +47,7 @@ const Delete = styled.button`
   border-radius: 15px;
   border: 1px solid #B3B3B3;
   background-color: white;
+
 
   &:hover {
     cursor: pointer;
@@ -84,6 +89,7 @@ const FoodListItem = function (props) {
   return (
     <FoodNoteContainer>
       <FoodNote>{result[0].name}</FoodNote>
+      <Calorie>칼로리: {props.record.calories}kal</Calorie>
       <SeeMore onClick={toggleExpansion}>
         <SmIng src={seemore}></SmIng>
       </SeeMore>
