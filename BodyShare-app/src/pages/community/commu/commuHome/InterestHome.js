@@ -30,12 +30,12 @@ const InterestHome = function () {
       const inResponse = await instance.get(`/users/interest/${userNo}`);
       const inData = inResponse.data;
 
-      const byResponse = await instance.get(`/community/byinterestlimited/${userNo}`);
+      const byResponse = await instance.get(`/community/bypopular/${userNo}`);
       const byData = byResponse.data;
 
       const filteredData = byData.filter(community => {
         const matchingInterest = inData.find(data => data.sportsNo === community.interest);
-        return matchingInterest && matchingInterest.userNo === community.adminUserNo;
+        return matchingInterest;
       });
 
 

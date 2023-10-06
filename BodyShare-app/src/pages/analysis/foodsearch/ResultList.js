@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from "styled-components";
 
 const ResultList = styled.div`
   margin-top: 20px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
+  max-height: 500px; 
   overflow-y: auto; 
 `;
 
@@ -17,10 +17,6 @@ const ResultButton = styled.button`
   padding-top: 40px;
   cursor: pointer;
   transition: background-color 0.2s; 
-
-  &:hover {
-    background-color: ${(props) => (props.active ? props.hovercolor : 'white')};
-  }
 `;
 
 const RP = styled.p`
@@ -35,11 +31,21 @@ const Line = styled.div`
 `;
 
 const ResultCate = function ({ foodList, changeSelected }) {
-  const [selectedButton, setSelectedButton] = useState(null);
-  const handleButtonClick = function(index, data){
-    setSelectedButton(index);
-    changeSelected(data);
+  const [selectedButtonData, setSelectedButtonData] = useState(null);
+
+  const handleButtonClick = function(data){
+    if (selectedButtonData === data) {
+      setSelectedButtonData(null);
+      changeSelected(null);
+    } else {
+      setSelectedButtonData(data);
+      changeSelected(data);
+    }
   };
+
+  useEffect(() => {
+    setSelectedButtonData(null);
+  }, [foodList]);
   
   return (
     <>
@@ -47,9 +53,9 @@ const ResultCate = function ({ foodList, changeSelected }) {
         {foodList.map((food, index) => (
           <ResultButton
             key={index}
-            active={selectedButton === index}
+            active={selectedButtonData === food}
             onClick={() => {
-              handleButtonClick(index, food);
+              handleButtonClick(food);
             }}
             hovercolor="rgba(85, 111, 255, 0.7)"
           >
