@@ -70,6 +70,7 @@ const Box = styled.div`
 
 const SportTime = styled.div`
   grid-row: 4;
+  position: relative;
 `;
 
 const SmallBox = styled.input`
@@ -82,25 +83,18 @@ const SmallBox = styled.input`
   text-align: center;
 `;
 
-const Category = styled.p`
-  font-size: 20px;
-  font-weight: bold;
-  margin-right: 10px;
-  float: left;
-`;
-
-const SmallLine = styled.div`
-  width: 2px;
-  height: 30px;
-  background-color: rgba(135, 135, 135, 0.3);
-  float: left;
-  margin-right: 10px;
-`;
-
 const SportName = styled.p`
   font-size: 20px;
   font-weight: bold;
-  margin-left: 10px;
+  margin-left: 5px;
+`;
+
+const ErrorMessage = styled.p`
+  position: absolute;
+  right: 25px;
+  font-size: 14px;
+  color: red;
+  margin-top: 5px;
 `;
 
 const TimeInput = function () {
@@ -114,6 +108,7 @@ const TimeInput = function () {
   let met;
 
   const [exerciseTime, setExerciseTime] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleExerciseTime = (e) => {
     const numVal = e.target.value.replace(/[^0-9]/g, "");
@@ -121,6 +116,11 @@ const TimeInput = function () {
   }
 
   const sendSportsDataToServer = async () => {
+    if (!exerciseTime) {
+      setErrorMessage("운동 시간을 입력해주세요.");
+      return;
+    }
+
     try{
       const response = await instance.get(`/users/user/${userNo}`);
       if(response.data)
@@ -170,8 +170,6 @@ const TimeInput = function () {
         <PreviousButton src={previous} onClick={() => navigate('/analysis')}></PreviousButton>
         
         <SportTitle>
-          {/* <Category>유산소</Category> */}
-          {/* <SmallLine></SmallLine> */}
           <SportName>{selectedSportName}</SportName>
           <Line></Line>
         </SportTitle>
@@ -189,6 +187,7 @@ const TimeInput = function () {
             value={exerciseTime} // 사용자 입력 값을 설정
             onChange={handleExerciseTime} 
           />
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </SportTime>
       </TimeInputContainer> 
 

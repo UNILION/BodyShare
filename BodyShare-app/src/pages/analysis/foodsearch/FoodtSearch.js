@@ -55,34 +55,33 @@ const Search = styled.img`
   margin: auto;
 `;
 
-const FoodtSearch = function () {
-
+const FoodSearch = function () {
   const foodList = useRecoilValue(foodSelector);
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(""); 
   const userNo = useRecoilValue(userSelector);
- 
   const navigate = useNavigate();
 
   const changeSelected = function (data) {
     setSelected(data);
   };
 
-  //검색기능 추가 ---
-  //input창에 검색어가 적히면 search에 업데이트
+  // 검색기능 추가
   const handleSearch = (e) => {
     setSearch(e.target.value);
   }
+
   // 검색 필터링 기능
-  //foodList 배열을 돌며 food 검사
-  //.includes :  포함되어있는지 확인
   const filterFoodList = foodList.filter((food) => {
-    // food.name이 정의되어 있고, search와 일치하는지 확인
     return food.name && food.name.includes(search);
   })
 
-  
   const sendFoodDataToServer = async () => {
+    if (!selected) {
+        alert("음식을 선택해주세요");
+      return;
+    }
+
     try {
       const dietDate = String(new Date().toLocaleDateString());
     
@@ -97,6 +96,8 @@ const FoodtSearch = function () {
       
       console.log('POST 요청이 성공적으로 보내졌습니다.');
       console.log('서버 응답:', response.data);
+
+      navigate("/analysis");
     } catch (error) {
       console.error('POST 요청 실패:', error);
     }
@@ -114,7 +115,6 @@ const FoodtSearch = function () {
         />
       </SearchInput>
 
-      {/* 검색결과 => 검색어와 일치하는 항목만 보이도록.. */}
       <ResultList foodList={filterFoodList} changeSelected={changeSelected} /> 
 
       <Button
@@ -124,13 +124,10 @@ const FoodtSearch = function () {
         display="block"
         ml="190px"
         mt="30px"
-          onClick={() => {
-            sendFoodDataToServer();
-            navigate("/analysis");
-      }}
+        onClick={sendFoodDataToServer}
       />
     </Container>
   );
 };
 
-export default FoodtSearch;
+export default FoodSearch;

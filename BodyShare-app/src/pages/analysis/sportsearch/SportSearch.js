@@ -130,7 +130,11 @@ const SportSearch = function() {
         ml="auto"
         mt="30px"
         onClick={() =>{
-          navigate("/analysis/add/time");
+          if (selected) {
+            navigate("/analysis/add/time");
+          } else {
+            alert("운동을 선택해주세요");
+          }
         }}
       />
     </Container>
