@@ -2,7 +2,7 @@ import styled from "styled-components";
 import logo from "../../assets/Img/logo.png"
 import React, { useState } from "react";
 import { DarkModeSwitch } from 'react-toggle-dark-mode'
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isDarkAtom } from "recoil/themeRecoil";
 
 const Container = styled.div`
@@ -35,18 +35,19 @@ const Dark = styled.div`
 `
 
 const Header = function () {
-  const [isDark, setIsDark] = useState(false);
+  const dark = useRecoilValue(isDarkAtom)
+  const [checkDark, setCheckDark] = useState(dark);
   const setDarkAtom = useSetRecoilState(isDarkAtom);
   const toggleDark = (checked) => {
     setDarkAtom((prev) => !prev);
-    setIsDark(checked)
+    setCheckDark(checked)
   }
   return (
     <Container>
       <Logo src={logo} />
       <Dark>
       <DarkModeSwitch
-        checked={isDark}
+        checked={checkDark}
         onChange={toggleDark}
         size={50}
         sunColor='red'
