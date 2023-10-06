@@ -20,7 +20,6 @@ const Text = styled.div`
 const Group = styled.div`
   margin-bottom: 30px;
   margin-top: 10px;
-  max-height: 500px; /* 스크롤 가능한 최대 높이 설정 */
   overflow-y: auto;
 `;
 
@@ -35,6 +34,7 @@ const My = function () {
         `/users/community/${userNo}`
       );
       setCommunityData(communityResponse.data);
+      console.log(communityResponse.data)
     } catch (error) {
       console.error(error);
     }
