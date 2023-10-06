@@ -23,6 +23,16 @@ const Group = styled.div`
   overflow-y: auto;
 `;
 
+const Not = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  width: 390px;
+  height: 290px;
+  margin-top: 30px;
+  overflow-y: hidden;
+`
+
 const My = function () {
   const [communityData, setCommunityData] = useState();
 
@@ -50,11 +60,10 @@ const My = function () {
 
       <Group>
         <>
-          {communityData
+          {communityData.length > 0
             ? communityData.map((commu, idx) => (
                 <MyCommu commu={commu} key={idx} />
-              ))
-            : null}
+              )) : <Not>가입한 커뮤니티가 존재하지 않습니다.</Not>}
         </>
       </Group>
     </>
