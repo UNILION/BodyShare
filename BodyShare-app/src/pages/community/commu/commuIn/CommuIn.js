@@ -70,7 +70,10 @@ const CommuIn = function () {
 
   const deleteCommu = async function () {
     try {
+      if (register > 0){
       await instance.delete(`users/communitydel/${commuNo}/${userNo}`);
+      setRegister(!register)
+      }
     } catch (error) {
       console.error(error);
     }
@@ -78,7 +81,10 @@ const CommuIn = function () {
 
   const registerCommu = async function () {
     try {
+      if (register == 0){
       await instance.post(`users/communityadd/${commuNo}/${userNo}`);
+      setRegister(!register)
+      }
     } catch (error) {
       console.error(error);
     }
