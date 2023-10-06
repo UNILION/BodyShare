@@ -82,7 +82,8 @@ const comuModel = {
       LEFT JOIN communityPost cp ON c.communityNo = cp.communityNo
       LEFT JOIN usersCommunity uc ON c.communityNo = uc.communityNo
       WHERE c.communityNo = ?
-      GROUP BY c.communityNo;`;
+      GROUP BY c.communityNo
+      ORDER BY createdDate DESC;`;
       const [result] = await pool.query(sql, [commuNo, userNo, commuNo]);
       return result[0];
     } catch (err) {
@@ -118,7 +119,9 @@ const comuModel = {
       const sql = `SELECT communityPost.postNo, communityPost.title, communityPost.content, communityPost.contentImageUrl, communityPost.createdDate ,user.nickname, (select count(communityNo) from usersCommunity where communityNo = ? group by communityNo) as member
       FROM bodyshare.communityPost
       left join user on communityPost.userNo = user.userNo
-      where communityNo = ? limit ?;
+      where communityNo = ?
+      ORDER BY createdDate DESC
+      limit ?;
       `;
       const [result] = await pool.query(sql, [commuNo, commuNo, limit]);
       return result;
