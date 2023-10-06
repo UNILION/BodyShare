@@ -5,6 +5,7 @@ const Div = styled.div`
   grid-row: 5;
   overflow: auto; /* 스크롤 가능하도록 설정 */
   text-align: center;
+  max-height: 300px;
 `;
 
 const SearchList = function ({itemList, selectedList, changeSelected}) {
