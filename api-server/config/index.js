@@ -4,6 +4,7 @@ module.exports = {
     port: "3306",
     database: "bodyshare",
     user: "bodyshare",
-    password: "Bodyshare12$$"
+    password: "Bodyshare12$$",
+    timezone: "-0900"
   }
 };
