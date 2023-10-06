@@ -15,7 +15,7 @@ const Group = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 10px;
-  max-height: 500px;
+  max-height: 450px;
   overflow-y: auto;
 `;
 
