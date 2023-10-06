@@ -25,7 +25,8 @@ const Not = styled.div`
   font-size: 20px;
   font-weight: bold;
   width: 300px;
-  max-height: 450px;
+  height: 420px;
+  margin-top: 30px;
   overflow-y: hidden;
 `
 
@@ -46,16 +47,15 @@ const PopularHome = function () {
     }
   };
 
-  console.log(popularCommunityData)
   useEffect(() => {
-    fetchPopularData(); 
-  }, []); 
+    fetchPopularData();
+  }, []);
 
   return (
     <Group>
-       {popularCommunityData.length > 0 ? 
-        popularCommunityData.map((community, index) => ( 
-            <Card
+      {popularCommunityData.length > 0 ?
+        popularCommunityData.map((community, index) => (
+          <Card
             key={index}
             img={`http://localhost:33000/images/communitys/${community.profileImageUrl}`}
             title={community.communityName}
@@ -64,7 +64,7 @@ const PopularHome = function () {
             footer={`${community.userCount}명의 회원이 가입함`}
             onClick={() => navigate(`/community/commuIn/${community.communityNo}`)}
           />
-        )): <Not>인기에 알맞은 커뮤니티가 존재하지 않습니다.</Not>}
+        )) : <Not>인기에 알맞은 커뮤니티가 존재하지 않습니다.</Not>}
     </Group>
   );
 };
