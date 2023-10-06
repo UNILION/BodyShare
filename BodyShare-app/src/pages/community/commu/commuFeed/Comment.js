@@ -62,6 +62,7 @@ const Comment = function () {
   const [commentData, setCommentData] = useState();
   const [comment, setComment] = useState('')
   const [isValid, setIsValid] = useState(false);
+  const [flag, setFlag] = useState(0);
   const location = useLocation();
   const feedNo = location.pathname.split("/")[3];
   const userNo = useRecoilValue(userSelector);
@@ -71,7 +72,6 @@ const Comment = function () {
       const commentResponse = await instance.get(
         `comment/post/${feedNo}`
       );
-      console.log(commentResponse.data);
       setCommentData(commentResponse.data);
     } catch (error) {
       console.error(error);
@@ -80,16 +80,9 @@ const Comment = function () {
 
   const onSubmit = async (e) => {
     if (isValid === false) return
-    const formData = new FormData()
-    formData.append("postNo", feedNo)
-    formData.append("userNo", userNo)
-    formData.append("content", comment)
-    console.log(formData)
-    for (let value of formData.values()) {
-      console.log(value);
-}
     try {
-      await instance.post(`comment/commentadd`, formData);
+      const response = await instance.post(`comment/commentadd`, { postNo:feedNo, userNo, content:comment });
+      setFlag(flag + 1)
     } catch (error) {
       console.error(error);
     }
@@ -97,7 +90,7 @@ const Comment = function () {
 
   useEffect(() => {
     commentList();
-  }, []);
+  }, [flag]);
 
   return (
     <CommentContainer>
