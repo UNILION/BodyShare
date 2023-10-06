@@ -3,7 +3,7 @@ import Card from "components/commons/Card";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { userSelector, interestSelector } from "recoil/userRecoil";
+import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
 
 const instance = axios.create({
@@ -27,10 +27,19 @@ const InterestHome = function () {
 
   const fetchInterestData = async () => {
     try {
-      const response = await instance.get(`/community/byinterestlimited/${userNo}`);
-      const CommunData = response.data;
+      const inResponse = await instance.get(`/users/interest/${userNo}`);
+      const inData = inResponse.data;
 
-      setInterestCommunityData(CommunData);
+      const byResponse = await instance.get(`/community/byinterestlimited/${userNo}`);
+      const byData = byResponse.data;
+
+      const filteredData = byData.filter(community => {
+        const matchingInterest = inData.find(data => data.sportsNo === community.interest);
+        return matchingInterest && matchingInterest.userNo === community.adminUserNo;
+      });
+
+
+      setInterestCommunityData(filteredData);
     } catch (error) {
       console.error(error);
     }
