@@ -22,6 +22,7 @@ const Slide = styled.div`
   margin: 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+
 `;
 
 const ChartContainer = styled.div`
@@ -29,14 +30,28 @@ const ChartContainer = styled.div`
   height: 470px;
   background-color: white;
   border-radius: 15px;
-  /* border: 1px solid rgba(135, 135, 135, 0.3); */
   cursor: pointer;
 `;
+const Calories = styled.div`
+  position: absolute;
+  bottom: 80px;
+  left: 110px;
+  font-weight: bold;
+`;
+const Title = styled.div`
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  position: relative;
+  left: 3px;
+  top: 20px;
+  z-index: 1;
+`;
+
 const Slide1 = function () {
   const userNo = useRecoilValue(userSelector);
   const [foodChartData, setFoodChartData] = useState([]);
-  console.log(foodChartData)
-
+  const [totalCalories, setTotalCalories] = useState(0);
 
   const chartDatas1 = async function () {
     try {
@@ -54,17 +69,18 @@ const Slide1 = function () {
         return (
           itemDate === todayDate
         );
-        
       });
     
       let carbohydrate = 0;
       let protein = 0;
       let fat = 0;
+      let totalCalories = 0;
       
       filtered.forEach((item) => {
-          carbohydrate += item.carbohydrates || 0;
-          protein += item.protein || 0;
-          fat += item.fat || 0;
+        carbohydrate += item.carbohydrates || 0;
+        protein += item.protein || 0;
+        fat += item.fat || 0;
+        totalCalories += item.calories || 0;
       });
       
       const updatedFoodChartData = [
@@ -74,6 +90,7 @@ const Slide1 = function () {
         ["지방", fat],
       ];
       setFoodChartData(updatedFoodChartData);
+      setTotalCalories(totalCalories.toFixed(2));
     } catch (error) {
       console.error(error);
     }
@@ -81,27 +98,32 @@ const Slide1 = function () {
 
   const chartOptions1 = {
     legend: { position: "top" },
-    title: "영양성분",
     pieHole: 0.2,
     width: 340,
-    height: 450
+    height: 440,
+    titleTextStyle: {
+      fontSize: 18,
+    },
   };
  
   useEffect(() => {
     chartDatas1();
   }, []);
 
-  return(
+  return (
     <Slide>
       <ChartContainer>
-      <Chart
+        <Title>오늘의 영양정보</Title>
+        <Chart
           chartType="PieChart"
           data={foodChartData}
           options={chartOptions1}
           graph_id="donutchart"
         />
+        <Calories>총 칼로리: {totalCalories} kcal </Calories>
       </ChartContainer>
-  </Slide>
+    </Slide>
   );
-}
-export default Slide1
+};
+
+export default Slide1;
