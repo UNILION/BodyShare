@@ -12,7 +12,7 @@ const Tab = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
   width: 100%;
-  margin: 20px 0 15px 0;
+  margin: 0px 0 15px 0;
   font-weight: bold;
 `;
 
@@ -50,6 +50,7 @@ const Text = styled.span`
 const Img = styled.img`
   display: grid;
   align-items: end;
+  margin-top: 10px;
   margin-left: auto;
   width: 50px;
   height: 50px;
