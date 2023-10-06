@@ -38,21 +38,22 @@ const Warn = styled.p`
   width: 260px;
 `
 
-const AfterPassword = function ({ register, errors, getValues }) {
+const AfterPassword = function ({ password, register, errors, getValues }) {
   return (
     <>
       <Ul>
         <Titlel>변경 비밀번호</Titlel>
         <Input
           {...register("afterpassword", {
-            required: '비밀번호 영문, 숫자 포함 8~16글자',
+            // required: '비밀번호 영문, 숫자 포함 8~16글자',
             pattern: {
               value: /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9가-힣]{8,16}$/,
               message: '영문, 숫자를 최소 1개씩 포함하여 8~16글자',
             }
           })}
-          placeholder="비밀번호 입력"
+          // placeholder="비밀번호 입력"
           type="password"
+          value={password}
         />
         {errors.afterpassword && (
           <Warn>{errors.afterpassword.message}</Warn>
@@ -62,14 +63,15 @@ const AfterPassword = function ({ register, errors, getValues }) {
         <Titlel>비밀번호 확인</Titlel>
         <Input
           {...register("checkpassword", {
-            required: '비밀번호를 확인해주세요',
+            // required: '비밀번호를 확인해주세요',
             validate: (value) => {
               const afterpassword = getValues('afterpassword');
               return value === afterpassword || '비밀번호와 일치하지 않습니다';
             },
           })}
-          placeholder="비밀번호 확인"
+          // placeholder="비밀번호 확인"
           type="password"
+          value={password}
         />
         {errors.checkpassword && (
           <Warn>{errors.checkpassword.message}</Warn>
