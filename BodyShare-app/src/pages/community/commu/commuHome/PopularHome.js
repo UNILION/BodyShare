@@ -53,7 +53,7 @@ const PopularHome = function () {
 
   return (
     <Group>
-      {popularCommunityData.length > 0 ?
+      {popularCommunityData ? popularCommunityData.length > 0 ?
         popularCommunityData.map((community, index) => (
           <Card
             key={index}
@@ -64,7 +64,7 @@ const PopularHome = function () {
             footer={`${community.userCount}명의 회원이 가입함`}
             onClick={() => navigate(`/community/commuIn/${community.communityNo}`)}
           />
-        )) : <Not>인기에 알맞은 커뮤니티가 존재하지 않습니다.</Not>}
+        )) : <Not>인기에 알맞은 커뮤니티가 존재하지 않습니다.</Not> : <Not>인기에 알맞은 커뮤니티가 존재하지 않습니다.</Not>}
     </Group>
   );
 };

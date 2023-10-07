@@ -33,7 +33,7 @@ const Middle = function ({ searchItemList }) {
   const [list, setList] = useState([]);
 
   const commuList = async function () {
-    try{
+    try {
       const response = await instance.get(`/community/byinterest/${searchItemList[0].no}`)
       setList(response.data);
       console.log(response.data);
@@ -50,7 +50,7 @@ const Middle = function ({ searchItemList }) {
   return (
     <>
       <Group>
-        {list.length > 0 ? list.map((community, index) => (        
+        {list ? list.length > 0 ? list.map((community, index) => (
           <Card
             key={index}
             img={`http://localhost:33000/images/communitys/${community.profileImageUrl}`}
@@ -60,7 +60,7 @@ const Middle = function ({ searchItemList }) {
             footer={`${community.userCount}명의 회원이 가입함`}
             onClick={() => navigate(`/community/commuIn/${community.communityNo}`)}
           />
-          )): <Not>{searchItemList[0].name}에 알맞은 커뮤니티가 존재하지 않습니다.</Not>}
+        )) : <Not>{searchItemList[0].name}에 알맞은 커뮤니티가 존재하지 않습니다.</Not> : <Not>{searchItemList[0].name}에 알맞은 커뮤니티가 존재하지 않습니다.</Not>}
       </Group>
     </>
   );

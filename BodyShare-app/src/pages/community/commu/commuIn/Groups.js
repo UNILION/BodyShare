@@ -28,7 +28,7 @@ const Groups = function ({ groupLists }) {
   return (
     <>
       <Group>
-        {groupLists.length > 0 ? groupLists.map((data, idx) => (
+        {groupLists ? groupLists.length > 0 ? groupLists.map((data, idx) => (
           <Card
             key={idx}
             img={`http://localhost:33000/images/posts/${data.contentImageUrl}`}
@@ -38,7 +38,7 @@ const Groups = function ({ groupLists }) {
             onClick={() => navigate(`/community/feed/${data.postNo}`)}
             mb="10px"
           />
-        )) : <Not>커뮤니티 내부에 피드가 존재하지 않습니다.</Not>}
+        )) : <Not>커뮤니티 내부에 피드가 존재하지 않습니다.</Not> : <Not>커뮤니티 내부에 피드가 존재하지 않습니다.</Not>}
       </Group>
     </>
   );
