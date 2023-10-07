@@ -21,7 +21,6 @@ const Slide = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.25);
   margin: 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
 
 `;
 
@@ -30,7 +29,6 @@ const ChartContainer = styled.div`
   height: 470px;
   background-color: white;
   border-radius: 15px;
-  cursor: pointer;
 `;
 const Calories = styled.div`
   position: absolute;
@@ -47,6 +45,16 @@ const Title = styled.div`
   top: 20px;
   z-index: 1;
 `;
+
+const Not = styled.div`
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  width: 300px;
+  height: 420px;
+  margin-top: 170px;
+  overflow-y: hidden;
+`
 
 const Slide1 = function () {
   const userNo = useRecoilValue(userSelector);
@@ -114,12 +122,14 @@ const Slide1 = function () {
     <Slide>
       <ChartContainer>
         <Title>오늘의 영양정보</Title>
+        {totalCalories ? totalCalories > 0 ?
         <Chart
           chartType="PieChart"
           data={foodChartData}
           options={chartOptions1}
           graph_id="donutchart"
         />
+        : <Not>오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요.</Not> : <Not>오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요.</Not>}
         <Calories>총 칼로리: {totalCalories} kcal </Calories>
       </ChartContainer>
     </Slide>

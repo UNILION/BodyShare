@@ -21,7 +21,6 @@ const Slide = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.25);
   margin: 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
 `;
 
 const ChartContainer = styled.div`
@@ -29,14 +28,23 @@ const ChartContainer = styled.div`
   height: 470px;
   background-color: white;
   border-radius: 15px;
-  cursor: pointer;
   margin-left: 10px;
 `;
+
+const Not = styled.div`
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  width: 300px;
+  height: 420px;
+  margin-top: 190px;
+  overflow-y: hidden;
+`
 
 const Slide2 = function () {
   const userNo = useRecoilValue(userSelector);
   const [foodChartData, setFoodChartData] = useState([]);
-  console.log(foodChartData);
+  const [sum, setSum] = useState(0);
 
   const chartDatas2 = async function () {
     try {
@@ -59,13 +67,13 @@ const Slide2 = function () {
       });
   
       const dailyCalories = [0, 0, 0, 0, 0, 0, 0];
-  
       for (let i = 0; i < currentWeekData.length; i++) {
         const record = currentWeekData[i];
         const recordDate = new Date(record.dietDate);
         const dayOfWeek = recordDate.getDay();
   
         dailyCalories[dayOfWeek] += record.calories;
+        setSum(sum + record.calories);
       }
   
       const foodChartData = [
@@ -85,7 +93,6 @@ const Slide2 = function () {
     }
   };
   
-
   useEffect(() => {
     chartDatas2();
   }, []);
@@ -104,12 +111,14 @@ const Slide2 = function () {
   return (
     <Slide>
         <ChartContainer>
+        {sum > 0 ?
           <Chart
             chartType="LineChart"
             data={foodChartData}
             options={chartOptions2}
             graph_id="foodchart2"
           />
+          : <Not>7일동안 식단이 기록되지 않았습니다. 기록 탭에서 등록해주세요.</Not>}
         </ChartContainer>
     </Slide>
   );
