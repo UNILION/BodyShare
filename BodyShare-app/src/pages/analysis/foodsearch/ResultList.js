@@ -5,8 +5,9 @@ const ResultList = styled.div`
   margin-top: 20px;
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  max-height: 500px; 
-  overflow-y: auto; 
+  max-height: 450px; 
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const ResultButton = styled.button`

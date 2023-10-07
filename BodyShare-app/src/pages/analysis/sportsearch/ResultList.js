@@ -9,7 +9,8 @@ const ResultList = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   max-height: 400px; /* 스크롤 가능한 최대 높이 설정 */
-  overflow-y: auto; 
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const ResultButton = styled.button`
