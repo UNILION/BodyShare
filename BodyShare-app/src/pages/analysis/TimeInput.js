@@ -97,6 +97,15 @@ const ErrorMessage = styled.p`
   margin-top: 5px;
 `;
 
+const BtnImg = styled.img`
+  width: 35px;
+  position: relative;
+  margin-left: 100px;
+  bottom: 40px;
+  left: 240px;
+  cursor: pointer;
+`;
+
 const TimeInput = function () {
   const navigate = useNavigate();
   const selectedSportName = useRecoilValue(selectedSportNameState);
@@ -193,7 +202,6 @@ const TimeInput = function () {
 
       <Button
           name="입력하기"
-          img={plus}
           ml="auto"
           mt="130px"
           width="150px"
@@ -201,7 +209,8 @@ const TimeInput = function () {
           onClick={() => {
             sendSportsDataToServer(); // 서버로 데이터 전송
           }}
-      />     
+      />
+      <BtnImg src={plus}  onClick={sendSportsDataToServer}></BtnImg>
     </>
   );
 };
