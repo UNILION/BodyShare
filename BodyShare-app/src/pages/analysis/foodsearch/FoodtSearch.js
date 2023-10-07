@@ -55,6 +55,15 @@ const Search = styled.img`
   margin: auto;
 `;
 
+const BtnImg = styled.img`
+  width: 35px;
+  position: relative;
+  margin-left: 100px;
+  bottom: 40px;
+  left: 200px;
+  cursor: pointer;
+`;
+
 const FoodSearch = function () {
   const foodList = useRecoilValue(foodSelector);
   const [search, setSearch] = useState("");
@@ -119,13 +128,15 @@ const FoodSearch = function () {
 
       <Button
         name="선택하기"
-        img={plus}
         width="170px"
         display="block"
         ml="190px"
         mt="30px"
         onClick={sendFoodDataToServer}
-      />
+      >
+      </Button>
+
+      <BtnImg src={plus}  onClick={sendFoodDataToServer}></BtnImg>
     </Container>
   );
 };
