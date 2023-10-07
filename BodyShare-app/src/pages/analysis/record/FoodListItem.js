@@ -41,7 +41,8 @@ const SmIng = styled.img`
 
 const Delete = styled.button`
   position: absolute; 
-  left: 160px;
+  top: -30px;
+  left: 150px;
   width: 158px;
   height: 40px;
   border-radius: 15px;
