@@ -60,10 +60,10 @@ const My = function () {
 
       <Group>
         <>
-          {communityData.length > 0
+          {communityData ? communityData.length > 0
             ? communityData.map((commu, idx) => (
                 <MyCommu commu={commu} key={idx} />
-              )) : <Not>가입한 커뮤니티가 존재하지 않습니다.</Not>}
+              )) : <Not>가입한 커뮤니티가 존재하지 않습니다.</Not>  : <Not>가입한 커뮤니티가 존재하지 않습니다.</Not>}
         </>
       </Group>
     </>
