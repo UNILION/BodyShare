@@ -70,6 +70,14 @@ const StyledTag = styled(Tag)`
     color: #fff;
   }
 `;
+const BtnImg = styled.img`
+  width: 35px;
+  position: relative;
+  margin-left: 100px;
+  bottom: 40px;
+  left: 200px;
+  cursor: pointer;
+`;
 
 
 const SportSearch = function() {
@@ -125,7 +133,6 @@ const SportSearch = function() {
 
       <Button
         name="선택하기"
-        img={plus}
         width="180px"
         display="block"
         ml="auto"
@@ -138,6 +145,16 @@ const SportSearch = function() {
           }
         }}
       />
+      <BtnImg 
+        src={plus}  
+        onClick={() =>{
+          if (selected) {
+            navigate("/analysis/add/time");
+          } else {
+            alert("운동을 선택해주세요");
+          }
+        }}>
+      </BtnImg>
     </Container>
   );
 };
