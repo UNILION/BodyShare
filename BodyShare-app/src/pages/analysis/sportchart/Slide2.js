@@ -16,7 +16,6 @@ const Slide = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.25);
   margin: 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
 `;
 
 const ChartContainer = styled.div`
@@ -24,9 +23,17 @@ const ChartContainer = styled.div`
   height: 476px;
   background-color: white;
   border-radius: 15px;
-  /* border: 1px solid rgba(135, 135, 135, 0.3); */
-  cursor: pointer;
 `;
+
+const Not = styled.div`
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  width: 340px;
+  height: 420px;
+  margin-top: 190px;
+  overflow-y: hidden;
+`
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -36,6 +43,7 @@ const instance = axios.create({
 const Slide2 = function () {
   const userNo = useRecoilValue(userSelector);
   const [chartData, setChartData] = useState([]);
+  const [sum, setSum] = useState(0);
 
   const parseDateString = (dateString) => {
     const dateParts = dateString.split(".");
@@ -113,7 +121,7 @@ const Slide2 = function () {
         const consumedCalories = consumedCaloriesRecord
           ? consumedCaloriesRecord.calories
           : 0;
-
+        setSum(sum + Totalconsum + consumedCalories)
         chartData.push([dateString, Totalconsum, consumedCalories]);
       }
 
@@ -144,6 +152,7 @@ const Slide2 = function () {
   return (
     <Slide>
       <ChartContainer>
+        {sum > 0 ?
         <Chart
           chartType="BarChart"
           width="330px"
@@ -152,6 +161,7 @@ const Slide2 = function () {
           options={chartOptions}
           graph_id="barchart"
         />
+        : <Not>7일동안 운동, 식단이 기록되지 않았습니다. 기록 탭에서 등록해주세요.</Not>}
       </ChartContainer>
     </Slide>
   );

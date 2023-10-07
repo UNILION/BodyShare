@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Chart } from "react-google-charts";
 import { userSelector } from "recoil/userRecoil";
@@ -16,7 +16,6 @@ const Slide = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.25);
   margin: 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
 `;
 
 
@@ -25,8 +24,6 @@ const ChartContainer = styled.div`
   height: 476px;
   background-color: white;
   border-radius: 15px;
-  /* border: 1px solid rgba(135, 135, 135, 0.3); */
-  cursor: pointer;
 `;
 const Title = styled.div`
   text-align: center;
@@ -38,30 +35,41 @@ const Title = styled.div`
   z-index: 1;
 `;
 
+const Not = styled.div`
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  width: 300px;
+  height: 420px;
+  margin-top: 190px;
+  overflow-y: hidden;
+`
+
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
   withCredentials: true,
 });
-const Slide1 = function (){
+const Slide1 = function () {
   const userNo = useRecoilValue(userSelector);
   const [sportsChartData, setSportsChartData] = useState([]);
+  const [sum, setSum] = useState(0);
 
   const parseDateString = (dateString) => {
     const dateParts = dateString.split(".");
-    const year = parseInt(dateParts[0],10);
-    const month = parseInt(dateParts[1], 10) -1 // 월은 0부터 시작하니까 1 뺴줌
-    const day = parseInt(dateParts[2],10);
+    const year = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10) - 1 // 월은 0부터 시작하니까 1 뺴줌
+    const day = parseInt(dateParts[2], 10);
     return new Date(year, month, day);
   }
 
   const chartDatas = async function () {
-    try{
+    try {
       const response = await instance.get(`/record/sports/${userNo}`);
       const allData = response.data;
 
       const currentDate = new Date();// 현재
       const currentWeekStartDate = new Date(currentDate); // 시작
-      currentWeekStartDate.setDate(                         
+      currentWeekStartDate.setDate(
         currentDate.getDate() - currentDate.getDay() //현재 날짜 - 현재요일 = 일
       );
       const currentWeekEndDate = new Date(currentWeekStartDate); // 종료
@@ -73,17 +81,17 @@ const Slide1 = function (){
         return (
           itemDate >= currentWeekStartDate && itemDate <= currentWeekEndDate // 운동한 날짜가 현재 주에 포함하는지 검사
         );
-        
+
       });
 
       const sportsChartData = [["", "운동 분"]];
-      const daysOfWeek = ["일","월","화","수","목","금","토"];
+      const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
-      for (let i=0; i<7; i++){ // sportsChartData에 추가
+      for (let i = 0; i < 7; i++) { // sportsChartData에 추가
         const day = daysOfWeek[i];
         const date = new Date(currentWeekStartDate);
         date.setDate(currentWeekStartDate.getDate() + i);
-        const options ={ //2자리표현
+        const options = { //2자리표현
           month: "2-digit",
           day: "2-digit",
         };
@@ -91,25 +99,23 @@ const Slide1 = function (){
         const dateString = `${formattedDate}\n(${day})`;
 
         let totalExerciseTime = 0;
-  
+
         // 해당 날짜에 대한 운동 기록 더하기
         allData.forEach((record) => {
           const recordDate = new Date(record.exerciseDate);
           const recordDateString = recordDate.toLocaleDateString("ko-KR", options);
-  
+
           if (recordDateString === formattedDate) {
             totalExerciseTime += record.exerciseTime;
           }
         });
 
-
+        setSum(sum + totalExerciseTime)
         sportsChartData.push([dateString, totalExerciseTime]); // 있으면 운동시간 가져오기
       }
 
-      
-
       setSportsChartData(sportsChartData);
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
   }
@@ -131,19 +137,21 @@ const Slide1 = function (){
     },
   };
 
-  return(
+  return (
     <Slide>
       <ChartContainer>
-      <Title>일주일 운동 시간</Title>
-      <Chart
-          chartType="ColumnChart"
-          data={sportsChartData}
-          options={chartOptions1}
-          graph_id="columnchart_values"
-          rootProps={{ "data-testid": "1" }}
-        />
+        <Title>일주일 운동 시간</Title>
+        {sum > 0 ?
+          <Chart
+            chartType="ColumnChart"
+            data={sportsChartData}
+            options={chartOptions1}
+            graph_id="columnchart_values"
+            rootProps={{ "data-testid": "1" }}
+          />
+        : <Not>7일동안 운동이 기록되지 않았습니다. 기록 탭에서 등록해주세요.</Not>}
       </ChartContainer>
-  </Slide>
+    </Slide>
   );
 };
 
