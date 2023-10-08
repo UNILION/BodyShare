@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import xbutton from "assets/Img/xbutton.png";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "recoil/themeRecoil";
 
 const SelectedDiv = styled.div`
   
@@ -20,6 +22,8 @@ const SelectCircle = styled.div`
   height: 23px;
   border-radius: 23px;
   background-color: rgba(85, 111, 255, 0.3);
+  text-align: center;
+  line-height: 23px;
 `;
 
 const SelectP = styled.p`
@@ -44,10 +48,13 @@ const Xbutton = styled.img`
 `;
 
 const Cover = styled.div`
-  background-color: white;
+background-color: ${props => props.isDarkMode ? "rgb(174 195 251)" : ""};
   border-radius: 15px;
   width: 56px;
   height: 23px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 말줄임 적용 */
 `
 
 const Cover_button = styled.div`
@@ -60,24 +67,27 @@ const Cover_button = styled.div`
 
 const SelectedItem = function ({ record, selectedList, changeSelected }) {
   console.log(record);
+  const isDarkMode = useRecoilValue(isDarkAtom)
 
   const handleButtonClick = () => {
-    const temp = [...selectedList].filter(item => item.no !== record.no );
+    const temp = [...selectedList].filter(item => item.no !== record.no);
     changeSelected(temp);
   };
-  
+
 
   return (
     < SelectedDiv >
       <Select>
-       <Cover>
         <SelectCircle>
-          <SelectP>{record.name}</SelectP>
+          <SelectP>
+            <Cover  isDarkMode={isDarkMode}>
+              {record.name}
+            </Cover>
+          </SelectP>
         </SelectCircle>
-        </Cover>
         <DeleteButtonDiv>
-       <Cover_button>
-          <Xbutton src={xbutton} onClick={handleButtonClick}></Xbutton>
+          <Cover_button>
+            <Xbutton src={xbutton} onClick={handleButtonClick}></Xbutton>
           </Cover_button>
         </DeleteButtonDiv>
       </Select>
