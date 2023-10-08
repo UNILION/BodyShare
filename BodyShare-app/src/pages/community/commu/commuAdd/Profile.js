@@ -17,7 +17,9 @@ const Title = styled.div`
 const Picture = styled.div`
   height: 350px;
   height: 60px;
-  border: 1px dotted black;
+  border: 1px dotted rgb(135, 135, 135);
+  background-color: white;
+  color: black;
   border-radius: 15px;
   text-align: center;
   padding-left: 50px;

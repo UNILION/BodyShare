@@ -26,7 +26,8 @@ const CategoryContent = styled.div`
   height: 60px;
   font-size: 15px;
   color: #878787;
-  border: 1px solid rgba(46, 44, 61, 0.3);
+  border: 1px dotted rgb(135, 135, 135);
+  background-color: white;
   border-radius: 15px;
   text-align: center;
   line-height: 60px;
