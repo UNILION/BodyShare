@@ -31,7 +31,7 @@ const CommuSearch = function () {
   
   return (
     <Container>
-      <PreviousButton onClick={() => navigate("/community")} />
+      <PreviousButton onClick={() => navigate("/community/communityAdd")} />
       <Search categoryList={categoryList}/>
     </Container>
   );
