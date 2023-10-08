@@ -3,7 +3,6 @@ import Check from "components/commons/Check";
 import Tag from "components/commons/useFormTag";
 import xbutton from "assets/Img/xbutton.png";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { categorySelector } from "recoil/commuRecoil";
 
@@ -19,6 +18,7 @@ const Category = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: 30%;
+  margin-top: 8px;
 `;
 
 const CategoryContent = styled.div`
@@ -38,9 +38,23 @@ const Xbutton = styled.img`
   height: 25px;
   background-color: rgba(85, 111, 255, 0.3);
   border-radius: 15px;
-  margin-left: 3px;
   cursor: pointer;
 `;
+
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width: 56px;
+  height: 23px;
+`
+
+const Cover_button = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width: 25px;
+  height: 25px;
+  margin-left: 3px;
+`
 
 const CommunityCategory = function ({ register, errors }) {
   const navigate = useNavigate();
@@ -53,18 +67,22 @@ const CommunityCategory = function ({ register, errors }) {
       </CategoryContent>
       {categoryList.length > 0 && (
         <Category>
-        <Tag tagtitle={categoryList[0].name} />
-        <Xbutton src={xbutton} />
-        <input
-          type="hidden"
-          value={categoryList[0].name}
-          {...register("tag", {
-            required: "한 개의 카테고리를 선택해주세요!",
-          })}
-        />
-      </Category>
+          <Cover>
+            <Tag tagtitle={categoryList[0].name} />
+          </Cover>
+          <Cover_button>
+            <Xbutton src={xbutton} />
+          </Cover_button>
+          <input
+            type="hidden"
+            value={categoryList[0].name}
+            {...register("tag", {
+              required: "한 개의 카테고리를 선택해주세요!",
+            })}
+          />
+        </Category>
       )}
-  
+
       <Check>{errors.tag?.message}</Check>
     </CommunityCategoryContainer>
   );
