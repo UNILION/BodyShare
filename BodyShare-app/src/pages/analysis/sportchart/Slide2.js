@@ -86,7 +86,7 @@ const Slide2 = function () {
 
       const chartData = [["일자", "소모 칼로리", "섭취 칼로리"]];
       const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-
+      let temp = sum
       for (let i = 0; i < 7; i++) {
         // 데이터 추가
         const day = daysOfWeek[i];
@@ -121,10 +121,11 @@ const Slide2 = function () {
         const consumedCalories = consumedCaloriesRecord
           ? consumedCaloriesRecord.calories
           : 0;
-        setSum(sum + Totalconsum + consumedCalories)
-        chartData.push([dateString, Totalconsum, consumedCalories]);
-      }
-
+          temp += Totalconsum + consumedCalories
+          chartData.push([dateString, Totalconsum, consumedCalories]);
+        }
+        
+        setSum(temp)
       setChartData(chartData);
     } catch (error) {
       console.log(error);

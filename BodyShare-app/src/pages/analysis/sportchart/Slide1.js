@@ -86,7 +86,7 @@ const Slide1 = function () {
 
       const sportsChartData = [["", "운동 분"]];
       const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-
+      let temp = sum;
       for (let i = 0; i < 7; i++) { // sportsChartData에 추가
         const day = daysOfWeek[i];
         const date = new Date(currentWeekStartDate);
@@ -109,10 +109,10 @@ const Slide1 = function () {
             totalExerciseTime += record.exerciseTime;
           }
         });
-
-        setSum(sum + totalExerciseTime)
+        temp += totalExerciseTime
         sportsChartData.push([dateString, totalExerciseTime]); // 있으면 운동시간 가져오기
       }
+      setSum(temp)
 
       setSportsChartData(sportsChartData);
     } catch (error) {
