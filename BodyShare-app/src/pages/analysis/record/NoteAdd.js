@@ -36,19 +36,28 @@ const P = styled.p`
   margin: 0;
 `;
 
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+`
+
 const NoteAdd = function () {
   const navigate = useNavigate();
   return(
     <>
       <NoteAddGrid>
+        <Cover>
         <Add  onClick={() => navigate("/analysis/add")}>
           <BtImg src={buttonplus} onClick={() => navigate("/analysis/add")}></BtImg>
           <P>운동 기록 추가</P>
         </Add>
+        </Cover>
+        <Cover>
         <Add onClick={() => navigate("/analysis/add/food")}>
           <BtImg src={buttonplus} onClick={() => navigate("/analysis/add/food")}></BtImg>
           <P>식단 기록 추가</P>
         </Add>
+        </Cover>
       </NoteAddGrid>    
     </>
   );

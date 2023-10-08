@@ -64,6 +64,11 @@ const Text = styled.span`
   color: ${(props) => props.color};
 `;
 
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 23px 23px 0 0;
+`
+
 const Category = function () {
   const navigate = useNavigate();
 
@@ -99,6 +104,7 @@ const Category = function () {
   return (
     <Container>
       <Tab>
+        <Cover>
         <Tab1
           onClick={showCalender}
           bg={Calender ? "rgba(85,111,255,0.3)" : "white"}
@@ -106,6 +112,8 @@ const Category = function () {
         >
           <Text color={Calender ? "#556FFF" : "rgba(0,0,0,0.2)"}>기록</Text>
         </Tab1>
+        </Cover>
+        <Cover>
         <Tab2
           onClick={showSportChart}
           bg={SportChart ? "rgba(85,111,255,0.3)" : "white"}
@@ -117,6 +125,8 @@ const Category = function () {
             운동
           </Text>
         </Tab2>
+        </Cover>
+        <Cover>
         <Tab3
           onClick={showFoodChart}
           bg={FoodChart ? "rgba(85,111,255,0.3)" : "white"}
@@ -128,6 +138,7 @@ const Category = function () {
             식단
           </Text>
         </Tab3>
+        </Cover>
       </Tab>
     </Container>
   );
