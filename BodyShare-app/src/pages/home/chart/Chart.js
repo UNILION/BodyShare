@@ -41,6 +41,14 @@ const settings = {
   infinite: false,
 };
 
+const Not = styled.div`
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  width: 300px;
+  overflow-y: hidden;
+`;
+
 const ChartContainer = styled.div`
   width: 360px;
   height: 280px;
@@ -53,20 +61,27 @@ const ChartContainer = styled.div`
 `;
 
 const Slide = styled.div`
-  min-width: 100%;
+  width: 360px;
   display: grid;
   place-items: center;
   transition: transform 0.3s ease;
   grid-column: span 1;
+  border-radius: 30px;
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  margin: 0 auto;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 `;
 
 const Cal = styled.div`
-position: absolute;
-top: 50%;
-right: 15px;
-font-size: 16px;
-font-weight: bold;
-`
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 120px;
+`;
 
 const Charts = function () {
   const navigate = useNavigate();
@@ -78,7 +93,6 @@ const Charts = function () {
   const [foodChartData, setFoodChartData] = useState([]);
   const [totalCalories, setTotalCalories] = useState(0);
 
-
   const chartDatas = async function () {
     try {
       // 서버에서 모든 데이터 가져오기
@@ -88,7 +102,9 @@ const Charts = function () {
       // 현재 주의 시작 및 종료 날짜 계산
       const currentDate = new Date();
       const currentWeekStartDate = new Date(currentDate);
-      currentWeekStartDate.setDate(currentDate.getDate() - currentDate.getDay());
+      currentWeekStartDate.setDate(
+        currentDate.getDate() - currentDate.getDay()
+      );
 
       const currentWeekEndDate = new Date(currentWeekStartDate);
       currentWeekEndDate.setDate(currentWeekStartDate.getDate() + 6);
@@ -112,7 +128,10 @@ const Charts = function () {
         // 해당 날짜에 대한 운동 기록 더하기
         allData.forEach((record) => {
           const recordDate = new Date(record.exerciseDate);
-          const recordDateString = recordDate.toLocaleDateString("ko-KR", options);
+          const recordDateString = recordDate.toLocaleDateString(
+            "ko-KR",
+            options
+          );
 
           if (recordDateString === formattedDate) {
             totalExerciseTime += record.exerciseTime;
@@ -124,6 +143,7 @@ const Charts = function () {
 
       // 차트 데이터 설정
       setSportsChartData(sportsChartData);
+      console.log("sportsChartData in useEffect:", sportsChartData);
     } catch (error) {
       console.error(error);
     }
@@ -160,7 +180,6 @@ const Charts = function () {
           protein += foodItem.protein || 0;
           fat += foodItem.fat || 0;
           totalCalories += foodItem.calories || 0;
-
         }
       });
 
@@ -177,7 +196,22 @@ const Charts = function () {
     } catch (error) {
       console.error(error);
     }
+    console.log("sportsChartData:", sportsChartData);
   };
+  const chartOptions = {
+    backgroundColor: isDarkMode ? "#292929" : "white",
+    color: isDarkMode ? "#fff" : "#000",
+    title: "오늘의 영양정보",
+    pieHole: 0.4,
+    legendTextStyle: {
+      color: isDarkMode ? "#fff" : "#000",
+    },
+    titleTextStyle: {
+      fontSize: 16,
+      color: isDarkMode ? "#fff" : "#000",
+    },
+  };
+
   useEffect(() => {
     chartDatas();
     const interval = setInterval(() => {
@@ -208,8 +242,8 @@ const Charts = function () {
                   title: "운동 분",
                 },
                 hAxis: {
-                  slantedText: false, // X 축 레이블을 회전합니다.
-                  slantedTextAngle: 45, // 각도를 45도로 설정합니다.
+                  slantedText: false,
+                  slantedTextAngle: 45,
                   titleTextStyle: {
                     fontSize: 10,
                     color: isDarkMode ? "#fff" : "#000",
@@ -219,7 +253,6 @@ const Charts = function () {
                     color: isDarkMode ? "#fff" : "#000",
                   },
                 },
-                // 텍스트 렌더링 함수 사용
                 vAxis: {
                   format: "decimal",
                   title: "운동 분",
@@ -244,31 +277,27 @@ const Charts = function () {
               navigate("/analysis/foodchart");
             }}
           >
-            <Chart
-              chartType="PieChart"
-              width="350px"
-              height="240px"
-              data={foodChartData}
-              options={{
-                backgroundColor: isDarkMode ? "#292929" : "white",
-                color: isDarkMode ? "#fff" : "#000",
-                title: "영양정보",
-                pieHole: 0.4,
-                legendTextStyle: {
-                  color: isDarkMode ? "#fff" : "#000",
-                },
-                titleTextStyle: {
-                  fontSize: 16,
-                  color: isDarkMode ? "#fff" : "#000",
-                },
-
-              }}
-              graph_id="foodchart"
-
-            />
-            <Cal>
-              칼로리: {totalCalories.toFixed(2)} kcal
-            </Cal>
+            {totalCalories ? (
+              totalCalories > 1 ? (
+                <Chart
+                  chartType="PieChart"
+                  width="350px"
+                  height="240px"
+                  data={foodChartData}
+                  options={chartOptions}
+                  graph_id="foodchart"
+                />
+              ) : (
+                <Not>
+                  오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요.
+                </Not>
+              )
+            ) : (
+              <Not>
+                오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요.
+              </Not>
+            )}
+            <Cal>칼로리: {totalCalories} kcal</Cal>
           </ChartContainer>
         </Slide>
       </Slider>
