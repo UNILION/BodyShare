@@ -91,7 +91,7 @@ const Middle = function () {
       <Button
         name="만들기"
         img={plus}
-        mt="-50px"
+        mt="-10px"
         ml="auto"
         mb="10px"
         width="150px"
