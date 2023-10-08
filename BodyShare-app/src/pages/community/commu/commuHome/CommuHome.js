@@ -5,6 +5,8 @@ import PopularHome from "pages/community/commu/commuHome/PopularHome"
 import Search from "assets/Img/buttonsearch.png"
 import Plus from "assets/Img/buttonplus.png"
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "recoil/themeRecoil";
 
 const Container = styled.div``;
 
@@ -43,7 +45,7 @@ const Text = styled.span`
   font-weight: bolder;
 
   &:hover{
-    color: #556FFF;
+   color:"#556FFF";
   }
 `;
 
@@ -62,6 +64,7 @@ const CommuHome = function () {
   const [Interest, setInterest] = useState(true);
   const [Popular, setPopular] = useState(false);
   const navigate = useNavigate();
+  const isDarkMode = useRecoilValue(isDarkAtom);
 
   const showInterest = async () => {
     setInterest(true);
@@ -84,23 +87,19 @@ const CommuHome = function () {
           onClick={showInterest}
           under={Interest ? "3px solid rgba(85, 111, 255,0.5)" : ""}
         >
-          <Text color={Interest ? "#556FFF" : "rgba(0,0,0,0.2)"}>관심사 추천</Text>
+          <Text color={isDarkMode ? (Interest ? "#556FFF" : "rgba(255,255,255,0.8)") : (Interest ? "#556FFF" : "rgba(0,0,0,0.2)")}>관심사 추천</Text>
         </Tab1>
         <Tab2
           onClick={showPopular}
           under={Popular ? "3px solid rgba(85, 111, 255,0.5)" : ""}
         >
-          <Text
-            color={Popular ? "#556FFF" : "rgba(0,0,0,0.2)"}
-          >
-            인기 추천
-          </Text>
+          <Text color={isDarkMode ? (Popular ? "#556FFF" : "rgba(255,255,255,0.8)") : (Popular ? "#556FFF" : "rgba(0,0,0,0.2)")}>인기 추천</Text>
         </Tab2>
-        <Img src={Search} onClick={() => navigate("/community/search")}/>
+        <Img src={Search} onClick={() => navigate("/community/search")} />
       </Tab>
       {Interest ? <InterestHome /> : null}
       {Popular ? <PopularHome /> : null}
-        <Img src={Plus} onClick={() => navigate("/community/communityAdd")} />
+      <Img src={Plus} onClick={() => navigate("/community/communityAdd")} />
     </Container>
   );
 };
