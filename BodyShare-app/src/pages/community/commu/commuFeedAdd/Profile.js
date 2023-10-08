@@ -13,7 +13,7 @@ background-color: #556FFF;
 color: white;
 border: 1px solid rgba(135,135,135,0.3);
 border-radius: 15px;
-font-size: 20px;
+font-size: 15px;
 width: 150px;
 height: 30px;
 text-align: center;
@@ -30,10 +30,11 @@ const Title = styled.div`
 
 const Picture = styled.div`
   height: 100px;
-  border: 1px dotted black;
+  border: 1px dotted rgb(135, 135, 135);
   border-radius: 15px;
   text-align: center;
   line-height: 100px;
+  background-color: white;
 `;
 
 const Profile = function ({ register, imagePreview, handleImageChange }) {
