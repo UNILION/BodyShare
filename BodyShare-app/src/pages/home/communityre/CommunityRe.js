@@ -72,7 +72,7 @@ const CommunityRe = function () {
 
   return (
     <CommunityDiv>
-      <CommunityP>News</CommunityP>
+      <CommunityP>새소식</CommunityP>
       <PostDiv>
         {communityData.slice(0, 2).map((communityPost, index) => (
           <CommunityRecommend
