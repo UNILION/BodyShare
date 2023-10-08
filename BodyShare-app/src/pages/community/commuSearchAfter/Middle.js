@@ -16,6 +16,7 @@ const Group = styled.div`
   max-height: 450px;
   overflow-y: auto;
   overflow-x: hidden;
+  width: 370px;
 `;
 
 const Not = styled.div`
