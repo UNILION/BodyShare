@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from "styled-components";
-import seemore from "assets/Img/seemore.png";
+import seemore_dark from "../../../assets/Img/seemore_dark.png";
+import seemore_white from "../../../assets/Img/seemore_white.png";
 import { useRecoilValue } from 'recoil';
 import { sportsSelector } from "recoil/sportList";
+import { isDarkAtom } from 'recoil/themeRecoil';
 
 const SportNoteContainer = styled.div`
   display: grid;
@@ -20,10 +22,9 @@ const SportTime = styled.p`
 `;
 
 const SeeMore = styled.button`
-  width: 20px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   border: none;
-  background-color: white;
   cursor: pointer;
   padding: 0;
 `;
@@ -34,8 +35,8 @@ const SeeMoreDetail = styled.div`
 `;
 
 const SmIng = styled.img`
-  width: 20px;
-  height: 26px;
+  width: 10px;
+  height: 30px;
 `;
 
 const Delete = styled.button`
@@ -58,6 +59,7 @@ const SportsListItem = function (props) {
   const allSports = useRecoilValue(sportsSelector);
   const [isExpanded, setIsExpanded] = useState(false); 
   const seeMoreDetailRef = useRef(null);
+  const isDarkMode = useRecoilValue(isDarkAtom);
 
   let result = [];
   result = allSports.filter(item => item.no == props.record.sportsNo);
@@ -85,11 +87,11 @@ const SportsListItem = function (props) {
   }, [isExpanded]);
 
   return (
-    <SportNoteContainer>
+    <SportNoteContainer style={{backgroundColor:isDarkMode?"black":"white"}}>
       <SportNote>{result[0].name}</SportNote>
       <SportTime>운동 시간: {props.record.exerciseTime}분</SportTime>
-      <SeeMore onClick={toggleExpansion}>
-        <SmIng src={seemore}></SmIng>
+      <SeeMore onClick={toggleExpansion} style={{backgroundColor:isDarkMode?"black":"white"}}>
+      <SmIng src={isDarkMode?seemore_white:seemore_dark}></SmIng>
       </SeeMore>
       {isExpanded && (
         <SeeMoreDetail ref={seeMoreDetailRef}>
