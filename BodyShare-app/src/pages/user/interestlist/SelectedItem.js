@@ -40,26 +40,44 @@ const Xbutton = styled.img`
   height: 25px;
   background-color: rgba(85, 111, 255, 0.3);
   border-radius: 15px;
-  margin-left: 3px;
   cursor: pointer;
 `;
+
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width: 56px;
+  height: 23px;
+`
+
+const Cover_button = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width: 25px;
+  height: 25px;
+  margin-left: 3px;
+`
 
 const SelectedItem = function ({ record, selectedList, changeSelected }) {
   console.log(record);
 
   const handleButtonClick = () => {
-    const temp = [...selectedList].filter(item => item.no !== record.no );
+    const temp = [...selectedList].filter(item => item.no !== record.no);
     changeSelected(temp);
   };
 
   return (
     < SelectedDiv >
       <Select>
-        <SelectCircle>
-          <SelectP>{record.name}</SelectP>
-        </SelectCircle>
+        <Cover>
+          <SelectCircle>
+            <SelectP>{record.name}</SelectP>
+          </SelectCircle>
+        </Cover>
         <DeleteButtonDiv>
-          <Xbutton src={xbutton} onClick={handleButtonClick}></Xbutton>
+          <Cover_button>
+            <Xbutton src={xbutton} onClick={handleButtonClick}></Xbutton>
+          </Cover_button>
         </DeleteButtonDiv>
       </Select>
     </SelectedDiv >

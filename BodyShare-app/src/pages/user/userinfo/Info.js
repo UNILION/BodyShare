@@ -36,6 +36,9 @@ const ProfileImg = styled.img`
 `;
 
 const ProfileButton = styled.button`
+  display: grid;
+  text-align: center;
+  line-height: 25px;
   width: 68px;
   height: 25px;
   font-size: 13px;
@@ -176,7 +179,6 @@ const Height = styled.input`
 
 const HeightP = styled.p`
   font-size: 13px;
-  color: #808080;
   margin-left: 10px;
 `;
 
@@ -212,7 +214,6 @@ const Weight = styled.input`
 
 const WeigthP = styled.p`
   font-size: 13px;
-  color: #808080;
   margin-left: 10px;
 `;
 

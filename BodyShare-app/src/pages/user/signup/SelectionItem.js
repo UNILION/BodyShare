@@ -35,22 +35,22 @@ const DeleteButtonDiv = styled.div`
   align-items: center;
 `;
 
-const Xbutton = styled.img`
-  width: 25px;
-  height: 25px;
-  background-color: rgba(85, 111, 255, 0.3);
+const Cover = styled.div`
+  background-color: white;
   border-radius: 15px;
-  margin-left: 3px;
-  cursor: pointer;
-`;
+  width: 56px;
+  height: 23px;
+`
 
 const SelectionItem = function ({record}) {
   return (
     < SelectedDiv >
       <Select>
+       <Cover>
         <SelectCircle>
           <SelectP>{record.name}</SelectP>
         </SelectCircle>
+       </Cover>
       </Select>
     </SelectedDiv >
   );

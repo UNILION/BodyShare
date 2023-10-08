@@ -1,12 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import axios from "axios";
 import { userAtom } from "recoil/userRecoil";
 import { useForm } from 'react-hook-form';
 import { sportsAtom } from "recoil/sportList";
 import { foodAtom } from "recoil/foodList";
 import { useState } from "react";
+import { isDarkAtom } from "recoil/themeRecoil";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -41,12 +42,16 @@ const StyledLink = styled(Link)`
   grid-row: 2;
   width: 355px;
   height: 30px;
-  color: black;
   font-size: 16px;
   text-decoration: none;
   text-align: center;
   margin: 10px auto;
   text-decoration: underline;
+  color: ${(props) => (props.isDarkMode ? 'white' : 'black')};
+
+  &:visited{
+  color: ${(props) => (props.isDarkMode ? 'white' : 'black')};
+  }
 `;
 
 const Logindiv = styled.div`
@@ -85,6 +90,7 @@ const LoginButton = styled.button`
 
 const Login = function () {
   const navigate = useNavigate();
+  const isDarkMode = useRecoilValue(isDarkAtom);
 
   const [loginError, setLoginError] = useState("");
 
@@ -159,7 +165,7 @@ const Login = function () {
         />
       </Inputdiv>
 
-      <StyledLink to="/signup">회원 가입</StyledLink>
+      <StyledLink to="/signup" isDarkMode={isDarkMode}>회원 가입</StyledLink>
 
       <Logindiv>
         {loginError && <LoingError>{loginError}</LoingError>}

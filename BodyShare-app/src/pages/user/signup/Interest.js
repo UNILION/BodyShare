@@ -12,7 +12,7 @@ const InterestDiv = styled.div`
 
 const InterestButton = styled.button`
   display: grid;
-  width: 298px;
+  width: 300px;
   height: 140px;
   grid-template-columns: auto 1fr;
   background-color: rgba(85, 111, 255, 0.1);
@@ -45,18 +45,25 @@ const ButtonLogo = styled.img`
   justify-content: end;
 `;
 
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+`
+
 const Interest = function () {
   const navigate = useNavigate();
 
   return (
     <InterestDiv>
-      <InterestButton onClick={() => navigate("/signup/interestList")}>
-        <ButtonPDiv>
-          <ButtonP>나의 관심사</ButtonP>
-          <ButtonP>선택하러가기</ButtonP>
-        </ButtonPDiv>
-        <ButtonLogo src={interest}></ButtonLogo>
-      </InterestButton>
+      <Cover>
+        <InterestButton onClick={() => navigate("/signup/interestList")}>
+          <ButtonPDiv>
+            <ButtonP>나의 관심사</ButtonP>
+            <ButtonP>선택하러가기</ButtonP>
+          </ButtonPDiv>
+          <ButtonLogo src={interest}></ButtonLogo>
+        </InterestButton>
+      </Cover>
     </InterestDiv>
   );
 };
