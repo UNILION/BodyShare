@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { userSelector } from "recoil/userRecoil";
+import { interestSelector, userSelector } from "recoil/userRecoil";
 import { sportsSelector } from 'recoil/sportList';
 import { useRecoilState, useRecoilValue } from "recoil";
 import { interestAtom } from "recoil/userRecoil";
@@ -48,8 +48,9 @@ const Icon = function ({ id, url }) {
   const userNo = useRecoilValue(userSelector);
   const sports = useRecoilValue(sportsSelector);
   const [interestList, setInterestList] = useRecoilState(interestAtom);
+  const inter = useRecoilValue(interestSelector);
   const [matchingSportNames, setMatchingSportNames] = useState([]);
-  
+
   const interestInit = function (list) {
     setInterestList(list);
   }
@@ -62,7 +63,7 @@ const Icon = function ({ id, url }) {
       let tempList = [];
 
       if (Array.isArray(userInterestData.data)) {
-        for(let i=0; i<userInterestData.data.length; i++){
+        for (let i = 0; i < userInterestData.data.length; i++) {
           const matchingSport = sports.find(item => item.no === userInterestData.data[i].sportsNo);
           if (matchingSport) {
             tempList.push(matchingSport);
@@ -70,20 +71,17 @@ const Icon = function ({ id, url }) {
         }
         interestInit(tempList);
       }
-      
 
-      const matchingSportNames = sports
-        .filter(sport => userInterestNo.includes(sport.no))
-        .map(sport => sport.name); // 매칭되는 스포츠의 이름 추출
-      console.log('matchingSport', matchingSportNames)
-      console.log('userInterestData', userInterestData)
+      // const matchingSportNames = sports
+      //   .filter(sport => userInterestNo.includes(sport.no))
+      //   .map(sport => sport.name); // 매칭되는 스포츠의 이름 추출
 
-      if (matchingSportNames.length === 0) {
-        // 사용자의 관심 스포츠가 없는 경우에 대한 처리
-        setMatchingSportNames(['No matching sports found']); // 또는 다른 기본값 설정
-      } else {
-        setMatchingSportNames(matchingSportNames);
-      }
+      // if (matchingSportNames.length === 0) {
+      //   // 사용자의 관심 스포츠가 없는 경우에 대한 처리
+      //   setMatchingSportNames(['No matching sports found']); // 또는 다른 기본값 설정
+      // } else {
+      //   setMatchingSportNames(matchingSportNames);
+      // }
 
     } catch (error) {
       console.error(error);
@@ -91,9 +89,24 @@ const Icon = function ({ id, url }) {
 
   };
 
+  const matching = function () {
+    const matchingList = inter.map(sport => sport.name); // 매칭되는 스포츠의 이름 추출
+
+    if (matchingList.length === 0) {
+      // 사용자의 관심 스포츠가 없는 경우에 대한 처리
+      setMatchingSportNames(['No matching sports found']); // 또는 다른 기본값 설정
+    } else {
+      setMatchingSportNames(matchingList);
+    }
+  };
+
   useEffect(() => {
     loadSport();
   }, []);
+
+  useEffect(() => {
+    matching();
+  }, [interestList]);
 
   return (
     <>

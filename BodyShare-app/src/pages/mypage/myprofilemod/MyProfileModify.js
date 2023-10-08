@@ -88,7 +88,7 @@ const MyProfileModify = function () {
     if (data.profileImg[0]) {
       formData.append('profileImg', data.profileImg[0]);
     }
-    if (data.bannerImg[0]){
+    if (data.bannerImg[0]) {
       formData.append('bannerImg', data.bannerImg[0]);
     }
     formData.append('nickname', data.nickname);
@@ -106,6 +106,25 @@ const MyProfileModify = function () {
 
       // 업데이트가 성공하면 사용자를 리디렉션하거나 성공 메시지를 표시할 수 있습니다.
       if (response.status === 200) {
+        // 유저 관심사 정보 전부 삭제
+        try {
+          await instance.delete(`/users/interestdel/${userNo}`);
+        } catch (error) {
+          console.error(error);
+        }
+
+        // 관심사 정보 모두 등록
+        for (let i = 0; i < list.length; i++) {
+          const data = {
+            userNo,
+            sportsNo: list[i].no
+          }
+          try {
+            await instance.post("/users/interestadd", data)
+          } catch (error) {
+            console.error(error);
+          }
+        }
         navigate("/mypage"); // 성공적으로 업데이트된 경우 메인 페이지로 이동
       } else {
         console.error("업데이트 실패");
@@ -114,25 +133,25 @@ const MyProfileModify = function () {
       console.error(error);
     }
 
-    // 유저 관심사 정보 전부 삭제
-    try{
-      await instance.delete(`/users/interestdel/${userNo}`);
-    }catch(error){
-      console.error(error);
-    }
+    // // 유저 관심사 정보 전부 삭제
+    // try{
+    //   await instance.delete(`/users/interestdel/${userNo}`);
+    // }catch(error){
+    //   console.error(error);
+    // }
 
-    // 관심사 정보 모두 등록
-    for(let i=0; i<list.length; i++){
-      const data = {
-        userNo,
-        sportsNo: list[i].no
-      }
-      try{
-        await instance.post("/users/interestadd", data )
-      }catch(error){
-        console.error(error);
-      }
-    }
+    // // 관심사 정보 모두 등록
+    // for(let i=0; i<list.length; i++){
+    //   const data = {
+    //     userNo,
+    //     sportsNo: list[i].no
+    //   }
+    //   try{
+    //     await instance.post("/users/interestadd", data )
+    //   }catch(error){
+    //     console.error(error);
+    //   }
+    // }
   };
 
   // console.log(interest);
@@ -148,7 +167,7 @@ const MyProfileModify = function () {
                 value={item.no}
               />;
             })} */}
-          
+
 
             <Titleul>
               <Backbutton onClick={() => { navigate("/mypage") }}></Backbutton>
@@ -157,7 +176,7 @@ const MyProfileModify = function () {
             <br />
             <Banner register={register} />
             <Profile register={register} />
-            <Nickname nickname={profileInfo.nickname} register={register} errors={errors} getValues={getValues}/>
+            <Nickname nickname={profileInfo.nickname} register={register} errors={errors} getValues={getValues} />
             <Password password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
             <AfterPassword password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
             <BodyDiv>
