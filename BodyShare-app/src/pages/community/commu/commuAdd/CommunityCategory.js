@@ -49,14 +49,6 @@ const Cover = styled.div`
   height: 23px;
 `
 
-const Cover_button = styled.div`
-  background-color: white;
-  border-radius: 15px;
-  width: 25px;
-  height: 25px;
-  margin-left: 3px;
-`
-
 const CommunityCategory = function ({ register, errors }) {
   const navigate = useNavigate();
   const categoryList = useRecoilValue(categorySelector);
@@ -71,9 +63,6 @@ const CommunityCategory = function ({ register, errors }) {
           <Cover>
             <Tag tagtitle={categoryList[0].name} />
           </Cover>
-          <Cover_button>
-            <Xbutton src={xbutton} />
-          </Cover_button>
           <input
             type="hidden"
             value={categoryList[0].name}
