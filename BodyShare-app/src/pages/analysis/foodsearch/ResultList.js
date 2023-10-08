@@ -16,6 +16,7 @@ const ResultButton = styled.button`
   border: none;
   border-radius: 15px;
   padding-top: 40px;
+  width: 340px;
   cursor: pointer;
   transition: background-color 0.2s; 
 `;

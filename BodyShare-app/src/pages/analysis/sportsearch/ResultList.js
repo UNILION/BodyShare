@@ -19,6 +19,7 @@ const ResultButton = styled.button`
   border: none;
   border-radius: 15px;
   padding-top: 30px;
+  width: 340px;
   cursor: pointer;
   transition: background-color 0.2s; 
 
