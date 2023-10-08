@@ -54,6 +54,7 @@ const Not = styled.div`
   height: 420px;
   margin-top: 170px;
   overflow-y: hidden;
+  color: black;
 `
 
 const Slide1 = function () {

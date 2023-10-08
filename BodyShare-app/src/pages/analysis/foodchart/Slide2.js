@@ -39,6 +39,7 @@ const Not = styled.div`
   height: 420px;
   margin-top: 190px;
   overflow-y: hidden;
+  color: black;
 `
 
 const Slide2 = function () {
@@ -74,8 +75,9 @@ const Slide2 = function () {
         dailyCalories[dayOfWeek] += record.calories;
         temp += record.calories;
       }
+      console.log(temp)
       setSum(temp);
-
+      console.log(temp)
       const foodChartData = [
         ["요일", "주간 칼로리"],
         ["일", dailyCalories[0]],

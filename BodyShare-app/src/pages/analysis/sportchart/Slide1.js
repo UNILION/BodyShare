@@ -43,6 +43,7 @@ const Not = styled.div`
   height: 420px;
   margin-top: 190px;
   overflow-y: hidden;
+  color: black;
 `
 
 const instance = axios.create({
