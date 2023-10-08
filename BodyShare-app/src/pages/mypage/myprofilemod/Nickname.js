@@ -16,6 +16,7 @@ const Titlel = styled.div`
   width: 95px;
   text-align: center;
   line-height: 45px;
+  color: black;
 `
 
 const Input = styled.input`

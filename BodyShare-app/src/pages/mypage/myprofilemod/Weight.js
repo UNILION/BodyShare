@@ -9,6 +9,7 @@ const Titlej = styled.div`
   width: 60px;
   text-align: center;
   line-height: 45px;
+  color: black;
 `;
 
 const Bodydetail = styled.div`
@@ -20,7 +21,6 @@ const Bodydetail = styled.div`
 
 const BInput = styled.input`
   width: 50px;
-  height: 43px;
   color: #808080;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -42,6 +42,7 @@ const BodyP = styled.div`
   width: 50px;
   text-align: center;
   line-height: 45px;
+  color: black;
 `;
 
 const Warn = styled.p`

@@ -24,7 +24,6 @@ const Cateckul = styled.div`
 const Catetitle = styled.p`
   align-items: center;
   font-size: 18px;
-  color: #000000;
   margin-top: 15px;
 `;
 
@@ -33,6 +32,7 @@ const Cateul = styled.div`
   grid-template-columns: 1fr 1fr 1fr 3fr;
   margin-top: 3px;
 `;
+
 
 const CateMod = function ({ usersList }) {
   const navigate = useNavigate();
@@ -99,7 +99,7 @@ const CateMod = function ({ usersList }) {
         </Cateckul>
         {matchingSportNames.map((sport, index) => (
           <Tag key={index} tagtitle={sport} ml="5px" />
-        ))}
+          ))}
       </>
     );
   }

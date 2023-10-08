@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Controller } from "react-hook-form";
 
 const Titlel = styled.div`
   border-radius: 15px 0px 0px 15px;
@@ -9,6 +8,7 @@ const Titlel = styled.div`
   width: 95px;
   text-align: center;
   line-height: 45px;
+  color: black;
 `
 
 const Input = styled.input`
