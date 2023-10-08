@@ -71,22 +71,9 @@ const Icon = function ({ id, url }) {
         }
         interestInit(tempList);
       }
-
-      // const matchingSportNames = sports
-      //   .filter(sport => userInterestNo.includes(sport.no))
-      //   .map(sport => sport.name); // 매칭되는 스포츠의 이름 추출
-
-      // if (matchingSportNames.length === 0) {
-      //   // 사용자의 관심 스포츠가 없는 경우에 대한 처리
-      //   setMatchingSportNames(['No matching sports found']); // 또는 다른 기본값 설정
-      // } else {
-      //   setMatchingSportNames(matchingSportNames);
-      // }
-
     } catch (error) {
       console.error(error);
     }
-
   };
 
   const matching = function () {
@@ -119,11 +106,6 @@ const Icon = function ({ id, url }) {
               <Tag key={index} tagtitle={sport} ml="5px" />
 
             ))}
-            {/* <Tag>
-              {matchingSportNames.map((sport, index) => (
-                <span key={index}>{sport}</span>
-              ))}
-            </Tag> */}
           </Inst>
         </Pfcommentul>
 
