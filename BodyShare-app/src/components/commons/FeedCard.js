@@ -4,7 +4,7 @@ import timer from "assets/Img/timer.png"
 import DropDown from "./DropDown"
 
 const StyledCard = styled.div`
-  width: ${(props) => (props.width ? props.width : "370px")};
+  width: ${(props) => (props.width ? props.width : "360px")};
   height: ${(props) => (props.height ? props.height : "")};
   color: ${(props) => (props.color ? props.color : "black")};
   background-color: ${(props) => (props.bc ? props.bc : "white")};
