@@ -92,6 +92,7 @@ const Charts = function () {
   const [sportsChartData, setSportsChartData] = useState([]);
   const [foodChartData, setFoodChartData] = useState([]);
   const [totalCalories, setTotalCalories] = useState(0);
+  const [sum, setSum] = useState(0);
 
   const chartDatas = async function () {
     try {
@@ -138,6 +139,7 @@ const Charts = function () {
           }
         });
 
+        setSum(sum + totalExerciseTime)
         sportsChartData.push([dateString, totalExerciseTime]);
       }
 
@@ -230,6 +232,7 @@ const Charts = function () {
               navigate("/analysis/sportschart");
             }}
           >
+            {sum > 0 ?
             <Chart
               chartType="ColumnChart"
               width="350px"
@@ -269,6 +272,7 @@ const Charts = function () {
               graph_id="sportschart"
               rootProps={{ "data-testid": "1" }}
             />
+            : <Not>7일동안 운동이 기록되지 않았습니다. 기록 탭에서 등록해주세요.</Not>}
           </ChartContainer>
         </Slide>
         <Slide>
