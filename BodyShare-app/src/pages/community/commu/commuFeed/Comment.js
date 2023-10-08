@@ -12,7 +12,6 @@ const instance = axios.create({
 });
 
 const CommentContainer = styled.div`
-  color: #878787;
 `;
 
 const Count = styled.div`
