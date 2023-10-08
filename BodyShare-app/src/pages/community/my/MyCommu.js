@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import user from "../../../assets/Img/user.png";
 import axios from "axios";
 import MyItem from "./Feed";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "recoil/themeRecoil";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -41,20 +42,21 @@ const Title = styled.div`
 `;
 
 const Member = styled.div`
-  color: rgba(0, 0, 0, 0.4);
+  color: ${props => props.isDarkMode ? "white" : "rgba(0, 0, 0, 0.4)"};
   font-size: 13px;
   font-weight: bold;
   margin-top: 10px;
 `;
 
 const Hr = styled.hr`
-  border-color: rgba(0, 0, 0, 0.25);
+  border-color: ${props => props.isDarkMode ? "white" : "rgba(0, 0, 0, 0.25)"};
 `;
 
 const MyCommu = function ({ commu }) {
   const [feeds, setFeeds] = useState([]);
   const [memberList, setMemberList] = useState([]);
   const navigate = useNavigate();
+  const isDarkMode = useRecoilValue(isDarkAtom);
 
   const myCommuList = async function (commuNo) {
     const limit = 3;
@@ -91,7 +93,7 @@ const MyCommu = function ({ commu }) {
           </Title>
           {memberList > 0 ? (
             <>
-              <Member>{memberList}명의 회원</Member>
+              <Member isDarkMode={isDarkMode}>{memberList}명의 회원</Member>
               {feeds.map((feed, idx) => (
                 <MyItem feed={feed} key={idx} />
               ))}
@@ -104,7 +106,7 @@ const MyCommu = function ({ commu }) {
         </Register>
       </Group>
 
-      <Hr />
+      <Hr isDarkMode={isDarkMode} />
     </>
   );
 };
