@@ -25,7 +25,6 @@ const RecordText = styled.p`
   font-size: 20px;
   font-weight: bold;
   text-align: left;
-  color: #878787;
   line-height: 60px;
   padding-left: 15px;
 `;
@@ -46,7 +45,6 @@ const ButtonImg = styled.img`
 
 const Record = function () {
   const [count, setCount] = useState(0);
-
   const userNo = useRecoilValue(userSelector);
 
   const loadRecord = async function () {
