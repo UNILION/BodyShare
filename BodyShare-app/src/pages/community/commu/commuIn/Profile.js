@@ -21,6 +21,12 @@ const Inst = styled.div`
     margin-top: 10px;
 `;
 
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width: 55px;
+`
+
 const Profile = function ( {title, intro, sports} ) {
   return(
     <Pfcommentul>
@@ -29,12 +35,14 @@ const Profile = function ( {title, intro, sports} ) {
         <CommuIntro>{intro}</CommuIntro>
       </CommuInLi>
         <Inst>
+        <Cover>
           <Tag 
             tagtitle={sports}
             mr="10px;"
             hovercolor="rgba(85,111,255, 0.3)"
             cursor="default"
           />
+          </Cover>
         </Inst>
     </Pfcommentul>
   )

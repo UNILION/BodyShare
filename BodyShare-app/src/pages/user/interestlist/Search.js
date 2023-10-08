@@ -62,13 +62,19 @@ const Done = styled.button`
   }
 `;
 
-const Search = function ({interestList}) {
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width: 80px;
+`;
+
+const Search = function ({ interestList }) {
   const navigate = useNavigate();
 
   const allSports = useRecoilValue(sportsSelector);
 
   const [list, setList] = useState(allSports);
-  
+
   const [buttonState, setButtonState] = useState({
     button1: true,
     button2: false,
@@ -83,20 +89,20 @@ const Search = function ({interestList}) {
     }));
 
     let tempName;
-    if(buttonName == "button1"){
+    if (buttonName == "button1") {
       tempName = "";
-    } else if(buttonName == "button2"){
+    } else if (buttonName == "button2") {
       tempName = "근력";
-    } else if(buttonName == "button3"){
+    } else if (buttonName == "button3") {
       tempName = "유산소";
-    } else if(buttonName == "button4"){
+    } else if (buttonName == "button4") {
       tempName = "기타";
     }
 
-    if(tempName != ""){
-      const tempList = [...allSports].filter(item => item.category == tempName );
+    if (tempName != "") {
+      const tempList = [...allSports].filter(item => item.category == tempName);
       setList(tempList);
-    }else{
+    } else {
       setList([...allSports]);
     }
   };
@@ -110,26 +116,26 @@ const Search = function ({interestList}) {
   };
 
   const keyword = useRef("");
-  
-  const searchText = function(){
+
+  const searchText = function () {
     let tempName;
-    if(buttonState.button1 == true){
+    if (buttonState.button1 == true) {
       tempName = "";
-    } else if(buttonState.button2 == true){
+    } else if (buttonState.button2 == true) {
       tempName = "근력";
-    } else if(buttonState.button3 == true){
+    } else if (buttonState.button3 == true) {
       tempName = "유산소";
-    } else if(buttonState.button4 == true){
+    } else if (buttonState.button4 == true) {
       tempName = "기타";
     }
 
     const regExp = new RegExp(keyword.current);
 
-    if(tempName != ""){
-      const tempList = [...allSports].filter(item => item.category == tempName );
+    if (tempName != "") {
+      const tempList = [...allSports].filter(item => item.category == tempName);
       const newList = tempList.filter(item => regExp.test(item.name));
       setList(newList);
-    }else{
+    } else {
       const tempAll = [...allSports];
       const newList = tempAll.filter(item => regExp.test(item.name));
       setList(newList);
@@ -139,13 +145,13 @@ const Search = function ({interestList}) {
   // 선택된 항목 리스트
   const [selectedList, setSelectedList] = useState(interestList);
 
-  const changeSelected = function(list) {
+  const changeSelected = function (list) {
     setSelectedList(list);
   };
 
   const [interest, setInterest] = useRecoilState(interestAtom);
 
-  const complete = function() {
+  const complete = function () {
     setInterest(selectedList);
     navigate("/signup")
   };
@@ -154,18 +160,26 @@ const Search = function ({interestList}) {
     <>
       <SearchInput>
         <SearchImg src={searchIcon} onClick={searchText} />
-        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" onKeyPress={handleKeyPress} onChange={(e)=>{keyword.current = (e.target.value)}}/>
+        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" onKeyPress={handleKeyPress} onChange={(e) => { keyword.current = (e.target.value) }} />
       </SearchInput>
 
       <SportCategory>
-        <Tag tagtitle="전체" width="80px" height="36px" br="13px"
-        onClick={() => handleButtonClick('button1')} bc={buttonState.button1 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)"/>
-        <Tag tagtitle="근력" width="80px" height="36px" br="13px" 
-        onClick={() => handleButtonClick('button2')} bc={buttonState.button2 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)"/>
-        <Tag tagtitle="유산소" width="80px" height="36px" br="13px"
-        onClick={() => handleButtonClick('button3')} bc={buttonState.button3 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)"/>
-        <Tag tagtitle="기타" width="80px" height="36px" br="13px"
-        onClick={() => handleButtonClick('button4')} bc={buttonState.button4 ? "rgba(85, 111, 255, 0.7)": "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)"/>
+        <Cover>
+          <Tag tagtitle="전체" width="80px" height="36px" br="13px"
+            onClick={() => handleButtonClick('button1')} bc={buttonState.button1 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
+        </Cover>
+        <Cover>
+          <Tag tagtitle="근력" width="80px" height="36px" br="13px"
+            onClick={() => handleButtonClick('button2')} bc={buttonState.button2 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
+        </Cover>
+        <Cover>
+          <Tag tagtitle="유산소" width="80px" height="36px" br="13px"
+            onClick={() => handleButtonClick('button3')} bc={buttonState.button3 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
+        </Cover>
+        <Cover>
+          <Tag tagtitle="기타" width="80px" height="36px" br="13px"
+            onClick={() => handleButtonClick('button4')} bc={buttonState.button4 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
+        </Cover>
       </SportCategory>
 
       {/* 조회된 목록과 선택된 관심사 목록 */}

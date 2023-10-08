@@ -185,7 +185,7 @@ const Middle = function ({ searchItemList }) {
       {/* 조회된 목록과 선택된 관심사 목록 */}
       <SearchList itemList={list} selectedList={selectedList} changeSelected={changeSelected} />
 
-        <Selected selectedList={selectedList} changeSelected={changeSelected} />
+      <Selected selectedList={selectedList} changeSelected={changeSelected} />
 
       <Donediv>
         {selectedList.length > 0 && (

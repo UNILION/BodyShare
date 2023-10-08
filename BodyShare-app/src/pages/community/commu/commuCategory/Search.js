@@ -56,10 +56,15 @@ const Donediv = styled.div`
   text-align: center;
 `;
 
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width: 80px;
+`;
 
-const Search = function ({categoryList}) {
+const Search = function ({ categoryList }) {
   const navigate = useNavigate();
-  
+
   const allSports = useRecoilValue(sportsSelector);
 
   const [list, setList] = useState(allSports);
@@ -133,7 +138,7 @@ const Search = function ({categoryList}) {
 
   // 선택된 항목 리스트
   const [selectedList, setSelectedList] = useState(categoryList);
-  
+
   const changeSelected = function (list) {
     setSelectedList(list);
   };
@@ -154,20 +159,29 @@ const Search = function ({categoryList}) {
       </SearchInput>
 
       <SportCategory>
-        <Tag tagtitle="전체" width="80px" height="36px" br="13px"
-          onClick={() => handleButtonClick('button1')} bc={buttonState.button1 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
-        <Tag tagtitle="근력" width="80px" height="36px" br="13px"
-          onClick={() => handleButtonClick('button2')} bc={buttonState.button2 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
-        <Tag tagtitle="유산소" width="80px" height="36px" br="13px"
-          onClick={() => handleButtonClick('button3')} bc={buttonState.button3 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
-        <Tag tagtitle="기타" width="80px" height="36px" br="13px"
-          onClick={() => handleButtonClick('button4')} bc={buttonState.button4 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
+        <Cover>
+          <Tag tagtitle="전체" width="80px" height="36px" br="13px"
+            onClick={() => handleButtonClick('button1')} bc={buttonState.button1 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
+        </Cover>
+        <Cover>
+          <Tag tagtitle="근력" width="80px" height="36px" br="13px"
+            onClick={() => handleButtonClick('button2')} bc={buttonState.button2 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
+        </Cover>
+        <Cover>
+          <Tag tagtitle="유산소" width="80px" height="36px" br="13px"
+            onClick={() => handleButtonClick('button3')} bc={buttonState.button3 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
+        </Cover>
+        <Cover>
+          <Tag tagtitle="기타" width="80px" height="36px" br="13px"
+            onClick={() => handleButtonClick('button4')} bc={buttonState.button4 ? "rgba(85, 111, 255, 0.7)" : "rgba(85,111,255, 0.3)"} hovercolor="rgba(85, 111, 255, 0.7)" />
+        </Cover>
       </SportCategory>
 
       {/* 조회된 목록과 선택된 관심사 목록 */}
       <SearchList itemList={list} selectedList={selectedList} changeSelected={changeSelected} />
 
-      <Selected selectedList={selectedList} changeSelected={changeSelected} ></Selected>
+      <Selected selectedList={selectedList} changeSelected={changeSelected} />
+      
       <Donediv>
         <Button
           name="선택완료"

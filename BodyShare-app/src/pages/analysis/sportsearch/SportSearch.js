@@ -79,14 +79,19 @@ const BtnImg = styled.img`
   cursor: pointer;
 `;
 
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width: 80px;
+`;
 
-const SportSearch = function() {
+const SportSearch = function () {
   const navigate = useNavigate();
 
   const sportsList = useRecoilValue(sportsSelector);
   const [sportsTag, setSportsTag] = useState('전체'); // 초기값은 전체로
   const [search, setSearch] = useState("");
-  const [selected, setSelected] = useState(""); 
+  const [selected, setSelected] = useState("");
   const [selectedSportName, setSelectedSportName] = useRecoilState(selectedSportNameState);
   const userNo = useRecoilValue(userSelector);
 
@@ -98,7 +103,7 @@ const SportSearch = function() {
   // 태그에 맞게 운동 리스트들이 나오도록 함
   const hadleTagfilter = (tag) => {
     setSportsTag(tag);
-    
+
   };
 
   // 검색기능 추가 ---
@@ -118,16 +123,24 @@ const SportSearch = function() {
 
       <SearchInput>
         <Search src={searchImg} />
-        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" onChange={handleSearch}/>
+        <Input type="text" placeholder="찾으시는 운동을 검색해주세요" onChange={handleSearch} />
       </SearchInput>
 
       <CategoryList>
-        <StyledTag tagtitle="전체" width="80px" height="36px" br="13px" isSelected={sportsTag === "전체"} onClick={() => hadleTagfilter('전체')}/>
-        <StyledTag tagtitle="근력" width="80px" height="36px" br="13px" isSelected={sportsTag === "근력"} onClick={() => hadleTagfilter('근력')}/>
-        <StyledTag tagtitle="유산소" width="80px" height="36px" br="13px" isSelected={sportsTag === "유산소"} onClick={() => hadleTagfilter('유산소')}/>
-        <StyledTag tagtitle="기타" width="80px" height="36px" br="13px" isSelected={sportsTag === "기타"} onClick={() => hadleTagfilter('기타')}/>
+        <Cover>
+          <StyledTag tagtitle="전체" width="80px" height="36px" br="13px" isSelected={sportsTag === "전체"} onClick={() => hadleTagfilter('전체')} />
+        </Cover>
+        <Cover>
+          <StyledTag tagtitle="근력" width="80px" height="36px" br="13px" isSelected={sportsTag === "근력"} onClick={() => hadleTagfilter('근력')} />
+        </Cover>
+        <Cover>
+          <StyledTag tagtitle="유산소" width="80px" height="36px" br="13px" isSelected={sportsTag === "유산소"} onClick={() => hadleTagfilter('유산소')} />
+        </Cover>
+        <Cover>
+          <StyledTag tagtitle="기타" width="80px" height="36px" br="13px" isSelected={sportsTag === "기타"} onClick={() => hadleTagfilter('기타')} />
+        </Cover>
       </CategoryList>
-      
+
       <ResultList sportsList={filterSportsList} changeSelected={changeSelected} search={search} />
 
 
@@ -137,7 +150,7 @@ const SportSearch = function() {
         display="block"
         ml="auto"
         mt="30px"
-        onClick={() =>{
+        onClick={() => {
           if (selected) {
             navigate("/analysis/add/time");
           } else {
@@ -145,9 +158,9 @@ const SportSearch = function() {
           }
         }}
       />
-      <BtnImg 
-        src={plus}  
-        onClick={() =>{
+      <BtnImg
+        src={plus}
+        onClick={() => {
           if (selected) {
             navigate("/analysis/add/time");
           } else {

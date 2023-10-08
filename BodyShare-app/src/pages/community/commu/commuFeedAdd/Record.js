@@ -110,6 +110,10 @@ const MiddleTime = styled.div`
   margin-right: 10px;
 `;
 
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+`
 const Record = function ({ register, setRecordDate, errors }) {
   const [click, setClick] = useState({
     click1: false,
@@ -178,6 +182,7 @@ const Record = function ({ register, setRecordDate, errors }) {
       <Explan>3일 이내의 기록 중 하루를 클릭해주세요</Explan>
       <TargetLists>
         <TargetList>
+        <Cover>
           <TargetListTop select={select["select1"]}>
             <TargetListTitle
               onClick={() =>
@@ -202,8 +207,9 @@ const Record = function ({ register, setRecordDate, errors }) {
                 }));
                 setFirst(first + 1);
               }}
-            />
+              />
           </TargetListTop>
+              </Cover>
           <DropDown>
             <TargetListMiddle
               first={first}
@@ -229,6 +235,7 @@ const Record = function ({ register, setRecordDate, errors }) {
         </TargetList>
 
         <TargetList>
+        <Cover>
           <TargetListTop select={select["select2"]}>
             <TargetListTitle
               onClick={() =>
@@ -255,6 +262,7 @@ const Record = function ({ register, setRecordDate, errors }) {
               }}
             />
           </TargetListTop>
+              </Cover>
           <DropDown>
             <TargetListMiddle first={first} click={click["click2"]}
                           onClick={() =>
@@ -278,6 +286,7 @@ const Record = function ({ register, setRecordDate, errors }) {
         </TargetList>
 
         <TargetList>
+        <Cover>
           <TargetListTop select={select["select3"]}>
             <TargetListTitle
               onClick={() =>
@@ -304,6 +313,7 @@ const Record = function ({ register, setRecordDate, errors }) {
               }}
             />
           </TargetListTop>
+              </Cover>
           <DropDown>
             <TargetListMiddle
               first={first}
