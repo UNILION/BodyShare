@@ -35,13 +35,7 @@ import SportHome from "./pages/analysis/sportchart/SportChart";
 import FoodHome from "./pages/analysis/foodchart/FoodChart";
 import LayoutAnalysis from "./pages/analysis/analysislayout";
 import { userSelector } from "recoil/userRecoil";
-import { useRecoilState, useRecoilValue } from "recoil";
-import ChallAdd from "./pages/community/challenge/challAdd/ChallAdd";
-import ChallIn from "./pages/community/challenge/challIn/ChallIn";
-import ChallMain from "./pages/community/challenge/challMain/ChallMain";
-import ChallSearch from "./pages/community/challenge/challSearch/ChallSearch"
-import ChallCategory from "./pages/community/challenge/challCategory/ChallCategory"
-import ChallSearchAfter from "./pages/community/challenge/challSearchAfter/ChallSearchAfter"
+import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "recoil/themeRecoil";
 
 function App() {
@@ -82,13 +76,6 @@ function App() {
               <Route path="/community/category" element={<CommuCategory />} />
               <Route path="/community/feedAdd/:commu" element={<CommuFeedAdd />} />
               <Route path="/community/feed/:feedNo" element={<CommuFeed />} />
-              
-              <Route path="/community/challenge/challAdd" element={<ChallAdd />} />
-              <Route path="/community/challenge/challIn/:challNo" element={<ChallIn />} />
-              <Route path="/community/challenge/challMain" element={<ChallMain />} />
-              <Route path="/community/challenge/challSearch" element={<ChallSearch />} />
-              <Route path="/community/challenge/challSearchAfter" element={<ChallSearchAfter />} />
-              <Route path="/community/challenge/challCategory" element={<ChallCategory />} />
               
             </Route>
             <Route path="/mypage" element={<Layout />}>
