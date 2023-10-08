@@ -16,6 +16,7 @@ const instance = axios.create({
 const Nickli = styled.li`
   font-size: 28px;
   font-weight: 800;
+  color: black;
 `;
 
 const Inst = styled.li`
@@ -28,7 +29,6 @@ const Pf = styled.ul`
   border-radius: 10px;
   display: grid;
   grid-template-columns: 1fr 3fr;
-  margin-left: 9.5px;
 `;
 
 const Pfpic = styled.img`
@@ -43,6 +43,13 @@ const Pfcommentul = styled.div`
   place-items: center;
   margin-bottom: 25px;
 `;
+
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width: 370px;
+  margin-left: 9.5px;
+`
 
 const Icon = function ({ id, url }) {
   const userNo = useRecoilValue(userSelector);
@@ -97,19 +104,21 @@ const Icon = function ({ id, url }) {
 
   return (
     <>
-      <Pf>
-        <Pfpic src={`http://localhost:33000/images/users/${url}`} />
-        <Pfcommentul>
-          <Nickli>{id}</Nickli>
-          <Inst>
-            {matchingSportNames.map((sport, index) => (
-              <Tag key={index} tagtitle={sport} ml="5px" />
+      <Cover>
+        <Pf>
+          <Pfpic src={`http://localhost:33000/images/users/${url}`} />
+          <Pfcommentul>
+            <Nickli>{id}</Nickli>
+            <Inst>
+              {matchingSportNames.map((sport, index) => (
+                <Tag key={index} tagtitle={sport} ml="5px" />
 
-            ))}
-          </Inst>
-        </Pfcommentul>
+              ))}
+            </Inst>
+          </Pfcommentul>
 
-      </Pf>
+        </Pf>
+      </Cover>
     </>
   );
 };
