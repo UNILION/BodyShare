@@ -5,10 +5,10 @@ import { Chart } from "react-google-charts";
 import { useNavigate } from "react-router-dom";
 import { userSelector } from "recoil/userRecoil";
 import { foodSelector } from "recoil/foodList";
-import { sportsSelector } from "recoil/sportList";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import Slider from "react-slick";
+import { isDarkAtom } from "recoil/themeRecoil";
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -26,12 +26,31 @@ const SliderContainer = styled.div`
     position: absolute;
     bottom: 5px;
   }
+
+  li button:before {
+    color: orange;
+  }
+
+  .slick-dots li.slick-active button:before {
+    color: orange;
+  }
 `;
 
 const settings = {
   dots: true,
   infinite: false,
 };
+
+const ChartContainer = styled.div`
+  width: 360px;
+  height: 280px;
+  border-radius: 30px;
+  border: 1px solid rgba(135, 135, 135, 0.3);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  margin: 0 auto;
+`;
 
 const Slide = styled.div`
   min-width: 100%;
@@ -41,37 +60,19 @@ const Slide = styled.div`
   grid-column: span 1;
 `;
 
-const ChartBox = styled.div`
-  grid-row: 2;
-  display: flex;
-  width: 360px;
-  height: 280px;
-  border-radius: 30px;
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.25);
-  margin: 0 auto;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  place-items: center;
-`;
-
-const ChartContainer = styled.div`
-  width: 360px;
-  height: 270px;
-  background-color: white;
-  border-radius: 30px;
-  border: 1px solid rgba(135, 135, 135, 0.3);
-  cursor: pointer;
-  display: grid;
-  place-items: center;
-  margin: 0 auto;
-`;
+const Cal = styled.div`
+position: absolute;
+top: 50%;
+right: 15px;
+font-size: 16px;
+font-weight: bold;
+`
 
 const Charts = function () {
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
   const selectedFood = useRecoilValue(foodSelector);
-  const selectedSport = useRecoilValue(sportsSelector);
+  const isDarkMode = useRecoilValue(isDarkAtom);
 
   const [sportsChartData, setSportsChartData] = useState([]);
   const [foodChartData, setFoodChartData] = useState([]);
@@ -83,18 +84,18 @@ const Charts = function () {
       // 서버에서 모든 데이터 가져오기
       const response = await instance.get(`/record/sports/${userNo}`);
       const allData = response.data;
-  
+
       // 현재 주의 시작 및 종료 날짜 계산
       const currentDate = new Date();
       const currentWeekStartDate = new Date(currentDate);
       currentWeekStartDate.setDate(currentDate.getDate() - currentDate.getDay());
-  
+
       const currentWeekEndDate = new Date(currentWeekStartDate);
       currentWeekEndDate.setDate(currentWeekStartDate.getDate() + 6);
-  
+
       const sportsChartData = [["", "운동 분"]];
       const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
-  
+
       for (let i = 0; i < 7; i++) {
         const day = daysOfWeek[i];
         const date = new Date(currentWeekStartDate);
@@ -105,19 +106,19 @@ const Charts = function () {
         };
         const formattedDate = date.toLocaleDateString("ko-KR", options);
         const dateString = `${formattedDate}\n(${day})`;
-  
+
         let totalExerciseTime = 0;
-  
+
         // 해당 날짜에 대한 운동 기록 더하기
         allData.forEach((record) => {
           const recordDate = new Date(record.exerciseDate);
           const recordDateString = recordDate.toLocaleDateString("ko-KR", options);
-  
+
           if (recordDateString === formattedDate) {
             totalExerciseTime += record.exerciseTime;
           }
         });
-  
+
         sportsChartData.push([dateString, totalExerciseTime]);
       }
 
@@ -159,7 +160,7 @@ const Charts = function () {
           protein += foodItem.protein || 0;
           fat += foodItem.fat || 0;
           totalCalories += foodItem.calories || 0;
-        
+
         }
       });
 
@@ -177,7 +178,6 @@ const Charts = function () {
       console.error(error);
     }
   };
-
   useEffect(() => {
     chartDatas();
     const interval = setInterval(() => {
@@ -191,67 +191,85 @@ const Charts = function () {
     <SliderContainer>
       <Slider {...settings}>
         <Slide>
-          <ChartBox>
-            <ChartContainer
-              onClick={() => {
-                navigate("/analysis/sportschart");
-              }}
-            >
-              <Chart
-                chartType="Bar"
-                width="350px"
-                height="240px"
-                data={sportsChartData}
-                options={{
-                  legend: { position: "none" },
-                  chart: {
-                    title: "운동 분",
+          <ChartContainer
+            onClick={() => {
+              navigate("/analysis/sportschart");
+            }}
+          >
+            <Chart
+              chartType="ColumnChart"
+              width="350px"
+              height="240px"
+              data={sportsChartData}
+              options={{
+                backgroundColor: isDarkMode ? "#292929" : "white",
+                legend: { position: "none" },
+                chart: {
+                  title: "운동 분",
+                },
+                hAxis: {
+                  slantedText: false, // X 축 레이블을 회전합니다.
+                  slantedTextAngle: 45, // 각도를 45도로 설정합니다.
+                  titleTextStyle: {
+                    fontSize: 10,
+                    color: isDarkMode ? "#fff" : "#000",
                   },
-                  hAxis: {
-                    title: "날짜",
+                  textStyle: {
+                    fontSize: 10,
+                    color: isDarkMode ? "#fff" : "#000",
                   },
-                  // 텍스트 렌더링 함수 사용
-                  vAxis: {
-                    format: "decimal",
-                    title: "운동 분",
-                    textStyle: {
-                      fontSize: 12,
-                    },
-                  },
-                }}
-                graph_id="sportschart"
-                rootProps={{ "data-testid": "1" }}
-              />
-            </ChartContainer>
-          </ChartBox>
-        </Slide>
-        <Slide>
-          <ChartBox>
-            <ChartContainer
-              onClick={() => {
-                navigate("/analysis/foodchart");
-              }}
-            >
-              <Chart
-                chartType="PieChart"
-                width="350px"
-                height="240px"
-                data={foodChartData}
-                options={{
-                  title: "영양정보",
-                  pieHole: 0.4,
+                },
+                // 텍스트 렌더링 함수 사용
+                vAxis: {
+                  format: "decimal",
+                  title: "운동 분",
                   titleTextStyle: {
                     fontSize: 16,
+                    color: isDarkMode ? "#fff" : "#000",
                   },
-                }}
-                graph_id="foodchart"
-                
-              />
-              <div style={{  position: "absolute", top: "50%", right: 15, fontSize: "16px" }}>
-                칼로리: {totalCalories.toFixed(2)} kcal
-              </div>
-            </ChartContainer>
-          </ChartBox>
+                  textStyle: {
+                    fontSize: 12,
+                    color: isDarkMode ? "#fff" : "#000",
+                  },
+                },
+              }}
+              graph_id="sportschart"
+              rootProps={{ "data-testid": "1" }}
+            />
+          </ChartContainer>
+        </Slide>
+        <Slide>
+          <ChartContainer
+            onClick={() => {
+              navigate("/analysis/foodchart");
+            }}
+          >
+            <Chart
+              chartType="PieChart"
+              width="350px"
+              height="240px"
+              data={foodChartData}
+              options={{
+                backgroundColor: isDarkMode ? "#292929" : "white",
+                color: isDarkMode ? "#fff" : "#000",
+                title: "영양정보",
+                pieHole: 0.4,
+                legendTextStyle: {
+                  color: isDarkMode ? "#fff" : "#000",
+                },
+                titleTextStyle: {
+                  fontSize: 16,
+                  color: isDarkMode ? "#fff" : "#000",
+                },
+
+              }}
+              graph_id="foodchart"
+
+            />
+            <Cal>
+              칼로리: {totalCalories.toFixed(2)} kcal
+            </Cal>
+          </ChartContainer>
         </Slide>
       </Slider>
     </SliderContainer>
