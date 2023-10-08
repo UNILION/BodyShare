@@ -38,11 +38,11 @@ const Mainbar = function ({registerMember, userCnt, postCnt, registerChange}) {
       <Info>
         <Feed>
           <p>{postCnt}</p>
-          <p>게시물</p>
+          <p style={{marginTop:"3px"}}>게시물</p>
         </Feed>
         <Member>
           <p>{userCnt}</p>
-          <p>회원</p>
+          <p style={{marginTop:"3px"}}>회원</p>
         </Member>
       </Info>
       <Button
