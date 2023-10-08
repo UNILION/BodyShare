@@ -16,8 +16,7 @@ const CommunityDiv = styled.div`
   width: 370px;
   height: 305px;
   border-radius: 30px;
-  background-color: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(135, 135, 135, 0.3);
   margin: 5px auto 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   display: grid;
