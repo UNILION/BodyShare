@@ -21,6 +21,7 @@ const Infoul = styled.ul`
   width: 101px;
   height: 206px;
   padding-left: 10px;
+  color: black;
 `;
 
 const Infodtul = styled.ul`
@@ -34,24 +35,41 @@ const Infodtul = styled.ul`
   border-radius: 0px 15px 15px 0px;
   width: 232px;
   height: 206px;
+  color: black;
 `;
+
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px 0px 0px 15px;
+  width: 101px;
+`
+
+const Cover2 = styled.div`
+  background-color: white;
+  border-radius: 0px 15px 15px 0px;
+  width: 232px;
+`
 
 const InfoCard = function ({ id, nickname, height, weight }) {
   return (
     <>
       <Info>
+        <Cover>
         <Infoul>
           <li>아이디</li>
           <li>닉네임</li>
           <li>키</li>
           <li>몸무게</li>
         </Infoul>
+        </Cover>
+        <Cover2>
         <Infodtul>
           <li>{id}</li>
           <li>{nickname}</li>
           <li>{height}cm</li>
           <li>{weight}kg</li>
         </Infodtul>
+        </Cover2>
       </Info>
     </>
   );
