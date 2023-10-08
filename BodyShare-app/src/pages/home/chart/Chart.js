@@ -50,7 +50,6 @@ const Not = styled.div`
 `;
 
 const ChartContainer = styled.div`
-  width: 360px;
   height: 280px;
   border-radius: 30px;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -67,7 +66,6 @@ const Slide = styled.div`
   transition: transform 0.3s ease;
   grid-column: span 1;
   border-radius: 30px;
-  background-color: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.25);
   margin: 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
@@ -113,6 +111,7 @@ const Charts = function () {
       const sportsChartData = [["", "운동 분"]];
       const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
+      let temp = sum
       for (let i = 0; i < 7; i++) {
         const day = daysOfWeek[i];
         const date = new Date(currentWeekStartDate);
@@ -138,14 +137,12 @@ const Charts = function () {
             totalExerciseTime += record.exerciseTime;
           }
         });
-
-        setSum(sum + totalExerciseTime)
+        temp += totalExerciseTime
         sportsChartData.push([dateString, totalExerciseTime]);
       }
-
+      setSum(temp)
       // 차트 데이터 설정
       setSportsChartData(sportsChartData);
-      console.log("sportsChartData in useEffect:", sportsChartData);
     } catch (error) {
       console.error(error);
     }
@@ -198,8 +195,8 @@ const Charts = function () {
     } catch (error) {
       console.error(error);
     }
-    console.log("sportsChartData:", sportsChartData);
   };
+
   const chartOptions = {
     backgroundColor: isDarkMode ? "#292929" : "white",
     color: isDarkMode ? "#fff" : "#000",
@@ -213,6 +210,38 @@ const Charts = function () {
       color: isDarkMode ? "#fff" : "#000",
     },
   };
+
+  const chartOptions2 = {
+    backgroundColor: isDarkMode ? "#292929" : "white",
+    legend: { position: "none" },
+    chart: {
+      title: "운동 분",
+    },
+    hAxis: {
+      slantedText: false,
+      slantedTextAngle: 45,
+      titleTextStyle: {
+        fontSize: 10,
+        color: isDarkMode ? "#fff" : "#000",
+      },
+      textStyle: {
+        fontSize: 10,
+        color: isDarkMode ? "#fff" : "#000",
+      },
+    },
+    vAxis: {
+      format: "decimal",
+      title: "운동 분",
+      titleTextStyle: {
+        fontSize: 16,
+        color: isDarkMode ? "#fff" : "#000",
+      },
+      textStyle: {
+        fontSize: 12,
+        color: isDarkMode ? "#fff" : "#000",
+      },
+    }
+  }
 
   useEffect(() => {
     chartDatas();
@@ -233,46 +262,16 @@ const Charts = function () {
             }}
           >
             {sum > 0 ?
-            <Chart
-              chartType="ColumnChart"
-              width="350px"
-              height="240px"
-              data={sportsChartData}
-              options={{
-                backgroundColor: isDarkMode ? "#292929" : "white",
-                legend: { position: "none" },
-                chart: {
-                  title: "운동 분",
-                },
-                hAxis: {
-                  slantedText: false,
-                  slantedTextAngle: 45,
-                  titleTextStyle: {
-                    fontSize: 10,
-                    color: isDarkMode ? "#fff" : "#000",
-                  },
-                  textStyle: {
-                    fontSize: 10,
-                    color: isDarkMode ? "#fff" : "#000",
-                  },
-                },
-                vAxis: {
-                  format: "decimal",
-                  title: "운동 분",
-                  titleTextStyle: {
-                    fontSize: 16,
-                    color: isDarkMode ? "#fff" : "#000",
-                  },
-                  textStyle: {
-                    fontSize: 12,
-                    color: isDarkMode ? "#fff" : "#000",
-                  },
-                },
-              }}
-              graph_id="sportschart"
-              rootProps={{ "data-testid": "1" }}
-            />
-            : <Not>7일동안 운동이 기록되지 않았습니다. 기록 탭에서 등록해주세요.</Not>}
+              <Chart
+                chartType="ColumnChart"
+                width="350px"
+                height="240px"
+                data={sportsChartData}
+                options={chartOptions2}
+                graph_id="sportschart"
+                rootProps={{ "data-testid": "1" }}
+              />
+              : <Not>7일동안 운동이 기록되지 않았습니다. 기록 탭에서 등록해주세요.</Not>}
           </ChartContainer>
         </Slide>
         <Slide>
