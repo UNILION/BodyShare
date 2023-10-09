@@ -9,6 +9,7 @@ import { useRecoilValue } from 'recoil';
 import { selectedSportNameState, selectedSportNoState, sportsSelector } from 'recoil/sportList'; 
 import axios from "axios";
 import { userSelector } from 'recoil/userRecoil';
+import { isDarkAtom } from 'recoil/themeRecoil';
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -71,6 +72,7 @@ const Box = styled.div`
 const SportTime = styled.div`
   grid-row: 4;
   position: relative;
+  color: ${(props) => (props.isDarkMode ? 'white' : 'black')};
 `;
 
 const SmallBox = styled.input`
@@ -81,12 +83,14 @@ const SmallBox = styled.input`
   border-radius: 15px;
   border: none;
   text-align: center;
+  color: ${(props) => (props.isDarkMode ? 'white' : 'black')};
 `;
 
 const SportName = styled.p`
   font-size: 20px;
   font-weight: bold;
   margin-left: 5px;
+  color: ${(props) => (props.isDarkMode ? 'white' : 'black')};
 `;
 
 const ErrorMessage = styled.p`
@@ -102,7 +106,7 @@ const BtnImg = styled.img`
   position: relative;
   margin-left: 100px;
   bottom: 40px;
-  left: 240px;
+  left: 200px;
   cursor: pointer;
 `;
 
@@ -113,6 +117,7 @@ const TimeInput = function () {
   const today = new Date().toLocaleDateString();
   const userNo = useRecoilValue(userSelector);
   const sportsList = useRecoilValue(sportsSelector);
+  const isDarkMode = useRecoilValue(isDarkAtom);
   let user;
   let met;
 
@@ -179,22 +184,23 @@ const TimeInput = function () {
         <PreviousButton src={previous} onClick={() => navigate('/analysis')}></PreviousButton>
         
         <SportTitle>
-          <SportName>{selectedSportName}</SportName>
+          <SportName  isDarkMode={isDarkMode}>{selectedSportName}</SportName>
           <Line></Line>
         </SportTitle>
-        <SportDate>
+        <SportDate isDarkMode={isDarkMode}>
           <P>날짜</P>
           <BoxContainer>
             <Box>{today}</Box>
           </BoxContainer>
         </SportDate>
-        <SportTime>
-          <P>운동한 시간</P>
+        <SportTime isDarkMode={isDarkMode}>
+          <P>운동한 시간(분)</P>
           <SmallBox
             type="text"
             maxLength="3"
             value={exerciseTime} // 사용자 입력 값을 설정
-            onChange={handleExerciseTime} 
+            onChange={handleExerciseTime}
+            isDarkMode={isDarkMode}
           />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </SportTime>
@@ -203,14 +209,15 @@ const TimeInput = function () {
       <Button
           name="입력하기"
           ml="auto"
-          mt="130px"
+          mt="30px"
+          mr = "20px"
           width="150px"
           display="block"
           onClick={() => {
             sendSportsDataToServer(); // 서버로 데이터 전송
           }}
       />
-      <BtnImg src={plus}  onClick={sendSportsDataToServer}></BtnImg>
+      <BtnImg src={plus} onClick={sendSportsDataToServer}></BtnImg>
     </>
   );
 };

@@ -11,7 +11,6 @@ const ResultList = styled.div`
 `;
 
 const ResultButton = styled.button`
-  margin-top: 10px;
   background-color: ${(props) => (props.active ? props.hovercolor : 'white')};
   border: none;
   border-radius: 15px;
@@ -32,10 +31,17 @@ const Line = styled.div`
   border: 1px solid rgba(135, 135, 135, 0.3);
 `;
 
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width:340px;
+  margin-top: 10px;
+`
+
 const ResultCate = function ({ foodList, changeSelected, search }) {
   const [selectedButtonData, setSelectedButtonData] = useState(null);
 
-  const handleButtonClick = function(data){
+  const handleButtonClick = function (data) {
     if (selectedButtonData === data) {
       setSelectedButtonData(null);
       changeSelected(null);
@@ -48,22 +54,24 @@ const ResultCate = function ({ foodList, changeSelected, search }) {
   useEffect(() => {
     setSelectedButtonData(null);
   }, [search]);
-  
+
   return (
     <>
       <ResultList>
         {foodList.map((food, index) => (
-          <ResultButton
-            key={index}
-            active={selectedButtonData === food}
-            onClick={() => {
-              handleButtonClick(food);
-            }}
-            hovercolor="rgba(85, 111, 255, 0.7)"
-          >
-            <RP>{food.name}</RP>
-            <Line></Line>
-          </ResultButton>
+          <Cover>
+            <ResultButton
+              key={index}
+              active={selectedButtonData === food}
+              onClick={() => {
+                handleButtonClick(food);
+              }}
+              hovercolor="rgba(85, 111, 255, 0.7)"
+            >
+              <RP>{food.name}</RP>
+              <Line></Line>
+            </ResultButton>
+          </Cover>
         ))}
       </ResultList>
     </>
