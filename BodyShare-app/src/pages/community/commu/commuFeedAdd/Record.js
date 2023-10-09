@@ -112,8 +112,13 @@ const MiddleTime = styled.div`
 
 const Cover = styled.div`
   background-color: white;
-  border-radius: 15px;
+  border-radius: 15px 15px 0 0;
 `
+
+const Cover_record = styled.div`
+  background-color: rgba(85, 111, 255, 0.8);
+`
+
 const Record = function ({ register, setRecordDate, errors }) {
   const [click, setClick] = useState({
     click1: false,
@@ -225,10 +230,12 @@ const Record = function ({ register, setRecordDate, errors }) {
               }
             >
               {beforeYesterdayList ? beforeYesterdayList.map((record, idx) => (
+                <Cover_record>
                 <MiddleDetail key={idx}>
                   <MiddleTitle>{record.sportsName}</MiddleTitle>
                   <MiddleTime>{record.exerciseTime}분</MiddleTime>
                 </MiddleDetail>
+                </Cover_record>
               )) : null}
             </TargetListMiddle>
           </DropDown>
@@ -276,10 +283,12 @@ const Record = function ({ register, setRecordDate, errors }) {
                           }
             >
               {yesterdayList ? yesterdayList.map((record, idx) => (
+                  <Cover_record>
                 <MiddleDetail key={idx}>
                   <MiddleTitle>{record.sportsName}</MiddleTitle>
                   <MiddleTime>{record.exerciseTime}분</MiddleTime>
                 </MiddleDetail>
+                  </Cover_record>
               )) : null}
             </TargetListMiddle>
           </DropDown>
@@ -329,10 +338,12 @@ const Record = function ({ register, setRecordDate, errors }) {
               }
             >
               {todayList ? todayList.map((record, idx) => (
+                  <Cover_record>
                 <MiddleDetail key={idx}>
                   <MiddleTitle>{record.sportsName}</MiddleTitle>
                   <MiddleTime>{record.exerciseTime}분</MiddleTime>
                 </MiddleDetail>
+                </Cover_record>
               )) : null}
             </TargetListMiddle>
           </DropDown>
