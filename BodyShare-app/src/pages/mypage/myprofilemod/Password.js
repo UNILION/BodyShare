@@ -13,7 +13,6 @@ const Titlel = styled.div`
 
 const Input = styled.input`
   height: 45px;
-  color: #808080;
   border-radius: 0px 15px 15px 0px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
