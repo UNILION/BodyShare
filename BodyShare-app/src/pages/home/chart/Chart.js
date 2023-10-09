@@ -60,7 +60,7 @@ const ChartContainer = styled.div`
 `;
 
 const Slide = styled.div`
-  width: 360px !important;
+  width: 360px;
   display: grid;
   place-items: center;
   transition: transform 0.3s ease;
@@ -300,7 +300,7 @@ const Charts = function () {
                 오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요.
               </Not>
             )}
-            <Cal>칼로리: {totalCalories} kcal</Cal>
+            <Cal>칼로리: {totalCalories.toFixed(1)} kcal</Cal>
           </ChartContainer>
         </Slide>
       </Slider>
