@@ -37,16 +37,18 @@ const Warn = styled.p`
   width: 260px;
 `
 
-const Password = function ({password, register, errors, getValues}) {
+const Password = function ({ passd, password, register, errors, getValues }) {
   const hidePassword = (password) => {
     return '*'.repeat(password.length);
   };
 
-  return(
+  return (
     <>
       <Ul>
-          <Titlel>기존 비밀번호</Titlel>
-          <Input
+        <Titlel>기존 비밀번호</Titlel>
+        <Input
+          onInput={e => { sessionStorage.setItem("passd", e.target.value) }}
+          defaultValue={passd}
           {...register("password", {
             validate: (value) =>
               value === password || "기존 비밀번호와 일치하지 않습니다."
@@ -55,7 +57,7 @@ const Password = function ({password, register, errors, getValues}) {
           type="password"
         />
         <Warn>{errors.password?.message}</Warn>
-        </Ul>
+      </Ul>
     </>
   )
 };
