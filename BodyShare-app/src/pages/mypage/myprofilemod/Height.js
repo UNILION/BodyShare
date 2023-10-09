@@ -21,7 +21,6 @@ const Bodydetail = styled.div`
 
 const BInput = styled.input`
   width: 50px;
-  color: #808080;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
@@ -57,7 +56,7 @@ const Warn = styled.p`
 `
 
 const Height = function ({ height, register, errors }) {
-  
+
   return (
     <>
       <Bodydetail>
