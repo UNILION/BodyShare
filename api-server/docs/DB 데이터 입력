@@ -1,0 +1,146 @@
+-- 유저 4명(홍길동, 김길동, 이길동, 박길동)
+-- 유저 관심사 정보(홍길동 - 클라이밍, 자전거 / 김길동 - 클라이밍,달리기 / 이길동 - 클라이밍 / 박길동 - 달리기) 
+-- 커뮤니티 5개(클라이밍(116번)2개, 자전거(141) 2개, 달리기(129) 1개)
+-- 유저 커뮤니티 가입정보(홍길동 커뮤니티 생성한 모든 커뮤니티 / 김길동 - 서울 클라이밍)
+-- 운동 기록(홍길동 클라이밍), 식단 기록(홍길동 닭고기 가슴(854))
+
+-------- 유저 등록 ----------
+INSERT INTO user (userId, userName, password, nickname, height, weight) VALUES ('bbb001', '이한나', '1234', '한나', 168.5, 57.8);
+INSERT INTO user (userId, userName, password, nickname, height, weight) VALUES ('bbb002', '김준호', '1234', '준호', 172.3, 68.2);
+INSERT INTO user (userId, userName, password, nickname, height, weight) VALUES ('bbb003', '박수진', '1234', '수진', 162.8, 50.5);
+
+-------- 유저 관심사 ----------
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 27);
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 113);
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 84);
+INSERT INTO userInterest (userNo, sportsNo) VALUES (21, 50);
+INSERT INTO userInterest (userNo, sportsNo) VALUES (21, 75);
+INSERT INTO userInterest (userNo, sportsNo) VALUES (22, 92);
+INSERT INTO userInterest (userNo, sportsNo) VALUES (23, 36);
+INSERT INTO userInterest (userNo, sportsNo) VALUES (23, 107);
+INSERT INTO userInterest (userNo, sportsNo) VALUES (23, 10);
+
+
+-------- 커뮤니티 등록 ----------
+
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 27, "강남 레그 프레스", "강남에서 레그 프레스를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 113, "종로 요가", "종로에서 요가를 즐기는 분들을 위한 모임입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 84, "강서 크로스 핏", "강서에서 크로스 핏을 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 50, "용평 사이드 플랭크", "용평에서 사이드 플랭크를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 75, "강동 점프 스쿼트", "강동에서 점프 스쿼트를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 92, "서초 프론트 레이즈", "서초에서 프론트 레이즈를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 36, "송파 바벨 스쿼트", "송파에서 바벨 스쿼트를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (20, 107, "송파 바벨 스쿼트", "송파에서 바벨 스쿼트를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (21, 10, "서울 축구", "서울에서 축구를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (21, 12, "강남 테니스", "강남에서 테니스를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (21, 9, "종로 족구", "종로에서 족구를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (21, 97, "강북 헬스", "강북에서 헬스를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (21, 105, "부산 서핑", "부산에서 서핑을 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (21, 103, "중구 발레", "중구에서 발레를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (22, 77, "양천 철봉매달리기", "양천에서 철봉매달리기를 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (22, 121, "프리다이빙 양천", "양천에서 프리다이빙을 즐기는 분들을 위한 커뮤니티입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (22, 2, "농구 팀", "농구를 즐기는 분들끼리의 팀입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (22, 19, "데드 리프트 그룹", "데드 리프트를 즐기는 분들끼리의 그룹입니다");
+INSERT INTO userInterest (userNo, sportsNo) VALUES (22, 84, "강남 크로스 핏", "강남에서 크로스 핏을 즐기는 분들을 위한 커뮤니티입니다");
+
+
+-------- 유저 커뮤니티 가입 정보 ----------
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (20, 1);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (20, 2);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (20, 3);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (20, 4);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (20, 5);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (20, 6);
+
+
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (21, 7);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (21, 8);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (21, 9);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (21, 10);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (21, 11);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (21, 12);
+
+
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (22, 13);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (22, 14);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (22, 15);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (22, 16);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (22, 17);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (22, 18);
+INSERT INTO usersCommunity (userNo, communityNo) VALUES (22, 19);
+
+
+
+-------- 유저 운동/식단 기록 등록 ----------
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (20, 136, "2023.10.08", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (20, 36, "2023.10.09", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (20, 75, "2023.10.10", 30);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (20, 6, "2023.10.11", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (20, 10, "2023.10.12", 120);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (20, 125, "2023.10.13", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (20, 144, "2023.10.14", 60);
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (20, 134, "2023.10.08");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (20, 754, "2023.10.09");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (20, 405, "2023.10.10");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (20, 124, "2023.10.11");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (20, 214, "2023.10.12");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (20, 234, "2023.10.13");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (20, 254, "2023.10.14");
+
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (21, 116, "2023.10.08", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (21, 116, "2023.10.09", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (21, 128, "2023.10.10", 30);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (21, 2, "2023.10.11", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (21, 1, "2023.10.12", 120);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (21, 115, "2023.10.13", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (21, 115, "2023.10.14", 60);
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (21, 854, "2023.10.08");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (21, 854, "2023.10.09");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (21, 455, "2023.10.10");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (21, 144, "2023.10.11");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (21, 244, "2023.10.12");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (21, 244, "2023.10.13");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (21, 25, "2023.10.14");
+
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (22, 116, "2023.10.08", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (22, 116, "2023.10.09", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (22, 128, "2023.10.10", 30);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (22, 2, "2023.10.11", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (22, 1, "2023.10.12", 120);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (22, 115, "2023.10.13", 60);
+INSERT INTO exerciseRecord (userNo, sportsNo, exerciseDate, exerciseTime) VALUES (22, 115, "2023.10.14", 60);
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (22, 854, "2023.10.08");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (22, 854, "2023.10.09");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (22, 455, "2023.10.10");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (22, 144, "2023.10.11");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (22, 244, "2023.10.12");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (22, 244, "2023.10.13");
+INSERT INTO dietRecord (userNo, foodNo, dietDate) VALUES (22, 25, "2023.10.14");
+
+-------- 커뮤니티 게시물 등록 ----------
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (1, 20, "레그 프레스 완료1");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (1, 20, "레그 프레스 완료2");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (1, 20, "레그 프레스 완료3");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (1, 21, "레그 프레스 완료1");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (1, 21, "레그 프레스 완료2");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (1, 21, "레그 프레스 완료3");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (1, 22, "레그 프레스 완료1");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (1, 22, "레그 프레스 완료2");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (1, 22, "레그 프레스 완료3");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (2, 20, "요가 완료1");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (2, 20, "요가 완료2");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (2, 20, "요가 완료3");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (2, 21, "요가 완료1");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (2, 21, "요가 완료2");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (2, 21, "요가 완료3");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (2, 22, "요가 완료1");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (2, 22, "요가 완료2");
+INSERT INTO communityPost (communityNo, userNo, title) VALUES (2, 22, "요가 완료3");
+
+
+-------- 게시물 댓글 등록 ----------
+INSERT INTO communityPostComment (postNo, userNo, content) VALUES (1, 20, "멋있어요");
+
+
+
+

@@ -9,6 +9,8 @@ import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
 import moment from 'moment';
+import exercise from 'assets/Img/exercise.png'
+import food from 'assets/Img/food.png'
 
 const instance = axios.create({
   baseURL: "http://localhost:33000/api",
@@ -35,7 +37,7 @@ const NoteGrid = styled.div`
   position: relative;
   background-color: white;
   border: 1px solid rgba(135, 135, 135, 0.3);
-  border-radius: 15px 15px 0 0;
+  border-radius: 15px;
   padding: 0;
   box-sizing: border-box;
 `;
@@ -68,6 +70,24 @@ const Record = function () {
     setSelectedDate(date);
   };
 
+  // 캘린더에 운동 식단 표시
+  const tileContent = ({ date }) => {
+    const dateStr = date.toLocaleDateString();
+    const hasExercise = sportsList && sportsList.some(item => dateCal(item.exerciseDate) === dateStr);
+    const hasDiet = foodList && foodList.some(item => dateCal(item.dietDate) === dateStr);
+  
+    return (
+      <div>
+        {hasExercise && <img src={exercise} alt="exercise" style={{width: '15px', height: '15px', marginRight: '5px'}} />}
+        {hasDiet && <img src={food} alt="food" style={{width: '15px', height: '15px'}} />}
+      </div>
+    );
+  };
+  
+  
+
+  
+
   const loadRecord = async function () {
     try {
       const result = await instance.get(`/record/sports/${userNo}`);
@@ -91,7 +111,7 @@ const Record = function () {
       console.error(error);
     }
   };
-
+  
   //운동 삭제
   const deleteSportsRecord = async (planNo) => {
     try{
@@ -144,6 +164,7 @@ const Record = function () {
             // 현재 날짜를 최대로 잡음
             maxDate={new Date()}
             formatDay={(locale, date) => moment(date).format('D')}
+            tileContent={tileContent}
           />
         </CalendarDiv>
 
