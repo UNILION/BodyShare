@@ -376,24 +376,6 @@ const Info = function () {
                 value: /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}$/,
                 message: '영문과 숫자로 이루어진 6~16자의 아이디를 입력하세요',
               },
-              // validate: {
-              //   checkId: async (value) => {
-              //     try {
-              //       const response = await instance.post('/users/checkid', { id: value });
-              //       if (response.data.check) {
-              //         // 중복 있음
-              //         return '중복된 아이디입니다';
-              //       } else {
-              //         // 중복 없음
-              //         return '';
-              //       }
-              //     } catch (error) {
-              //       // 에러 처리
-              //       console.error(error);
-              //       return '중복 확인 중 오류가 발생했습니다';
-              //     }
-              //   },
-              // },
             })}
             placeholder="아이디"
           />
@@ -410,24 +392,6 @@ const Info = function () {
                 value: /^[a-zA-Z0-9가-힣]{4,16}$/,
                 message: '영문, 한글, 숫자로 이루어진 4~16자',
               },
-              // validate: {
-              //   checkNic: async (value) => {
-              //     try {
-              //       const response = await instance.post('/users/checknic', { nic: value });
-              //       if (response.data.check) {
-              //         // 중복 있음
-              //         return '중복된 닉네임입니다';
-              //       } else {
-              //         // 중복 없음
-              //         return '';
-              //       }
-              //     } catch (error) {
-              //       // 에러 처리
-              //       console.error(error);
-              //       return '중복 확인 중 오류가 발생했습니다';
-              //     }
-              //   },
-              // },
             })}
             placeholder="닉네임"
           />
