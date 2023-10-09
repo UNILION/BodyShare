@@ -15,7 +15,7 @@ const recordModel = {
   // 해당 유저의 최근 3일 운동 기록 목록 조회
   async findByRecent(no, day){
     try{
-      const sql = `SELECT er.*, s.name AS sportsName,
+      const sql = `SELECT er.*, s.name AS sportsName
       FROM exerciseRecord er
       INNER JOIN sports s ON er.sportsNo = s.no
       WHERE er.userNo = ?
