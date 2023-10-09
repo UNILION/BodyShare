@@ -22,6 +22,15 @@ const CommunityDiv = styled.div`
   display: grid;
 `;
 
+const Not = styled.div`
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  width: 300px;
+  overflow-y: hidden;
+  margin: 0 auto;
+`;
+
 const CommunityP = styled.p`
   grid-row: 1;
   text-align: left;
@@ -73,23 +82,29 @@ const CommunityRe = function () {
   return (
     <CommunityDiv>
       <CommunityP>새소식</CommunityP>
-      <PostDiv>
-        {communityData.slice(0, 2).map((communityPost, index) => (
-          <CommunityRecommend
-            key={index}
-            onClick={() => {
-              navigate(`/community/commuIn/${communityPost.communityNo}`);
-            }}
-          >
-            <Card
-              img={`http://localhost:33000/images/posts/${communityPost.contentImageUrl}`}
-              title={communityPost.title}
-              contents={communityPost.content}
-              footer={String(communityPost.createdDate.split('-')[0]) + "년" + String(communityPost.createdDate.split('-')[1]) + "월" + String(communityPost.createdDate.split('-')[2]).substring(0, 2) + "일"}
-            />
-          </CommunityRecommend>
-        ))}
-      </PostDiv>
+      {communityData && communityData.length > 0 ? (
+        <PostDiv>
+          {communityData.slice(0, 2).map((communityPost, index) => (
+            <CommunityRecommend
+              key={index}
+              onClick={() => {
+                navigate(`/community/commuIn/${communityPost.communityNo}`);
+              }}
+            >
+              <Card
+                img={`http://localhost:33000/images/posts/${communityPost.contentImageUrl}`}
+                title={communityPost.title}
+                contents={communityPost.content}
+                footer={String(communityPost.createdDate.split('-')[0]) + "년" + String(communityPost.createdDate.split('-')[1]) + "월" + String(communityPost.createdDate.split('-')[2]).substring(0, 2) + "일"}
+              />
+            </CommunityRecommend>
+          ))}
+        </PostDiv>
+      ) : (
+        <Not>
+          데이터가 없습니다. 기록 탭에서 등록해주세요.
+        </Not>
+      )}
     </CommunityDiv>
   );
 };
