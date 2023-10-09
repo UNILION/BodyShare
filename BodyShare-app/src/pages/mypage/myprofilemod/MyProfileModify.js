@@ -80,9 +80,46 @@ const MyProfileModify = function () {
     loadUser();
   }, []);
 
-  const { control, handleSubmit, formState: { errors }, register, getValues } = useForm({ mode: "onChange" })
+  const { control, handleSubmit, formState: { errors, dirtyFields }, register, getValues, setError } = useForm({ mode: "onChange" })
 
   const onSubmit = async (data) => {
+    // 닉네임 중복 검사
+    if (dirtyFields.nickname) {
+      const nicknameValue = getValues('nickname');
+      try {
+        const check = await instance.get(`/users/user/${userNo}`);
+        if (check.data.nickname != nicknameValue) {
+          try {
+            const response = await instance.post('/users/checknic', { nic: nicknameValue });
+            if (response.data.check) {
+              // 중복된 닉네임인 경우 에러 메시지 설정
+              setError('nickname', {
+                type: 'manual',
+                message: '중복된 닉네임입니다',
+              });
+              return; // 중복된 닉네임일 경우 가입을 중단합니다.
+            }
+          } catch (error) {
+            // 에러 처리
+            console.error(error);
+            setError('nickname', {
+              type: 'manual',
+              message: '중복 확인 중 오류가 발생했습니다',
+            });
+            return; // 중복 확인 중 에러가 발생한 경우 가입을 중단합니다.
+          }
+        }
+      } catch (error) {
+        // 에러 처리
+        console.error(error);
+        setError('nickname', {
+          type: 'manual',
+          message: '중복 확인 중 오류가 발생했습니다',
+        });
+        return; // 중복 확인 중 에러가 발생한 경우 가입을 중단합니다.
+      }
+    }
+
     // FormData 생성 및 데이터 추가
     const formData = new FormData();
     if (data.profileImg[0]) {
@@ -91,8 +128,15 @@ const MyProfileModify = function () {
     if (data.bannerImg[0]) {
       formData.append('bannerImg', data.bannerImg[0]);
     }
+
     formData.append('nickname', data.nickname);
-    formData.append('password', data.afterpassword);
+
+    if (data.afterpassword) {
+      formData.append('password', data.afterpassword);
+    } else {
+      formData.append('password', data.password);
+    }
+
     formData.append('height', data.height);
     formData.append('weight', data.weight);
 

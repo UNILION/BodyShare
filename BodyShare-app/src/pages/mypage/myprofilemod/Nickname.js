@@ -64,41 +64,41 @@ const NicknameButton = styled.button`
 
 const Nickname = function ({ nickname, register, errors, getValues }) {
 
-  const [checkNic, setCheckNic] = useState("1");
+  // const [checkNic, setCheckNic] = useState("1");
 
-  const checkNicServer = async function (nic) {
-    console.log(nickname, nic);
-    if (nic == nickname) {
-      // 닉네임이 비어 있는 경우 중복 확인을 하지 않음
-      setCheckNic("4");
-      return;
-    }
-    try {
-      const response = await instance.post('/users/checknic', { nic });
-      if (response.data.check) {
-        //중복 있음
-        setCheckNic("2");
-      } else {
-        //중복 없음
-        setCheckNic("3");
-      }
-    } catch (error) {
-      // 에러 처리
-      console.error(error);
-    }
-  };
+  // const checkNicServer = async function (nic) {
+  //   console.log(nickname, nic);
+  //   if (nic == nickname) {
+  //     // 닉네임이 비어 있는 경우 중복 확인을 하지 않음
+  //     setCheckNic("4");
+  //     return;
+  //   }
+  //   try {
+  //     const response = await instance.post('/users/checknic', { nic });
+  //     if (response.data.check) {
+  //       //중복 있음
+  //       setCheckNic("2");
+  //     } else {
+  //       //중복 없음
+  //       setCheckNic("3");
+  //     }
+  //   } catch (error) {
+  //     // 에러 처리
+  //     console.error(error);
+  //   }
+  // };
 
-  const checkNicValidate = function () {
-    if (checkNic == 1) {
-      return "중복확인을 해주세요";
-    }
-    else if (checkNic == 2) {
-      return "중복된 닉네임입니다."
-    }
-    else {
-      return;
-    }
-  };
+  // const checkNicValidate = function () {
+  //   if (checkNic == 1) {
+  //     return "중복확인을 해주세요";
+  //   }
+  //   else if (checkNic == 2) {
+  //     return "중복된 닉네임입니다."
+  //   }
+  //   else {
+  //     return;
+  //   }
+  // };
 
   return (
     <>
@@ -111,13 +111,13 @@ const Nickname = function ({ nickname, register, errors, getValues }) {
               value: /^[a-zA-Z0-9가-힣]{4,16}$/,
               message: '영문, 한글, 숫자로 이루어진 4~16자',
             },
-            validate: checkNicValidate,
+            // validate: checkNicValidate,
           })}
           defaultValue={nickname}
           placeholder={nickname}
         >
         </Input>
-        <NicknameButton onClick={() => checkNicServer(getValues('nickname'))}>중복확인</NicknameButton>
+        {/* <NicknameButton onClick={() => checkNicServer(getValues('nickname'))}>중복확인</NicknameButton> */}
       </Ul>
       {errors.nickname && (
         <Warn>{errors.nickname.message}</Warn>
