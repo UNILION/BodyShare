@@ -60,7 +60,7 @@ const ChartContainer = styled.div`
 `;
 
 const Slide = styled.div`
-  width: 360px;
+  width: 360px !important;
   display: grid;
   place-items: center;
   transition: transform 0.3s ease;
