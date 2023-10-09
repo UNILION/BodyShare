@@ -7,7 +7,7 @@ import Tag from "components/commons/Tag";
 import ResultList from "pages/analysis/sportsearch/ResultList";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from 'recoil';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { sportsSelector } from "recoil/sportList";
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
@@ -149,6 +149,7 @@ const SportSearch = function () {
         width="180px"
         display="block"
         ml="auto"
+        mr = "20px"
         mt="30px"
         onClick={() => {
           if (selected) {
