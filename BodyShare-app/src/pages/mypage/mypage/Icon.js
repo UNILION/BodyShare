@@ -111,7 +111,7 @@ const Icon = function ({ id, url }) {
             <Nickli>{id}</Nickli>
             <Inst>
               {matchingSportNames.map((sport, index) => (
-                <Tag key={index} tagtitle={sport} ml="5px" />
+                <Tag key={index} cursor="auto" tagtitle={sport} hovercolor="rgba(85,111,255, 0.3)" ml="5px" />
 
               ))}
             </Inst>
