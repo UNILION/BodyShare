@@ -41,7 +41,7 @@ const Infodtul = styled.ul`
 const Cover = styled.div`
   background-color: white;
   border-radius: 15px 0px 0px 15px;
-  width: 101px;
+  width: 111px;
 `
 
 const Cover2 = styled.div`
