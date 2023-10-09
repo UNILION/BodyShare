@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Check from "components/commons/Check";
 import Tag from "components/commons/useFormTag";
-import xbutton from "assets/Img/xbutton.png";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { categorySelector } from "recoil/commuRecoil";
@@ -34,14 +33,6 @@ const CategoryContent = styled.div`
   cursor: pointer;
 `;
 
-const Xbutton = styled.img`
-  width: 25px;
-  height: 25px;
-  background-color: rgba(85, 111, 255, 0.3);
-  border-radius: 15px;
-  cursor: pointer;
-`;
-
 const Cover = styled.div`
   background-color: white;
   border-radius: 15px;
@@ -61,7 +52,7 @@ const CommunityCategory = function ({ register, errors }) {
       {categoryList.length > 0 && (
         <Category>
           <Cover>
-            <Tag tagtitle={categoryList[0].name} />
+            <Tag cursor="auto" hovercolor="rgba(85,111,255, 0.3)" tagtitle={categoryList[0].name} />
           </Cover>
           <input
             type="hidden"
