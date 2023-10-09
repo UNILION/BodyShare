@@ -79,7 +79,7 @@ const Buttons = styled.ul`
   gap: 5px; 
 `;
 
-const PasswordModify = function () {
+const Logout = function () {
   const navigate = useNavigate();
 
   const [userNo, setUserNo] = useRecoilState(userAtom);
@@ -144,4 +144,4 @@ const PasswordModify = function () {
   );
 };
 
-export default PasswordModify;
+export default Logout;
