@@ -91,7 +91,7 @@ const Menu = styled.div`
   background: gray;
   position: absolute;
   top: 550px;
-  left: 30%;
+  left: 44%;
   width: 200px;
   text-align: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
