@@ -20,7 +20,6 @@ const Titlel = styled.div`
 `
 
 const Input = styled.input`
-  width: 185px;
   height: 45px;
   border-radius: 0px 15px 15px 0px;
   background-color: #FFFFFF;
@@ -32,7 +31,7 @@ const Input = styled.input`
 const Ul = styled.ul`
   margin-top: 7px;
   display: grid;
-  grid-template-columns: 95px 190px auto;
+  grid-template-columns: 95px auto;
 `
 
 const Warn = styled.p`
