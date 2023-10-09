@@ -29,7 +29,7 @@ const Input = styled.input`
 `;
 
 const Ul = styled.ul`
-  margin-top: 7px;
+  margin-top: 17px;
   display: grid;
   grid-template-columns: 95px auto;
 `
