@@ -3,7 +3,7 @@ import user from "assets/Img/userProfileDefault.png"
 import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { interestAtom, interestSelector } from "recoil/userRecoil";
 
@@ -21,7 +21,7 @@ const Form = styled.form`
 
 const ProfileDiv = styled.div`
   grid-row: 1;
-  width: 372px;
+  width: 390px;
   height: 130px;
   display: flex;
   flex-direction: column;
@@ -36,9 +36,6 @@ const ProfileImg = styled.img`
 `;
 
 const ProfileButton = styled.button`
-  display: grid;
-  text-align: center;
-  line-height: 25px;
   width: 68px;
   height: 25px;
   font-size: 13px;
@@ -55,7 +52,7 @@ const ProfileButton = styled.button`
 const InputDiv = styled.div`
   grid-row: 2;
   display: grid;
-  width: 372px;
+  width: 390px;
   grid-template-rows: auto auto auto auto auto;
   gap: 10px;
   align-items: center;
@@ -67,36 +64,23 @@ const IdDiv = styled.div`
 `;
 
 const Id = styled.input`
-  width: 240px;
+  width: 300px;
   height: 45px;
+  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
   padding-left: 10px;
-`;
-
-const IdButton = styled.button`
-  width: 68px;
-  height: 25px;
-  font-size: 13px;
-  color: white;
-  border-radius: 15px;
-  background-color: #556FFF;
-  border: none;
-  margin-left: 15px;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
 const NicknameDiv = styled.div`
 `;
 
 const Nickname = styled.input`
-  width: 240px;
+  width: 300px;
   height: 45px;
+  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -104,24 +88,10 @@ const Nickname = styled.input`
   padding-left: 10px;
 `;
 
-const NicknameButton = styled.button`
-  width: 68px;
-  height: 25px;
-  font-size: 13px;
-  color: white;
-  border-radius: 15px;
-  background-color: #556FFF;
-  border: none;
-  margin-left: 15px;
-
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 const Pw = styled.input.attrs({ type: "password" })`
-  width: 311px;
+  width: 300px;
   height: 45px;
+  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -130,8 +100,9 @@ const Pw = styled.input.attrs({ type: "password" })`
 `;
 
 const CheckPw = styled.input.attrs({ type: "password" })`
-  width: 311px;
+  width: 300px;
   height: 45px;
+  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -165,6 +136,7 @@ const HDiv = styled.div`
 const Height = styled.input`
   width: 110px;
   height: 45px;
+  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -174,6 +146,7 @@ const Height = styled.input`
 
 const HeightP = styled.p`
   font-size: 13px;
+  color: #808080;
   margin-left: 10px;
 `;
 
@@ -185,7 +158,7 @@ const WeigthDiv = styled.div`
   grid-template-rows: auto auto;
   justify-content: center;
   align-items: center;
-  margin-left: 20px;
+  margin-left: 15px;
 `;
 
 const WDiv = styled.div`
@@ -199,6 +172,7 @@ const WDiv = styled.div`
 const Weight = styled.input`
   width: 110px;
   height: 45px;
+  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -208,6 +182,7 @@ const Weight = styled.input`
 
 const WeigthP = styled.p`
   font-size: 13px;
+  color: #808080;
   margin-left: 10px;
 `;
 
@@ -243,7 +218,7 @@ const NextButton = styled.button`
   color: white;
   font-size: 13px;
   border: 1px solid rgba(135, 135, 135, 0.3);
-
+  
   &:hover {
     cursor: pointer;
   }
@@ -261,9 +236,57 @@ const Info = function () {
   const [interest, setInterest] = useRecoilState(interestAtom);
   const interestList = useRecoilValue(interestSelector);
 
-  const { handleSubmit, register, formState: { errors }, getValues } = useForm({ mode: "onChange" });
+  const { handleSubmit, register, formState: { errors, dirtyFields }, getValues, setError } = useForm({ mode: "onChange" });
 
   const onSubmit = async (data) => {
+    // 중복 아이디 검사
+    if (dirtyFields.id) {
+      const idValue = getValues('id');
+      try {
+        const response = await instance.post('/users/checkid', { id: idValue });
+        if (response.data.check) {
+          // 중복된 아이디인 경우 에러 메시지 설정
+          setError('id', {
+            type: 'manual',
+            message: '중복된 아이디입니다',
+          });
+          return; // 중복된 아이디일 경우 가입을 중단합니다.
+        }
+      } catch (error) {
+        // 에러 처리
+        console.error(error);
+        setError('id', {
+          type: 'manual',
+          message: '중복 확인 중 오류가 발생했습니다',
+        });
+        return; // 중복 확인 중 에러가 발생한 경우 가입을 중단합니다.
+      }
+    }
+
+     // 중복 닉네임 검사
+     if (dirtyFields.nickname) {
+      const nicknameValue = getValues('nickname');
+      try {
+        const response = await instance.post('/users/checknic', { nic: nicknameValue });
+        if (response.data.check) {
+          // 중복된 닉네임인 경우 에러 메시지 설정
+          setError('nickname', {
+            type: 'manual',
+            message: '중복된 닉네임입니다',
+          });
+          return; // 중복된 닉네임일 경우 가입을 중단합니다.
+        }
+      } catch (error) {
+        // 에러 처리
+        console.error(error);
+        setError('nickname', {
+          type: 'manual',
+          message: '중복 확인 중 오류가 발생했습니다',
+        });
+        return; // 중복 확인 중 에러가 발생한 경우 가입을 중단합니다.
+      }
+    }
+
     // FormData 생성 및 데이터 추가
     const formData = new FormData();
     if (data.profileImage[0]) {
@@ -315,68 +338,6 @@ const Info = function () {
 
   };
 
-  // id 중복검사 useState
-  const [checkId, setCheckId] = useState("1");
-
-  const checkIdServer = async function(id){
-    try{
-      const response = await instance.post('/users/checkid', { id });
-      if (response.data.check){
-        //중복 있음
-        setCheckId("2");
-      } else {
-        //중복 없음
-        setCheckId("3");
-      }
-    } catch(error){
-      // 에러 처리
-      console.error(error);
-    }
-  };
-
-  const checkIdValidate = function(){
-    if(checkId==1){
-      return "중복확인을 해주세요";
-    }
-    else if(checkId==2){
-      return "중복된 아이디입니다."
-    }
-    else{
-      return ;
-    }
-  };
-
-  // nickname 중복검사 useState
-  const [checkNic, setCheckNic] = useState("1");
-
-  const checkNicServer = async function(nic){
-    try{
-      const response = await instance.post('/users/checknic', { nic });
-      if (response.data.check){
-        //중복 있음
-        setCheckNic("2");
-      } else {
-        //중복 없음
-        setCheckNic("3");
-      }
-    } catch(error){
-      // 에러 처리
-      console.error(error);
-    }
-  };
-
-  const checkNicValidate = function(){
-    if(checkNic==1){
-      return "중복확인을 해주세요";
-    }
-    else if(checkNic==2){
-      return "중복된 닉네임입니다."
-    }
-    else{
-      return ;
-    }
-  };
-
   const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -415,11 +376,27 @@ const Info = function () {
                 value: /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,16}$/,
                 message: '영문과 숫자로 이루어진 6~16자의 아이디를 입력하세요',
               },
-              validate: checkIdValidate,
+              // validate: {
+              //   checkId: async (value) => {
+              //     try {
+              //       const response = await instance.post('/users/checkid', { id: value });
+              //       if (response.data.check) {
+              //         // 중복 있음
+              //         return '중복된 아이디입니다';
+              //       } else {
+              //         // 중복 없음
+              //         return '';
+              //       }
+              //     } catch (error) {
+              //       // 에러 처리
+              //       console.error(error);
+              //       return '중복 확인 중 오류가 발생했습니다';
+              //     }
+              //   },
+              // },
             })}
             placeholder="아이디"
           />
-          <IdButton onClick={() => checkIdServer(getValues('id'))}>중복확인</IdButton>
         </IdDiv>
         {errors.id && (
           <ErrorP>{errors.id.message}</ErrorP>
@@ -433,11 +410,27 @@ const Info = function () {
                 value: /^[a-zA-Z0-9가-힣]{4,16}$/,
                 message: '영문, 한글, 숫자로 이루어진 4~16자',
               },
-              validate: checkNicValidate,
+              // validate: {
+              //   checkNic: async (value) => {
+              //     try {
+              //       const response = await instance.post('/users/checknic', { nic: value });
+              //       if (response.data.check) {
+              //         // 중복 있음
+              //         return '중복된 닉네임입니다';
+              //       } else {
+              //         // 중복 없음
+              //         return '';
+              //       }
+              //     } catch (error) {
+              //       // 에러 처리
+              //       console.error(error);
+              //       return '중복 확인 중 오류가 발생했습니다';
+              //     }
+              //   },
+              // },
             })}
             placeholder="닉네임"
           />
-          <NicknameButton onClick={() => checkNicServer(getValues('nickname'))}>중복확인</NicknameButton>
         </NicknameDiv>
         {errors.nickname && (
           <ErrorP>{errors.nickname.message}</ErrorP>
@@ -498,7 +491,7 @@ const Info = function () {
                 {...register('weight', {
                   required: '몸무게',
                   pattern: {
-                    value: /^\d+(\.\d{1})?$/,
+                    value: /^\d{2,3}(\.\d{1})?$/,
                     message: '2~3자리 숫자, 소수점 포함 3~4자리 숫자',
                   },
                 })}
