@@ -19,11 +19,14 @@ const Content = styled.input`
   padding: 5px 20px;
 `;
 
-const CommunityTitle = function ({ register, errors }) {
+const CommunityTitle = function ({ titled, register, errors }) {
   return (
     <CommunityTitleContainer>
       <Title>커뮤니티 명</Title>
       <Content
+        maxLength={10}
+        onInput={e => { sessionStorage.setItem("commu-title", e.target.value) }}
+        defaultValue={titled}
         {...register("title", {
           required: "커뮤니티 명을 필수로 적어주세요!",
           maxLength: {
