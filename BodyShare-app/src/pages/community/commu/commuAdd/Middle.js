@@ -29,6 +29,8 @@ const Middle = function () {
   const userNo = useRecoilValue(userSelector);
   const categoryList = useRecoilValue(categorySelector);
   const [categoryItem, setCategoryItem] = useRecoilState(categoryAtom);
+  const titled = sessionStorage.getItem("commu-title")
+  const contentd = sessionStorage.getItem("commu-content")
 
   const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onChange" });
 
@@ -46,6 +48,8 @@ const Middle = function () {
     formData.append('communityName', data.title);
     formData.append('intro', data.content);
 
+    sessionStorage.removeItem("commu-title")
+    sessionStorage.removeItem("commu-content")
     try {
       // 서버로 데이터를 전송합니다.
       const response = await instance.post("/community/commuadd", formData, {
@@ -73,19 +77,18 @@ const Middle = function () {
     }
   };
 
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <MiddleContainer>
+        <CommunityTitle titled={titled} register={register} errors={errors} />
+
+        <CommunityContent contentd={contentd} register={register} errors={errors} />
+
+        <CommunityCategory register={register} errors={errors} />
+        
         <Banner register={register} />
 
         <Profile register={register} />
-
-        <CommunityTitle register={register} errors={errors} />
-
-        <CommunityContent register={register} errors={errors} />
-
-        <CommunityCategory register={register} errors={errors} />
       </MiddleContainer>
 
       <Button
