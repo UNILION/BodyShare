@@ -9,7 +9,7 @@ const Title = styled.div`
   margin: 10px 0 10px 0;
 `;
 
-const Content = styled.textarea`
+const Content = styled.input`
   width: 310px;
   height: 50px;
   font-size: 15px;
