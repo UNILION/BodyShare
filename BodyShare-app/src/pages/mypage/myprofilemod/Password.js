@@ -39,7 +39,7 @@ const Warn = styled.p`
 
 const Password = function ({password, register, errors, getValues}) {
   const hidePassword = (password) => {
-    return password.charAt(0) + '*'.repeat(password.length - 1);
+    return '*'.repeat(password.length);
   };
 
   return(
