@@ -215,4 +215,13 @@ router.post("/checknic", async (req, res, next) => {
   }
 });
 
+// 세션 확인
+router.get("/checksession", async (req, res, next) => {
+  if(req.session.userNo){
+    res.json({check: true})
+  } else {
+    res.json({check: false})
+  }
+});
+
 module.exports = router;
