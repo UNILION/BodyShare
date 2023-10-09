@@ -29,7 +29,6 @@ import FoodSearch from "./pages/analysis/foodsearch/FoodtSearch";
 import TimeInput from "./pages/analysis/TimeInput";
 import MyProfileModify from "./pages/mypage/myprofilemod/MyProfileModify";
 import Logout from "./pages/mypage/Logout";
-import PasswordModify from "./pages/mypage/PasswordModify";
 import InterestModify from "./pages/mypage/intermod/InterestModify";
 import SportHome from "./pages/analysis/sportchart/SportChart";
 import FoodHome from "./pages/analysis/foodchart/FoodChart";
@@ -85,10 +84,6 @@ function App() {
               <Route
                 path="/mypage/modify/interest"
                 element={<InterestModify />}
-              />
-              <Route
-                path="/mypage/modify/password"
-                element={<PasswordModify />}
               />
             </Route>
             <Route path="/*" element={<Navigate replace to="/home" />} />
