@@ -7,8 +7,7 @@ const SportSearchResult = styled.div`
 `;
 
 const ResultButton = styled.button`
-  width: 360px;
-  //margin-top: 10px;
+  width: 340px;
   background-color: ${(props) => (props.active ? props.hovercolor : 'white')};
   border: none;
   border-radius: 15px;
@@ -31,6 +30,14 @@ const Line = styled.div`
   width: 340px;
   border: 1px solid rgba(135, 135, 135, 0.3);
 `;
+
+const Cover = styled.div`
+  background-color: white;
+  border-radius: 15px;
+  width:340px;
+  margin-top: 10px;
+  margin-left: 15px;
+`
 
 const SearchListItem = function ( { record, selectedList, changeSelected } ) {
   const [buttonActive, setButtonActive] = useState(false);
@@ -76,6 +83,7 @@ const SearchListItem = function ( { record, selectedList, changeSelected } ) {
 
   return (
     <SportSearchResult>
+      <Cover>
       <ResultButton
         active={buttonActive}
         onClick={handleButtonClick}
@@ -84,6 +92,7 @@ const SearchListItem = function ( { record, selectedList, changeSelected } ) {
         <RP>{record.name}</RP>
         <Line></Line>
       </ResultButton>
+          </Cover>
     </SportSearchResult>
   );
 };
