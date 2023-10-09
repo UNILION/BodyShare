@@ -53,7 +53,7 @@ const AfterPassword = function ({ password, register, errors, getValues }) {
           })}
           // placeholder="비밀번호 입력"
           type="password"
-          value={password}
+          defaultValue={password}
         />
         {errors.afterpassword && (
           <Warn>{errors.afterpassword.message}</Warn>
@@ -71,7 +71,7 @@ const AfterPassword = function ({ password, register, errors, getValues }) {
           })}
           // placeholder="비밀번호 확인"
           type="password"
-          value={password}
+          defaultValue={password}
         />
         {errors.checkpassword && (
           <Warn>{errors.checkpassword.message}</Warn>
@@ -81,4 +81,7 @@ const AfterPassword = function ({ password, register, errors, getValues }) {
   )
 };
 
+
+
 export default AfterPassword;
+
