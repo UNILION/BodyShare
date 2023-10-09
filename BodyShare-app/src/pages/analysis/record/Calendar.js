@@ -35,7 +35,7 @@ const NoteGrid = styled.div`
   position: relative;
   background-color: white;
   border: 1px solid rgba(135, 135, 135, 0.3);
-  border-radius: 15px;
+  border-radius: 15px 15px 0 0;
   padding: 0;
   box-sizing: border-box;
 `;
