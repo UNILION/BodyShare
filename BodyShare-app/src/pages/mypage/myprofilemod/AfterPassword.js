@@ -38,12 +38,14 @@ const Warn = styled.p`
   width: 260px;
 `
 
-const AfterPassword = function ({ password, register, errors, getValues }) {
+const AfterPassword = function ({ afterPassd, afterPassd2, password, register, errors, getValues }) {
   return (
     <>
       <Ul>
         <Titlel>변경 비밀번호</Titlel>
         <Input
+                onInput={e => { sessionStorage.setItem("afterPassd", e.target.value) }}
+                defaultValue={afterPassd}
           {...register("afterpassword", {
             // required: '비밀번호 영문, 숫자 포함 8~16글자',
             pattern: {
@@ -62,6 +64,8 @@ const AfterPassword = function ({ password, register, errors, getValues }) {
       <Ul> 
         <Titlel>비밀번호 확인</Titlel>
         <Input
+                onInput={e => { sessionStorage.setItem("afterPassd2", e.target.value) }}
+                defaultValue={afterPassd2}
           {...register("checkpassword", {
             // required: '비밀번호를 확인해주세요',
             validate: (value) => {
