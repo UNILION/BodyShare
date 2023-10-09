@@ -69,7 +69,6 @@ const IdDiv = styled.div`
 const Id = styled.input`
   width: 240px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -98,7 +97,6 @@ const NicknameDiv = styled.div`
 const Nickname = styled.input`
   width: 240px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -124,7 +122,6 @@ const NicknameButton = styled.button`
 const Pw = styled.input.attrs({ type: "password" })`
   width: 311px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -135,7 +132,6 @@ const Pw = styled.input.attrs({ type: "password" })`
 const CheckPw = styled.input.attrs({ type: "password" })`
   width: 311px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -169,7 +165,6 @@ const HDiv = styled.div`
 const Height = styled.input`
   width: 110px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -204,7 +199,6 @@ const WDiv = styled.div`
 const Weight = styled.input`
   width: 110px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
