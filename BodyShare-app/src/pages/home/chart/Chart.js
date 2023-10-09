@@ -60,7 +60,7 @@ const ChartContainer = styled.div`
 `;
 
 const Slide = styled.div`
-  width: 360px;
+  width: 360px !important;
   display: grid;
   place-items: center;
   transition: transform 0.3s ease;
@@ -74,7 +74,7 @@ const Slide = styled.div`
 const Cal = styled.div`
   position: absolute;
   top: 50%;
-  right: 15px;
+  right: 20px;
   font-size: 16px;
   font-weight: bold;
   text-align: center;
