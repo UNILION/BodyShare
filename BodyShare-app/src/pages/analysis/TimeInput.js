@@ -104,7 +104,7 @@ const ErrorMessage = styled.p`
 const BtnImg = styled.img`
   width: 35px;
   position: relative;
-  margin-left: 100px;
+  margin-left: 120px;
   bottom: 40px;
   left: 200px;
   cursor: pointer;
