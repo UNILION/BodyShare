@@ -65,6 +65,9 @@ const MyProfileModify = function () {
   const interest = useRecoilValue(interestSelector);
   const [list, setList] = useState(interest);
   const [profileInfo, setProfileInfo] = useState();
+  const passd = sessionStorage.getItem("passd")
+  const afterPassd = sessionStorage.getItem("afterPassd")
+  const afterPassd2 = sessionStorage.getItem("afterPassd2")
 
   const loadUser = async function () {
     try {
@@ -140,6 +143,10 @@ const MyProfileModify = function () {
     formData.append('height', data.height);
     formData.append('weight', data.weight);
 
+    sessionStorage.removeItem("passd")
+    sessionStorage.removeItem("afterPassd")
+    sessionStorage.removeItem("afterPassd2")
+
     try {
       // 사용자가 입력한 정보를 서버로 전송합니다.
       const response = await instance.put(`/users/useredit/${userNo}`, formData, {
@@ -196,16 +203,16 @@ const MyProfileModify = function () {
               <Title>나의 정보 수정</Title>
             </Titleul>
             <br />
-            <Banner register={register} />
-            <Profile register={register} />
             <Nickname nickname={profileInfo.nickname} register={register} errors={errors} getValues={getValues} />
-            <Password password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
-            <AfterPassword password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
+            <Password passd={passd} password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
+            <AfterPassword afterPassd={afterPassd} afterPassd2={afterPassd2} password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
             <BodyDiv>
               <Height height={profileInfo.height} register={register} errors={errors} />
               <Weight weight={profileInfo.weight} register={register} errors={errors} />
             </BodyDiv>
             <CateMod usersList={list} interest={interest} />
+            <Banner register={register} />
+            <Profile register={register} />
             <Button
               name="수정완료"
               img={Image5}
