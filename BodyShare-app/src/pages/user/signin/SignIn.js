@@ -15,6 +15,7 @@ const Logo = styled.img`
   width: 180px;
   height: 180px;
   margin: 15px auto auto auto;
+  background-color: white;
 `;
 
 const SignIn = function () {
