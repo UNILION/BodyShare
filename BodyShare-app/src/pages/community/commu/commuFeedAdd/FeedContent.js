@@ -25,6 +25,7 @@ const FeedContent = function ({ register, errors }) {
     <FeedContentContainer>
       <Title>오늘 무슨 일이 있었나요?</Title>
       <Content
+        maxLength={60}
         {...register("feedContent", {
           required: "피드 설명을 적어주세요!",
           maxLength: {

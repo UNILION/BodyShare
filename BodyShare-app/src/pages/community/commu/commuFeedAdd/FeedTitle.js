@@ -25,6 +25,7 @@ const FeedTitle = function ({ register, errors }) {
     <FeedTitleContainer>
       <Title>피드 제목 추가하기</Title>
       <Content
+        maxLength={10}
         {...register("feedTitle", {
           required: "피드 제목을 필수로 입력해주세요!",
           maxLength: {
