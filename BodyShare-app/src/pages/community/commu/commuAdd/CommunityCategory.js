@@ -73,6 +73,14 @@ const CommunityCategory = function ({ register, errors }) {
         </Category>
       )}
 
+      <input
+        type="hidden"
+        value={categoryList}
+        {...register("tag", {
+          required: "한 개의 카테고리를 선택해주세요!",
+        })}
+      />
+
       <Check>{errors.tag?.message}</Check>
     </CommunityCategoryContainer>
   );
