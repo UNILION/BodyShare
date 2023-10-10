@@ -45,6 +45,17 @@ const Cover = styled.div`
   margin-left: 9.5px;
 `;
 
+const Not = styled.div`
+  text-align: center;
+  font-size: 17px;
+  font-weight: bold;
+  width: 300px;
+  height: 420px;
+  margin-top: 170px;
+  overflow-y: hidden;
+  color: black;
+`
+
 const Icon = function ({ id, url }) {
   const instance = useCustomAxios();
   const userNo = useRecoilValue(userSelector);
@@ -99,6 +110,7 @@ const Icon = function ({ id, url }) {
 
   return (
     <>
+    {userNo > 0 ? 
       <Cover>
         <Pf>
           <Pfpic src={`http://localhost:33000/images/users/${url}`} />
@@ -112,7 +124,8 @@ const Icon = function ({ id, url }) {
           </Pfcommentul>
 
         </Pf>
-      </Cover>
+      </Cover> :  <Not>오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요</Not>
+}
     </>
   );
 };
