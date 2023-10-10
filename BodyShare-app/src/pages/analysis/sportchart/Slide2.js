@@ -70,15 +70,8 @@ const Slide2 = function () {
       const currentWeekEndDate = new Date(currentWeekStartDate);
       currentWeekEndDate.setDate(currentWeekStartDate.getDate() + 6);
 
-      // 현재 주 해당 운동기록만 저장
-      const currentWeekDate1 = exerciseData.filter((item) => {
-        const itemDate = parseDateString(item.exerciseDate);
-        return (
-          itemDate >= currentWeekStartDate && itemDate <= currentWeekEndDate // 운동한 날짜가 현재 주에 포함하는지 검사
-        );
-      });
       // 현재 주 해당 칼로리기록만 저장
-      const currentWeekData2 = foodData.filter((record) => {
+      const currentWeekData = foodData.filter((record) => {
         const recordDate = new Date(record.dietDate);
         return (
           recordDate >= currentWeekStartDate && recordDate <= currentWeekEndDate
@@ -113,7 +106,7 @@ const Slide2 = function () {
           }
         });
 
-        const consumedCaloriesRecord = currentWeekData2.find((record) => {
+        const consumedCaloriesRecord = currentWeekData.find((record) => {
           // 현재 요일에 해당되는 음식 칼로리 기록이 있는지 확인
           const recordDate = new Date(record.dietDate);
           return recordDate.getDay() === i;
