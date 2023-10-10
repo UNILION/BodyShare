@@ -57,8 +57,10 @@ const P = styled.p`
 
 const Record = function () {
   // 캘린더
-  const [value, onChange] = useState(new Date());
+  const value = new Date();
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [sportData, setsportData] = useState([]);
+  const [foodData, setfoodData] = useState([]);
   const today = new Date();
 
   const [sportsList, setSportsList] = useState();
@@ -73,8 +75,9 @@ const Record = function () {
   // 캘린더에 운동 식단 표시
   const tileContent = ({ date }) => {
     const dateStr = date.toLocaleDateString();
-    const hasExercise = sportsList && sportsList.some(item => dateCal(item.exerciseDate) === dateStr);
-    const hasDiet = foodList && foodList.some(item => dateCal(item.dietDate) === dateStr);
+
+    const hasExercise =  sportData && sportData.some(item => dateCal(item.exerciseDate) === dateStr);
+    const hasDiet = foodData && foodData.some(item => dateCal(item.dietDate) === dateStr);
   
     return (
       <div>
@@ -92,6 +95,7 @@ const Record = function () {
     try {
       const result = await instance.get(`/record/sports/${userNo}`);
       const tempSportsList = result.data; // API 응답의 구조에 따라 수정
+      setsportData(tempSportsList);
       let temp_s = [];
       temp_s.push(...filterS(selectedDate, tempSportsList)); // 새로운 내용 추가
       setSportsList(temp_s);
@@ -103,6 +107,7 @@ const Record = function () {
     try {
       const diet = await instance.get(`/record/food/${userNo}`);
       const tempdiet = diet.data; // API 응답의 구조에 따라 수정
+      setfoodData(tempdiet);
       let temp_f = [];
       temp_f.push(...filterF(selectedDate, tempdiet)); // 새로운 내용 추가
       setFoodList(temp_f);
@@ -146,9 +151,10 @@ const Record = function () {
 
   const dateCal = function (date) {
     const dateObject = new Date(date);
-
     return dateObject.toLocaleDateString();
+    
   };
+
 
   useEffect(() => {
     loadRecord();
@@ -160,7 +166,7 @@ const Record = function () {
         <CalendarDiv>
           <Calendar
             onChange={handleDateChange}
-            value={value}
+            value={today}
             // 현재 날짜를 최대로 잡음
             maxDate={new Date()}
             formatDay={(locale, date) => moment(date).format('D')}
