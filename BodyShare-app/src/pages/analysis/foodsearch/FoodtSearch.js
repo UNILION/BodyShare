@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import searchImg from 'assets/Img/search.png';
 import previous from 'assets/Img/Previous.png';
@@ -7,7 +7,6 @@ import Button from "components/commons/Button";
 import plus from "assets/Img/buttonplus.png";
 import ResultList from "pages/analysis/foodsearch/ResultList";
 import { useNavigate } from 'react-router-dom';
-import { useRecoilState } from 'recoil';
 import { foodSelector } from "recoil/foodList";
 import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
