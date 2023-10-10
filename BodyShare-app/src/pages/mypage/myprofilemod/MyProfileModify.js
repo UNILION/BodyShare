@@ -190,19 +190,13 @@ const MyProfileModify = function () {
       <form onSubmit={handleSubmit(onSubmit)}>
         {profileInfo && (
           <All>
-            {/* {interest.map(item => {
-              return <input {...register('sportsNo')}
-                type="hidden"
-                value={item.no}
-              />;
-            })} */}
-
-
             <Titleul>
               <Backbutton onClick={() => { navigate("/mypage") }}></Backbutton>
               <Title>나의 정보 수정</Title>
             </Titleul>
             <br />
+            <Banner register={register} />
+            <Profile register={register} />
             <Nickname nickname={profileInfo.nickname} register={register} errors={errors} getValues={getValues} />
             <Password passd={passd} password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
             <AfterPassword afterPassd={afterPassd} afterPassd2={afterPassd2} password={profileInfo.password} register={register} errors={errors} getValues={getValues} />
@@ -211,8 +205,7 @@ const MyProfileModify = function () {
               <Weight weight={profileInfo.weight} register={register} errors={errors} />
             </BodyDiv>
             <CateMod usersList={list} interest={interest} />
-            <Banner register={register} />
-            <Profile register={register} />
+            
             <Button
               name="수정완료"
               img={Image5}

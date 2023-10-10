@@ -9,7 +9,7 @@ const Titlel = styled.div`
   text-align: center;
   line-height: 45px;
   color: black;
-`
+`;
 
 const Input = styled.input`
   height: 45px;
@@ -24,7 +24,7 @@ const Ul = styled.ul`
   margin-top: 7px;
   display: grid;
   grid-template-columns: 95px auto;
-`
+`;
 
 const Warn = styled.p`
   margin-top: 7px;
@@ -35,9 +35,9 @@ const Warn = styled.p`
   grid-template-columns: auto;
   align-items: center;
   width: 260px;
-`
+`;
 
-const Password = function ({ passd, password, register, errors, getValues }) {
+const Password = function ({ passd, password, register, errors }) {
   const hidePassword = (password) => {
     return '*'.repeat(password.length);
   };

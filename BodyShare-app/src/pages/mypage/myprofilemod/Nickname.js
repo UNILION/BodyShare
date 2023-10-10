@@ -1,12 +1,4 @@
 import styled from "styled-components";
-import { useRecoilValue } from "recoil";
-import axios from "axios";
-import { useState } from "react";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const Titlel = styled.div`
   border-radius: 15px 0px 0px 15px;
@@ -17,7 +9,7 @@ const Titlel = styled.div`
   text-align: center;
   line-height: 45px;
   color: black;
-`
+`;
 
 const Input = styled.input`
   height: 45px;
@@ -32,7 +24,7 @@ const Ul = styled.ul`
   margin-top: 17px;
   display: grid;
   grid-template-columns: 95px auto;
-`
+`;
 
 const Warn = styled.p`
   margin-top: 7px;
@@ -43,62 +35,9 @@ const Warn = styled.p`
   grid-template-columns: auto;
   align-items: center;
   width: 260px;
-`
-
-const NicknameButton = styled.button`
-  width: 68px;
-  height: 25px;
-  font-size: 13px;
-  color: white;
-  border-radius: 15px;
-  background-color: #556FFF;
-  border: none;
-  margin-left: 15px;
-  margin-top: 12px;
-
-  &:hover {
-    cursor: pointer;
-  }
 `;
 
-const Nickname = function ({ nickname, register, errors, getValues }) {
-
-  // const [checkNic, setCheckNic] = useState("1");
-
-  // const checkNicServer = async function (nic) {
-  //   console.log(nickname, nic);
-  //   if (nic == nickname) {
-  //     // 닉네임이 비어 있는 경우 중복 확인을 하지 않음
-  //     setCheckNic("4");
-  //     return;
-  //   }
-  //   try {
-  //     const response = await instance.post('/users/checknic', { nic });
-  //     if (response.data.check) {
-  //       //중복 있음
-  //       setCheckNic("2");
-  //     } else {
-  //       //중복 없음
-  //       setCheckNic("3");
-  //     }
-  //   } catch (error) {
-  //     // 에러 처리
-  //     console.error(error);
-  //   }
-  // };
-
-  // const checkNicValidate = function () {
-  //   if (checkNic == 1) {
-  //     return "중복확인을 해주세요";
-  //   }
-  //   else if (checkNic == 2) {
-  //     return "중복된 닉네임입니다."
-  //   }
-  //   else {
-  //     return;
-  //   }
-  // };
-
+const Nickname = function ({ nickname, register, errors }) {
   return (
     <>
       <Ul>
@@ -110,13 +49,11 @@ const Nickname = function ({ nickname, register, errors, getValues }) {
               value: /^[a-zA-Z0-9가-힣]{4,16}$/,
               message: '영문, 한글, 숫자로 이루어진 4~16자',
             },
-            // validate: checkNicValidate,
           })}
           defaultValue={nickname}
           placeholder={nickname}
         >
         </Input>
-        {/* <NicknameButton onClick={() => checkNicServer(getValues('nickname'))}>중복확인</NicknameButton> */}
       </Ul>
       {errors.nickname && (
         <Warn>{errors.nickname.message}</Warn>

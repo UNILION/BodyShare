@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const PicInput = styled.input`
   margin-top: 15px;
   cursor: pointer;
-`
+`;
 
 const TitleT = styled.p`
   margin-top: 7px;

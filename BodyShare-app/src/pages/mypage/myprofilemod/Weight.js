@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import React, { useState } from "react";
 
 const Titlej = styled.div`
   border-radius: 15px 0px 0px 15px;
@@ -53,7 +52,7 @@ const Warn = styled.p`
   grid-template-columns: auto;
   align-items: center;
   width: 260px;
-`
+`;
 
 const Weight = function ({ weight, register, errors }) {
 

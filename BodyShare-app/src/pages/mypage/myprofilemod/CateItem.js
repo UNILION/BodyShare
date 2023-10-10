@@ -39,7 +39,7 @@ const Cover = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;  /* 말줄임 적용 */
-`
+`;
 
 const CateItem = function ({ record }) {
   const isDarkMode = useRecoilValue(isDarkAtom)
