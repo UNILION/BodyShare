@@ -11,17 +11,13 @@ const Form = styled.form`
   grid-row: 3;
   display: grid;
   grid-template-rows: auto auto auto auto;
-  gap: 10px;
 `;
 
 const ProfileDiv = styled.div`
   grid-row: 1;
-  width: 390px;
   height: 130px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  place-items: center;
 `;
 
 const ProfileImg = styled.img`
@@ -31,13 +27,12 @@ const ProfileImg = styled.img`
 `;
 
 const ProfileButton = styled.button`
-  width: 68px;
-  height: 25px;
   font-size: 13px;
   color: white;
   border-radius: 15px;
   background-color: #556FFF;
   border: none;
+  padding: 7px;
 
   &:hover {
     cursor: pointer;
@@ -59,12 +54,12 @@ const IdDiv = styled.div``;
 const Id = styled.input`
   width: 300px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
   font-size: 13px;
   padding-left: 10px;
+  margin-top: 10px;
 `;
 
 const NicknameDiv = styled.div`
@@ -73,7 +68,6 @@ const NicknameDiv = styled.div`
 const Nickname = styled.input`
   width: 300px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -84,7 +78,6 @@ const Nickname = styled.input`
 const Pw = styled.input.attrs({ type: "password" })`
   width: 300px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -95,7 +88,6 @@ const Pw = styled.input.attrs({ type: "password" })`
 const CheckPw = styled.input.attrs({ type: "password" })`
   width: 300px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -129,7 +121,6 @@ const HDiv = styled.div`
 const Height = styled.input`
   width: 110px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -139,7 +130,6 @@ const Height = styled.input`
 
 const HeightP = styled.p`
   font-size: 13px;
-  color: #808080;
   margin-left: 10px;
 `;
 
@@ -165,7 +155,6 @@ const WDiv = styled.div`
 const Weight = styled.input`
   width: 110px;
   height: 45px;
-  color: #808080;
   border-radius: 15px;
   background-color: #FFFFFF;
   border: 1px solid rgba(135, 135, 135, 0.3);
@@ -175,7 +164,6 @@ const Weight = styled.input`
 
 const WeigthP = styled.p`
   font-size: 13px;
-  color: #808080;
   margin-left: 10px;
 `;
 

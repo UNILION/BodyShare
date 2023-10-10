@@ -9,7 +9,7 @@ import useCustomAxios from "components/commons/CustomAxios"
 
 const CommunityDiv = styled.div`
   grid-row: 3;
-  width: 370px;
+  width: 360px;
   height: 305px;
   border-radius: 30px;
   border: 1px solid rgba(135, 135, 135, 0.3);
