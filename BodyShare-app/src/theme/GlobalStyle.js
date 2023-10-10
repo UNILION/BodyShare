@@ -5,7 +5,7 @@ const GlobalStyle = createGlobalStyle`
   ${reset}
    /* Width */
    ::-webkit-scrollbar {
-    width: 12px;
+    width: 7px;
   }
 
   /* Track */
