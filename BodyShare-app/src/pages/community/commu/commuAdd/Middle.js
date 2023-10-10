@@ -7,16 +7,11 @@ import Profile from "./Profile";
 import CommunityTitle from "./CommunityTitle";
 import CommunityContent from "./CommunityContent";
 import CommunityCategory from "./CommunityCategory";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { useRecoilState, useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
 import { categoryAtom, categorySelector } from "recoil/commuRecoil";
 import { useNavigate } from "react-router-dom";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const MiddleContainer = styled.div`
   display: grid;
@@ -25,6 +20,7 @@ const MiddleContainer = styled.div`
 `;
 
 const Middle = function () {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
   const categoryList = useRecoilValue(categorySelector);

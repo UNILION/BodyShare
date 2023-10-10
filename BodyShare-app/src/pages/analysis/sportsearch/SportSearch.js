@@ -9,16 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from 'recoil';
 import { useState } from "react";
 import { sportsSelector } from "recoil/sportList";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
 import { selectedSportNameState } from 'recoil/sportList';
-
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const Container = styled.div`
   width: 95%;
@@ -86,6 +80,7 @@ const Cover = styled.div`
 `;
 
 const SportSearch = function () {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
 
   const sportsList = useRecoilValue(sportsSelector);

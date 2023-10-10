@@ -1,18 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useRecoilState, useRecoilValue } from 'recoil';
-import axios from "axios";
 import { userAtom } from "recoil/userRecoil";
 import { useForm } from 'react-hook-form';
 import { sportsAtom } from "recoil/sportList";
 import { foodAtom } from "recoil/foodList";
 import { useState } from "react";
 import { isDarkAtom } from "recoil/themeRecoil";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
+import useCustomAxios from "components/commons/CustomAxios"
 
 const Form = styled.form`
   grid-row: 3;
@@ -89,6 +84,7 @@ const LoginButton = styled.button`
 `;
 
 const Login = function () {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
   const isDarkMode = useRecoilValue(isDarkAtom);
 

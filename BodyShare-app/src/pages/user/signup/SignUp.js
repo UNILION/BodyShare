@@ -3,16 +3,11 @@ import IntroMessage from "pages/user/signup/IntroMessage";
 import Interest from "pages/user/signup/Interest";
 import Selection from "pages/user/signup/Selection";
 import Button from 'pages/user/signup/Button';
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { sportsAtom } from "recoil/sportList";
 import { useEffect, useState } from "react";
 import { interestSelector } from "recoil/userRecoil";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const Container = styled.div`
   display: grid;
@@ -23,6 +18,7 @@ const Container = styled.div`
 `;
 
 const SignUp = function () {
+  const instance = useCustomAxios();
   const [sports, setSports] = useRecoilState(sportsAtom);
   const userInterest = useRecoilValue(interestSelector);
   const [list, setList] = useState(userInterest); 

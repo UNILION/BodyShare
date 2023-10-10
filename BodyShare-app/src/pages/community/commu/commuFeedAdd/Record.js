@@ -1,15 +1,10 @@
 import styled from "styled-components";
 import next from "assets/Img/circletgo.png";
 import Check from "components/commons/Check";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
 import { useEffect, useState } from "react";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
 
 const Targets = styled.div``;
 
@@ -120,6 +115,7 @@ const Cover_record = styled.div`
 `
 
 const Record = function ({ register, setRecordDate, errors }) {
+  const instance = useCustomAxios();
   const [click, setClick] = useState({
     click1: false,
     click2: false,

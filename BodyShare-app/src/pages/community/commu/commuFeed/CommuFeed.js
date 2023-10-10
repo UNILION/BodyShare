@@ -5,13 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
 import Comment from "./Comment";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { useEffect, useState } from "react";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
 
 const Container = styled.div`
   padding: 10px;
@@ -25,6 +20,7 @@ const Previous = styled.img`
 `;
 
 const CommuFeed = function () {
+  const instance = useCustomAxios();
   const [feedData, setFeedData] = useState();
   const [recordData, setRecordData] = useState();
   const location = useLocation();

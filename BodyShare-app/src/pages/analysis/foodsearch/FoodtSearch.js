@@ -8,14 +8,9 @@ import plus from "assets/Img/buttonplus.png";
 import ResultList from "pages/analysis/foodsearch/ResultList";
 import { useNavigate } from 'react-router-dom';
 import { foodSelector } from "recoil/foodList";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const Container = styled.div`
   width: 95%;
@@ -64,6 +59,7 @@ const BtnImg = styled.img`
 `;
 
 const FoodSearch = function () {
+  const instance = useCustomAxios();
   const foodList = useRecoilValue(foodSelector);
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState(""); 

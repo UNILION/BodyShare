@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Chart } from "react-google-charts";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 
 const Slide = styled.div`
   width: 360px;
@@ -18,13 +18,13 @@ const Slide = styled.div`
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 `;
 
-
 const ChartContainer = styled.div`
   width: 330px;
   height: 476px;
   background-color: white;
   border-radius: 15px;
 `;
+
 const Title = styled.div`
   text-align: center;
   font-size: 20px;
@@ -46,11 +46,8 @@ const Not = styled.div`
   color: black;
 `
 
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
 const Slide1 = function () {
+  const instance = useCustomAxios();
   const userNo = useRecoilValue(userSelector);
   const [sportsChartData, setSportsChartData] = useState([]);
   const [sum, setSum] = useState(0);

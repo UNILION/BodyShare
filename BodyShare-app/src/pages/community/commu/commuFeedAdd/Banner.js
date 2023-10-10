@@ -1,12 +1,7 @@
 import styled from "styled-components";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
 
 const BannerContainer = styled.div`
   width: 100%;
@@ -32,6 +27,7 @@ const Text = styled.div`
 `;
 
 const Banner = function () {
+  const instance = useCustomAxios();
   const [postData, setPostData] = useState([]);
   const location = useLocation();
   let commuNo = location.pathname.split("/")[3];

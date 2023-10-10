@@ -8,15 +8,10 @@ import Button from "components/commons/Button";
 import plus from "assets/Img/buttonplus.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
 import { useEffect, useState } from "react";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
 
 const MiddleContainer = styled.div`
   display: grid;
@@ -26,6 +21,7 @@ const MiddleContainer = styled.div`
 `;
 
 const Middle = function () {
+  const instance = useCustomAxios();
   const {
     register,
     handleSubmit,

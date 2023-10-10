@@ -6,14 +6,9 @@ import Profile from "./Profile";
 import Mainbar from "./Mainbar";
 import Groups from "./Groups";
 import previous from "assets/Img/Previous.png";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
 
 const Container = styled.div`
   margin: 10px;
@@ -60,6 +55,7 @@ const Img = styled.img`
 `;
 
 const CommuIn = function () {
+  const instance = useCustomAxios();
   const [communityData, setCommunityData] = useState([]);
   const [groupData, setGroupData] = useState([]);
   const location = useLocation();

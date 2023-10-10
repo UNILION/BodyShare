@@ -5,17 +5,12 @@ import './Calendar.css'
 import Add from "pages/analysis/record/NoteAdd"
 import SportRecord from "pages/analysis/record/SportNote"
 import FoodRecord from "pages/analysis/record/FoodNote"
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
 import moment from 'moment';
 import exercise from 'assets/Img/exercise.png'
 import food from 'assets/Img/food.png'
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const RecordGrid = styled.div`
   display: grid;
@@ -54,6 +49,7 @@ const P = styled.p`
 `;
 
 const Record = function () {
+  const instance = useCustomAxios();
   // 캘린더
   const value = new Date();
   const [selectedDate, setSelectedDate] = useState(new Date());

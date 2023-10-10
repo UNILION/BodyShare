@@ -5,15 +5,9 @@ import Image5 from "assets/Img/right.png";
 import Icon from "pages/mypage/mypage/Icon";
 import InfoCard from "pages/mypage/mypage/InfoCard";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
-
-//axios.defaults.baseURL = 'http://localhost:3000/api';
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const Banner = styled.img`
     height: 87px;
@@ -34,6 +28,7 @@ const Buttons = styled.ul`
 `;
 
 const MyPage = function () {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
 
   const userNo = useRecoilValue(userSelector);

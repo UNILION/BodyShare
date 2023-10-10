@@ -2,12 +2,7 @@ import styled from "styled-components";
 import Card from "components/commons/Card";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
+import useCustomAxios from "components/commons/CustomAxios"
 
 const Group = styled.div`
   display: grid;
@@ -29,6 +24,7 @@ const Not = styled.div`
 `
 
 const Middle = function ({ searchItemList }) {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
 
   const [list, setList] = useState([]);

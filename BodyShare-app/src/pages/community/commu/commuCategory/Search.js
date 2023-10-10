@@ -9,13 +9,8 @@ import { sportsSelector } from "recoil/sportList";
 import Selected from "pages/community/commu/commuCategory/Selected";
 import Button from "components/commons/Button";
 import plus from "assets/Img/check.png";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { categoryAtom } from "recoil/commuRecoil";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const SearchInput = styled.div`
   grid-row: 3;
@@ -63,6 +58,7 @@ const Cover = styled.div`
 `;
 
 const Search = function ({ categoryList }) {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
 
   const allSports = useRecoilValue(sportsSelector);

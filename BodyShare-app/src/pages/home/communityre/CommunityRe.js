@@ -2,14 +2,10 @@ import styled from "styled-components";
 import Card from "components/commons/Card";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
+import useCustomAxios from "components/commons/CustomAxios"
 
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const CommunityDiv = styled.div`
   grid-row: 3;
@@ -51,11 +47,8 @@ const CommunityRecommend = styled.div`
   margin: 0 auto;
 `;
 
-const CommunityRecommend2 = styled.div`
-  margin: 0 auto;
-`;
-
 const CommunityRe = function () {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
 

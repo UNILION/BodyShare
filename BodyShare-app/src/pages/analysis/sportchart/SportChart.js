@@ -3,16 +3,11 @@ import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
 import Slide1 from "./Slide1";
 import Slide2 from "./Slide2";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
 
 const SliderContainer = styled.div`
   display: grid;
@@ -31,6 +26,7 @@ const SliderContainer = styled.div`
 
 //운동 차트 1
 const SportChart = function () {
+  const instance = useCustomAxios();
   const userNo = useRecoilValue(userSelector);
   const [sportsChartData, setSportsChartData] = useState([]);
 

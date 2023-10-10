@@ -1,15 +1,10 @@
 import styled from "styled-components";
 import circle from "assets/Img/circletgo.png";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
 
 const CommentContainer = styled.div`
 `;
@@ -58,6 +53,7 @@ const Nick = styled.span`
 const Commend = styled.span``;
 
 const Comment = function () {
+  const instance = useCustomAxios();
   const [commentData, setCommentData] = useState([]);
   const [comment, setComment] = useState('')
   const [isValid, setIsValid] = useState(false);

@@ -1,19 +1,15 @@
 import styled from "styled-components";
-import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 import { useNavigate } from "react-router-dom";
 import { userSelector } from "recoil/userRecoil";
 import { foodSelector } from "recoil/foodList";
 import { useRecoilValue } from "recoil";
-
 import Slider from "react-slick";
 import { isDarkAtom } from "recoil/themeRecoil";
+import useCustomAxios from "components/commons/CustomAxios"
 
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
+
 
 const SliderContainer = styled.div`
   display: grid;
@@ -82,6 +78,7 @@ const Cal = styled.div`
 `;
 
 const Charts = function () {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
   const selectedFood = useRecoilValue(foodSelector);

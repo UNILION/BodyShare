@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Chart } from "react-google-charts";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 
 const Slide = styled.div`
   width: 360px;
@@ -36,12 +36,8 @@ const Not = styled.div`
   color: black;
 `
 
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
-
 const Slide2 = function () {
+  const instance = useCustomAxios();
   const userNo = useRecoilValue(userSelector);
   const [chartData, setChartData] = useState([]);
   const [sum, setSum] = useState(0);

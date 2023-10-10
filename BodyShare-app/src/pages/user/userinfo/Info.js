@@ -2,15 +2,10 @@ import styled from "styled-components";
 import user from "assets/Img/userProfileDefault.png"
 import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { interestAtom, interestSelector } from "recoil/userRecoil";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const Form = styled.form`
   grid-row: 3;
@@ -230,6 +225,7 @@ const ErrorP = styled.p`
 `;
 
 const Info = function () {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
 
   const [image, setImage] = useState(user);

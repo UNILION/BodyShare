@@ -1,19 +1,13 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { userSelector } from "recoil/userRecoil";
 import { sportsSelector } from 'recoil/sportList';
 import { useRecoilValue } from "recoil";
 import ButtonTT from "pages/mypage/newverst/ButtonTT";
 import CateItem from "./CateItem";
 import Tag from "components/commons/Tag";
-
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const Cateckul = styled.div`
   margin-top: 7px;
@@ -35,6 +29,7 @@ const Cateul = styled.div`
 
 
 const CateMod = function ({ usersList }) {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
   const sports = useRecoilValue(sportsSelector);

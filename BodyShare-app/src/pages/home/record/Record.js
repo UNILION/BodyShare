@@ -2,14 +2,11 @@ import styled from "styled-components";
 import CircleImg from "assets/Img/circletgo.png";
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
+import useCustomAxios from "components/commons/CustomAxios"
 
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
+
 
 const Records = styled.div`
   display: grid;
@@ -44,6 +41,7 @@ const ButtonImg = styled.img`
 `;
 
 const Record = function () {
+  const instance = useCustomAxios();
   const [count, setCount] = useState(0);
   const userNo = useRecoilValue(userSelector);
 

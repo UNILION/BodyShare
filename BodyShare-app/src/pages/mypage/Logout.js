@@ -9,13 +9,7 @@ import { useRecoilState } from 'recoil';
 import { userAtom, interestAtom } from "recoil/userRecoil";
 import { sportsAtom } from "recoil/sportList";
 import { foodAtom } from "recoil/foodList";
-import axios from "axios";
-
-//axios.defaults.baseURL = "http://localhost:33000/api";
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
+import useCustomAxios from "components/commons/CustomAxios"
 
 const All = styled.div`
   margin-left: 3px;
@@ -80,6 +74,7 @@ const Buttons = styled.ul`
 `;
 
 const Logout = function () {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
 
   const [userNo, setUserNo] = useRecoilState(userAtom);

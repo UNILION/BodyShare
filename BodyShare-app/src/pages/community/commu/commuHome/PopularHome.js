@@ -1,15 +1,10 @@
 import styled from "styled-components";
 import Card from "components/commons/Card";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const Group = styled.div`
   display: grid;
@@ -31,6 +26,7 @@ const Not = styled.div`
 `
 
 const PopularHome = function () {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
   const userNo = useRecoilValue(userSelector);
 

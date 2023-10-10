@@ -1,14 +1,9 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from "recoil";
 import MyCommu from "./MyCommu";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
 
 const Text = styled.div`
   font-size: 20px;
@@ -34,6 +29,7 @@ const Not = styled.div`
 `
 
 const My = function () {
+  const instance = useCustomAxios();
   const [communityData, setCommunityData] = useState();
 
   const userNo = useRecoilValue(userSelector);

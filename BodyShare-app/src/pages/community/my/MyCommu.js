@@ -1,15 +1,10 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import MyItem from "./Feed";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "recoil/themeRecoil";
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true,
-});
 
 const Group = styled.div`
   display: grid;
@@ -53,6 +48,7 @@ const Hr = styled.hr`
 `;
 
 const MyCommu = function ({ commu }) {
+  const instance = useCustomAxios();
   const [feeds, setFeeds] = useState([]);
   const [memberList, setMemberList] = useState([]);
   const navigate = useNavigate();

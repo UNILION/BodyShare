@@ -1,17 +1,11 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import useCustomAxios from "components/commons/CustomAxios"
 import { interestSelector, userSelector } from "recoil/userRecoil";
 import { sportsSelector } from 'recoil/sportList';
 import { useRecoilState, useRecoilValue } from "recoil";
 import { interestAtom } from "recoil/userRecoil";
 import Tag from "components/commons/useFormTag";
-
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const Nickli = styled.li`
   font-size: 28px;
@@ -52,6 +46,7 @@ const Cover = styled.div`
 `;
 
 const Icon = function ({ id, url }) {
+  const instance = useCustomAxios();
   const userNo = useRecoilValue(userSelector);
   const sports = useRecoilValue(sportsSelector);
   const [interestList, setInterestList] = useRecoilState(interestAtom);

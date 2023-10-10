@@ -6,15 +6,10 @@ import plus from "assets/Img/buttonplus.png";
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
-import { selectedSportNameState, selectedSportNoState, sportsSelector } from 'recoil/sportList'; 
-import axios from "axios";
+import { selectedSportNameState, selectedSportNoState, sportsSelector } from 'recoil/sportList';
+import useCustomAxios from "components/commons/CustomAxios"
 import { userSelector } from 'recoil/userRecoil';
 import { isDarkAtom } from 'recoil/themeRecoil';
-
-const instance = axios.create({
-  baseURL: "http://localhost:33000/api",
-  withCredentials: true
-});
 
 const TimeInputContainer = styled.div`
   display: grid;
@@ -111,6 +106,7 @@ const BtnImg = styled.img`
 `;
 
 const TimeInput = function () {
+  const instance = useCustomAxios();
   const navigate = useNavigate();
   const selectedSportName = useRecoilValue(selectedSportNameState);
   const selectedSportNo = useRecoilValue(selectedSportNoState);
@@ -135,20 +131,19 @@ const TimeInput = function () {
       return;
     }
 
-    try{
+    try {
       const response = await instance.get(`/users/user/${userNo}`);
-      if(response.data)
-      {
+      if (response.data) {
         user = response.data;
       }
-    } catch(err){
+    } catch (err) {
       console.error(err);
     }
 
     try {
-  
+
       const exerciseDate = String(new Date().toLocaleDateString());
-      
+
       // 일치 하는 운동 찾아서 met 계수 찾기
       const list = sportsList.filter(item => item.no == selectedSportNo);
       met = list[0].met;
@@ -156,19 +151,19 @@ const TimeInput = function () {
       // 칼로리 계산하기
       console.log(user);
       console.log(met);
-      const consum = Math.floor(((3.5 * met * user.weight * parseInt(exerciseTime))/1000)*5);
+      const consum = Math.floor(((3.5 * met * user.weight * parseInt(exerciseTime)) / 1000) * 5);
 
       // 선택한 음식 정보를 담은 객체를 생성
       const sportsData = {
         userNo,
         sportsNo: selectedSportNo,
         exerciseDate,
-        exerciseTime:  parseInt(exerciseTime),
+        exerciseTime: parseInt(exerciseTime),
         consum: consum
       };
-  
+
       const response = await instance.post('/record/sportsadd', sportsData);
-      if(response.data){
+      if (response.data) {
         console.log('POST 요청이 성공적으로 보내졌습니다.');
         console.log('서버 응답:', response.data);
         navigate('/analysis');
@@ -179,14 +174,14 @@ const TimeInput = function () {
   }
 
 
- 
+
   return (
     <>
       <TimeInputContainer>
         <PreviousButton src={previous} onClick={() => navigate('/analysis')}></PreviousButton>
-        
+
         <SportTitle>
-          <SportName  isDarkMode={isDarkMode}>{selectedSportName}</SportName>
+          <SportName isDarkMode={isDarkMode}>{selectedSportName}</SportName>
           <Line></Line>
         </SportTitle>
         <SportDate isDarkMode={isDarkMode}>
@@ -206,16 +201,16 @@ const TimeInput = function () {
           />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </SportTime>
-      </TimeInputContainer> 
+      </TimeInputContainer>
 
       <Button
-          name="입력하기"
-          ml="auto"
-          mt="30px"
-          mr = "20px"
-          width="150px"
-          display="block"
-          onClick={sendSportsDataToServer}
+        name="입력하기"
+        ml="auto"
+        mt="30px"
+        mr="20px"
+        width="150px"
+        display="block"
+        onClick={sendSportsDataToServer}
       >
       </Button>
 
