@@ -95,6 +95,7 @@ router.get("/commuusers/:no", async (req, res, next) => {
   }
 });
 
+// 커뮤니티 상세 피드 내용 조회
 router.get("/:commuNo/feeds/:limit", async (req, res, next) => {
   try {
     const limit = Number(req.params.limit);
