@@ -35,7 +35,7 @@ const Member = styled.div`
 const BtnImg = styled.img`
   width: 35px;
   position: relative;
-  bottom: 45px;
+  bottom: ${(props) => (props.registerMember ? '40px' : '45px')};
   left: 300px;
   cursor: pointer;
 `;
@@ -66,7 +66,7 @@ const Mainbar = function ({ registerMember, userCnt, postCnt, registerChange }) 
         onClick={() => registerChange(registerMember)}
       />
 
-      <BtnImg src={registerMember ? Image6 : Image5} onClick={() => registerChange(registerMember)}></BtnImg>
+      <BtnImg registerMember={registerMember} src={registerMember ? Image6 : Image5} onClick={() => registerChange(registerMember)}></BtnImg>
     </MainBar>
   );
 };
