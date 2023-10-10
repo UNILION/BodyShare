@@ -26,8 +26,8 @@ const CommuSearchAfter = function () {
 
   return (
     <Container>
-      <Top searchItemList={searchItemList}/>
-      <Middle searchItemList={searchItemList}/>
+      <Top searchItemList={searchItemList} />
+      <Middle searchItemList={searchItemList} />
       <AddImg src={Plus} onClick={() => navigate("/community/communityAdd")} />
     </Container>
   );

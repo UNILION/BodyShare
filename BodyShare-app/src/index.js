@@ -20,9 +20,9 @@ const Container = styled.div`
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <RecoilRoot>
-      <Container>
-        <App />
-      </Container>
+    <Container>
+      <App />
+    </Container>
   </RecoilRoot>
 );
 

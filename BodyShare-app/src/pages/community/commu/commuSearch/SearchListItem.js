@@ -33,14 +33,14 @@ const RP = styled.p`
 
 const Line = styled.div`
   width: 340px;
-  border: ${(props) => (props.isDarkMode ? "1px solid rgba(255, 255, 255, 0.7)": '1px solid rgba(135, 135, 135, 0.3)')};
+  border: ${(props) => (props.isDarkMode ? "1px solid rgba(255, 255, 255, 0.7)" : '1px solid rgba(135, 135, 135, 0.3)')};
 `;
 
 const Cover = styled.div`
   background-color: white;
   border-radius: 15px;
   width:360px;
-`
+`;
 
 const SearchListItem = function ({ record, selectedList, changeSelected }) {
   const [buttonActive, setButtonActive] = useState(false);
@@ -84,17 +84,17 @@ const SearchListItem = function ({ record, selectedList, changeSelected }) {
 
   return (
     <SportSearchResult>
-    <Cover>
-      <ResultButton
-        active={buttonActive}
-        onClick={handleButtonClick}
-        isDarkMode={isDarkMode}
-        hovercolor="rgba(85, 111, 255, 0.7)"
-      >
-        <RP color={isDarkMode ? "white" : "black"}>{record.name}</RP>
-        <Line isDarkMode={isDarkMode} />
-      </ResultButton>
-        </Cover>
+      <Cover>
+        <ResultButton
+          active={buttonActive}
+          onClick={handleButtonClick}
+          isDarkMode={isDarkMode}
+          hovercolor="rgba(85, 111, 255, 0.7)"
+        >
+          <RP color={isDarkMode ? "white" : "black"}>{record.name}</RP>
+          <Line isDarkMode={isDarkMode} />
+        </ResultButton>
+      </Cover>
     </SportSearchResult>
   );
 };

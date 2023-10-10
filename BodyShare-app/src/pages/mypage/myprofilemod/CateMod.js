@@ -84,7 +84,7 @@ const CateMod = function ({ usersList }) {
         </Cateckul>
         {matchingSportNames.map((sport, index) => (
           <Tag key={index} tagtitle={sport} ml="5px" />
-          ))}
+        ))}
       </>
     );
   };

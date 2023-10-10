@@ -32,39 +32,39 @@ const Line = styled.div`
   border: 1px solid rgba(135, 135, 135, 0.3);
 `;
 
-const SearchListItem = function ( { record, selectedList, changeSelected } ) {
+const SearchListItem = function ({ record, selectedList, changeSelected }) {
   const [buttonActive, setButtonActive] = useState(false);
 
   const handleButtonClick = () => {
-    if(selectedList.length < 3){
-      if(buttonActive == false){
+    if (selectedList.length < 3) {
+      if (buttonActive == false) {
         changeSelected([...selectedList, record])
-      } else{
-        const temp = [...selectedList].filter(item => item.no != record.no );
+      } else {
+        const temp = [...selectedList].filter(item => item.no != record.no);
         changeSelected(temp);
       }
       setButtonActive(!buttonActive);
-    }else if(selectedList.length == 3){
-      if(buttonActive == true){
-        const temp = [...selectedList].filter(item => item.no != record.no );
+    } else if (selectedList.length == 3) {
+      if (buttonActive == true) {
+        const temp = [...selectedList].filter(item => item.no != record.no);
         changeSelected(temp);
         setButtonActive(!buttonActive);
       }
     }
   };
 
-  const detect = function(){
-    if(!buttonActive){
-      const temp = [...selectedList].filter(item => item.no == record.no );
-      if(temp.length != 0){
+  const detect = function () {
+    if (!buttonActive) {
+      const temp = [...selectedList].filter(item => item.no == record.no);
+      if (temp.length != 0) {
         setButtonActive(!buttonActive);
       }
-    }else if(buttonActive){
-      const temp = [...selectedList].filter(item => item.no == record.no );
-      if(temp.length == 0){
+    } else if (buttonActive) {
+      const temp = [...selectedList].filter(item => item.no == record.no);
+      if (temp.length == 0) {
         setButtonActive(!buttonActive);
       }
-    }  
+    }
   };
 
   useEffect(() => {

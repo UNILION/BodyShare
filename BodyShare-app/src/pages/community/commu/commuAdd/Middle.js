@@ -36,7 +36,7 @@ const Middle = function () {
     if (data.profileImg[0]) {
       formData.append('profileImg', data.profileImg[0]);
     }
-    if (data.bannerImg[0]){
+    if (data.bannerImg[0]) {
       formData.append('bannerImg', data.bannerImg[0]);
     }
     formData.append('adminUserNo', userNo);
@@ -51,18 +51,18 @@ const Middle = function () {
       const response = await instance.post("/community/commuadd", formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
-        }, 
+        },
       });
 
       // 성공적으로 업데이트된 경우 usesCommunity에 등록 하고 관련 recoil 초기화하고 메인 페이지로 이동
       if (response.status === 200) {
-        try{
+        try {
           const result = await instance.post(`/users/communityadd/${response.data.id}/${userNo}`);
-          if(result.data)
-          // 성공시 메인 페이지 이동
-          setCategoryItem([]);
+          if (result.data)
+            // 성공시 메인 페이지 이동
+            setCategoryItem([]);
           navigate("/community");
-        }catch(err){
+        } catch (err) {
           console.error("usersCommunity 업데이트 실패")
         }
       } else {
@@ -81,7 +81,7 @@ const Middle = function () {
         <CommunityContent contentd={contentd} register={register} errors={errors} />
 
         <CommunityCategory register={register} errors={errors} />
-        
+
         <Banner register={register} />
 
         <Profile register={register} />

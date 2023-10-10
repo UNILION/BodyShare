@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -20,9 +20,7 @@ const SliderContainer = styled.div`
   position: absolute;
   bottom: 10px;
 }
-
 `;
-
 
 //운동 차트 1
 const SportChart = function () {
@@ -32,19 +30,19 @@ const SportChart = function () {
 
   const parseDateString = (dateString) => {
     const dateParts = dateString.split(".");
-    const year = parseInt(dateParts[0],10);
-    const month = parseInt(dateParts[1], 10) -1 // 월은 0부터 시작하니까 1 뺴줌
-    const day = parseInt(dateParts[2],10);
+    const year = parseInt(dateParts[0], 10);
+    const month = parseInt(dateParts[1], 10) - 1 // 월은 0부터 시작하니까 1 뺴줌
+    const day = parseInt(dateParts[2], 10);
     return new Date(year, month, day);
   }
   const chartDatas = async function () {
-    try{
+    try {
       const response = await instance.get(`/record/sports/${userNo}`);
       const allData = response.data;
 
       const currentDate = new Date();// 현재
       const currentWeekStartDate = new Date(currentDate); // 시작
-      currentWeekStartDate.setDate(                         
+      currentWeekStartDate.setDate(
         currentDate.getDate() - currentDate.getDay() //현재 날짜 - 현재요일 = 일
       );
       const currentWeekEndDate = new Date(currentWeekStartDate); // 종료
@@ -56,17 +54,17 @@ const SportChart = function () {
         return (
           itemDate >= currentWeekStartDate && itemDate <= currentWeekEndDate // 운동한 날짜가 현재 주에 포함하는지 검사
         );
-        
+
       });
 
       const sportsChartData = [["", "운동 분"]];
-      const daysOfWeek = ["일","월","화","수","목","금","토"];
+      const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
 
-      for (let i=0; i<7; i++){ // sportsChartData에 추가
+      for (let i = 0; i < 7; i++) { // sportsChartData에 추가
         const day = daysOfWeek[i];
         const date = new Date(currentWeekStartDate);
         date.setDate(currentWeekStartDate.getDate() + i);
-        const options ={ //2자리표현
+        const options = { //2자리표현
           month: "2-digit",
           day: "2-digit",
         };
@@ -85,7 +83,7 @@ const SportChart = function () {
       }
 
       setSportsChartData(sportsChartData);
-    }catch(error){
+    } catch (error) {
       console.log(error);
     }
   }

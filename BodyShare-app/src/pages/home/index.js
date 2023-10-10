@@ -1,6 +1,6 @@
 import Index from "pages/home/MainHome";
 
-const Home = function() {
+const Home = function () {
   return (
     <>
       <Index />

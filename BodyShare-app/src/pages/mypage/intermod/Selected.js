@@ -16,7 +16,7 @@ const Selected = function ({ selectedList, changeSelected }) {
   }
   const list = selectedList.map(record => {
     return (
-      <SelectedItem key={record.no} record={record} selectedList={selectedList} changeSelected={changeSelected}/>
+      <SelectedItem key={record.no} record={record} selectedList={selectedList} changeSelected={changeSelected} />
     );
   });
   return (

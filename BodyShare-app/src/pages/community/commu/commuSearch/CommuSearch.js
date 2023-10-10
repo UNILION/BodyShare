@@ -18,7 +18,7 @@ const CommuSearch = function () {
   return (
     <Container>
       <Top />
-      <Middle searchItemList={searchItemList}/>
+      <Middle searchItemList={searchItemList} />
     </Container>
   );
 };

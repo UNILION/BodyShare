@@ -44,21 +44,13 @@ const Not = styled.div`
   margin-top: 190px;
   overflow-y: hidden;
   color: black;
-`
+`;
 
 const Slide1 = function () {
   const instance = useCustomAxios();
   const userNo = useRecoilValue(userSelector);
   const [sportsChartData, setSportsChartData] = useState([]);
   const [sum, setSum] = useState(0);
-
-  const parseDateString = (dateString) => {
-    const dateParts = dateString.split(".");
-    const year = parseInt(dateParts[0], 10);
-    const month = parseInt(dateParts[1], 10) - 1 // 월은 0부터 시작하니까 1 뺴줌
-    const day = parseInt(dateParts[2], 10);
-    return new Date(year, month, day);
-  }
 
   const chartDatas = async function () {
     try {
@@ -72,7 +64,7 @@ const Slide1 = function () {
       );
       const currentWeekEndDate = new Date(currentWeekStartDate); // 종료
       currentWeekEndDate.setDate(currentWeekStartDate.getDate() + 6); // 토
-      
+
       const sportsChartData = [["", "운동 분"]];
       const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
       let temp = sum;
@@ -138,7 +130,7 @@ const Slide1 = function () {
             graph_id="columnchart_values"
             rootProps={{ "data-testid": "1" }}
           />
-        : <Not>7일동안 운동이 기록되지 않았습니다. 기록 탭에서 등록해주세요.</Not>}
+          : <Not>7일동안 운동이 기록되지 않았습니다. 기록 탭에서 등록해주세요.</Not>}
       </ChartContainer>
     </Slide>
   );

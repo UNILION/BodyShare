@@ -12,17 +12,17 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const InterestList = function() {
+const InterestList = function () {
   const interestList = useRecoilValue(interestSelector);
 
   return (
     <Container>
       <IntroMessage />
 
-      <Search interestList={interestList}/>
+      <Search interestList={interestList} />
     </Container>
   );
-  
+
 };
 
 export default InterestList;

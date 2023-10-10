@@ -21,7 +21,7 @@ const SP = styled.p`
   margin-top: 25px;
 `;
 
-const Intro = function() {
+const Intro = function () {
   return (
     <Container>
       <BP>안녕하세요.</BP>

@@ -5,7 +5,7 @@ import { userAtom } from "recoil/userRecoil";
 
 const API_SERVER = process.env.REACT_APP_API_SERVER;
 
-const CustomAxios = function(){
+const CustomAxios = function () {
   const [userNo, setUserNo] = useRecoilState(userAtom);
   const navigate = useNavigate();
   const instance = axios.create({
@@ -17,25 +17,25 @@ const CustomAxios = function(){
     return res;
   }, async err => {
     console.error('interceptors err', err);
-    
+
     const { response } = err;
 
     console.log(userNo)
-    if(response?.status === 401 && userNo > 0){
-        console.log('refreshToken 인증 실패.');
-       
-        if(window.localStorage.getItem('recoil-persist')){
-          setUserNo('');
-           // alert('로그 필요');
-          navigate("/")
-        }
-        window.localStorage.removeItem('recoil-persist');
+    if (response?.status === 401 && userNo > 0) {
+      console.log('refreshToken 인증 실패.');
 
-        
-    }else{
+      if (window.localStorage.getItem('recoil-persist')) {
+        setUserNo('');
+        // alert('로그 필요');
+        navigate("/")
+      }
+      window.localStorage.removeItem('recoil-persist');
+
+
+    } else {
       return Promise.reject(err);
     }
-    
+
   });
 
   return instance;

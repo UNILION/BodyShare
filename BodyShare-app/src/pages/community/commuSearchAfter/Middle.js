@@ -21,7 +21,7 @@ const Not = styled.div`
   width: 300px;
   max-height: 450px;
   overflow-y: hidden;
-`
+`;
 
 const Middle = function ({ searchItemList }) {
   const instance = useCustomAxios();

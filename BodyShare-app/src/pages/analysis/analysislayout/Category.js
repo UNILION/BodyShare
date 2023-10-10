@@ -67,7 +67,7 @@ const Text = styled.span`
 const Cover = styled.div`
   background-color: white;
   border-radius: 23px 23px 0 0;
-`
+`;
 
 const Category = function () {
   const navigate = useNavigate();
@@ -105,39 +105,39 @@ const Category = function () {
     <Container>
       <Tab>
         <Cover>
-        <Tab1
-          onClick={showCalender}
-          bg={Calender ? "rgba(85,111,255,0.3)" : "white"}
-          under={Calender ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
-        >
-          <Text color={Calender ? "#556FFF" : "rgba(0,0,0,0.2)"}>기록</Text>
-        </Tab1>
+          <Tab1
+            onClick={showCalender}
+            bg={Calender ? "rgba(85,111,255,0.3)" : "white"}
+            under={Calender ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
+          >
+            <Text color={Calender ? "#556FFF" : "rgba(0,0,0,0.2)"}>기록</Text>
+          </Tab1>
         </Cover>
         <Cover>
-        <Tab2
-          onClick={showSportChart}
-          bg={SportChart ? "rgba(85,111,255,0.3)" : "white"}
-          under={SportChart ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
-        >
-          <Text
-            color={SportChart ? "#556FFF" : "rgba(0,0,0,0.2)"}
+          <Tab2
+            onClick={showSportChart}
+            bg={SportChart ? "rgba(85,111,255,0.3)" : "white"}
+            under={SportChart ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
           >
-            운동
-          </Text>
-        </Tab2>
+            <Text
+              color={SportChart ? "#556FFF" : "rgba(0,0,0,0.2)"}
+            >
+              운동
+            </Text>
+          </Tab2>
         </Cover>
         <Cover>
-        <Tab3
-          onClick={showFoodChart}
-          bg={FoodChart ? "rgba(85,111,255,0.3)" : "white"}
-          under={FoodChart ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
-        >
-          <Text
-            color={FoodChart ? "#556FFF" : "rgba(0,0,0,0.2)"}
+          <Tab3
+            onClick={showFoodChart}
+            bg={FoodChart ? "rgba(85,111,255,0.3)" : "white"}
+            under={FoodChart ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
           >
-            식단
-          </Text>
-        </Tab3>
+            <Text
+              color={FoodChart ? "#556FFF" : "rgba(0,0,0,0.2)"}
+            >
+              식단
+            </Text>
+          </Tab3>
         </Cover>
       </Tab>
     </Container>

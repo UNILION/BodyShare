@@ -6,7 +6,6 @@ import { useRecoilValue } from 'recoil';
 import { foodSelector } from "recoil/foodList";
 import { isDarkAtom } from "recoil/themeRecoil";
 
-
 const FoodNoteContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr auto auto;
@@ -63,7 +62,7 @@ const FoodListItem = function (props) {
   const isDarkMode = useRecoilValue(isDarkAtom);
 
   let result = [];
-  result = allFoods.filter(item => item.no === props.record.foodNo); 
+  result = allFoods.filter(item => item.no === props.record.foodNo);
 
   const toggleExpansion = () => {
     setIsExpanded(!isExpanded);
@@ -89,17 +88,17 @@ const FoodListItem = function (props) {
 
 
   return (
-    <FoodNoteContainer style={{backgroundColor:isDarkMode?"black":"white"}}>
+    <FoodNoteContainer style={{ backgroundColor: isDarkMode ? "black" : "white" }}>
       <FoodNote>{result[0].name}</FoodNote>
       <Calorie>칼로리: {props.record.calories}kal</Calorie>
-      <SeeMore onClick={toggleExpansion} style={{backgroundColor:isDarkMode?"black":"white"}}>
-        <SmIng src={isDarkMode?seemore_white:seemore_dark}></SmIng>
+      <SeeMore onClick={toggleExpansion} style={{ backgroundColor: isDarkMode ? "black" : "white" }}>
+        <SmIng src={isDarkMode ? seemore_white : seemore_dark}></SmIng>
       </SeeMore>
       {isExpanded && (
         <SeeMoreDetail ref={seeMoreDetailRef}>
-        <Delete onClick={() => props.onDelete(props.record.planNo)}>
-          삭제하기
-        </Delete>
+          <Delete onClick={() => props.onDelete(props.record.planNo)}>
+            삭제하기
+          </Delete>
         </SeeMoreDetail>
       )}
 

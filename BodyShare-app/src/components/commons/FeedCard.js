@@ -96,9 +96,9 @@ const Menu = styled.div`
   text-align: center;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
-  opacity: ${(props) => props.isDropped ? 1 : 0 };
-  visibility: ${(props) => props.isDropped ? "visible": "hidden" };
-  transform: ${(props) => props.isDropped ? "translate(-50%, 0)": "translate(-50%, -20px)" };
+  opacity: ${(props) => props.isDropped ? 1 : 0};
+  visibility: ${(props) => props.isDropped ? "visible" : "hidden"};
+  transform: ${(props) => props.isDropped ? "translate(-50%, 0)" : "translate(-50%, -20px)"};
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
   z-index: 9;
 
@@ -115,7 +115,7 @@ const Menu = styled.div`
     border-bottom-color: gray;
   }
 `
-   
+
 const Ul = styled.ul`
   & > li {
     margin-bottom: 10px;
@@ -168,8 +168,8 @@ const FeedCard = (props) => {
       <Contents>{props.contents}</Contents>
       <Footer>
         <Left
-        onClick = {myPageHandler}
-        ref = {myPageRef}
+          onClick={myPageHandler}
+          ref={myPageRef}
         >
           <Img src={dumbbell} />
           <Exer>{props.exercise}개</Exer>
@@ -177,15 +177,15 @@ const FeedCard = (props) => {
           <Time>{props.time}분</Time>
         </Left>
         <Menu isDropped={myPageIsOpen}>
-            <Ul>
+          <Ul>
             {props.recordData ? props.recordData.map((record, idx) => (
-            <Li key={idx}>
-              <LinkWrapper>{record.sportsName} {record.exerciseTime}분</LinkWrapper>
-            </Li>
-          )):null}
-            </Ul>
+              <Li key={idx}>
+                <LinkWrapper>{record.sportsName} {record.exerciseTime}분</LinkWrapper>
+              </Li>
+            )) : null}
+          </Ul>
         </Menu>
-          <Upload>{props.upload}</Upload>
+        <Upload>{props.upload}</Upload>
       </Footer>
     </StyledCard>
   );

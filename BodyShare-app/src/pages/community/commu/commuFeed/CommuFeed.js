@@ -30,10 +30,10 @@ const CommuFeed = function () {
   const year = feedData ? String(feedData.createdDate.split('-')[0]) : 0
   const month = feedData ? String(feedData.createdDate.split('-')[1]) : 0
   const day = feedData ? String(feedData.createdDate.split('-')[2]) : 0
-  const feedTime = feedData ? year + "년" + month + "월" + day.substring(0,2) + "일" : 0
-  const createTime = feedData ? year + ". " + month + ". " + day.substring(0,2) + ". " : 0
+  const feedTime = feedData ? year + "년" + month + "월" + day.substring(0, 2) + "일" : 0
+  const createTime = feedData ? year + ". " + month + ". " + day.substring(0, 2) + ". " : 0
 
-   const feedList = async function () {
+  const feedList = async function () {
     try {
       const feedResponse = await instance.get(
         `/post/${feedNo}`
@@ -59,7 +59,7 @@ const CommuFeed = function () {
   useEffect(() => {
     feedList();
   }, []);
-  
+
   useEffect(() => {
     recordList();
   }, [feedData]);
@@ -72,18 +72,18 @@ const CommuFeed = function () {
         onClick={() => navigate(`/community/commuIn/${feedData.communityNo}`)}
       />
 
-    {feedData?
-      <FeedCard
-        img={`http://localhost:33000/images/posts/${feedData.contentImageUrl}`}
-        title={feedData.title}
-        contents={feedData.content}
-        exercise= {recordData ? (recordData.length > 0) ? recordData[0].cnt_exercise : 0 : 0}
-        time={recordData ? (recordData.length > 0) ? recordData[0].total_time : 0 : 0}
-        upload={feedTime}
-        recordData={recordData}
-      />
-      :null
-    }
+      {feedData ?
+        <FeedCard
+          img={`http://localhost:33000/images/posts/${feedData.contentImageUrl}`}
+          title={feedData.title}
+          contents={feedData.content}
+          exercise={recordData ? (recordData.length > 0) ? recordData[0].cnt_exercise : 0 : 0}
+          time={recordData ? (recordData.length > 0) ? recordData[0].total_time : 0 : 0}
+          upload={feedTime}
+          recordData={recordData}
+        />
+        : null
+      }
       <Comment />
     </Container>
   );

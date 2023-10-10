@@ -28,11 +28,11 @@ const PreviousButton = styled.button`
 const CommuSearch = function () {
   const navigate = useNavigate();
   const categoryList = useRecoilValue(categorySelector);
-  
+
   return (
     <Container>
       <PreviousButton onClick={() => navigate("/community/communityAdd")} />
-      <Search categoryList={categoryList}/>
+      <Search categoryList={categoryList} />
     </Container>
   );
 };

@@ -3,7 +3,7 @@ import user from "assets/Img/userProfileDefault.png"
 import { useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import useCustomAxios from "components/commons/CustomAxios"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { interestAtom, interestSelector } from "recoil/userRecoil";
 
@@ -54,9 +54,7 @@ const InputDiv = styled.div`
   justify-content: center;
 `;
 
-const IdDiv = styled.div`
-
-`;
+const IdDiv = styled.div``;
 
 const Id = styled.input`
   width: 300px;
@@ -259,8 +257,8 @@ const Info = function () {
       }
     }
 
-     // 중복 닉네임 검사
-     if (dirtyFields.nickname) {
+    // 중복 닉네임 검사
+    if (dirtyFields.nickname) {
       const nicknameValue = getValues('nickname');
       try {
         const response = await instance.post('/users/checknic', { nic: nicknameValue });
@@ -307,8 +305,8 @@ const Info = function () {
         // 성공적으로 가입된 경우 처리
 
         // 관심사 추가 코드 (for 문 이용), 추가 후 recoil에 있는 관심사 리스트 초기화 해야함
-        try{
-          for(let i=0; i<interestList.length; i++){
+        try {
+          for (let i = 0; i < interestList.length; i++) {
             const data = {
               userNo: response.data.id,
               sportsNo: interestList[i].no
@@ -323,7 +321,7 @@ const Info = function () {
         } catch (error) {
           console.error(error);
         }
-        
+
       } else {
         // 가입 실패 시 에러 처리
         console.error('가입 실패');
@@ -442,7 +440,7 @@ const Info = function () {
               <ErrorP>{errors.height.message}</ErrorP>
             )}
           </HeightDiv>
-          
+
           <WeigthDiv>
             <WDiv>
               <Weight

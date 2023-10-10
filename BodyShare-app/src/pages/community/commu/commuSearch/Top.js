@@ -19,9 +19,7 @@ const Top = function () {
   const navigate = useNavigate();
 
   return (
-    <>
       <PreviousButton onClick={() => navigate("/community")} />
-    </>
   );
 };
 

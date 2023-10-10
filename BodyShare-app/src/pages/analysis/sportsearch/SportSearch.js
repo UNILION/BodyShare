@@ -9,8 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from 'recoil';
 import { useState } from "react";
 import { sportsSelector } from "recoil/sportList";
-import useCustomAxios from "components/commons/CustomAxios"
-import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
 import { selectedSportNameState } from 'recoil/sportList';
 
@@ -80,7 +78,6 @@ const Cover = styled.div`
 `;
 
 const SportSearch = function () {
-  const instance = useCustomAxios();
   const navigate = useNavigate();
 
   const sportsList = useRecoilValue(sportsSelector);
@@ -143,7 +140,7 @@ const SportSearch = function () {
         width="180px"
         display="block"
         ml="auto"
-        mr = "20px"
+        mr="20px"
         mt="30px"
         onClick={() => {
           if (selected) {

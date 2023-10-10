@@ -19,26 +19,26 @@ const Contents = styled.input`
 
 const CommunityContentContainer = styled.div``;
 
-const CommunityContent = function ({contentd, register, errors}) {
+const CommunityContent = function ({ contentd, register, errors }) {
   return (
     <CommunityContentContainer>
-    <Title>커뮤니티 설명</Title>
-    <Contents
-      maxLength={60}
-      onInput={e => { sessionStorage.setItem("commu-content", e.target.value) }}
-      defaultValue={contentd}
-      {...register("content", {
-        required: "설명을 필수로 적어주세요!",
-        maxLength: {
-          value: 60,
-          message: "최대 60글자까지 가능합니다!"
-        }
-      })}
-      placeholder="나의 커뮤니티를 설명해주세요!
+      <Title>커뮤니티 설명</Title>
+      <Contents
+        maxLength={60}
+        onInput={e => { sessionStorage.setItem("commu-content", e.target.value) }}
+        defaultValue={contentd}
+        {...register("content", {
+          required: "설명을 필수로 적어주세요!",
+          maxLength: {
+            value: 60,
+            message: "최대 60글자까지 가능합니다!"
+          }
+        })}
+        placeholder="나의 커뮤니티를 설명해주세요!
 (최대 60글자)"
-    />
-    <Check>{errors.content?.message}</Check>
-  </CommunityContentContainer>
+      />
+      <Check>{errors.content?.message}</Check>
+    </CommunityContentContainer>
   )
 }
 

@@ -70,11 +70,8 @@ const Cover = styled.div`
 
 const Search = function ({ interestList }) {
   const navigate = useNavigate();
-
   const allSports = useRecoilValue(sportsSelector);
-
   const [list, setList] = useState(allSports);
-
   const [buttonState, setButtonState] = useState({
     button1: true,
     button2: false,

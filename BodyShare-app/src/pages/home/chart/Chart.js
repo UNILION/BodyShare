@@ -9,8 +9,6 @@ import Slider from "react-slick";
 import { isDarkAtom } from "recoil/themeRecoil";
 import useCustomAxios from "components/commons/CustomAxios"
 
-
-
 const SliderContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 100%);

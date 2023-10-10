@@ -7,7 +7,7 @@ const Layout = function () {
   return (
     <>
       <Header />
-      
+
       <Category />
 
       <Outlet />

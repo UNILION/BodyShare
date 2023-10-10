@@ -87,7 +87,6 @@ const userModel = {
   // 회원 가입한 커뮤니티 조회
   async findByNoUsersCommu(no) {
     try {
-      // const sql = `select * from usersCommunity where userNo = ?`;
       const sql = `
           select * 
             from usersCommunity

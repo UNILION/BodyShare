@@ -76,26 +76,26 @@ const Category = function () {
     <Container>
       <Tab>
         <Cover>
-        <Tab1
-          onClick={showMypage}
-          bg={Mypage ? "rgba(85,111,255,0.3)" : "white"}
-          under={Mypage ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
-        >
-          <Text color={Mypage ? "#556FFF" : "rgba(0,0,0,0.2)"}>MY</Text>
-        </Tab1>
+          <Tab1
+            onClick={showMypage}
+            bg={Mypage ? "rgba(85,111,255,0.3)" : "white"}
+            under={Mypage ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
+          >
+            <Text color={Mypage ? "#556FFF" : "rgba(0,0,0,0.2)"}>MY</Text>
+          </Tab1>
         </Cover>
         <Cover>
-        <Tab2
-          onClick={showCommu}
-          bg={Commu ? "rgba(85,111,255,0.3)" : "white"}
-          under={Commu ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
-        >
-          <Text
-            color={Commu ? "#556FFF" : "rgba(0,0,0,0.2)"}
+          <Tab2
+            onClick={showCommu}
+            bg={Commu ? "rgba(85,111,255,0.3)" : "white"}
+            under={Commu ? "2px solid #556FFF" : "2px solid rgba(0,0,0,0.25)"}
           >
-            커뮤니티
-          </Text>
-        </Tab2>
+            <Text
+              color={Commu ? "#556FFF" : "rgba(0,0,0,0.2)"}
+            >
+              커뮤니티
+            </Text>
+          </Tab2>
         </Cover>
       </Tab>
       {Mypage ? <My /> : null}

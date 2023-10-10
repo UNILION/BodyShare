@@ -5,13 +5,12 @@ const food = require("../models/foodModel");
 
 // 음식 목록 조회
 router.get("/", async (req, res, next) => {
-  try{
+  try {
     const list = await food.find();
     res.json(list);
-  }catch(err){
+  } catch (err) {
     next(err);
   }
 });
-
 
 module.exports = router;

@@ -57,7 +57,7 @@ const Delete = styled.button`
 
 const SportsListItem = function (props) {
   const allSports = useRecoilValue(sportsSelector);
-  const [isExpanded, setIsExpanded] = useState(false); 
+  const [isExpanded, setIsExpanded] = useState(false);
   const seeMoreDetailRef = useRef(null);
   const isDarkMode = useRecoilValue(isDarkAtom);
 
@@ -87,11 +87,11 @@ const SportsListItem = function (props) {
   }, [isExpanded]);
 
   return (
-    <SportNoteContainer style={{backgroundColor:isDarkMode?"black":"white"}}>
+    <SportNoteContainer style={{ backgroundColor: isDarkMode ? "black" : "white" }}>
       <SportNote>{result[0].name}</SportNote>
       <SportTime>운동 시간: {props.record.exerciseTime}분</SportTime>
-      <SeeMore onClick={toggleExpansion} style={{backgroundColor:isDarkMode?"black":"white"}}>
-      <SmIng src={isDarkMode?seemore_white:seemore_dark}></SmIng>
+      <SeeMore onClick={toggleExpansion} style={{ backgroundColor: isDarkMode ? "black" : "white" }}>
+        <SmIng src={isDarkMode ? seemore_white : seemore_dark}></SmIng>
       </SeeMore>
       {isExpanded && (
         <SeeMoreDetail ref={seeMoreDetailRef}>

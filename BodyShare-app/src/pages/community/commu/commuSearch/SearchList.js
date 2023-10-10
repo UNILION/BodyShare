@@ -8,10 +8,10 @@ const Div = styled.div`
   max-height: 300px;
 `;
 
-const SearchList = function ({itemList, selectedList, changeSelected}) {
+const SearchList = function ({ itemList, selectedList, changeSelected }) {
   const list = itemList.map(record => {
     return (
-      <SearchListItem key={record.no} record={record} selectedList={selectedList} changeSelected={changeSelected}/>
+      <SearchListItem key={record.no} record={record} selectedList={selectedList} changeSelected={changeSelected} />
     );
   });
   return (

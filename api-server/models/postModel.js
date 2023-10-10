@@ -2,14 +2,14 @@ const pool = require("./pool");
 
 const postModel = {
   // 해당 커뮤니티 게시물 목록 조회
-  async find(no){
-    try{
+  async find(no) {
+    try {
       const sql = `select * from communityPost 
       where communityNo = ?
       ORDER BY createdDate DESC;`;
-      const [ result ] = await pool.query(sql, [no]);
+      const [result] = await pool.query(sql, [no]);
       return result;
-    }catch(err){
+    } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
   },
@@ -40,7 +40,7 @@ const postModel = {
     }
   },
 
-  
+
   // 커뮤니티 게시물 추가 상단 내용
   async postBanner(no) {
     try {
@@ -77,12 +77,12 @@ const postModel = {
   },
 
   // 게시물 삭제
-  async deletePost(no, conn=pool){
-    try{
+  async deletePost(no, conn = pool) {
+    try {
       const sql = `delete from communityPost where postNo = ?`;
-      const [ result ] = await conn.query(sql, [no]);
+      const [result] = await conn.query(sql, [no]);
       return result.affectedRows;
-    }catch(err){
+    } catch (err) {
       throw new Error("DB Error", { cause: err });
     }
   }

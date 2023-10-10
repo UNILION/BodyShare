@@ -23,7 +23,7 @@ const Not = styled.div`
   height: 420px;
   margin-top: 30px;
   overflow-y: hidden;
-`
+`;
 
 const PopularHome = function () {
   const instance = useCustomAxios();

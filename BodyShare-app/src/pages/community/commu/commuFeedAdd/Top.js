@@ -30,7 +30,7 @@ const TopContent = styled.div`
   margin-top: 5px;
 `;
 
-const Top = function ({commuNo}) {
+const Top = function ({ commuNo }) {
   const navigate = useNavigate();
   return (
     <TopContainer>

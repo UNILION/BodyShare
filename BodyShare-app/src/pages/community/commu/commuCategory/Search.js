@@ -177,7 +177,7 @@ const Search = function ({ categoryList }) {
       <SearchList itemList={list} selectedList={selectedList} changeSelected={changeSelected} />
 
       <Selected selectedList={selectedList} changeSelected={changeSelected} />
-      
+
       <Donediv>
         <Button
           name="선택완료"

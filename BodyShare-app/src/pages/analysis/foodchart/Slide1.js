@@ -16,7 +16,6 @@ const Slide = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.25);
   margin: 0 auto;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-
 `;
 
 const ChartContainer = styled.div`
@@ -25,12 +24,14 @@ const ChartContainer = styled.div`
   background-color: white;
   border-radius: 15px;
 `;
+
 const Calories = styled.div`
   position: absolute;
   bottom: 80px;
   left: 110px;
   font-weight: bold;
 `;
+
 const Title = styled.div`
   text-align: center;
   font-size: 20px;
@@ -50,7 +51,7 @@ const Not = styled.div`
   margin-top: 170px;
   overflow-y: hidden;
   color: black;
-`
+`;
 
 const Slide1 = function () {
   const instance = useCustomAxios();
@@ -64,7 +65,6 @@ const Slide1 = function () {
       const responseFood = await instance.get(`/record/food/${userNo}`);
 
       const allDataFood = responseFood.data;
-      //console.log(allDataFood);
 
       const todayDate = new Date().toLocaleDateString();
 
@@ -75,19 +75,19 @@ const Slide1 = function () {
           itemDate === todayDate
         );
       });
-    
+
       let carbohydrate = 0;
       let protein = 0;
       let fat = 0;
       let totalCalories = 0;
-      
+
       filtered.forEach((item) => {
         carbohydrate += item.carbohydrates || 0;
         protein += item.protein || 0;
         fat += item.fat || 0;
         totalCalories += item.calories || 0;
       });
-      
+
       const updatedFoodChartData = [
         ["영양소", "그램"],
         ["탄수화물", carbohydrate],
@@ -110,7 +110,7 @@ const Slide1 = function () {
       fontSize: 18,
     },
   };
- 
+
   useEffect(() => {
     chartDatas1();
   }, []);
@@ -120,13 +120,13 @@ const Slide1 = function () {
       <ChartContainer>
         <Title>오늘의 영양정보</Title>
         {totalCalories ? totalCalories > 0 ?
-        <Chart
-          chartType="PieChart"
-          data={foodChartData}
-          options={chartOptions1}
-          graph_id="donutchart"
-        />
-        : <Not>오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요.</Not> : <Not>오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요.</Not>}
+          <Chart
+            chartType="PieChart"
+            data={foodChartData}
+            options={chartOptions1}
+            graph_id="donutchart"
+          />
+          : <Not>오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요.</Not> : <Not>오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요.</Not>}
         <Calories>총 칼로리: {totalCalories} kcal </Calories>
       </ChartContainer>
     </Slide>

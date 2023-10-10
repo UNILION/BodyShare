@@ -55,20 +55,20 @@ const InfoCard = function ({ id, nickname, height, weight }) {
     <>
       <Info>
         <Cover>
-        <Infoul>
-          <li>아이디</li>
-          <li>닉네임</li>
-          <li>키</li>
-          <li>몸무게</li>
-        </Infoul>
+          <Infoul>
+            <li>아이디</li>
+            <li>닉네임</li>
+            <li>키</li>
+            <li>몸무게</li>
+          </Infoul>
         </Cover>
         <Cover2>
-        <Infodtul>
-          <li>{id}</li>
-          <li>{nickname}</li>
-          <li>{height}cm</li>
-          <li>{weight}kg</li>
-        </Infodtul>
+          <Infodtul>
+            <li>{id}</li>
+            <li>{nickname}</li>
+            <li>{height}cm</li>
+            <li>{weight}kg</li>
+          </Infodtul>
         </Cover2>
       </Info>
     </>

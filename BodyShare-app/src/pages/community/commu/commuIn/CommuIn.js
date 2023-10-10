@@ -66,9 +66,9 @@ const CommuIn = function () {
 
   const deleteCommu = async function () {
     try {
-      if (register > 0){
-      await instance.delete(`users/communitydel/${commuNo}/${userNo}`);
-      setRegister(!register)
+      if (register > 0) {
+        await instance.delete(`users/communitydel/${commuNo}/${userNo}`);
+        setRegister(!register)
       }
     } catch (error) {
       console.error(error);
@@ -77,9 +77,9 @@ const CommuIn = function () {
 
   const registerCommu = async function () {
     try {
-      if (register == 0){
-      await instance.post(`users/communityadd/${commuNo}/${userNo}`);
-      setRegister(!register)
+      if (register == 0) {
+        await instance.post(`users/communityadd/${commuNo}/${userNo}`);
+        setRegister(!register)
       }
     } catch (error) {
       console.error(error);
@@ -126,11 +126,11 @@ const CommuIn = function () {
         <Banner
           src={`http://localhost:33000/images/communitys/${communityData.bannerImageUrl}`}
         />
-      <Previous
-      src={previous}
-      alt="뒤로가기"
-      onClick={() => navigate("/community")}
-    />
+        <Previous
+          src={previous}
+          alt="뒤로가기"
+          onClick={() => navigate("/community")}
+        />
       </BannerPic>
       <Container>
         <Pf>
@@ -150,8 +150,8 @@ const CommuIn = function () {
           registerChange={registerChange}
         />
         {groupData ?
-        <Groups groupLists={groupData} />
-        : null}
+          <Groups groupLists={groupData} />
+          : null}
         <Img src={Plus} onClick={() => navigate(`/community/feedAdd/${communityData.communityNo}`)} />
       </Container>
     </>

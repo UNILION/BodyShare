@@ -82,7 +82,7 @@ const Logout = function () {
   const [food, setFood] = useRecoilState(foodAtom);
   const [interest, setInterest] = useRecoilState(interestAtom);
 
-  const Logout = async function(){
+  const Logout = async function () {
     try {
       // 서버 세션 처리 - 서버에서 세션 삭제 API 호출
       const response = await instance.get('/users/logout'); // 예시: 로그아웃 요청을 서버로 보냄
@@ -103,7 +103,6 @@ const Logout = function () {
       // 서버와 통신 중 에러 처리
       console.error('로그아웃 요청 중 에러:', error);
     }
-    
   };
 
   return (

@@ -6,8 +6,6 @@ import { userSelector } from "recoil/userRecoil";
 import { useRecoilValue } from 'recoil';
 import useCustomAxios from "components/commons/CustomAxios"
 
-
-
 const Records = styled.div`
   display: grid;
   grid-row: 1;
@@ -64,25 +62,24 @@ const Record = function () {
       // 에러 처리
       console.error(error);
     }
-    
     setCount(sum);
   };
 
-  const filterS = function(list) {
+  const filterS = function (list) {
     const today = new Date().toLocaleDateString();
-  
+
     return list.filter(item => dateCal(item.exerciseDate) === today).length;
   };
 
-  const filterF = function(list) {
+  const filterF = function (list) {
     const today = new Date().toLocaleDateString();
-  
+
     return list.filter(item => dateCal(item.dietDate) === today).length;
   };
 
-  const dateCal = function(date) {
+  const dateCal = function (date) {
     const dateObject = new Date(date);
-  
+
     return dateObject.toLocaleDateString();
   };
 
@@ -101,7 +98,3 @@ const Record = function () {
   );
 };
 export default Record;
-
-
-
-

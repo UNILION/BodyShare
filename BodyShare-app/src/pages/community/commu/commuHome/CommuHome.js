@@ -57,8 +57,7 @@ const Img = styled.img`
   width: 50px;
   height: 50px;
   cursor: pointer;
-`
-
+`;
 
 const CommuHome = function () {
   const [Interest, setInterest] = useState(true);

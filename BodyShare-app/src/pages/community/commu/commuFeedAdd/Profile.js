@@ -5,7 +5,7 @@ const ProfileContainer = styled.div``;
 const Top = styled.div`
 display: grid;
 grid-template-columns: 1.5fr 1fr;
-`
+`;
 
 const Button = styled.div`
 margin-bottom : 10px;

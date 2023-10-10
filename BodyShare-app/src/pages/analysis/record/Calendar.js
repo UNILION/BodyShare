@@ -70,20 +70,16 @@ const Record = function () {
   const tileContent = ({ date }) => {
     const dateStr = date.toLocaleDateString();
 
-    const hasExercise =  sportData && sportData.some(item => dateCal(item.exerciseDate) === dateStr);
+    const hasExercise = sportData && sportData.some(item => dateCal(item.exerciseDate) === dateStr);
     const hasDiet = foodData && foodData.some(item => dateCal(item.dietDate) === dateStr);
-  
+
     return (
       <div>
-        {hasExercise && <img src={exercise} alt="exercise" style={{width: '15px', height: '15px', marginRight: '5px'}} />}
-        {hasDiet && <img src={food} alt="food" style={{width: '15px', height: '15px'}} />}
+        {hasExercise && <img src={exercise} alt="exercise" style={{ width: '15px', height: '15px', marginRight: '5px' }} />}
+        {hasDiet && <img src={food} alt="food" style={{ width: '15px', height: '15px' }} />}
       </div>
     );
   };
-  
-  
-
-  
 
   const loadRecord = async function () {
     try {
@@ -110,26 +106,26 @@ const Record = function () {
       console.error(error);
     }
   };
-  
+
   //운동 삭제
   const deleteSportsRecord = async (planNo) => {
-    try{
+    try {
       await instance.delete(`/record/sportsdel/${planNo}`);
       //삭제후에 다시 스포츠 리스트 불러옴
       loadRecord();
-    }catch(error){
-      console.log("오류",error);
+    } catch (error) {
+      console.log("오류", error);
     };
   };
 
-   //음식 삭제
-   const deleteFoodRecord = async (planNo) => {
-    try{
+  //음식 삭제
+  const deleteFoodRecord = async (planNo) => {
+    try {
       await instance.delete(`/record/fooddel/${planNo}`);
       //삭제후에 다시 스포츠 리스트 불러옴
       loadRecord();
-    }catch(error){
-      console.log("오류",error);
+    } catch (error) {
+      console.log("오류", error);
     };
   };
 
@@ -146,9 +142,8 @@ const Record = function () {
   const dateCal = function (date) {
     const dateObject = new Date(date);
     return dateObject.toLocaleDateString();
-    
-  };
 
+  };
 
   useEffect(() => {
     loadRecord();
@@ -175,10 +170,10 @@ const Record = function () {
           </TitleDate>
           <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
             {/* 운동 기록 부분 */}
-            {sportsList && 
-              <SportRecord sportsList={sportsList} 
-              onDelete={(planNo) => deleteSportsRecord(planNo)}
-            />}
+            {sportsList &&
+              <SportRecord sportsList={sportsList}
+                onDelete={(planNo) => deleteSportsRecord(planNo)}
+              />}
           </div>
         </NoteGrid>
 
@@ -189,14 +184,12 @@ const Record = function () {
           </TitleDate>
           <div style={{ maxHeight: '200px', overflowY: 'auto' }}>
             {/* 음식 기록 부분 */}
-            {foodList && 
-            <FoodRecord foodList={foodList} 
-            onDelete={(planNo) => deleteFoodRecord(planNo)}
-          />}
+            {foodList &&
+              <FoodRecord foodList={foodList}
+                onDelete={(planNo) => deleteFoodRecord(planNo)}
+              />}
           </div>
         </NoteGrid>
-
-
 
         {/* 기록 추가하기 */}
         {selectedDate.toLocaleDateString() == today.toLocaleDateString() ? <Add /> : null}

@@ -7,10 +7,10 @@ const Div = styled.div`
   text-align: center;
 `;
 
-const SearchList = function ({itemList, selectedList, changeSelected}) {
+const SearchList = function ({ itemList, selectedList, changeSelected }) {
   const list = itemList.map(record => {
     return (
-      <SearchListItem key={record.no} record={record} selectedList={selectedList} changeSelected={changeSelected}/>
+      <SearchListItem key={record.no} record={record} selectedList={selectedList} changeSelected={changeSelected} />
     );
   });
   return (

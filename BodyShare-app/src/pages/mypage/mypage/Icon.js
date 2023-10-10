@@ -13,9 +13,7 @@ const Nickli = styled.li`
   color: black;
 `;
 
-const Inst = styled.li`
-
-`;
+const Inst = styled.li``;
 
 const Pf = styled.ul`
   border: 5px solid rgba(85, 111, 255, 0.2);
@@ -110,22 +108,22 @@ const Icon = function ({ id, url }) {
 
   return (
     <>
-    {userNo > 0 ? 
-      <Cover>
-        <Pf>
-          <Pfpic src={`http://localhost:33000/images/users/${url}`} />
-          <Pfcommentul>
-            <Nickli>{id}</Nickli>
-            <Inst>
-              {matchingSportNames.map((sport, index) => (
-                <Tag key={index} cursor="auto" tagtitle={sport} hovercolor="rgba(85,111,255, 0.3)" ml="5px" />
-              ))}
-            </Inst>
-          </Pfcommentul>
+      {userNo > 0 ?
+        <Cover>
+          <Pf>
+            <Pfpic src={`http://localhost:33000/images/users/${url}`} />
+            <Pfcommentul>
+              <Nickli>{id}</Nickli>
+              <Inst>
+                {matchingSportNames.map((sport, index) => (
+                  <Tag key={index} cursor="auto" tagtitle={sport} hovercolor="rgba(85,111,255, 0.3)" ml="5px" />
+                ))}
+              </Inst>
+            </Pfcommentul>
 
-        </Pf>
-      </Cover> :  <Not>오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요</Not>
-}
+          </Pf>
+        </Cover> : <Not>오늘의 영양정보가 존재하지 않습니다. 기록 탭에서 등록해주세요</Not>
+      }
     </>
   );
 };

@@ -3,7 +3,7 @@ import Category from "./Category";
 const index = function () {
   return (
     <>
-    <Category />
+      <Category />
     </>
   );
 };

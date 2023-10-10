@@ -8,7 +8,7 @@ const Container = styled.div`
 const CommuAdd = function () {
   return (
     <Container>
-      <Top/>
+      <Top />
       <Middle />
     </Container>
   );

@@ -19,20 +19,20 @@ const Container = styled.div`
     background:linear-gradient(to right,  #FF798E, #556FFF);
     bottom:-5px;
   }
-`
+`;
 
 const Logo = styled.img`
   background: white;
   width: 50%;
   display: grid;
   margin: 0 auto;
-`
+`;
 
 const Dark = styled.div`
   position: absolute;
   right: 10px;
   top: 10px;
-`
+`;
 
 const Header = function () {
   const dark = useRecoilValue(isDarkAtom)
@@ -46,14 +46,14 @@ const Header = function () {
     <Container>
       <Logo src={logo} />
       <Dark>
-      <DarkModeSwitch
-        checked={checkDark}
-        onChange={toggleDark}
-        size={50}
-        sunColor='red'
-        moonColor='royalblue'
+        <DarkModeSwitch
+          checked={checkDark}
+          onChange={toggleDark}
+          size={50}
+          sunColor='red'
+          moonColor='royalblue'
         />
-        </Dark>
+      </Dark>
     </Container>
   )
 };

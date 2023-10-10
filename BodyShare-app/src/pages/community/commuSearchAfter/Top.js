@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Search from "assets/Img/buttonsearch.png";
+
 const TopContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -22,7 +23,7 @@ const Img = styled.img`
   cursor: pointer;
 `;
 
-const Top = function ({searchItemList}) {
+const Top = function ({ searchItemList }) {
   const navigate = useNavigate();
   return (
     <TopContainer>

@@ -7,8 +7,8 @@ const CheckContainer = styled.div`
   margin-bottom:  ${(props) => (props.cmb ? props.cmb : "10px")};
 `
 
-const Check = function(props) {
-  return(
+const Check = function (props) {
+  return (
     <CheckContainer {...props} />
   )
 }

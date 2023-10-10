@@ -3,15 +3,12 @@ import xbutton from "assets/Img/xbutton.png";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "recoil/themeRecoil";
 
-const SelectedDiv = styled.div`
-  
-`;
+const SelectedDiv = styled.div``;
 
 const Select = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-
-`;
+  `;
 
 const SelectCircle = styled.div`
   display: flex;
@@ -74,13 +71,12 @@ const SelectedItem = function ({ record, selectedList, changeSelected }) {
     changeSelected(temp);
   };
 
-
   return (
     < SelectedDiv >
       <Select>
         <SelectCircle>
           <SelectP>
-            <Cover  isDarkMode={isDarkMode}>
+            <Cover isDarkMode={isDarkMode}>
               {record.name}
             </Cover>
           </SelectP>

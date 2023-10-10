@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import xbutton from "assets/Img/xbutton.png";
 
-const SelectedDiv = styled.div`
-  
-`;
+const SelectedDiv = styled.div``;
 
 const Select = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-
 `;
 
 const SelectCircle = styled.div`
@@ -27,6 +24,7 @@ const SelectP = styled.p`
   font-weight: bold;
   color: #656565;
 `;
+
 const DeleteButtonDiv = styled.div`
   width: 30px;
   display: flex;
@@ -48,7 +46,7 @@ const Cover = styled.div`
   border-radius: 15px;
   width: 56px;
   height: 23px;
-`
+`;
 
 const Cover_button = styled.div`
   background-color: white;
@@ -56,11 +54,9 @@ const Cover_button = styled.div`
   width: 25px;
   height: 25px;
   margin-left: 3px;
-`
+`;
 
 const SelectedItem = function ({ record, selectedList, changeSelected }) {
-  console.log(record);
-
   const handleButtonClick = () => {
     const temp = [...selectedList].filter(item => item.no !== record.no);
     changeSelected(temp);

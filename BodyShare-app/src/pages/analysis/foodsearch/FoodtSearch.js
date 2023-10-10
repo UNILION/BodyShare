@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import searchImg from 'assets/Img/search.png';
 import previous from 'assets/Img/Previous.png';
@@ -62,7 +62,7 @@ const FoodSearch = function () {
   const instance = useCustomAxios();
   const foodList = useRecoilValue(foodSelector);
   const [search, setSearch] = useState("");
-  const [selected, setSelected] = useState(""); 
+  const [selected, setSelected] = useState("");
   const userNo = useRecoilValue(userSelector);
   const navigate = useNavigate();
 
@@ -82,13 +82,13 @@ const FoodSearch = function () {
 
   const sendFoodDataToServer = async () => {
     if (!selected) {
-        alert("음식을 선택해주세요");
+      alert("음식을 선택해주세요");
       return;
     }
 
     try {
       const dietDate = String(new Date().toLocaleDateString());
-    
+
       // 선택한 음식 정보를 담은 객체를 생성
       const foodData = {
         userNo,
@@ -97,7 +97,7 @@ const FoodSearch = function () {
       };
 
       const response = await instance.post('/record/foodadd', foodData);
-      
+
       console.log('POST 요청이 성공적으로 보내졌습니다.');
       console.log('서버 응답:', response.data);
 
@@ -112,14 +112,14 @@ const FoodSearch = function () {
       <PreviousButton onClick={() => navigate("/analysis")} />
       <SearchInput>
         <Search src={searchImg} />
-        <Input 
-          type="text" 
-          placeholder="찾으시는 음식을 검색해주세요" 
-          onChange={handleSearch}  
+        <Input
+          type="text"
+          placeholder="찾으시는 음식을 검색해주세요"
+          onChange={handleSearch}
         />
       </SearchInput>
 
-      <ResultList foodList={filterFoodList} changeSelected={changeSelected} search={search} /> 
+      <ResultList foodList={filterFoodList} changeSelected={changeSelected} search={search} />
 
       <Button
         name="선택하기"
@@ -131,7 +131,7 @@ const FoodSearch = function () {
       >
       </Button>
 
-      <BtnImg src={plus}  onClick={sendFoodDataToServer}></BtnImg>
+      <BtnImg src={plus} onClick={sendFoodDataToServer}></BtnImg>
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import Header from "components/layout/Header";
 import { Outlet } from "react-router-dom";
 
-const User = function() {
+const User = function () {
   return (
     <>
       <Header />

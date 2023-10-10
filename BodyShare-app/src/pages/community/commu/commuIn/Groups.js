@@ -20,11 +20,10 @@ const Not = styled.div`
   height: 290px;
   margin-top: 30px;
   overflow-y: hidden;
-`
+`;
 
 const Groups = function ({ groupLists }) {
   const navigate = useNavigate();
-
 
   return (
     <>

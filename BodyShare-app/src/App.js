@@ -75,7 +75,7 @@ function App() {
               <Route path="/community/category" element={<CommuCategory />} />
               <Route path="/community/feedAdd/:commu" element={<CommuFeedAdd />} />
               <Route path="/community/feed/:feedNo" element={<CommuFeed />} />
-              
+
             </Route>
             <Route path="/mypage" element={<Layout />}>
               <Route index element={<Mypage />} />
@@ -100,7 +100,7 @@ function App() {
           </Routes>
         )}
       </Router>
-      </ThemeProvider>
+    </ThemeProvider>
   );
 }
 

@@ -30,21 +30,21 @@ const TopContent = styled.div`
   margin-top: 5px;
 `;
 
-const Top = function() {
+const Top = function () {
   const navigate = useNavigate();
-  
+
   return (
     <TopContainer>
-    <Previous
-      src={previous}
-      alt="뒤로가기"
-      onClick={() => navigate("/community")}
-    />
-    <TopRight>
-      <TopTitle>커뮤니티 만들기</TopTitle>
-      <TopContent>나에게 맞는 커뮤니티를 만들어보세요! 😛</TopContent>
-    </TopRight>
-  </TopContainer>
+      <Previous
+        src={previous}
+        alt="뒤로가기"
+        onClick={() => navigate("/community")}
+      />
+      <TopRight>
+        <TopTitle>커뮤니티 만들기</TopTitle>
+        <TopContent>나에게 맞는 커뮤니티를 만들어보세요! 😛</TopContent>
+      </TopRight>
+    </TopContainer>
   );
 };
 

@@ -2,14 +2,11 @@ import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "recoil/themeRecoil";
 import styled from "styled-components";
 
-const SelectedDiv = styled.div`
-
-`;
+const SelectedDiv = styled.div``;
 
 const Select = styled.div`
   display: grid;
   grid-template-columns: auto;
-
 `;
 
 const SelectCircle = styled.div`

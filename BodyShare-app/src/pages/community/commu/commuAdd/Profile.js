@@ -6,7 +6,7 @@ const ProfileContainer = styled.div``;
 const PicInput = styled.input`
   margin-top: 15px;
   cursor: pointer;
-`
+`;
 
 const Title = styled.div`
   font-weight: bold;
@@ -33,8 +33,6 @@ const PreviewImage = styled.img`
   max-height: 60px; /* 세로 높이를 최대 60px로 제한 */
   display: ${(props) => (props.src ? "block" : "none")};
 `;
-
-
 
 const Profile = function ({ register }) {
   const [previewImage, setPreviewImage] = useState(null);
@@ -64,7 +62,7 @@ const Profile = function ({ register }) {
           />
         </label>
         <PreviewImage src={previewImage} alt="Preview" />
-      </Picture> 
+      </Picture>
     </ProfileContainer>
   );
 };

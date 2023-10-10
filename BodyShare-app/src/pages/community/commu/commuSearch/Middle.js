@@ -66,7 +66,7 @@ const Cover = styled.div`
   background-color: white;
   border-radius: 15px;
   width: 80px;
-`
+`;
 
 const Middle = function ({ searchItemList }) {
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router({mergeParams: true});
+var router = express.Router({ mergeParams: true });
 
 const userRouter = require("./users");
 const commuRouter = require("./community");

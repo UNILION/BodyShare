@@ -96,7 +96,7 @@ const Login = function () {
 
   const { register, handleSubmit } = useForm();
 
-  const loadDB = async function(){
+  const loadDB = async function () {
     try {
       const response = await instance.get('/sports');
       setSports(response.data)
@@ -116,7 +116,7 @@ const Login = function () {
   };
 
   const onSubmit = async function (formData) {
-    const {userId, password} = formData;
+    const { userId, password } = formData;
 
     try {
       const response = await instance.post('/users/signin', { userId, password });

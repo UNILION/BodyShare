@@ -21,7 +21,7 @@ const SignUp = function () {
   const instance = useCustomAxios();
   const [sports, setSports] = useRecoilState(sportsAtom);
   const userInterest = useRecoilValue(interestSelector);
-  const [list, setList] = useState(userInterest); 
+  const [list, setList] = useState(userInterest);
 
   const loadDB = async function () {
     try {
@@ -43,7 +43,7 @@ const SignUp = function () {
 
       <Interest />
 
-      <Selection usersList={list}/>
+      <Selection usersList={list} />
 
       <Button />
     </Container>

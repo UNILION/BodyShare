@@ -31,7 +31,7 @@ const InterestModify = function () {
   return (
     <Container>
       <PreviousButton onClick={() => navigate("/mypage/modify")} />
-      <Search interestList={interestList}/>
+      <Search interestList={interestList} />
     </Container>
   );
 };

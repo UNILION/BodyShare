@@ -27,23 +27,23 @@ const Cover = styled.div`
   width: 55px;
 `
 
-const Profile = function ( {title, intro, sports} ) {
-  return(
+const Profile = function ({ title, intro, sports }) {
+  return (
     <Pfcommentul>
       <CommuName>{title}</CommuName>
       <CommuInLi>
         <CommuIntro>{intro}</CommuIntro>
       </CommuInLi>
-        <Inst>
+      <Inst>
         <Cover>
-          <Tag 
+          <Tag
             tagtitle={sports}
             mr="10px;"
             hovercolor="rgba(85,111,255, 0.3)"
             cursor="default"
           />
-          </Cover>
-        </Inst>
+        </Cover>
+      </Inst>
     </Pfcommentul>
   )
 }

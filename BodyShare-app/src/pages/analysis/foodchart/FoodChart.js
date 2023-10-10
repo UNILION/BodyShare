@@ -17,7 +17,6 @@ const SliderContainer = styled.div`
   position: absolute;
   bottom: 10px;
 }
-
 `;
 
 const FoodChart = function () {

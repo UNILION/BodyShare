@@ -108,11 +108,11 @@ const MiddleTime = styled.div`
 const Cover = styled.div`
   background-color: white;
   border-radius: 15px 15px 0 0;
-`
+`;
 
 const Cover_record = styled.div`
   background-color: rgba(85, 111, 255, 0.8);
-`
+`;
 
 const Record = function ({ register, setRecordDate, errors }) {
   const instance = useCustomAxios();
@@ -183,34 +183,34 @@ const Record = function ({ register, setRecordDate, errors }) {
       <Explan>3일 이내의 기록 중 하루를 클릭해주세요</Explan>
       <TargetLists>
         <TargetList>
-        <Cover>
-          <TargetListTop select={select["select1"]}>
-            <TargetListTitle
-              onClick={() =>
-                setSelect((prevState) => ({
-                  ["select1"]: !prevState["select1"],
-                  ["select2"]: false,
-                  ["select3"]: false,
-                }),
-                select["select1"] ? setRecordDate("NULL") : setRecordDate(beforeYesterday)
-                )
-              }
-            >
-              {beforeYesterday} {week[new Date(beforeYesterday).getDay()]}
-            </TargetListTitle>
-            <Next
-              src={next}
-              click={click["click1"]}
-              onClick={() => {
-                setClick((prevState) => ({
-                  ...prevState,
-                  ["click1"]: !prevState["click1"],
-                }));
-                setFirst(first + 1);
-              }}
+          <Cover>
+            <TargetListTop select={select["select1"]}>
+              <TargetListTitle
+                onClick={() =>
+                  setSelect((prevState) => ({
+                    ["select1"]: !prevState["select1"],
+                    ["select2"]: false,
+                    ["select3"]: false,
+                  }),
+                    select["select1"] ? setRecordDate("NULL") : setRecordDate(beforeYesterday)
+                  )
+                }
+              >
+                {beforeYesterday} {week[new Date(beforeYesterday).getDay()]}
+              </TargetListTitle>
+              <Next
+                src={next}
+                click={click["click1"]}
+                onClick={() => {
+                  setClick((prevState) => ({
+                    ...prevState,
+                    ["click1"]: !prevState["click1"],
+                  }));
+                  setFirst(first + 1);
+                }}
               />
-          </TargetListTop>
-              </Cover>
+            </TargetListTop>
+          </Cover>
           <DropDown>
             <TargetListMiddle
               first={first}
@@ -221,16 +221,16 @@ const Record = function ({ register, setRecordDate, errors }) {
                   ["select2"]: false,
                   ["select3"]: false,
                 }),
-                select["select1"] ? setRecordDate("NULL") : setRecordDate(beforeYesterday)
+                  select["select1"] ? setRecordDate("NULL") : setRecordDate(beforeYesterday)
                 )
               }
             >
               {beforeYesterdayList ? beforeYesterdayList.map((record, idx) => (
                 <Cover_record>
-                <MiddleDetail key={idx}>
-                  <MiddleTitle>{record.sportsName}</MiddleTitle>
-                  <MiddleTime>{record.exerciseTime}분</MiddleTime>
-                </MiddleDetail>
+                  <MiddleDetail key={idx}>
+                    <MiddleTitle>{record.sportsName}</MiddleTitle>
+                    <MiddleTime>{record.exerciseTime}분</MiddleTime>
+                  </MiddleDetail>
                 </Cover_record>
               )) : null}
             </TargetListMiddle>
@@ -238,87 +238,87 @@ const Record = function ({ register, setRecordDate, errors }) {
         </TargetList>
 
         <TargetList>
-        <Cover>
-          <TargetListTop select={select["select2"]}>
-            <TargetListTitle
+          <Cover>
+            <TargetListTop select={select["select2"]}>
+              <TargetListTitle
+                onClick={() =>
+                  setSelect((prevState) => ({
+                    ["select1"]: false,
+                    ["select2"]: !prevState["select2"],
+                    ["select3"]: false,
+                  }),
+                    select["select2"] ? setRecordDate("NULL") : setRecordDate(yesterday)
+                  )
+                }
+              >
+                {yesterday} {week[new Date(yesterday).getDay()]}
+              </TargetListTitle>
+              <Next
+                src={next}
+                click={click["click2"]}
+                onClick={() => {
+                  setClick((prevState) => ({
+                    ...prevState,
+                    ["click2"]: !prevState["click2"],
+                  }));
+                  setFirst(first + 1);
+                }}
+              />
+            </TargetListTop>
+          </Cover>
+          <DropDown>
+            <TargetListMiddle first={first} click={click["click2"]}
               onClick={() =>
                 setSelect((prevState) => ({
                   ["select1"]: false,
                   ["select2"]: !prevState["select2"],
                   ["select3"]: false,
                 }),
-                select["select2"] ? setRecordDate("NULL") : setRecordDate(yesterday)
+                  select["select2"] ? setRecordDate("NULL") : setRecordDate(yesterday)
                 )
               }
             >
-              {yesterday} {week[new Date(yesterday).getDay()]}
-            </TargetListTitle>
-            <Next
-              src={next}
-              click={click["click2"]}
-              onClick={() => {
-                setClick((prevState) => ({
-                  ...prevState,
-                  ["click2"]: !prevState["click2"],
-                }));
-                setFirst(first + 1);
-              }}
-            />
-          </TargetListTop>
-              </Cover>
-          <DropDown>
-            <TargetListMiddle first={first} click={click["click2"]}
-                          onClick={() =>
-                            setSelect((prevState) => ({
-                              ["select1"]: false,
-                              ["select2"]: !prevState["select2"],
-                              ["select3"]: false,
-                            }),
-                            select["select2"] ? setRecordDate("NULL") : setRecordDate(yesterday)
-                            )
-                          }
-            >
               {yesterdayList ? yesterdayList.map((record, idx) => (
-                  <Cover_record>
-                <MiddleDetail key={idx}>
-                  <MiddleTitle>{record.sportsName}</MiddleTitle>
-                  <MiddleTime>{record.exerciseTime}분</MiddleTime>
-                </MiddleDetail>
-                  </Cover_record>
+                <Cover_record>
+                  <MiddleDetail key={idx}>
+                    <MiddleTitle>{record.sportsName}</MiddleTitle>
+                    <MiddleTime>{record.exerciseTime}분</MiddleTime>
+                  </MiddleDetail>
+                </Cover_record>
               )) : null}
             </TargetListMiddle>
           </DropDown>
         </TargetList>
 
         <TargetList>
-        <Cover>
-          <TargetListTop select={select["select3"]}>
-            <TargetListTitle
-              onClick={() =>
-                setSelect((prevState) => ({
-                  ["select1"]: false,
-                  ["select2"]: false,
-                  ["select3"]: !prevState["select3"],
-                }),
-                select["select3"] ? setRecordDate("NULL") : setRecordDate(today)
-                )
-              }
-            >
-              {today} {week[new Date(today).getDay()]}
-            </TargetListTitle>
-            <Next
-              src={next}
-              click={click["click3"]}
-              onClick={() => {
-                setClick((prevState) => ({
-                  ...prevState,
-                  ["click3"]: !prevState["click3"],
-                }));
-                setFirst(first + 1);
-              }}
-            />
-          </TargetListTop>
-              </Cover>
+          <Cover>
+            <TargetListTop select={select["select3"]}>
+              <TargetListTitle
+                onClick={() =>
+                  setSelect((prevState) => ({
+                    ["select1"]: false,
+                    ["select2"]: false,
+                    ["select3"]: !prevState["select3"],
+                  }),
+                    select["select3"] ? setRecordDate("NULL") : setRecordDate(today)
+                  )
+                }
+              >
+                {today} {week[new Date(today).getDay()]}
+              </TargetListTitle>
+              <Next
+                src={next}
+                click={click["click3"]}
+                onClick={() => {
+                  setClick((prevState) => ({
+                    ...prevState,
+                    ["click3"]: !prevState["click3"],
+                  }));
+                  setFirst(first + 1);
+                }}
+              />
+            </TargetListTop>
+          </Cover>
           <DropDown>
             <TargetListMiddle
               first={first}
@@ -329,16 +329,16 @@ const Record = function ({ register, setRecordDate, errors }) {
                   ["select2"]: false,
                   ["select3"]: !prevState["select3"],
                 }),
-                select["select3"] ? setRecordDate("NULL") : setRecordDate(today)
+                  select["select3"] ? setRecordDate("NULL") : setRecordDate(today)
                 )
               }
             >
               {todayList ? todayList.map((record, idx) => (
-                  <Cover_record>
-                <MiddleDetail key={idx}>
-                  <MiddleTitle>{record.sportsName}</MiddleTitle>
-                  <MiddleTime>{record.exerciseTime}분</MiddleTime>
-                </MiddleDetail>
+                <Cover_record>
+                  <MiddleDetail key={idx}>
+                    <MiddleTitle>{record.sportsName}</MiddleTitle>
+                    <MiddleTime>{record.exerciseTime}분</MiddleTime>
+                  </MiddleDetail>
                 </Cover_record>
               )) : null}
             </TargetListMiddle>

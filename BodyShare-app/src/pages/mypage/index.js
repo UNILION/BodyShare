@@ -1,6 +1,6 @@
 import MyPage from "pages/mypage/mypage/MyPage.js";
 
-const MyMain = function() {
+const MyMain = function () {
   return (
     <>
       <MyPage />
@@ -9,4 +9,3 @@ const MyMain = function() {
 };
 
 export default MyMain;
-

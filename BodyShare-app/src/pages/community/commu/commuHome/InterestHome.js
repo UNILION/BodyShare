@@ -23,8 +23,7 @@ const Not = styled.div`
   height: 420px;
   overflow-y: hidden;
   margin-top: 30px;
-`
-
+`;
 
 const InterestHome = function () {
   const instance = useCustomAxios();

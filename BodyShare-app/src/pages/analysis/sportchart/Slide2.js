@@ -34,7 +34,7 @@ const Not = styled.div`
   margin-top: 190px;
   overflow-y: hidden;
   color: black;
-`
+`;
 
 const Slide2 = function () {
   const instance = useCustomAxios();
@@ -91,12 +91,12 @@ const Slide2 = function () {
         const dateString = `${formattedDate}\n(${day})`;
 
         let Totalconsum = 0;
-  
+
         // 해당 날짜에 대한 운동 기록 더하기
         exerciseData.forEach((record) => {
           const recordDate = new Date(record.exerciseDate);
           const recordDateString = recordDate.toLocaleDateString("ko-KR", options);
-  
+
           if (recordDateString === formattedDate) {
             Totalconsum += record.consum;
           }
@@ -111,11 +111,11 @@ const Slide2 = function () {
         const consumedCalories = consumedCaloriesRecord
           ? consumedCaloriesRecord.calories
           : 0;
-          temp += Totalconsum + consumedCalories
-          chartData.push([dateString, Totalconsum, consumedCalories]);
-        }
-        
-        setSum(temp)
+        temp += Totalconsum + consumedCalories
+        chartData.push([dateString, Totalconsum, consumedCalories]);
+      }
+
+      setSum(temp)
       setChartData(chartData);
     } catch (error) {
       console.log(error);
@@ -144,15 +144,15 @@ const Slide2 = function () {
     <Slide>
       <ChartContainer>
         {sum > 0 ?
-        <Chart
-          chartType="BarChart"
-          width="330px"
-          height="476px"
-          data={chartData}
-          options={chartOptions}
-          graph_id="barchart"
-        />
-        : <Not>7일동안 운동, 식단이 기록되지 않았습니다. 기록 탭에서 등록해주세요.</Not>}
+          <Chart
+            chartType="BarChart"
+            width="330px"
+            height="476px"
+            data={chartData}
+            options={chartOptions}
+            graph_id="barchart"
+          />
+          : <Not>7일동안 운동, 식단이 기록되지 않았습니다. 기록 탭에서 등록해주세요.</Not>}
       </ChartContainer>
     </Slide>
   );

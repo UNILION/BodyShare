@@ -37,9 +37,9 @@ const Cover = styled.div`
   width:340px;
   margin-top: 10px;
   margin-left: 15px;
-`
+`;
 
-const SearchListItem = function ( { record, selectedList, changeSelected } ) {
+const SearchListItem = function ({ record, selectedList, changeSelected }) {
   const [buttonActive, setButtonActive] = useState(false);
 
   const handleButtonClick = () => {
@@ -61,20 +61,19 @@ const SearchListItem = function ( { record, selectedList, changeSelected } ) {
       }
     }
   };
-  
 
-  const detect = function(){
-    if(!buttonActive){
-      const temp = [...selectedList].filter(item => item.no == record.no );
-      if(temp.length != 0){
+  const detect = function () {
+    if (!buttonActive) {
+      const temp = [...selectedList].filter(item => item.no == record.no);
+      if (temp.length != 0) {
         setButtonActive(!buttonActive);
       }
-    }else if(buttonActive){
-      const temp = [...selectedList].filter(item => item.no == record.no );
-      if(temp.length == 0){
+    } else if (buttonActive) {
+      const temp = [...selectedList].filter(item => item.no == record.no);
+      if (temp.length == 0) {
         setButtonActive(!buttonActive);
       }
-    }  
+    }
   };
 
   useEffect(() => {
@@ -84,15 +83,15 @@ const SearchListItem = function ( { record, selectedList, changeSelected } ) {
   return (
     <SportSearchResult>
       <Cover>
-      <ResultButton
-        active={buttonActive}
-        onClick={handleButtonClick}
-        hovercolor="rgba(85, 111, 255, 0.7)"
-      >
-        <RP>{record.name}</RP>
-        <Line></Line>
-      </ResultButton>
-          </Cover>
+        <ResultButton
+          active={buttonActive}
+          onClick={handleButtonClick}
+          hovercolor="rgba(85, 111, 255, 0.7)"
+        >
+          <RP>{record.name}</RP>
+          <Line></Line>
+        </ResultButton>
+      </Cover>
     </SportSearchResult>
   );
 };

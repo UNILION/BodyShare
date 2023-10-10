@@ -12,7 +12,7 @@ const CommuFeedAdd = function () {
   const commuNo = location.pathname.split("/")[3];
   return (
     <Container>
-      <Top commuNo = {commuNo}/>
+      <Top commuNo={commuNo} />
       <Middle />
     </Container>
   );

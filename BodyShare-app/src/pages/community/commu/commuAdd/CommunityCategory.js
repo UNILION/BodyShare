@@ -38,7 +38,7 @@ const Cover = styled.div`
   border-radius: 15px;
   width: 56px;
   height: 23px;
-`
+`;
 
 const CommunityCategory = function ({ register, errors }) {
   const navigate = useNavigate();

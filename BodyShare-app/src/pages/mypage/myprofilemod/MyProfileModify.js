@@ -201,7 +201,7 @@ const MyProfileModify = function () {
               <Weight weight={profileInfo.weight} register={register} errors={errors} />
             </BodyDiv>
             <CateMod usersList={list} interest={interest} />
-            
+
             <Button
               name="수정완료"
               img={Image5}
