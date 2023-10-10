@@ -5,7 +5,7 @@ const postModel = {
   async find(no) {
     try {
       const sql = `select * from communityPost 
-      where communityNo = ?
+      where userNo = ?
       ORDER BY createdDate DESC;`;
       const [result] = await pool.query(sql, [no]);
       return result;
