@@ -74,6 +74,7 @@ const Button = function () {
 
   const interestList = useRecoilValue(interestSelector);
   const [interestRecoil, setInterestRecoil] = useRecoilState(interestAtom);
+  
   // 로그인 페이지로 돌아갈때 관심사 리코일 초기화
   const previous = function() {
     setInterestRecoil([]);

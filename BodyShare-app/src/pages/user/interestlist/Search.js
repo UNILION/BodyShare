@@ -2,7 +2,7 @@ import styled from "styled-components";
 import searchIcon from "assets/Img/search.png";
 import { useNavigate } from "react-router-dom";
 import Tag from "components/commons/Tag";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import SearchList from "pages/user/interestlist/SearchList";
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { sportsSelector } from "recoil/sportList";

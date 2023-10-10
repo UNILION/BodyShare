@@ -359,9 +359,7 @@ const Info = function () {
         <input
           type="file"
           id="profileImageInput"
-          {...register('profileImage', {
-            //required: '프로필 이미지를 업로드하세요',
-          })}
+          {...register('profileImage')}
           style={{ display: 'none' }} // 원래 input 숨김
           onChange={handleProfileImageChange}
         />
