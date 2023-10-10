@@ -75,16 +75,7 @@ const Slide1 = function () {
       );
       const currentWeekEndDate = new Date(currentWeekStartDate); // 종료
       currentWeekEndDate.setDate(currentWeekStartDate.getDate() + 6); // 토
-
-      //현재 주 해당 운동기록만 저장
-      const currentWeekDate = allData.filter((item) => {
-        const itemDate = parseDateString(item.exerciseDate);
-        return (
-          itemDate >= currentWeekStartDate && itemDate <= currentWeekEndDate // 운동한 날짜가 현재 주에 포함하는지 검사
-        );
-
-      });
-
+      
       const sportsChartData = [["", "운동 분"]];
       const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
       let temp = sum;
