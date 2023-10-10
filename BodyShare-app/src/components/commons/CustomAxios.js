@@ -13,16 +13,6 @@ const CustomAxios = function(){
     withCredentials: true
   });
 
-  instance.interceptors.request.use(config => {
-    console.log('url', config.url);
-    if(userNo || config.url === '/users/signin'){
-      return config;
-    }else{
-      return false;
-    }
-    
-  });
-
   instance.interceptors.response.use(res => {
     return res;
   }, async err => {
