@@ -27,11 +27,11 @@ router.get("/sports/recent/:no/:today", async (req, res, next) => {
 });
 
 // 해당 유저의 당일 운동 기록 목록 조회
-router.get("/sports/recentToday/:no/:today", async (req, res, next) => {
+router.get("/sports/recentToday/:no/:postNo", async (req, res, next) => {
   try {
     const id = Number(req.params.no);
-    const day = req.params.today;
-    const list = await record.findByRecentToday(id, day);
+    const postNo = req.params.postNo;
+    const list = await record.findByRecentToday(id, postNo);
     res.json(list);
   } catch (err) {
     next(err);
