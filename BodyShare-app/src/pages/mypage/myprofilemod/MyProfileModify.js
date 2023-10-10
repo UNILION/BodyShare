@@ -190,6 +190,7 @@ const MyProfileModify = function () {
               <Title>나의 정보 수정</Title>
             </Titleul>
             <br />
+            <CateMod usersList={list} interest={interest} />
             <Banner register={register} />
             <Profile register={register} />
             <Nickname nickname={profileInfo.nickname} register={register} errors={errors} getValues={getValues} />
@@ -199,7 +200,6 @@ const MyProfileModify = function () {
               <Height height={profileInfo.height} register={register} errors={errors} />
               <Weight weight={profileInfo.weight} register={register} errors={errors} />
             </BodyDiv>
-            <CateMod usersList={list} interest={interest} />
 
             <Button
               name="수정완료"
