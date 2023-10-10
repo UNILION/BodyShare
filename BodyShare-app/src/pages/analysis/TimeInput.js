@@ -177,6 +177,8 @@ const TimeInput = function () {
       console.error('POST 요청 실패:', error);
     }
   }
+
+
  
   return (
     <>
@@ -213,10 +215,10 @@ const TimeInput = function () {
           mr = "20px"
           width="150px"
           display="block"
-          onClick={() => {
-            sendSportsDataToServer(); // 서버로 데이터 전송
-          }}
-      />
+          onClick={sendSportsDataToServer}
+      >
+      </Button>
+
       <BtnImg src={plus} onClick={sendSportsDataToServer}></BtnImg>
     </>
   );
