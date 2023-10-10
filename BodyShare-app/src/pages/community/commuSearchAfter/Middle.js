@@ -33,7 +33,6 @@ const Middle = function ({ searchItemList }) {
     try {
       const response = await instance.get(`/community/byinterest/${searchItemList[0].no}`)
       setList(response.data);
-      console.log(response.data);
     } catch (error) {
       // 에러 처리
       console.error(error);

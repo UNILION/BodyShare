@@ -17,10 +17,8 @@ const CustomAxios = function () {
     return res;
   }, async err => {
     console.error('interceptors err', err);
-
     const { response } = err;
 
-    console.log(userNo)
     if (response?.status === 401 && userNo > 0) {
       console.log('refreshToken 인증 실패.');
 

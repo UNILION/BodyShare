@@ -56,8 +56,6 @@ const Cover_button = styled.div`
 `;
 
 const SelectedItem = function ({ record, selectedList, changeSelected }) {
-  console.log(record);
-
   const handleButtonClick = () => {
     const temp = [...selectedList].filter(item => item.no !== record.no);
     changeSelected(temp);

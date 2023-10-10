@@ -159,7 +159,6 @@ const Hr = styled.hr`
 
 const FeedCard = (props) => {
   const [myPageIsOpen, myPageRef, myPageHandler] = DropDown(false);
-  console.log(myPageIsOpen)
   return (
     <StyledCard {...props} >
       <Image {...props} src={props.img}></Image>

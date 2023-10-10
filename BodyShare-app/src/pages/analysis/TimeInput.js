@@ -149,8 +149,6 @@ const TimeInput = function () {
       met = list[0].met;
 
       // 칼로리 계산하기
-      console.log(user);
-      console.log(met);
       const consum = Math.floor(((3.5 * met * user.weight * parseInt(exerciseTime)) / 1000) * 5);
 
       // 선택한 음식 정보를 담은 객체를 생성

@@ -71,9 +71,7 @@ const Slide2 = function () {
         dailyCalories[dayOfWeek] += record.calories;
         temp += record.calories;
       }
-      console.log(temp)
       setSum(temp);
-      console.log(temp)
       const foodChartData = [
         ["요일", "주간 칼로리"],
         ["일", dailyCalories[0]],

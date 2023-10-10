@@ -63,7 +63,6 @@ const Cover_button = styled.div`
 `;
 
 const SelectedItem = function ({ record, selectedList, changeSelected }) {
-  console.log(record);
   const isDarkMode = useRecoilValue(isDarkAtom)
 
   const handleButtonClick = () => {

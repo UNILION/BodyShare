@@ -40,7 +40,6 @@ const My = function () {
         `/users/community/${userNo}`
       );
       setCommunityData(communityResponse.data);
-      console.log(communityResponse.data)
     } catch (error) {
       console.error(error);
     }

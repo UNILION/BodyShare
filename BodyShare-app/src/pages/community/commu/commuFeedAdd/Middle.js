@@ -70,7 +70,6 @@ const Middle = function () {
 
   useEffect(() => {
     if (image && image.length > 0) {
-      console.log("image" + JSON.stringify(image))
       const file = image[0];
       setImagePreview(URL.createObjectURL(file));
     }

@@ -74,8 +74,6 @@ router.put("/useredit/:no", checkLogin, upload.fields([{ name: "profileImg" }, {
       userInfo.bannerImageUrl = bannerImages[0].filename;
     }
 
-    console.log(req.body);
-
     const count = await user.update(no, userInfo);
     res.json({ count });
   } catch (err) {
@@ -91,7 +89,6 @@ router.post("/signin", async (req, res, next) => {
     if (result.length === 1) {
       // 로그인 성공 시, 유저 번호를 세션에 저장
       req.session.userNo = result[0].userNo; // 유저 번호를 가져와서 세션에 저장
-      console.log(req.session.userNo);
       res.json({ login: true, userNo: req.session.userNo });
     } else {
       // 로그인 실패 시, 클라이언트에게 실패 응답 전송

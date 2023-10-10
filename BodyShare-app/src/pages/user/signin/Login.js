@@ -120,7 +120,6 @@ const Login = function () {
 
     try {
       const response = await instance.post('/users/signin', { userId, password });
-      console.log(response.data);
 
       if (response.data.login) {
         // recoil에 userNo 담기
