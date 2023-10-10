@@ -1,6 +1,5 @@
 import React, { useState, useEffect  } from "react";
 import styled from "styled-components";
-import { Chart } from "react-google-charts";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -102,10 +101,6 @@ const SportChart = function () {
 
     return () => clearInterval(interval);
   }, [userNo]);
-    
-
-
-
 
   // 슬라이드
   const settings = {
