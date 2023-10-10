@@ -90,7 +90,7 @@ const Time = styled.div`
 const Menu = styled.div`
   background: gray;
   position: absolute;
-  top: 550px;
+  top: 580px;
   left: 44%;
   width: 200px;
   text-align: center;
@@ -143,10 +143,12 @@ const LinkWrapper = styled.a`
 `;
 
 const Upload = styled.div`
+  display: grid;
+  grid-template-rows: 1fr 1fr;
   color: #878787;
   font-size: 14px;
   text-align: end;
-  margin: 20px;
+  margin-right: 20px;
 `
 
 const Hr = styled.hr`
@@ -155,6 +157,11 @@ const Hr = styled.hr`
   margin: 3px auto;
 `
 
+const Dates = styled.div`
+  text-align: center;
+  line-height: 10px;
+  margin-top: 15px;
+`
 
 
 const FeedCard = (props) => {
@@ -162,7 +169,10 @@ const FeedCard = (props) => {
   return (
     <StyledCard {...props} >
       <Image {...props} src={props.img}></Image>
+      <>
       <Title>{props.title}</Title>
+      <Upload>{props.upload}</Upload>
+      </>
       <Hr />
       <Contents>{props.contents}</Contents>
       <Footer>
@@ -184,7 +194,13 @@ const FeedCard = (props) => {
             )) : null}
           </Ul>
         </Menu>
-        <Upload>{props.upload}</Upload>
+        <Dates>
+        <Upload>
+          <span>기록 날짜</span>
+          <br></br>
+          <span>{props.upload}</span>
+          </Upload>
+        </Dates>
       </Footer>
     </StyledCard>
   );
