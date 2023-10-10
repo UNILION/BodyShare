@@ -49,7 +49,7 @@ const Cover = styled.div`
   border-radius: 15px;
   width: 370px;
   margin-left: 9.5px;
-`
+`;
 
 const Icon = function ({ id, url }) {
   const userNo = useRecoilValue(userSelector);
@@ -112,7 +112,6 @@ const Icon = function ({ id, url }) {
             <Inst>
               {matchingSportNames.map((sport, index) => (
                 <Tag key={index} cursor="auto" tagtitle={sport} hovercolor="rgba(85,111,255, 0.3)" ml="5px" />
-
               ))}
             </Inst>
           </Pfcommentul>

@@ -42,13 +42,13 @@ const Cover = styled.div`
   background-color: white;
   border-radius: 15px 0px 0px 15px;
   width: 111px;
-`
+`;
 
 const Cover2 = styled.div`
   background-color: white;
   border-radius: 0px 15px 15px 0px;
   width: 232px;
-`
+`;
 
 const InfoCard = function ({ id, nickname, height, weight }) {
   return (
