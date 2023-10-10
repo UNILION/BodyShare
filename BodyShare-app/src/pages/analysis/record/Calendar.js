@@ -17,8 +17,6 @@ const instance = axios.create({
   withCredentials: true
 });
 
-
-
 const RecordGrid = styled.div`
   display: grid;
   gap: 10px;
