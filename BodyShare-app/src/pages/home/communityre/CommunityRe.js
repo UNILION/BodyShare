@@ -85,6 +85,7 @@ const CommunityRe = function () {
               }}
             >
               <Card
+                width="170px"
                 img={`http://localhost:33000/images/posts/${communityPost.contentImageUrl}`}
                 title={communityPost.title}
                 contents={communityPost.content}
@@ -94,9 +95,7 @@ const CommunityRe = function () {
           ))}
         </PostDiv>
       ) : (
-        <Not>
-          데이터가 없습니다. 기록 탭에서 등록해주세요.
-        </Not>
+        <Not>커뮤니티에 새 글이 아직 없습니다 :( </Not>
       )}
     </CommunityDiv>
   );
