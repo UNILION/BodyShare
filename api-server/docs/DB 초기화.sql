@@ -35,38 +35,6 @@ CREATE UNIQUE INDEX `nickname_UNIQUE` ON `bodyshare`.`user` (`nickname` ASC);
 
 
 -- -----------------------------------------------------
--- Table `bodyshare`.`challenge`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bodyshare`.`challenge` ;
-
-CREATE TABLE IF NOT EXISTS `bodyshare`.`challenge` (
-  `challengeNo` INT NOT NULL AUTO_INCREMENT,
-  `adminUserNo` INT NOT NULL,
-  `challengeName` VARCHAR(255) NOT NULL,
-  `startDate` DATE NOT NULL,
-  `endDate` DATE NOT NULL,
-  `goalSportsNo` INT NOT NULL,
-  `goalTime` TIME NULL DEFAULT NULL COMMENT '목표 시간',
-  `goalKcal` INT NULL DEFAULT NULL COMMENT '목표 칼로리',
-  `done` TINYINT NULL DEFAULT '0' COMMENT '완료/ 미완료 처리',
-  `profileImageUrl` VARCHAR(255) NULL DEFAULT NULL,
-  `bannerImageUrl` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`challengeNo`),
-  CONSTRAINT `fk_challenge_adminUserNo`
-    FOREIGN KEY (`adminUserNo`)
-    REFERENCES `bodyshare`.`user` (`userNo`),
-  CONSTRAINT `fk_challenge_sports1`
-    FOREIGN KEY (`goalSportsNo`)
-    REFERENCES `bodyshare`.`sports` (`no`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-CREATE INDEX `fk_challenge_user1_idx` ON `bodyshare`.`challenge` (`adminUserNo` ASC);
-
-CREATE INDEX `fk_challenge_sports1_idx` ON `bodyshare`.`challenge` (`goalSportsNo` ASC);
-
-
--- -----------------------------------------------------
 -- Table `bodyshare`.`community`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `bodyshare`.`community` ;
@@ -199,7 +167,7 @@ CREATE TABLE IF NOT EXISTS `bodyshare`.`exerciseRecord` (
   `sets` INT NULL DEFAULT NULL COMMENT '세트 수',
   `weight` INT NULL DEFAULT NULL COMMENT '중량',
   `distance` DOUBLE NULL DEFAULT NULL COMMENT '거리',
-  `consum` DOUBLE NULL DEFAULT NULL COMMENT '계산된 소모 칼로리양',
+  `consum` DOUBLE NOT NULL COMMENT '계산된 소모 칼로리양',
   PRIMARY KEY (`planNo`),
   CONSTRAINT `fk_exercisePlan_userNo`
     FOREIGN KEY (`userNo`)
@@ -214,107 +182,6 @@ DEFAULT CHARACTER SET = utf8mb3;
 CREATE INDEX `fk_exercisePlan_user_idx` ON `bodyshare`.`exerciseRecord` (`userNo` ASC);
 
 CREATE INDEX `fk_exerciseRecord_sports1_idx` ON `bodyshare`.`exerciseRecord` (`sportsNo` ASC);
-
-
--- -----------------------------------------------------
--- Table `bodyshare`.`feedPost`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bodyshare`.`feedPost` ;
-
-CREATE TABLE IF NOT EXISTS `bodyshare`.`feedPost` (
-  `postNo` INT NOT NULL AUTO_INCREMENT,
-  `userNo` INT NOT NULL,
-  `createdDate` DATETIME NOT NULL COMMENT '작성 날짜 및 시간',
-  `modifiedDate` DATETIME NULL DEFAULT NULL COMMENT '수정 날짜 및 시간',
-  `content` VARCHAR(255) NULL DEFAULT NULL COMMENT '내용',
-  `locationLat` DOUBLE NULL DEFAULT NULL COMMENT '위도',
-  `locationLong` DOUBLE NULL DEFAULT NULL COMMENT '경도',
-  `likes` INT NOT NULL DEFAULT '0',
-  `contentImageUrl` VARCHAR(255) NULL DEFAULT NULL,
-  PRIMARY KEY (`postNo`),
-  CONSTRAINT `fk_feedPost_userNo`
-    FOREIGN KEY (`userNo`)
-    REFERENCES `bodyshare`.`user` (`userNo`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-CREATE INDEX `fk_feedPost_userNo_idx` ON `bodyshare`.`feedPost` (`userNo` ASC);
-
-
--- -----------------------------------------------------
--- Table `bodyshare`.`feedPostComment`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bodyshare`.`feedPostComment` ;
-
-CREATE TABLE IF NOT EXISTS `bodyshare`.`feedPostComment` (
-  `commentNo` INT NOT NULL AUTO_INCREMENT,
-  `postNo` INT NOT NULL,
-  `userNo` INT NOT NULL,
-  `content` VARCHAR(255) NOT NULL COMMENT '내용',
-  `createdDate` DATETIME NOT NULL COMMENT '댓글 작성 날짜 및 시간',
-  `modifiedDate` DATETIME NULL DEFAULT NULL COMMENT '수정 날짜 및 시간',
-  PRIMARY KEY (`commentNo`),
-  CONSTRAINT `fk_feedPostComment_postNo`
-    FOREIGN KEY (`postNo`)
-    REFERENCES `bodyshare`.`feedPost` (`postNo`),
-  CONSTRAINT `fk_feedPostComment_userNo`
-    FOREIGN KEY (`userNo`)
-    REFERENCES `bodyshare`.`user` (`userNo`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-CREATE INDEX `fk_feedPostComment_feedPost1_idx` ON `bodyshare`.`feedPostComment` (`postNo` ASC);
-
-CREATE INDEX `fk_feedPostComment_userNo_idx` ON `bodyshare`.`feedPostComment` (`userNo` ASC);
-
-
--- -----------------------------------------------------
--- Table `bodyshare`.`feedPostInterest`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bodyshare`.`feedPostInterest` ;
-
-CREATE TABLE IF NOT EXISTS `bodyshare`.`feedPostInterest` (
-  `no` INT NOT NULL AUTO_INCREMENT,
-  `postNo` INT NOT NULL,
-  `sportsNo` INT NOT NULL,
-  PRIMARY KEY (`no`),
-  CONSTRAINT `fk_feedPostInterest_feedPost1`
-    FOREIGN KEY (`postNo`)
-    REFERENCES `bodyshare`.`feedPost` (`postNo`),
-  CONSTRAINT `fk_feedPostInterest_sports1`
-    FOREIGN KEY (`sportsNo`)
-    REFERENCES `bodyshare`.`sports` (`no`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-CREATE INDEX `fk_feedPostInterest_feedPost1_idx` ON `bodyshare`.`feedPostInterest` (`postNo` ASC);
-
-CREATE INDEX `fk_feedPostInterest_sports1_idx` ON `bodyshare`.`feedPostInterest` (`sportsNo` ASC);
-
-
--- -----------------------------------------------------
--- Table `bodyshare`.`uesrsChallenge`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `bodyshare`.`uesrsChallenge` ;
-
-CREATE TABLE IF NOT EXISTS `bodyshare`.`uesrsChallenge` (
-  `no` INT NOT NULL AUTO_INCREMENT,
-  `userNo` INT NOT NULL,
-  `challengeNo` INT NOT NULL,
-  `progress` INT NOT NULL DEFAULT '0',
-  PRIMARY KEY (`no`),
-  CONSTRAINT `fk_uesrsChallenge_challenge1`
-    FOREIGN KEY (`challengeNo`)
-    REFERENCES `bodyshare`.`challenge` (`challengeNo`),
-  CONSTRAINT `fk_uesrsChallenge_user1`
-    FOREIGN KEY (`userNo`)
-    REFERENCES `bodyshare`.`user` (`userNo`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb3;
-
-CREATE INDEX `fk_uesrsChallenge_user1_idx` ON `bodyshare`.`uesrsChallenge` (`userNo` ASC);
-
-CREATE INDEX `fk_uesrsChallenge_challenge1_idx` ON `bodyshare`.`uesrsChallenge` (`challengeNo` ASC);
 
 
 -- -----------------------------------------------------
