@@ -24,6 +24,7 @@ export const sportsSelector = selector({
 export const selectedSportNameState = atom({
   key: 'selectedSportName',
   default: '',
+  effects_UNSTABLE: [persistAtom]
 });
 
 //선택한 sportsNo
