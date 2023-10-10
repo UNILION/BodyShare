@@ -31,7 +31,6 @@ const CommuFeed = function () {
   const month = feedData ? String(feedData.createdDate.split('-')[1]) : 0
   const day = feedData ? String(feedData.createdDate.split('-')[2]) : 0
   const feedTime = feedData ? year + "년" + month + "월" + day.substring(0, 2) + "일" : 0
-  const createTime = feedData ? year + ". " + month + ". " + day.substring(0, 2) + ". " : 0
 
   const feedList = async function () {
     try {
@@ -47,7 +46,7 @@ const CommuFeed = function () {
   const recordList = async function () {
     try {
       const recordResponse = await instance.get(
-        `/record/sports/recentToday/${userNo}/${createTime}`
+        `/record/sports/recentToday/${userNo}/${feedNo}`
       );
       setRecordData(recordResponse.data);
 
