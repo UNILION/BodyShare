@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Tag from "components/commons/Tag";
 
-const Pfcommentul = styled.div``;
+const Pfcommentul = styled.div`
+  margin-left: 20px;
+`;
 
 const CommuName = styled.li`
   margin-top: 28px;
