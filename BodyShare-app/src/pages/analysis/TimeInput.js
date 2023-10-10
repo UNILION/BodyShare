@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from "styled-components";
 import previous from "assets/Img/Previous.png";
 import Button from "components/commons/Button";

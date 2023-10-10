@@ -93,7 +93,6 @@ const SportSearch = function () {
   const [search, setSearch] = useState("");
   const [selected, setSelected] = useState("");
   const [selectedSportName, setSelectedSportName] = useRecoilState(selectedSportNameState);
-  const userNo = useRecoilValue(userSelector);
 
   const changeSelected = function (data) {
     setSelected(data);
