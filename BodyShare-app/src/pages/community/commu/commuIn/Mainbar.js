@@ -32,6 +32,14 @@ const Member = styled.div`
   font-weight: bold;
 `;
 
+const BtnImg = styled.img`
+  width: 35px;
+  position: relative;
+  bottom: 45px;
+  left: 300px;
+  cursor: pointer;
+`;
+
 const Mainbar = function ({ registerMember, userCnt, postCnt, registerChange }) {
   return (
     <MainBar>
@@ -48,7 +56,6 @@ const Mainbar = function ({ registerMember, userCnt, postCnt, registerChange }) 
       <Button
         name={registerMember ? "탈퇴하기" : "가입하기"}
         bc={registerMember ? "#FF3131" : "#556FFF"}
-        img={registerMember ? Image6 : Image5}
         hovercolor={registerMember ? "#FF0000" : ""}
         iwidth={registerMember ? "40px" : "30px"}
         iheight={registerMember ? "40px" : "30px"}
@@ -58,6 +65,8 @@ const Mainbar = function ({ registerMember, userCnt, postCnt, registerChange }) 
         ml="10px"
         onClick={() => registerChange(registerMember)}
       />
+
+      <BtnImg src={registerMember ? Image6 : Image5} onClick={() => registerChange(registerMember)}></BtnImg>
     </MainBar>
   );
 };
