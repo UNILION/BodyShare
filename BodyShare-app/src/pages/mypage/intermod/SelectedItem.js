@@ -55,7 +55,7 @@ background-color: ${props => props.isDarkMode ? "rgb(174 195 251)" : ""};
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis; /* 말줄임 적용 */
-`
+`;
 
 const Cover_button = styled.div`
   background-color: white;
@@ -63,7 +63,7 @@ const Cover_button = styled.div`
   width: 25px;
   height: 25px;
   margin-left: 3px;
-`
+`;
 
 const SelectedItem = function ({ record, selectedList, changeSelected }) {
   console.log(record);

@@ -10,7 +10,7 @@ const Div = styled.div`
   margin: 0 auto;
 `;
 
-const Selected = function ( { selectedList, changeSelected }) {
+const Selected = function ({ selectedList, changeSelected }) {
   if (!selectedList || selectedList.length === 0) {
     return null; // 또는 다른 적절한 처리
   }

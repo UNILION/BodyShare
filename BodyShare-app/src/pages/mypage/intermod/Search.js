@@ -2,7 +2,7 @@ import styled from "styled-components";
 import searchIcon from "assets/Img/search.png";
 import { useNavigate } from "react-router-dom";
 import Tag from "components/commons/Tag";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import SearchList from "pages/mypage/intermod/SearchList";
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { sportsSelector } from "recoil/sportList";
@@ -61,7 +61,7 @@ const Cover = styled.div`
   background-color: white;
   border-radius: 15px;
   width: 80px;
-`
+`;
 
 const Search = function ({ interestList }) {
   const navigate = useNavigate();
