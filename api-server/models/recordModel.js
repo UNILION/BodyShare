@@ -30,17 +30,17 @@ const recordModel = {
   },
 
   // 해당 유저의 당일 운동 기록 목록 조회
-  async findByRecentToday(no, day) {
+  async findByRecentToday(no, postNo) {
     try {
       const sql = `SELECT er.*, s.name AS sportsName,
-        (select count(*) from exerciseRecord er where er.userNo = ? and DATE(STR_TO_DATE(er.exerciseDate, '%Y. %m. %d.')) = DATE(STR_TO_DATE(?, '%Y. %m. %d.'))) as cnt_exercise,
-        (select sum(exerciseTime) from exerciseRecord er where er.userNo = ? and DATE(STR_TO_DATE(er.exerciseDate, '%Y. %m. %d.')) = DATE(STR_TO_DATE(?, '%Y. %m. %d.'))) as total_time
-        FROM exerciseRecord er
-        INNER JOIN sports s ON er.sportsNo = s.no
-        WHERE er.userNo = ?
-        AND DATE(STR_TO_DATE(er.exerciseDate, '%Y. %m. %d.')) = DATE(STR_TO_DATE(?, '%Y. %m. %d.'))
-        ORDER BY er.exerciseDate DESC;`;
-      const [result] = await pool.query(sql, [no, day, no, day, no, day]);
+      (select count(*) from exerciseRecord er where er.userNo = ? and DATE(STR_TO_DATE(er.exerciseDate, '%Y. %m. %d.')) = DATE(STR_TO_DATE((SELECT recordDate FROM communityPost where postNo=?), '%Y. %m. %d.'))) as cnt_exercise,
+      (select sum(exerciseTime) from exerciseRecord er where er.userNo = ? and DATE(STR_TO_DATE(er.exerciseDate, '%Y. %m. %d.')) = DATE(STR_TO_DATE((SELECT recordDate FROM communityPost where postNo=?), '%Y. %m. %d.'))) as total_time
+      FROM exerciseRecord er
+      INNER JOIN sports s ON er.sportsNo = s.no
+      WHERE er.userNo = ?
+      AND DATE(STR_TO_DATE(er.exerciseDate, '%Y. %m. %d.')) = DATE(STR_TO_DATE((SELECT recordDate FROM communityPost where postNo=?), '%Y. %m. %d.'))
+      ORDER BY er.exerciseDate DESC;`;
+      const [result] = await pool.query(sql, [no, postNo, no, postNo, no, postNo]);
       return result;
     } catch (err) {
       throw new Error("DB Error", { cause: err });
