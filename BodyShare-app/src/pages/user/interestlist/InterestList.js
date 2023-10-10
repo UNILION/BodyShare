@@ -22,7 +22,6 @@ const InterestList = function () {
       <Search interestList={interestList} />
     </Container>
   );
-
 };
 
 export default InterestList;

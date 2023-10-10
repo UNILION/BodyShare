@@ -2,14 +2,13 @@ import styled from "styled-components";
 import searchIcon from "assets/Img/search.png";
 import { useNavigate } from "react-router-dom";
 import Tag from "components/commons/Tag";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import SearchList from "pages/community/commu/commuCategory/SearchList";
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { sportsSelector } from "recoil/sportList";
 import Selected from "pages/community/commu/commuCategory/Selected";
 import Button from "components/commons/Button";
 import plus from "assets/Img/check.png";
-import useCustomAxios from "components/commons/CustomAxios"
 import { categoryAtom } from "recoil/commuRecoil";
 
 const SearchInput = styled.div`
@@ -58,7 +57,6 @@ const Cover = styled.div`
 `;
 
 const Search = function ({ categoryList }) {
-  const instance = useCustomAxios();
   const navigate = useNavigate();
 
   const allSports = useRecoilValue(sportsSelector);

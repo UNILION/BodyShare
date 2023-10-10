@@ -1,22 +1,21 @@
-import styled from "styled-components";
 import backButton from "assets/Img/back.png";
-import { useNavigate } from "react-router-dom";
-import Button from "components/commons/Button";
 import Image5 from "assets/Img/right.png";
+import Button from "components/commons/Button";
+import useCustomAxios from "components/commons/CustomAxios";
 import CateMod from "pages/mypage/myprofilemod/CateMod";
-import React, { useState, useEffect } from "react";
-import useCustomAxios from "components/commons/CustomAxios"
-import { userSelector } from "recoil/userRecoil";
-import { interestSelector } from "recoil/userRecoil";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import { interestSelector, userSelector } from "recoil/userRecoil";
+import styled from "styled-components";
+import AfterPassword from "./AfterPassword";
 import Banner from "./Banner";
-import Profile from "./Profile";
+import Height from "./Height";
 import Nickname from "./Nickname";
 import Password from "./Password";
-import AfterPassword from "./AfterPassword";
-import Height from "./Height";
+import Profile from "./Profile";
 import Weight from "./Weight";
-import { useForm } from "react-hook-form";
 
 const All = styled.div`
   margin-left: 7px;
@@ -79,7 +78,7 @@ const MyProfileModify = function () {
     loadUser();
   }, []);
 
-  const { control, handleSubmit, formState: { errors, dirtyFields }, register, getValues, setError } = useForm({ mode: "onChange" })
+  const { handleSubmit, formState: { errors, dirtyFields }, register, getValues, setError } = useForm({ mode: "onChange" })
 
   const onSubmit = async (data) => {
     // 닉네임 중복 검사

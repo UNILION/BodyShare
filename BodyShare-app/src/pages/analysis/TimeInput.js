@@ -141,7 +141,6 @@ const TimeInput = function () {
     }
 
     try {
-
       const exerciseDate = String(new Date().toLocaleDateString());
 
       // 일치 하는 운동 찾아서 met 계수 찾기
@@ -170,8 +169,6 @@ const TimeInput = function () {
       console.error('POST 요청 실패:', error);
     }
   }
-
-
 
   return (
     <>

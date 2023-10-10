@@ -1,8 +1,5 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import Record from "../record/Calendar";
-import SportHome from "../sportchart/SportChart";
-import FoodHome from "../foodchart/FoodChart";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`

@@ -59,13 +59,11 @@ const Category = function () {
   const showMypage = async () => {
     setMypage(true);
     setCommu(false);
-
   };
 
   const showCommu = async () => {
     setMypage(false);
     setCommu(true);
-
   };
 
   useEffect(() => {

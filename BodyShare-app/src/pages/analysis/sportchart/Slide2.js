@@ -41,15 +41,7 @@ const Slide2 = function () {
   const userNo = useRecoilValue(userSelector);
   const [chartData, setChartData] = useState([]);
   const [sum, setSum] = useState(0);
-
-  const parseDateString = (dateString) => {
-    const dateParts = dateString.split(".");
-    const year = parseInt(dateParts[0], 10);
-    const month = parseInt(dateParts[1], 10) - 1; // 월은 0부터 시작하니까 1 뺴줌
-    const day = parseInt(dateParts[2], 10);
-    return new Date(year, month, day);
-  };
-
+  
   const chartDatas = async function () {
     try {
       const exerciseResponse = await instance.get(`/record/sports/${userNo}`);

@@ -35,7 +35,7 @@ const Not = styled.div`
   margin-top: 190px;
   overflow-y: hidden;
   color: black;
-`
+`;
 
 const Slide2 = function () {
   const instance = useCustomAxios();
@@ -101,7 +101,6 @@ const Slide2 = function () {
     titleTextStyle: {
       fontSize: 18,
     },
-
   };
 
   return (

@@ -30,9 +30,7 @@ const Buttons = styled.ul`
 const MyPage = function () {
   const instance = useCustomAxios();
   const navigate = useNavigate();
-
   const userNo = useRecoilValue(userSelector);
-
   const [profileInfo, setProfileInfo] = useState();
 
   const loadUser = async function () {

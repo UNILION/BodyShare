@@ -193,7 +193,6 @@ const Record = function () {
 
         {/* 기록 추가하기 */}
         {selectedDate.toLocaleDateString() == today.toLocaleDateString() ? <Add /> : null}
-        {/* <Add /> */}
 
       </RecordGrid>
     </>

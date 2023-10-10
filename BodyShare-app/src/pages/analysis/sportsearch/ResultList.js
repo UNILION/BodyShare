@@ -55,7 +55,6 @@ const ResultCate = function ({ sportsList, changeSelected, search }) {
     //이미 선택한 버튼이면 비활성화
     if (selectedButton === index) {
       setSelectedButton(null);
-      // changeSelected(null);
       setSelectedSportNo(null);
     } else {
       setSelectedButton(index);

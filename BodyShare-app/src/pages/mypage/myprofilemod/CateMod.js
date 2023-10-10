@@ -27,7 +27,6 @@ const Cateul = styled.div`
   margin-top: 3px;
 `;
 
-
 const CateMod = function ({ usersList }) {
   const instance = useCustomAxios();
   const navigate = useNavigate();
