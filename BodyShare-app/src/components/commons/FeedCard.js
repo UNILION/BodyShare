@@ -90,7 +90,7 @@ const Time = styled.div`
 const Menu = styled.div`
   background: gray;
   position: absolute;
-  top: 580px;
+  top: 600px;
   left: 44%;
   width: 200px;
   text-align: center;
