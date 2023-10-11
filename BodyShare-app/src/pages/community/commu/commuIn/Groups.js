@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Group = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: 10px;
+  margin-top: -25px;
   max-height: 320px; /* 스크롤 가능한 최대 높이 설정 */
   overflow-y: auto;
   overflow-x: hidden;

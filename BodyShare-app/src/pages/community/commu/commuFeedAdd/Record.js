@@ -5,6 +5,7 @@ import useCustomAxios from "components/commons/CustomAxios"
 import { useRecoilValue } from "recoil";
 import { userSelector } from "recoil/userRecoil";
 import { useEffect, useState } from "react";
+import { isDarkAtom } from "recoil/themeRecoil";
 
 const Targets = styled.div``;
 
@@ -111,10 +112,11 @@ const Cover = styled.div`
 `;
 
 const Cover_record = styled.div`
-  background-color: rgba(85, 111, 255, 0.8);
+  background-color: ${(props) => (props.isDarkMode ? ' rgba(85, 111, 255, 0.8)' : ' rgba(85, 111, 255, 0.3)')};
 `;
 
 const Record = function ({ register, setRecordDate, errors }) {
+  const isDarkMode = useRecoilValue(isDarkAtom)
   const instance = useCustomAxios();
   const [click, setClick] = useState({
     click1: false,
@@ -226,7 +228,7 @@ const Record = function ({ register, setRecordDate, errors }) {
               }
             >
               {beforeYesterdayList ? beforeYesterdayList.map((record, idx) => (
-                <Cover_record>
+                <Cover_record isDarkMode={isDarkMode}>
                   <MiddleDetail key={idx}>
                     <MiddleTitle>{record.sportsName}</MiddleTitle>
                     <MiddleTime>{record.exerciseTime}분</MiddleTime>
@@ -279,7 +281,7 @@ const Record = function ({ register, setRecordDate, errors }) {
               }
             >
               {yesterdayList ? yesterdayList.map((record, idx) => (
-                <Cover_record>
+                <Cover_record isDarkMode={isDarkMode}>
                   <MiddleDetail key={idx}>
                     <MiddleTitle>{record.sportsName}</MiddleTitle>
                     <MiddleTime>{record.exerciseTime}분</MiddleTime>
@@ -334,7 +336,7 @@ const Record = function ({ register, setRecordDate, errors }) {
               }
             >
               {todayList ? todayList.map((record, idx) => (
-                <Cover_record>
+                <Cover_record isDarkMode={isDarkMode}>
                   <MiddleDetail key={idx}>
                     <MiddleTitle>{record.sportsName}</MiddleTitle>
                     <MiddleTime>{record.exerciseTime}분</MiddleTime>

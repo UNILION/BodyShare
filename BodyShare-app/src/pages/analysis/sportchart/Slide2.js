@@ -124,7 +124,7 @@ const Slide2 = function () {
   }, [userNo]);
 
   const chartOptions = {
-    title: "운동 시간과 섭취 칼로리 비교",
+    title: "소모 칼로리와 섭취 칼로리 비교",
     legend: { position: "top" },
     bars: "horizontal",
     titleTextStyle: {

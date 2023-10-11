@@ -87,7 +87,7 @@ const Card = (props) => {
       <Contents>{props.contents}</Contents>
       <Hr />
       <Bottom {...props}>
-        {props.tagtitle ? <Tag {...props}></Tag> : null}
+        {props.tagtitle ? <Tag hovercolor="rgba(85,111,255, 0.3)" {...props}></Tag> : null}
         <Footer>{props.footer}</Footer>
       </Bottom>
     </StyledCard>
