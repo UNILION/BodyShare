@@ -165,6 +165,7 @@ const Dates = styled.div`
 
 
 const FeedCard = (props) => {
+  let exerciseDate = props.recordData ? ((props.recordData.length > 0) ? props.recordData[0].exerciseDate : "기록이 없습니다") : "기록이 없습니다"
   const [myPageIsOpen, myPageRef, myPageHandler] = DropDown(false);
   return (
     <StyledCard {...props} >
@@ -198,7 +199,7 @@ const FeedCard = (props) => {
         <Upload>
           <span>기록 날짜</span>
           <br></br>
-          <span>{props.upload}</span>
+          <span>{exerciseDate}</span>
           </Upload>
         </Dates>
       </Footer>
