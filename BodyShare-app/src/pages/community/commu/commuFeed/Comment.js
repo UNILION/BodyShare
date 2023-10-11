@@ -37,12 +37,14 @@ const CommentList = styled.div``;
 
 const Profile = styled.div`
   margin: 10px 0;
-  font-size: 12px;
+  font-size: 15px;
   display: grid;
   grid-template-columns: 1fr 3fr;
+  width: 370px;
 `;
 
 const Nick = styled.span`
+  min-width: 60px;
   font-weight: bold;
   margin-right: 10px;
   white-space: nowrap;
@@ -50,7 +52,10 @@ const Nick = styled.span`
   text-overflow: ellipsis; /* 말줄임 적용 */
 `;
 
-const Commend = styled.span``;
+const Commend = styled.span`
+  max-width: 250px;
+  word-break: break-word;
+`;
 
 const Comment = function () {
   const instance = useCustomAxios();
@@ -95,7 +100,9 @@ const Comment = function () {
     <CommentContainer>
       <Count>댓글 {(commentData.length > 0) ? commentData[0].commentCnt : 0}개</Count>
       <InputBox>
-        <Input onChange={e => { setComment(e.target.value) }}
+        <Input
+          max-maxLength={60}
+          onChange={e => { setComment(e.target.value) }}
           onKeyUp={e => {
             e.target.value.length > 0 ? setIsValid(true) : setIsValid(false);
             if (e.key === "Enter") onSubmit()
