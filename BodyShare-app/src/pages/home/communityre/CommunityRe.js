@@ -63,6 +63,7 @@ const CommunityRe = function () {
     }
   };
 
+
   useEffect(() => {
     const fetchCommunityData = async () => {
       const data = await fetchData();
@@ -81,7 +82,7 @@ const CommunityRe = function () {
             <CommunityRecommend
               key={index}
               onClick={() => {
-                navigate(`/community/commuIn/${communityPost.communityNo}`);
+                navigate(`/community/feed/${communityPost.postNo}`);
               }}
             >
               <Card
