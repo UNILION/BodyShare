@@ -56,21 +56,15 @@ const CommunityRe = function () {
   const fetchData = async () => {
     try {
       const response = await instance.get(`/post/recent/${userNo}`);
-      return response.data;
+      setCommunityData(response.data);
     } catch (error) {
       console.error(error);
       return null;
     }
   };
 
-
   useEffect(() => {
-    const fetchCommunityData = async () => {
-      const data = await fetchData();
-      setCommunityData(data);
-    };
-
-    fetchCommunityData();
+    fetchData();
   }, [userNo]);
 
   return (
