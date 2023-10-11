@@ -103,8 +103,8 @@ INSERT INTO communityPost (communityNo, userNo, title, content, contentImageUrl)
 INSERT INTO communityPost (communityNo, userNo, title, content, contentImageUrl) VALUES (8, 5, "자전거 구매 고민", "원하는 가격대에서 좋은거 찾기가 쉽지 않네요", "feedcycle5.png");
 INSERT INTO communityPost (communityNo, userNo, title, content, contentImageUrl) VALUES (8, 5, "오늘 기록", "한강에서 자전거 2시간 타기 완료!", "feedcycle6.png");
 
-INSERT INTO communityPost (communityNo, userNo, title, content) VALUES (9, 5, "헬린이 일기", "처음보는 기구가 너무 많지만 도전!", "feedhealth5.png");
-INSERT INTO communityPost (communityNo, userNo, title, content) VALUES (9, 5, "오늘 헬스", "런닝머신 30분, 스쿼트 5세트 끝!", "feedhealth7.png");
+INSERT INTO communityPost (communityNo, userNo, title, content, contentImageUrl) VALUES (9, 5, "헬린이 일기", "처음보는 기구가 너무 많지만 도전!", "feedhealth5.png");
+INSERT INTO communityPost (communityNo, userNo, title, content, contentImageUrl) VALUES (9, 5, "오늘 헬스", "런닝머신 30분, 스쿼트 5세트 끝!", "feedhealth7.png");
 
 -------- 게시물 댓글 등록 ----------
 
@@ -114,12 +114,12 @@ INSERT INTO communityPostComment (postNo, userNo, content) VALUES (2, 3, "대회
 INSERT INTO communityPostComment (postNo, userNo, content) VALUES (2, 4, "대회 참가 확정되었군요! 기운 내서 최고의 모습 보여주세요. 응원합니다!");
 INSERT INTO communityPostComment (postNo, userNo, content) VALUES (3, 2, "테니스로 활력을 찾는 순간은 참 좋아요. 어떤 기술을 연마하고 계세요? ");
 INSERT INTO communityPostComment (postNo, userNo, content) VALUES (3, 4, "테니스로 활력을 찾다니 저도 같이하고싶네요.");
-INSERT INTO communityPostComment (postNo, userNo, content) VALUES (19, 5, "건강한 습관을 만들어 나가는 모습이 보기 좋아요.");
-INSERT INTO communityPostComment (postNo, userNo, content) VALUES (19, 3, "저도 조깅으로 시작하는 아침은 하루를 상쾌하게 시작하는 느낌인거같아요");
-INSERT INTO communityPostComment (postNo, userNo, content) VALUES (20, 1, "저도 한강에서 런닝하는데 다음에 같이하실래요?");
-INSERT INTO communityPostComment (postNo, userNo, content) VALUES (20, 2, "한강에서 러닝하고싶은데 너무 머네요 ㅠㅠ");
-INSERT INTO communityPostComment (postNo, userNo, content) VALUES (21, 2, "어떤 지역에 관심이 있나요? 쾌적한 코스를 소개해드릴게요! ");
-INSERT INTO communityPostComment (postNo, userNo, content) VALUES (21, 3, "저도 러닝 좋아하는데 어떤 지역이 좋아서 추천을 받고 싶다면 알려주세요! ");
+INSERT INTO communityPostComment (postNo, userNo, content) VALUES (22, 2, "건강한 습관을 만들어 나가는 모습이 보기 좋아요.");
+INSERT INTO communityPostComment (postNo, userNo, content) VALUES (22, 3, "저도 조깅으로 시작하는 아침은 하루를 상쾌하게 시작하는 느낌인거같아요");
+INSERT INTO communityPostComment (postNo, userNo, content) VALUES (23, 1, "저도 한강에서 런닝하는데 다음에 같이하실래요?");
+INSERT INTO communityPostComment (postNo, userNo, content) VALUES (23, 2, "한강에서 러닝하고싶은데 너무 머네요 ㅠㅠ");
+INSERT INTO communityPostComment (postNo, userNo, content) VALUES (24, 2, "어떤 지역에 관심이 있나요? 쾌적한 코스를 소개해드릴게요! ");
+INSERT INTO communityPostComment (postNo, userNo, content) VALUES (24, 3, "저도 러닝 좋아하는데 어떤 지역이 좋아서 추천을 받고 싶다면 알려주세요! ");
 
 
 
