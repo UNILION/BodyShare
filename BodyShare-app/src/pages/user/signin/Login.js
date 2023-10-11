@@ -83,6 +83,11 @@ const LoginButton = styled.button`
   }
 `;
 
+const ErrorP = styled.p`
+  color: red;
+  font-size: 10px;
+`;
+
 const Login = function () {
   const instance = useCustomAxios();
   const navigate = useNavigate();
@@ -94,7 +99,7 @@ const Login = function () {
   const [sports, setSports] = useRecoilState(sportsAtom);
   const [food, setFood] = useRecoilState(foodAtom);
 
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onChange" });
 
   const loadDB = async function () {
     try {
@@ -148,16 +153,26 @@ const Login = function () {
           type="text"
           name="userId"
           placeholder="아이디"
-          {...register('userId')}
+          {...register('userId', {
+            required: "아이디를 입력하세요",
+          })}
         />
+        {errors.userId && (
+          <ErrorP>{errors.userId.message}</ErrorP>
+        )}
         <br></br>
         <br></br>
         <Input
           type="password"
           name="password"
           placeholder="비밀번호"
-          {...register('password')}
+          {...register('password', {
+            required: "비밀번호를 입력하세요",
+          })}
         />
+        {errors.password && (
+          <ErrorP>{errors.password.message}</ErrorP>
+        )}
       </Inputdiv>
 
       <StyledLink to="/signup" isDarkMode={isDarkMode}>회원 가입</StyledLink>
