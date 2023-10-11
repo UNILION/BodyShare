@@ -30,6 +30,17 @@ router.get("/community/:no", async (req, res, next) => {
   }
 });
 
+// 유저가 가입한 커뮤니티들의 게시물 최신순 조회(자기가 작성한 것은 제외)
+router.get("/recent/:no", async (req, res, next) => {
+  try{
+    const no = Number(req.params.no);
+    const list = await post.findRecent(no);
+    res.json(list);
+  }catch(err){
+    next(err);
+  }
+});
+
 // 게시물 상세 조회
 router.get("/:no", async (req, res, next) => {
   try{

@@ -5,7 +5,7 @@ const postModel = {
   async find(no) {
     try {
       const sql = `select * from communityPost 
-      where userNo = ?
+      where communityNo = ?
       ORDER BY createdDate DESC;`;
       const [result] = await pool.query(sql, [no]);
       return result;
@@ -13,6 +13,27 @@ const postModel = {
       throw new Error("DB Error", { cause: err });
     }
   },
+
+  // 유저가 가입한 커뮤니티들의 게시물 최신순 조회(자기가 작성한 것은 제외)
+  async findRecent(no) {
+    try {
+      const sql = `SELECT cp.*
+      FROM communityPost cp
+      INNER JOIN (
+          SELECT uc.communityNo
+          FROM usersCommunity uc
+          WHERE uc.userNo = ?
+      ) AS userCommunities
+      ON cp.communityNo = userCommunities.communityNo
+      WHERE cp.userNo <> ?  
+      ORDER BY cp.createdDate DESC;`;
+      const [result] = await pool.query(sql, [no, no]);
+      return result;
+    } catch (err) {
+      throw new Error("DB Error", { cause: err });
+    }
+  },
+
 
   // 게시물 상세 조회
   async findByNo(no) {

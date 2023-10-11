@@ -55,7 +55,7 @@ const CommunityRe = function () {
   const [communityData, setCommunityData] = useState([]);
   const fetchData = async () => {
     try {
-      const response = await instance.get(`/post/community/${userNo}`);
+      const response = await instance.get(`/post/recent/${userNo}`);
       return response.data;
     } catch (error) {
       console.error(error);
