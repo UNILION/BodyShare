@@ -52,7 +52,7 @@ const MyPage = function () {
     <>
       {profileInfo && (
         <>
-          <Banner src={`http://localhost:33000/images/users/${profileInfo.bannerImageUrl}`} />
+          <Banner src={`${process.env.REACT_APP_IMAGE_SERVER}/users/${profileInfo.bannerImageUrl}`} />
           <Title>마이페이지</Title>
           <Icon
             id={profileInfo.userId}

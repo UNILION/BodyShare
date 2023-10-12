@@ -46,7 +46,7 @@ const Banner = function () {
   return (
     <BannerContainer>
       <BannerPic
-        src={`http://localhost:33000/images/communitys/${postData.bannerImageUrl}`}
+        src={`${process.env.REACT_APP_IMAGE_SERVER}/communitys/${postData.bannerImageUrl}`}
       />
       <Text>{postData.communityName}</Text>
     </BannerContainer>

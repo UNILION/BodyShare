@@ -81,7 +81,7 @@ const CommunityRe = function () {
             >
               <Card
                 width="170px"
-                img={`http://localhost:33000/images/posts/${communityPost.contentImageUrl}`}
+                img={`${process.env.REACT_APP_IMAGE_SERVER}/posts/${communityPost.contentImageUrl}`}
                 title={communityPost.title}
                 contents={communityPost.content}
                 footer={String(communityPost.createdDate.split('-')[0]) + "년" + String(communityPost.createdDate.split('-')[1]) + "월" + String(communityPost.createdDate.split('-')[2]).substring(0, 2) + "일"}

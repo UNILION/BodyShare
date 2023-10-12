@@ -73,7 +73,7 @@ const CommuFeed = function () {
 
       {feedData ?
         <FeedCard
-          img={`http://localhost:33000/images/posts/${feedData.contentImageUrl}`}
+          img={`${process.env.REACT_APP_IMAGE_SERVER}/posts/${feedData.contentImageUrl}`}
           title={feedData.title}
           contents={feedData.content}
           exercise={recordData ? (recordData.length > 0) ? recordData[0].cnt_exercise : 0 : 0}

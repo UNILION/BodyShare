@@ -80,7 +80,7 @@ const MyCommu = function ({ commu }) {
     <>
       <Group>
         <Img
-          src={`http://localhost:33000/images/communitys/${commu.profileImageUrl}`}
+          src={`${process.env.REACT_APP_IMAGE_SERVER}/communitys/${commu.profileImageUrl}`}
           onClick={() => navigate(`/community/commuIn/${commu.communityNo}`)}
         />
         <Register>

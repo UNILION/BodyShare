@@ -53,7 +53,7 @@ const PopularHome = function () {
         popularCommunityData.map((community, index) => (
           <Card
             key={index}
-            img={`http://localhost:33000/images/communitys/${community.profileImageUrl}`}
+            img={`${process.env.REACT_APP_IMAGE_SERVER}/communitys/${community.profileImageUrl}`}
             title={community.communityName}
             contents={community.intro}
             tagtitle={community.sportsName}

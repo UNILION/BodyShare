@@ -111,7 +111,7 @@ const Icon = function ({ id, url }) {
       {userNo > 0 ?
         <Cover>
           <Pf>
-            <Pfpic src={`http://localhost:33000/images/users/${url}`} />
+            <Pfpic src={`${process.env.REACT_APP_IMAGE_SERVER}/users/${url}`} />
             <Pfcommentul>
               <Nickli>{id}</Nickli>
               <Inst>

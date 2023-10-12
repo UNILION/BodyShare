@@ -31,7 +31,7 @@ const Groups = function ({ groupLists }) {
         {groupLists ? groupLists.length > 0 ? groupLists.map((data, idx) => (
           <Card
             key={idx}
-            img={`http://localhost:33000/images/posts/${data.contentImageUrl}`}
+            img={`${process.env.REACT_APP_IMAGE_SERVER}/posts/${data.contentImageUrl}`}
             title={data.title}
             contents={data.content}
             footer={String(data.createdDate.split('-')[0]) + "년" + String(data.createdDate.split('-')[1]) + "월" + String(data.createdDate.split('-')[2]).substring(0, 2) + "일"}

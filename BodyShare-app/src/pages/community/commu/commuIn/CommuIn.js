@@ -124,7 +124,7 @@ const CommuIn = function () {
     <>
       <BannerPic>
         <Banner
-          src={`http://localhost:33000/images/communitys/${communityData.bannerImageUrl}`}
+          src={`${process.env.REACT_APP_IMAGE_SERVER}/communitys/${communityData.bannerImageUrl}`}
         />
         <Previous
           src={previous}
@@ -135,7 +135,7 @@ const CommuIn = function () {
       <Container>
         <Pf>
           <Pfpic
-            src={`http://localhost:33000/images/communitys/${communityData.profileImageUrl}`}
+            src={`${process.env.REACT_APP_IMAGE_SERVER}/communitys/${communityData.profileImageUrl}`}
           />
           <Profile
             title={communityData.communityName}
