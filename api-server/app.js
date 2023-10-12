@@ -23,7 +23,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use("/images", express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "..", "BodyShare-app", "build")));
 
 app.use(session({
   cookie: { maxAge: 1000 * 60 * 60 * 1 },   // 로그인 유지 시간
@@ -43,6 +44,11 @@ app.use('/api', indexRouter);
 app.use((req, res, next) => {
   console.error(404, req.url);
   res.json({ error: { message: "존재하지 않는 API입니다." } });
+});
+
+// React용 fallback 추가
+app.use("/", (req, res, next) => {
+  res.sendFile(path.join(__dirname, "..", "BodyShare-app", "build", "index.html"));
 });
 
 // 500 에러 처리
