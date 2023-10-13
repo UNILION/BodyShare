@@ -122,7 +122,7 @@ const Slide2 = function () {
     legend: { position: "top" },
     bars: "horizontal",
     titleTextStyle: {
-      fontSize: 15,
+      fontSize: 14,
     },
   };
 
